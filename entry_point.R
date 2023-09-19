@@ -1,22 +1,11 @@
-library("rjson")
-
 source(file.path("ode_solvers.R"))
 source(file.path("tree_generator.R"))
 
 # TODO need to decide data input standards and implement validation
-params_json_path <- file.path("params.json")
-params <- fromJSON(file = params_json_path)
-# Speciation rate
-λ <- params$lambda
-# Extinction rate
-μ <- params$mu
-# Sampling rate over time and lineages
-Ψ <- params$psi
-# Transition matrix
-q <- do.call("cbind", params$q)
-
-sampled_states_freqs_csv_path <- file.path("two_sampled_states_freqs.csv")
-state_freqs_df <- read.csv(sampled_states_csv_path, header = FALSE)
+sampled_states_params_csv_path <- file.path("two_sampled_states_params.csv")
+params_matrix <- as.matrix(read.csv(sampled_states_params_csv_path))
+rownames(params_matrix) <- params_matrix[,1]
+params_matrix <- params_matrix[, -c(1)]
 
 #Transition matrix
 sampled_states_q_csv_path <- file.path("two_sampled_states_q.csv")

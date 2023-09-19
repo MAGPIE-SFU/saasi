@@ -1,0 +1,4 @@
+,freq,lambda,mu,psi
+state_1,0.2,3,0.02,1
+state_2,0.3,3,0.02,1
+state_3,0.5,3,0.02,1
