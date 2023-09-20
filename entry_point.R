@@ -2,14 +2,11 @@ source(file.path("ode_solvers.R"))
 source(file.path("tree_generator.R"))
 
 # TODO need to decide data input standards and implement validation
-sampled_states_params_csv_path <- file.path("two_sampled_states_params.csv")
-params_matrix <- as.matrix(read.csv(sampled_states_params_csv_path))
-rownames(params_matrix) <- params_matrix[, 1]
-params_matrix <- params_matrix[, -c(1)]
-class(params_matrix) <- "numeric"
+sampled_states_params_csv_path <- file.path("three_sampled_states_params.csv")
+params_df <- read.csv(sampled_states_params_csv_path)
 
 #Transition matrix
-sampled_states_q_csv_path <- file.path("two_sampled_states_q.csv")
+sampled_states_q_csv_path <- file.path("three_sampled_states_q.csv")
 q_matrix <- as.matrix(read.csv(sampled_states_q_csv_path))
 rownames(q_matrix) <- q_matrix[, 1]
 q_matrix <- q_matrix[, -c(1)]
@@ -17,9 +14,9 @@ diag(q_matrix) <- NA
 class(q_matrix) <- "numeric"
 
 # TODO test input is a binomial tree
-phy <- get_rand_phy(3, 100, params_matrix, q_matrix)
+phy <- get_rand_phy(3, 20, params_df, q_matrix)
 # TODO temporarily for comparison purposes
-nstates <- nrow(params_matrix)
+nstates <- nrow(params_df)
 plot(history.from.sim.discrete(phy, 1:nstates), phy)
 tiplabels(frame = "circle", cex = 0.5)
 nodelabels(frame = "circle", cex = 0.5)
