@@ -16,64 +16,66 @@ class(q_matrix) <- "numeric"
 # TODO test input is a binomial tree
 phy <- get_rand_phy(3, 20, params_df, q_matrix)
 # TODO temporarily for comparison purposes
-nstates <- nrow(params_df)
-plot(history.from.sim.discrete(phy, 1:nstates), phy)
+nstate <- nrow(params_df)
+plot(history.from.sim.discrete(phy, 1:nstate), phy)
 tiplabels(frame = "circle", cex = 0.5)
 nodelabels(frame = "circle", cex = 0.5)
 
-leaf_node_ids <- seq_along(phy[["tip.state"]])
-leaf_nodes_df <- data.frame(
-  id = leaf_node_ids,
-  # Time to root
-  t_root = NA,
-  # Children ids
-  left = NA,
-  right = NA,
-  # Parent id
-  parent = NA,
-  # State probabilities used in backwards time eqns
-  backwards_state_1 = ifelse(phy[["tip.state"]] == 0, state_1_freq, 0),
-  backwards_state_2 = ifelse(phy[["tip.state"]] == 1, state_2_freq, 0),
-  # Ancestral state reconstructions
-  ancestral_state_1 = NA,
-  ancestral_state_2 = NA)
-
-ancestor_node_ids <- seq(length(leaf_node_ids) + 1,
-                         length(leaf_node_ids) + phy[["Nnode"]])
-ancestor_nodes_df <- data.frame(
-  id = ancestor_node_ids,
+# Total number of nodes == number of non-leaf nodes * 2 + 1
+nnode <- phy[["Nnode"]] * 2 + 1
+# Df with node ids, with leaf node ids coming first. Will also be populated by
+# time distances from present day and parent/children connections.
+topology_df <- data.frame(
+  id = seq_len(nnode),
   t_root = NA,
   left = NA,
   right = NA,
-  parent = NA,
-  backwards_state_1 = NA,
-  backwards_state_2 = NA,
-  ancestral_state_1 = NA,
-  ancestral_state_2 = NA)
+  parent = NA)
 
-df <- rbind(leaf_nodes_df, ancestor_nodes_df)
-
-# Populate df with `t_root` vals
+# Populate topology df with time distances from present day
 node_depths <- node.depth.edgelength(phy)
 max_depth <- max(node_depths)
 invisible(lapply(seq_len(length(node_depths)), function(i) {
-  df$t_root[df$id == i] <<- max_depth - node_depths[i]
+  topology_df$t_root[topology_df$id == i] <<- max_depth - node_depths[i]
 }))
 
-# Populate df with connections
+# Populate topology df with parent/children connections
 post_order_edges <- reorder.phylo(phy, "postorder")[["edge"]]
 invisible(lapply(seq(1, length(post_order_edges[, 1]), 2), function(i) {
   node <- post_order_edges[[i, 1]]
   left <- post_order_edges[[i, 2]]
   right <- post_order_edges[[i + 1, 2]]
 
-  df$parent[df$id == left] <<- node
-  df$parent[df$id == right] <<- node
-  df$left[df$id == node] <<- left
-  df$right[df$id == node] <<- right
+  topology_df$parent[topology_df$id == left] <<- node
+  topology_df$parent[topology_df$id == right] <<- node
+  topology_df$left[topology_df$id == node] <<- left
+  topology_df$right[topology_df$id == node] <<- right
 }))
 
-# Backward-time equations
+# To be populated with state likelihoods used in backwards time equations.
+# list[[x]][[y]] is the likelihood for state y in node x. Note: likelihoods for
+# leaf nodes are sampling probabilities, but the internal node likelihoods must
+# be calculated.
+backwards_likelihoods_list <- rep(list(rep(0, nstate)), nnode)
+
+# Populate leaf node likelihoods for backwards time equations
+invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
+  state <- phy[["tip.state"]][[i]]
+  state_freq <- params_df$freq[params_df$state == state]
+  backwards_likelihoods_list[[i]][[state]] <<- state_freq
+}))
+
+# Populate internal node likelihoods for backwards time equations
+invisible(lapply(seq(1, length(post_order_edges[, 1]), 2), function(i) {
+  node <- post_order_edges[[i, 1]]
+  left <- post_order_edges[[i, 2]]
+  right <- post_order_edges[[i + 1, 2]]
+
+  tf <- df$t_root[df$id == node]
+  left_t0 <- df$t_root[df$id == left]
+  right_t0 <- df$t_root[df$id == right]
+}))
+
 invisible(lapply(seq(1, length(post_order_edges[, 1]), 2), function(i) {
   node <- post_order_edges[[i, 1]]
   left <- post_order_edges[[i, 2]]
