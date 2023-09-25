@@ -95,7 +95,13 @@ invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
   state_probabilities_list[[i]][[state]] <<- 1
 }))
 
-# TODO Populate root node state probabilities
+# Populate root node state probabilities. Root node ID == number of leaf
+# nodes + 1.
+root_node <- phy[["Nnode"]] + 2
+state_probabilities_list[[root_node]] <- (
+  backwards_likelihoods_list[[root_node]] * params_df$freq
+  / (sum(backwards_likelihoods_list[[root_node]] * params_df$freq))
+)
 
 # TODO Populate internal node state probabilities
 
