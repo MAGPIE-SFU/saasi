@@ -83,6 +83,36 @@ get_backwards_likelihoods_helper <- function(child_likelihoods,
   return(tail(sol, n = 1)[1 + 1:nstate])
 }
 
+get_state_probabilities <- function(parent_state_probabilities, t0, tf,
+                                    params_df, q_matrix) {
+  # Number of states == n
+  nstate <- nrow(params_df)
+
+  # D1...Dn are parent state probabilities, and E1...En are NA
+  yini <- c(parent_state_probabilities, rep(NA, nstate))
+  # D1...Dn are NA, and E1...En are 0
+  yend <- c(rep(NA, nstate), rep(0, nstate))
+
+  # Increment time in the positive direction because otherwise the ode solver
+  # can run into errors with negative numbers being smaller than machine min.
+  x <- seq(0, t0, by = t0 / 100)
+  parms <- list(λ = params_df$lambda,
+                μ = params_df$mu,
+                Ψ = params_df$psi,
+                q = q_matrix,
+                nstate = nstate)
+
+  # Suppress warnings about initial conditions guessed as 0
+  suppressWarnings(
+    # Run opposite directions because of positively increasing x. Should not
+    # affect result.
+    sol <- bvpshoot(yend, x, func, yini, parms)
+  )
+  browser()
+
+  return()
+}
+
 get_forwards_sol <- function(ancestral_state_1,
                              ancestral_state_2,
                              t0, tf,

@@ -103,7 +103,23 @@ state_probabilities_list[[root_node]] <- (
   / (sum(backwards_likelihoods_list[[root_node]] * params_df$freq))
 )
 
-# TODO Populate internal node state probabilities
+# Populate internal node state probabilities
+invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
+  node <- post_order_edges[[i, 1]]
+  if (node == root_node) {
+    return()
+  }
+
+  parent <- topology_df$parent[topology_df$id == node]
+  parent_state_probabilities <- state_probabilities_list[[parent]]
+
+  t0 <- topology_df$t_root[topology_df$id == parent]
+  tf <- topology_df$t_root[topology_df$id == node]
+
+  forwards_sol <- get_state_probabilities(parent_state_probabilities,
+                                          t0, tf,
+                                          params_df, q_matrix)
+}))
 
 # # Forward-time equations
 # invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
