@@ -82,41 +82,7 @@ invisible(lapply(seq(1, length(post_order_edges[, 1]), 2), function(i) {
                                            params_df, q_matrix)
   backwards_likelihoods_list[[node]] <<- likelihoods
 }))
-
-# invisible(lapply(seq(1, length(post_order_edges[, 1]), 2), function(i) {
-#   node <- post_order_edges[[i, 1]]
-#   left <- post_order_edges[[i, 2]]
-#   right <- post_order_edges[[i + 1, 2]]
-# 
-#   tf <- df$t_root[df$id == node]
-#   left_t0 <- df$t_root[df$id == left]
-#   right_t0 <- df$t_root[df$id == right]
-# 
-#   left_backwards_state_1 <- df$backwards_state_1[df$id == left]
-#   left_backwards_state_2 <- df$backwards_state_2[df$id == left]
-#   left_backwards_sol <- get_backwards_sol(left_backwards_state_1,
-#                                           left_backwards_state_2,
-#                                           left_t0, tf,
-#                                           λ, μ, Ψ, q, node)
-# 
-#   right_backwards_state_1 <- df$backwards_state_1[df$id == right]
-#   right_backwards_state_2 <- df$backwards_state_2[df$id == right]
-#   right_backwards_sol <- get_backwards_sol(right_backwards_state_1,
-#                                            right_backwards_state_2,
-#                                            right_t0, tf,
-#                                            λ, μ, Ψ, q, node)
-# 
-#   lb1 <- left_backwards_sol[["backwards_state_1"]]
-#   rb1 <- right_backwards_sol[["backwards_state_1"]]
-#   backwards_state_1 <- λ * lb1 * rb1
-#   df$backwards_state_1[df$id == node] <<- backwards_state_1
-# 
-#   lb2 <- left_backwards_sol[["backwards_state_2"]]
-#   rb2 <- right_backwards_sol[["backwards_state_2"]]
-#   backwards_state_2 <- λ * lb2 * rb2
-#   df$backwards_state_2[df$id == node] <<- backwards_state_2
-# }))
-# 
+ 
 # # Forward-time equations
 # invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
 #   node <- post_order_edges[[i, 1]]
