@@ -10,7 +10,7 @@ get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
   right_sol <- get_backwards_likelihoods_helper(right_likelihoods,
                                                 right_t0, tf,
                                                 params_df, q_matrix)
-  return(left_sol * right_sol)
+  return(params_df$lambda * left_sol * right_sol)
 }
 
 get_backwards_likelihoods_helper <- function(child_likelihoods, 
