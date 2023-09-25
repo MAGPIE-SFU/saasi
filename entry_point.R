@@ -82,7 +82,23 @@ invisible(lapply(seq(1, length(post_order_edges[, 1]), 2), function(i) {
                                            params_df, q_matrix)
   backwards_likelihoods_list[[node]] <<- likelihoods
 }))
- 
+
+# To be populated with ancestral state reconstruction probabilities.
+# list[[x]][[y]] is the probability of state y in node x. Note: this will also
+# include leaf nodes, which have probabilities == 1 for the observed state.
+state_probabilities_list <- rep(list(rep(0, nstate)), nnode)
+
+# Populate leaf node state probabilities
+invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
+  state <- phy[["tip.state"]][[i]]
+  state_freq <- params_df$freq[params_df$state == state]
+  state_probabilities_list[[i]][[state]] <<- 1
+}))
+
+# TODO Populate root node state probabilities
+
+# TODO Populate internal node state probabilities
+
 # # Forward-time equations
 # invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
 #   node <- post_order_edges[[i, 1]]
