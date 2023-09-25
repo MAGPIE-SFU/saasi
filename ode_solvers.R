@@ -7,7 +7,10 @@ get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
   left_sol <- get_backwards_likelihoods_helper(left_likelihoods,
                                                left_t0, tf,
                                                params_df, q_matrix)
-  return(list())
+  right_sol <- get_backwards_likelihoods_helper(right_likelihoods,
+                                                right_t0, tf,
+                                                params_df, q_matrix)
+  return(left_sol * right_sol)
 }
 
 get_backwards_likelihoods_helper <- function(child_likelihoods, 
@@ -76,9 +79,8 @@ get_backwards_likelihoods_helper <- function(child_likelihoods,
   suppressWarnings(
     sol <- ode(y, times, func, parms, events = list(data = events_df))
   )
-  browser()
-  
-  return(list())
+
+  return(tail(sol, n = 1)[1 + 1:nstate])
 }
 
 get_backwards_sol <- function(backwards_state_1,

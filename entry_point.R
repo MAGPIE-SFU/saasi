@@ -80,6 +80,7 @@ invisible(lapply(seq(1, length(post_order_edges[, 1]), 2), function(i) {
   likelihoods <- get_backwards_likelihoods(left_likelihoods, right_likelihoods,
                                            left_t0, right_t0, tf,
                                            params_df, q_matrix)
+  backwards_likelihoods_list[[node]] <<- likelihoods
 }))
 
 # invisible(lapply(seq(1, length(post_order_edges[, 1]), 2), function(i) {
