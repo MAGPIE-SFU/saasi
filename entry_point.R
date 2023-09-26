@@ -119,6 +119,10 @@ invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
   forwards_sol <- get_state_probabilities(parent_state_probabilities,
                                           t0, tf,
                                           params_df, q_matrix)
+  state_probabilities_list[[node]] <<- (
+    backwards_likelihoods_list[[node]] * forwards_sol
+    / sum(backwards_likelihoods_list[[node]] * forwards_sol)
+  )
 }))
 
 # # Forward-time equations

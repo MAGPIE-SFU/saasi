@@ -88,6 +88,42 @@ get_state_probabilities <- function(parent_state_probabilities, t0, tf,
   # Number of states == n
   nstate <- nrow(params_df)
 
+  func <- function(x, y, parms) {
+    with(as.list(c(y, parms)), {
+      # States 1...n
+      dD_equations_list <- lapply(seq_len(nstate), function(i) ({
+        # With i =/= j:
+        # * Ψ[-i] is Ψ[j]
+        # * q[i,][-i] is q[i, j]
+        # * y[i + nstate] is Ei
+        # * y[1:nstate][-i] is Dj
+        # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
+        return(-(
+          -(λ[i] + μ[i] + sum(Ψ[-i] + q[i,][-i])) * y[i]
+          + 2 * λ[i] * y[i + nstate] * y[i]
+          + sum(q[i,][-i] * y[1:nstate][-i])
+        ))
+      }))
+
+      # States 1...n
+      dE_equations_list <- lapply(seq_len(nstate), function(i) ({
+        # With i =/= j:
+        # * Ψ[-i] is Ψ[j]
+        # * q[i,][-i] is q[i, j]
+        # * y[i + nstate] is Ei
+        # * y[nstate + 1:nstate][-i] is Ej
+        # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
+        return(
+          μ[i] - (λ[i] + μ[i] + sum(Ψ[-i] + q[i,][-i])) * y[i + nstate]
+          + λ[i] * y[i + nstate]^2
+          + sum(q[i][-i] * y[nstate + 1:nstate][-i])
+        )
+      }))
+
+      return(list(c(dD_equations_list, dE_equations_list)))
+    })
+  }
+
   # D1...Dn are parent state probabilities, and E1...En are NA
   yini <- c(parent_state_probabilities, rep(NA, nstate))
   # D1...Dn are NA, and E1...En are 0
@@ -108,9 +144,11 @@ get_state_probabilities <- function(parent_state_probabilities, t0, tf,
     # affect result.
     sol <- bvpshoot(yend, x, func, yini, parms)
   )
-  browser()
 
-  return()
+  # Closest index to tf
+  closest_index <- which.min(abs(sol[, "x"] - tf))
+
+  return(unname(sol[closest_index, 1 + 1:nstate]))
 }
 
 get_forwards_sol <- function(ancestral_state_1,
