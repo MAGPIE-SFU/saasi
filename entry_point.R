@@ -125,46 +125,6 @@ invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
   )
 }))
 
-# # Forward-time equations
-# invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
-#   node <- post_order_edges[[i, 1]]
-#   left <- post_order_edges[[i - 1, 2]]
-#   right <- post_order_edges[[i, 2]]
-# 
-#   backwards_state_1 <- df$backwards_state_1[df$id == node]
-#   backwards_state_2 <- df$backwards_state_2[df$id == node]
-# 
-#   # If root else not root
-#   if (i == length(post_order_edges[, 1])) {
-#     denominator <- (backwards_state_1 * state_1_freq
-#                     + backwards_state_2 * state_2_freq)
-#     df$ancestral_state_1[df$id == node] <<-
-#       backwards_state_1 * state_1_freq / denominator
-#     df$ancestral_state_2[df$id == node] <<-
-#       backwards_state_2 * state_2_freq / denominator
-#   } else {
-#     parent <- df$parent[df$id == node]
-#     parent_ancestral_state_1 <- df$ancestral_state_1[df$id == parent]
-#     parent_ancestral_state_2 <- df$ancestral_state_2[df$id == parent]
-# 
-#     t0 <- df$t_root[df$id == parent]
-#     tf <- df$t_root[df$id == node]
-# 
-#     forwards_sol <- get_forwards_sol(parent_ancestral_state_1,
-#                                      parent_ancestral_state_2,
-#                                      t0, tf,
-#                                      λ, μ, Ψ, q, node)
-#     forwards_state_1 <- forwards_sol[["forwards_state_1"]]
-#     forwards_state_2 <- forwards_sol[["forwards_state_2"]]
-# 
-#     numerator_1 <- backwards_state_1 * forwards_state_1
-#     numerator_2 <- backwards_state_2 * forwards_state_2
-#     denominator <- numerator_1 + numerator_2
-#     df$ancestral_state_1[df$id == node] <<- numerator_1 / denominator
-#     df$ancestral_state_2[df$id == node] <<- numerator_2 / denominator
-#   }
-# }))
-# 
 # # Output log report
 # log_df <- data.frame(
 #   ancestor_node_id = ancestor_node_ids,
