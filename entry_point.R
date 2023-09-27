@@ -96,7 +96,7 @@ invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
 }))
 
 # Populate root node state probabilities. Root node ID == number of leaf
-# nodes + 1.
+# nodes + 1 == number of internal nodes + 2.
 root_node <- phy[["Nnode"]] + 2
 state_probabilities_list[[root_node]] <- (
   backwards_likelihoods_list[[root_node]] * params_df$freq
@@ -125,13 +125,18 @@ invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
   )
 }))
 
-# # Output log report
-# log_df <- data.frame(
-#   ancestor_node_id = ancestor_node_ids,
-#   ancestral_state_1 = tail(df$ancestral_state_1, phy[["Nnode"]]),
-#   ancestral_state_2 = tail(df$ancestral_state_2, phy[["Nnode"]]),
-#   bisse_state = phy[["node.state"]],
-#   match = NA
-# )
-# match <- log_df$ancestral_state_1 > log_df$ancestral_state_2
-# log_df$match <- match != log_df$bisse_state
+# Generate log_df to compare internal node results with diversitree states
+internal_node_ids <- root_node:nnode
+log_df <- data.frame(
+  id = internal_node_ids,
+  diversitree_state = phy[["node.state"]],
+  match = (
+    phy[["node.state"]]
+    == unlist(lapply(state_probabilities_list[internal_node_ids], which.max))
+  ),
+  state_probabilities = unlist(
+    lapply(state_probabilities_list[internal_node_ids], function(e) {
+      return(paste(e, collapse = ", "))
+    })
+  )
+)
