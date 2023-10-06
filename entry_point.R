@@ -116,12 +116,12 @@ invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
   t0 <- topology_df$t_root[topology_df$id == parent]
   tf <- topology_df$t_root[topology_df$id == node]
 
-  forwards_sol <- get_state_probabilities(parent_state_probabilities,
-                                          t0, tf,
-                                          params_df, q_matrix)
+  likelihoods <- get_forwards_likelihoods(parent_state_probabilities,
+                                           t0, tf,
+                                           params_df, q_matrix)
   state_probabilities_list[[node]] <<- (
-    backwards_likelihoods_list[[node]] * forwards_sol
-    / sum(backwards_likelihoods_list[[node]] * forwards_sol)
+    backwards_likelihoods_list[[node]] * likelihoods
+    / sum(backwards_likelihoods_list[[node]] * likelihoods)
   )
 }))
 
