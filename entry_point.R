@@ -22,7 +22,8 @@ tiplabels(frame = "circle", cex = 0.5)
 nodelabels(frame = "circle", cex = 0.5)
 
 # Total number of nodes == number of non-leaf nodes * 2 + 1
-nnode <- phy[["Nnode"]] * 2 + 1
+nleaf_node <- phy[["Nnode"]]
+nnode <- nleaf_node * 2 + 1
 # Df with node ids, with leaf node ids coming first. Will also be populated by
 # time distances from present day and parent/children connections.
 topology_df <- data.frame(
@@ -97,7 +98,7 @@ invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
 
 # Populate root node state probabilities. Root node ID == number of leaf
 # nodes + 1 == number of internal nodes + 2.
-root_node <- phy[["Nnode"]] + 2
+root_node <- nleaf_node + 2
 state_probabilities_list[[root_node]] <- (
   backwards_likelihoods_list[[root_node]] * params_df$freq
   / (sum(backwards_likelihoods_list[[root_node]] * params_df$freq))
