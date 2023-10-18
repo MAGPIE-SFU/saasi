@@ -129,7 +129,6 @@ invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
 # Generate log_df to compare internal node results with diversitree states
 internal_node_ids <- root_node:nnode
 log_df <- data.frame(
-  id = internal_node_ids,
   diversitree_state = phy[["node.state"]],
   match = (
     phy[["node.state"]]
