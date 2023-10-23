@@ -11,7 +11,7 @@ get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
                                                 right_t0, tf,
                                                 params_df, q_matrix)
   likelihoods <- params_df$lambda * left_sol * right_sol
-  return(likelihoods / sum(likelihoods))
+  return(likelihoods)
 }
 
 get_backwards_likelihoods_helper <- function(child_likelihoods, 
@@ -151,5 +151,5 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
 
   likelihoods <- unname(sol[closest_index, 1 + 1:nstate])
 
-  return(likelihoods / sum(likelihoods))
+  return(likelihoods)
 }

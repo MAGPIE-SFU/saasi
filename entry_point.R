@@ -63,7 +63,7 @@ backwards_likelihoods_list <- rep(list(rep(0, nstate)), nnode)
 invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
   state <- phy[["tip.state"]][[i]]
   state_freq <- params_df$freq[params_df$state == state]
-  backwards_likelihoods_list[[i]][[state]] <<- state_freq
+  backwards_likelihoods_list[[i]][[state]] <<- log(state_freq)
 }))
 
 # Populate internal node likelihoods for backwards time equations
