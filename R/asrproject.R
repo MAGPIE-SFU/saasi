@@ -30,6 +30,17 @@ get_tree <- function(phy, params_file, q_matrix_file) {
                                                                post_order_edges,
                                                                topology_df)
 
+  state_probabilities_list <- get_state_probabilities_list(
+    params_df,
+    q_matrix,
+    nstate,
+    nleaf_node,
+    nnode,
+    post_order_edges,
+    topology_df,
+    backwards_likelihoods_list
+  )
+
   return("Hello world!")
 }
 
@@ -128,4 +139,65 @@ get_backwards_likelihoods_list <- function(params_df,
   }))
 
   return(backwards_likelihoods_list)
+}
+
+#' TODO
+#'
+#' @param params_df TODO
+#' @param q_matrix TODO
+#' @param nstate TODO
+#' @param nleaf_node TODO
+#' @param nnode TODO
+#' @param post_order_edges TODO
+#' @param topology_df TODO
+#' @param backwards_likelihoods_list TODO
+#' @return List of ancestral state probabilities.
+#' list[[x]][[y]] is the probability of state y in node x.
+#' @noRd
+get_state_probabilities_list <- function(params_df,
+                                         q_matrix,
+                                         nstate,
+                                         nleaf_node,
+                                         nnode,
+                                         post_order_edges,
+                                         topology_df,
+                                         backwards_likelihoods_list) {
+  state_probabilities_list <- rep(list(rep(0, nstate)), nnode)
+
+  # Populate leaf node state probabilities
+  invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
+    state <- phy[["tip.state"]][[i]]
+    state_freq <- params_df$freq[params_df$state == state]
+    state_probabilities_list[[i]][[state]] <<- 1
+  }))
+
+  # Populate root node state probabilities. Root node ID == number of leaf
+  # nodes + 1 == number of internal nodes + 2.
+  root_node <- nleaf_node + 2
+  state_probabilities_list[[root_node]] <- (
+    backwards_likelihoods_list[[root_node]] * params_df$freq
+    / (sum(backwards_likelihoods_list[[root_node]] * params_df$freq))
+  )
+
+  # Populate internal node state probabilities
+  invisible(lapply(seq(length(post_order_edges[, 1]), 1, -2), function(i) {
+    node <- post_order_edges[[i, 1]]
+    if (node == root_node) {
+      return()
+    }
+    
+    parent <- topology_df$parent[topology_df$id == node]
+    parent_state_probabilities <- state_probabilities_list[[parent]]
+    
+    t0 <- topology_df$t_root[topology_df$id == parent]
+    tf <- topology_df$t_root[topology_df$id == node]
+    
+    likelihoods <- get_forwards_likelihoods(parent_state_probabilities,
+                                            t0, tf,
+                                            params_df, q_matrix)
+    state_probabilities_list[[node]] <<- (
+      backwards_likelihoods_list[[node]] * likelihoods
+      / sum(backwards_likelihoods_list[[node]] * likelihoods)
+    )
+  }))
 }

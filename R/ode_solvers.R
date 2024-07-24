@@ -1,5 +1,3 @@
-library("bvpSolve", warn.conflicts = FALSE)
-
 #' TODO
 #'
 #' @param left_likelihoods TODO
@@ -173,7 +171,12 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
   suppressWarnings(
     # Run opposite directions because of positively increasing x. Should not
     # affect result.
-    sol <- bvpshoot(yend, x, func, yini, parms)
+    sol <- bvpSolve::bvpshoot(yend,
+                              x,
+                              func,
+                              yini,
+                              parms,
+                              method = deSolve::lsoda)
   )
 
   # Closest index to tf
