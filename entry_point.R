@@ -1,4 +1,4 @@
-source(file.path("ode_solvers.R"))
+source(file.path("R/ode_solvers.R"))
 source(file.path("tree_generator.R"))
 
 # TODO need to decide data input standards and implement validation

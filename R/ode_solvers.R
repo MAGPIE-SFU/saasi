@@ -1,6 +1,16 @@
-library("deSolve")
 library("bvpSolve", warn.conflicts = FALSE)
 
+#' TODO
+#'
+#' @param left_likelihoods TODO
+#' @param right_likelihoods TODO
+#' @param left_t0 TODO
+#' @param right_t0 TODO
+#' @param tf TODO
+#' @param params_df TODO
+#' @param q_matrix TODO
+#' @return TODO
+#' @noRd
 get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
                                       left_t0, right_t0, tf,
                                       params_df, q_matrix) {
@@ -14,7 +24,16 @@ get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
   return(likelihoods / sum(likelihoods))
 }
 
-get_backwards_likelihoods_helper <- function(child_likelihoods, 
+#' TODO
+#'
+#' @param child_likelihoods TODO
+#' @param t0 TODO
+#' @param tf TODO
+#' @param params_df TODO
+#' @param q_matrix TODO
+#' @return TODO
+#' @noRd
+get_backwards_likelihoods_helper <- function(child_likelihoods,
                                              t0, tf,
                                              params_df, q_matrix) {
   # Number of states == n
@@ -31,12 +50,12 @@ get_backwards_likelihoods_helper <- function(child_likelihoods,
         # * y[1:nstate][-i] is Dj
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          -(λ[i] + μ[i] + sum(Ψ[-i] + q[i,][-i])) * y[i]
+          -(λ[i] + μ[i] + sum(Ψ[-i] + q[i, ][-i])) * y[i]
           + 2 * λ[i] * y[i + nstate] * y[i]
-          + sum(q[i,][-i] * y[1:nstate][-i])
+          + sum(q[i, ][-i] * y[1:nstate][-i])
         )
       }))
-  
+
       # States 1...n
       dE_equations_list <- lapply(seq_len(nstate), function(i) ({
         # With i =/= j:
@@ -46,7 +65,7 @@ get_backwards_likelihoods_helper <- function(child_likelihoods,
         # * y[nstate + 1:nstate][-i] is Ej
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          μ[i] - (λ[i] + μ[i] + sum(Ψ[-i] + q[i,][-i])) * y[i + nstate]
+          μ[i] - (λ[i] + μ[i] + sum(Ψ[-i] + q[i, ][-i])) * y[i + nstate]
           + λ[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
@@ -55,7 +74,7 @@ get_backwards_likelihoods_helper <- function(child_likelihoods,
       return(list(c(dD_equations_list, dE_equations_list)))
     })
   }
-  
+
 
   # D1...Dn are NA, and E1...En are 1
   y <- c(rep(NA, nstate), rep(1, nstate))
@@ -74,16 +93,25 @@ get_backwards_likelihoods_helper <- function(child_likelihoods,
                           time = rep(t0),
                           value = child_likelihoods,
                           method = rep("replace", nstate))
-  # browser()
 
   # Suppress warnings about t0 not in times
   suppressWarnings(
-    sol <- ode(y, times, func, parms, events = list(data = events_df))
+    sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df))
   )
 
   return(tail(sol, n = 1)[1 + 1:nstate])
 }
 
+
+#' TODO
+#'
+#' @param parent_state_probabilities TODO
+#' @param t0 TODO
+#' @param tf TODO
+#' @param params_df TODO
+#' @param q_matrix TODO
+#' @return TODO
+#' @noRd
 get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
                                      params_df, q_matrix) {
   # Number of states == n
@@ -100,9 +128,9 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
         # * y[1:nstate][-i] is Dj
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(-(
-          -(λ[i] + μ[i] + sum(Ψ[-i] + q[i,][-i])) * y[i]
+          -(λ[i] + μ[i] + sum(Ψ[-i] + q[i, ][-i])) * y[i]
           + 2 * λ[i] * y[i + nstate] * y[i]
-          + sum(q[i,][-i] * y[1:nstate][-i])
+          + sum(q[i, ][-i] * y[1:nstate][-i])
         ))
       }))
 
@@ -115,7 +143,7 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
         # * y[nstate + 1:nstate][-i] is Ej
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          μ[i] - (λ[i] + μ[i] + sum(Ψ[-i] + q[i,][-i])) * y[i + nstate]
+          μ[i] - (λ[i] + μ[i] + sum(Ψ[-i] + q[i, ][-i])) * y[i + nstate]
           + λ[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
