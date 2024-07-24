@@ -14,12 +14,12 @@ library("bvpSolve", warn.conflicts = FALSE)
 get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
                                       left_t0, right_t0, tf,
                                       params_df, q_matrix) {
-  left_sol <- get_backwards_likelihoods_helper(left_likelihoods,
-                                               left_t0, tf,
-                                               params_df, q_matrix)
-  right_sol <- get_backwards_likelihoods_helper(right_likelihoods,
-                                                right_t0, tf,
-                                                params_df, q_matrix)
+  left_sol <- backwards_likelihoods_helper(left_likelihoods,
+                                           left_t0, tf,
+                                           params_df, q_matrix)
+  right_sol <- backwards_likelihoods_helper(right_likelihoods,
+                                            right_t0, tf,
+                                            params_df, q_matrix)
   likelihoods <- params_df$lambda * left_sol * right_sol
   return(likelihoods / sum(likelihoods))
 }
@@ -33,16 +33,18 @@ get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
 #' @param q_matrix TODO
 #' @return TODO
 #' @noRd
-get_backwards_likelihoods_helper <- function(child_likelihoods,
-                                             t0, tf,
-                                             params_df, q_matrix) {
+backwards_likelihoods_helper <- function(child_likelihoods,
+                                         t0,
+                                         tf,
+                                         params_df,
+                                         q_matrix) {
   # Number of states == n
   nstate <- nrow(params_df)
 
   func <- function(t, y, parms) {
     with(as.list(c(y, parms)), {
       # States 1...n
-      dD_equations_list <- lapply(seq_len(nstate), function(i) ({
+      dD_equations_list <- lapply(seq_len(nstate), function(i) {
         # With i =/= j:
         # * Ψ[-i] is Ψ[j]
         # * q[i,][-i] is q[i, j]
@@ -54,10 +56,10 @@ get_backwards_likelihoods_helper <- function(child_likelihoods,
           + 2 * λ[i] * y[i + nstate] * y[i]
           + sum(q[i, ][-i] * y[1:nstate][-i])
         )
-      }))
+      })
 
       # States 1...n
-      dE_equations_list <- lapply(seq_len(nstate), function(i) ({
+      dE_equations_list <- lapply(seq_len(nstate), function(i) {
         # With i =/= j:
         # * Ψ[-i] is Ψ[j]
         # * q[i,][-i] is q[i, j]
@@ -69,7 +71,7 @@ get_backwards_likelihoods_helper <- function(child_likelihoods,
           + λ[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
-      }))
+      })
 
       return(list(c(dD_equations_list, dE_equations_list)))
     })
@@ -120,7 +122,7 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
   func <- function(x, y, parms) {
     with(as.list(c(y, parms)), {
       # States 1...n
-      dD_equations_list <- lapply(seq_len(nstate), function(i) ({
+      dD_equations_list <- lapply(seq_len(nstate), function(i) {
         # With i =/= j:
         # * Ψ[-i] is Ψ[j]
         # * q[i,][-i] is q[i, j]
@@ -132,10 +134,10 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
           + 2 * λ[i] * y[i + nstate] * y[i]
           + sum(q[i, ][-i] * y[1:nstate][-i])
         ))
-      }))
+      })
 
       # States 1...n
-      dE_equations_list <- lapply(seq_len(nstate), function(i) ({
+      dE_equations_list <- lapply(seq_len(nstate), function(i) {
         # With i =/= j:
         # * Ψ[-i] is Ψ[j]
         # * q[i,][-i] is q[i, j]
@@ -147,7 +149,7 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
           + λ[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
-      }))
+      })
 
       return(list(c(dD_equations_list, dE_equations_list)))
     })
