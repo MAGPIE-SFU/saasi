@@ -173,7 +173,6 @@ get_state_probabilities_list <- function(params_df,
   # Populate leaf node state probabilities
   invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
     state <- phy[["tip.state"]][[i]]
-    state_freq <- params_df$freq[params_df$state == state]
     state_probabilities_list[[i]][[state]] <<- 1
   }))
 
