@@ -7,7 +7,7 @@
 get_tree(phy, params_file, q_matrix_file)
 }
 \arguments{
-\item{phy}{TODO has tip.state}
+\item{phy}{TODO required attrs}
 
 \item{params_file}{TODO}
 

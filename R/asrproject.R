@@ -1,6 +1,6 @@
 #' Test package.
 #'
-#' @param phy TODO has tip.state
+#' @param phy TODO required attrs
 #' @param params_file TODO
 #' @param q_matrix_file TODO
 #' @return TODO phylo
@@ -14,6 +14,8 @@ get_tree <- function(phy, params_file, q_matrix_file) {
   nleaf_node <- phy[["Nnode"]]
   # Total number of nodes == number of non-leaf nodes * 2 + 1
   nnode <- nleaf_node * 2 + 1
+  # Root node ID == number of leaf nodes + 1 == number of internal nodes + 2.
+  root_node <- nleaf_node + 2
 
   node_depths <- ape::node.depth.edgelength(phy)
   max_depth <- max(node_depths)
@@ -34,14 +36,18 @@ get_tree <- function(phy, params_file, q_matrix_file) {
     params_df,
     q_matrix,
     nstate,
-    nleaf_node,
     nnode,
+    root_node,
     post_order_edges,
     topology_df,
     backwards_likelihoods_list
   )
 
-  return("Hello world!")
+  state_probabilities_df <- get_state_probabilities_df(phy,
+                                                       nstate,
+                                                       state_probabilities_list)
+
+  return(state_probabilities_df)
 }
 
 #' TODO
@@ -146,8 +152,8 @@ get_backwards_likelihoods_list <- function(params_df,
 #' @param params_df TODO
 #' @param q_matrix TODO
 #' @param nstate TODO
-#' @param nleaf_node TODO
 #' @param nnode TODO
+#' @param root_node TODO
 #' @param post_order_edges TODO
 #' @param topology_df TODO
 #' @param backwards_likelihoods_list TODO
@@ -157,8 +163,8 @@ get_backwards_likelihoods_list <- function(params_df,
 get_state_probabilities_list <- function(params_df,
                                          q_matrix,
                                          nstate,
-                                         nleaf_node,
                                          nnode,
+                                         root_node,
                                          post_order_edges,
                                          topology_df,
                                          backwards_likelihoods_list) {
@@ -171,9 +177,6 @@ get_state_probabilities_list <- function(params_df,
     state_probabilities_list[[i]][[state]] <<- 1
   }))
 
-  # Populate root node state probabilities. Root node ID == number of leaf
-  # nodes + 1 == number of internal nodes + 2.
-  root_node <- nleaf_node + 2
   state_probabilities_list[[root_node]] <- (
     backwards_likelihoods_list[[root_node]] * params_df$freq
     / (sum(backwards_likelihoods_list[[root_node]] * params_df$freq))
@@ -185,13 +188,13 @@ get_state_probabilities_list <- function(params_df,
     if (node == root_node) {
       return()
     }
-    
+
     parent <- topology_df$parent[topology_df$id == node]
     parent_state_probabilities <- state_probabilities_list[[parent]]
-    
+
     t0 <- topology_df$t_root[topology_df$id == parent]
     tf <- topology_df$t_root[topology_df$id == node]
-    
+
     likelihoods <- get_forwards_likelihoods(parent_state_probabilities,
                                             t0, tf,
                                             params_df, q_matrix)
@@ -200,4 +203,22 @@ get_state_probabilities_list <- function(params_df,
       / sum(backwards_likelihoods_list[[node]] * likelihoods)
     )
   }))
+
+  return(state_probabilities_list)
+}
+
+#' TODO
+#'
+#' @param phy TODO
+#' @param nstate TODO
+#' @param state_probabilities_list TODO
+#' @return TODO
+#' @noRd
+get_state_probabilities_df <- function(phy, nstate, state_probabilities_list) {
+  state_probabilities_df <-
+    as.data.frame(do.call(rbind, state_probabilities_list))
+  row.names(state_probabilities_df) <-
+    c(phy[["tip.label"]], phy[["node.label"]])
+  names(state_probabilities_df) <- seq_len(nstate)
+  return(state_probabilities_df)
 }
