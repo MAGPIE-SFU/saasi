@@ -5,7 +5,7 @@
 #' @param q_matrix_file TODO
 #' @return TODO phylo
 #' @export
-get_tree <- function(phy, params_file, q_matrix_file) {
+asr <- function(phy, params_file, q_matrix_file) {
   # TODO validate parameters
   params_df <- read.csv(file.path(params_file))
   q_matrix <- get_q_matrix(q_matrix_file)
