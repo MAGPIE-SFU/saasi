@@ -1,9 +1,38 @@
-#' Test package.
+#' Ancestral state reconstruction.
 #'
-#' @param phy TODO required attrs
-#' @param params_file TODO
-#' @param q_matrix_file TODO
-#' @return TODO phylo
+#' Get the internal node state probabilities of a tree with defined leaf states.
+#'
+#' @param phy A \code{phylo} phylogenetic tree (ape format). Must contain
+#' \code{tip.state}.
+#' @param params_file Path to CSV file containing parameters used in ancestral
+#' state reconstruction algorithm. Must have the following header row:
+#' \code{state,freq,lambda,mu,psi}. The state values should be a 1-based
+#' sequence of natural numbers: \code{1, 2, ..., \emph{n}}.
+#'
+#' Example:
+#'
+#' \code{state,freq,lambda,mu,psi}
+#'
+#' \code{1,0.2,3,0.02,1}
+#'
+#' \code{2,0.3,3,0.02,1}
+#'
+#' \code{3,0.5,3,0.02,1}
+#' @param q_matrix_file Path to CSV file containing q matrix used in ancestral
+#' state reconstruction algorithm. Must have column and row headers
+#' listing state values in \code{params_file}.
+#'
+#' Example:
+#'
+#' \code{,1,2,3}
+#'
+#' \code{1,,0.3,0.6}
+#'
+#' \code{2,0.5,,0.1}
+#'
+#' \code{3,0.2,0.4,}
+#' @return A data frame listing the state probabilities of every node in
+#' \code{phy}.
 #' @export
 asr <- function(phy, params_file, q_matrix_file) {
   # TODO validate parameters

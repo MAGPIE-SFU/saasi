@@ -2,20 +2,47 @@
 % Please edit documentation in R/asrproject.R
 \name{asr}
 \alias{asr}
-\title{Test package.}
+\title{Ancestral state reconstruction.}
 \usage{
 asr(phy, params_file, q_matrix_file)
 }
 \arguments{
-\item{phy}{TODO required attrs}
+\item{phy}{A \code{phylo} phylogenetic tree (ape format). Must contain
+\code{tip.state}.}
 
-\item{params_file}{TODO}
+\item{params_file}{Path to CSV file containing parameters used in ancestral
+state reconstruction algorithm. Must have the following header row:
+\code{state,freq,lambda,mu,psi}. The state values should be a 1-based
+sequence of natural numbers: \code{1, 2, ..., \emph{n}}.
 
-\item{q_matrix_file}{TODO}
+Example:
+
+\code{state,freq,lambda,mu,psi}
+
+\code{1,0.2,3,0.02,1}
+
+\code{2,0.3,3,0.02,1}
+
+\code{3,0.5,3,0.02,1}}
+
+\item{q_matrix_file}{Path to CSV file containing q matrix used in ancestral
+state reconstruction algorithm. Must have column and row headers
+listing state values in \code{params_file}.
+
+Example:
+
+\code{,1,2,3}
+
+\code{1,,0.3,0.6}
+
+\code{2,0.5,,0.1}
+
+\code{3,0.2,0.4,}}
 }
 \value{
-TODO phylo
+A data frame listing the state probabilities of every node in
+\code{phy}.
 }
 \description{
-Test package.
+Get the internal node state probabilities of a tree with defined leaf states.
 }
