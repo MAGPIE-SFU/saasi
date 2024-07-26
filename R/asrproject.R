@@ -130,6 +130,7 @@ get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
 
 #' TODO
 #'
+#' @param phy TODO
 #' @param params_df TODO
 #' @param q_matrix TODO
 #' @param nstate TODO
@@ -139,7 +140,8 @@ get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
 #' @return List of state likelihoods used in backwards time equations.
 #' list[[x]][[y]] is the likelihood for state y in node x.
 #' @noRd
-get_backwards_likelihoods_list <- function(params_df,
+get_backwards_likelihoods_list <- function(phy,
+                                           params_df,
                                            q_matrix,
                                            nstate,
                                            nnode,
@@ -178,6 +180,7 @@ get_backwards_likelihoods_list <- function(params_df,
 
 #' TODO
 #'
+#' @param phy TODO
 #' @param params_df TODO
 #' @param q_matrix TODO
 #' @param nstate TODO
@@ -189,7 +192,8 @@ get_backwards_likelihoods_list <- function(params_df,
 #' @return List of ancestral state probabilities.
 #' list[[x]][[y]] is the probability of state y in node x.
 #' @noRd
-get_state_probabilities_list <- function(params_df,
+get_state_probabilities_list <- function(phy,
+                                         params_df,
                                          q_matrix,
                                          nstate,
                                          nnode,

@@ -24,7 +24,7 @@ get_rand_phy <- function(seed, max_taxa, params_file, q_matrix_file,
             params_df$mu,
             q_vector)
 
-  phy <- diversitree::tree.musse(pars, max.taxa = max_taxa, x0=1)
+  phy <- diversitree::tree.musse(pars, max.taxa = max_taxa, x0 = 1)
 
   if (plot) {
     nstate <- nrow(params_df)
