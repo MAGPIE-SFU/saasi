@@ -29,8 +29,8 @@ get_rand_phy <- function(seed, max_taxa, params_file, q_matrix_file,
   if (plot) {
     nstate <- nrow(params_df)
     plot(diversitree::history.from.sim.discrete(phy, 1:nstate), phy)
-    tiplabels(frame = "circle", cex = 0.5)
-    nodelabels(frame = "circle", cex = 0.5)
+    ape::tiplabels(frame = "circle", cex = 0.5)
+    ape::nodelabels(frame = "circle", cex = 0.5)
   }
 
   return(phy)
