@@ -79,10 +79,11 @@ asr <- function(phy, params_file, q_matrix_file) {
   return(state_probabilities_df)
 }
 
-#' TODO
+#' Convert q matrix CSV file to matrix object.
 #'
-#' @param q_matrix_csv TODO
-#' @return TODO
+#' @param q_matrix_csv Path to CSV file containing q matrix used in ancestral
+#' state reconstruction algorithm.
+#' @return Matrix representation of \code{q_matrix_csv}.
 #' @noRd
 get_q_matrix <- function(q_matrix_file) {
   q_matrix <- as.matrix(read.csv(file.path(q_matrix_file)))
@@ -93,13 +94,13 @@ get_q_matrix <- function(q_matrix_file) {
   return(q_matrix)
 }
 
-#' TODO
+#' Get data frame representation of tree topology.
 #'
-#' @param nnode TODO
-#' @param node_depths TODO
-#' @param max_depth TODO
-#' @param post_order_edges TODO
-#' @return TODO
+#' @param nnode Number of nodes in tree.
+#' @param node_depths Depths of nodes in tree.
+#' @param max_depth Depth of tree.
+#' @param post_order_edges Post order representation of edges in tree.
+#' @return Data frame showing the parents, children, and depth of nodes.
 #' @noRd
 get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
   topology_df <- data.frame(id = seq_len(nnode),
