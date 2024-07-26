@@ -12,5 +12,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
     ape,
-    bvpSolve (== 1.4.4),
+    bvpSolve (>= 1.4.4),
+    bvpSolve (<= 1.4.4),
     deSolve
