@@ -13,6 +13,7 @@ RoxygenNote: 7.3.2
 Imports: 
     ape,
     bvpSolve (>= 1.4.4),
-    deSolve
+    deSolve,
+    diversitree
 Remotes:
     cran/bvpSolve
