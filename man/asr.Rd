@@ -12,9 +12,8 @@ asr(phy, params_df, q_matrix)
 
 \item{params_df}{Data frame containing non-q parameters used in ancestral
 state reconstruction algorithm. Must have the following column names:
-\code{state}, \code{freq}, \code{lambda}, \code{mu}, \code{psi}. The state
-values should be a 1-based sequence of natural numbers:
-\code{1, 2, ..., \emph{n}}.
+\code{state}, \code{freq}, \code{lambda}, \code{mu}, and \code{psi}. The state values should be a
+1-based sequence of natural numbers: \code{1}, \code{2}, ..., \emph{\code{n}}.
 
 Example:\tabular{lllll}{
    \strong{state} \tab \strong{freq} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
@@ -27,8 +26,7 @@ Example:\tabular{lllll}{
 algorithm. Row and column indices represent states.}
 }
 \value{
-A data frame listing the state probabilities of every node in
-\code{phy}.
+A data frame listing the state probabilities of every node in \code{phy}.
 }
 \description{
 Get the internal node state probabilities of a tree with defined leaf states.

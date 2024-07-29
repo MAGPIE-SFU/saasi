@@ -2,13 +2,12 @@
 #'
 #' Get the internal node state probabilities of a tree with defined leaf states.
 #'
-#' @param phy A \code{phylo} phylogenetic tree (ape format). Must contain
-#' \code{tip.state}.
+#' @param phy A `phylo` phylogenetic tree (ape format). Must contain
+#' `tip.state`.
 #' @param params_df Data frame containing non-q parameters used in ancestral
 #' state reconstruction algorithm. Must have the following column names:
-#' \code{state}, \code{freq}, \code{lambda}, \code{mu}, \code{psi}. The state
-#' values should be a 1-based sequence of natural numbers:
-#' \code{1, 2, ..., \emph{n}}.
+#' `state`, `freq`, `lambda`, `mu`, and `psi`. The state values should be a
+#' 1-based sequence of natural numbers: `1`, `2`, ..., *`n`*.
 #'
 #' Example:
 #' | **state** | **freq** | **lambda** | **mu** | **psi** |
@@ -18,8 +17,7 @@
 #' | 3 | 0.5 | 3 | 0.02 | 1 |
 #' @param q_matrix Numeric q matrix used in ancestral state reconstruction
 #' algorithm. Row and column indices represent states.
-#' @return A data frame listing the state probabilities of every node in
-#' \code{phy}.
+#' @return A data frame listing the state probabilities of every node in `phy`.
 #' @export
 asr <- function(phy, params_df, q_matrix) {
   nstate <- nrow(params_df)
