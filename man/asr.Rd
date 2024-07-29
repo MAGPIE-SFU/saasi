@@ -4,13 +4,13 @@
 \alias{asr}
 \title{Ancestral state reconstruction.}
 \usage{
-asr(phy, params, q_matrix_file)
+asr(phy, params_df, q_matrix)
 }
 \arguments{
 \item{phy}{A \code{phylo} phylogenetic tree (ape format). Must contain
 \code{tip.state}.}
 
-\item{params}{Data frame containing non-q parameters used in ancestral
+\item{params_df}{Data frame containing non-q parameters used in ancestral
 state reconstruction algorithm. Must have the following column names:
 \code{state}, \code{freq}, \code{lambda}, \code{mu}, \code{psi}. The state
 values should be a 1-based sequence of natural numbers:
@@ -23,19 +23,8 @@ Example:\tabular{lllll}{
    3 \tab 0.5 \tab 3 \tab 0.02 \tab 1 \cr
 }}
 
-\item{q_matrix_file}{Path to CSV file containing q matrix used in ancestral
-state reconstruction algorithm. Must have column and row headers
-listing state values in \code{params_file}.
-
-Example:
-
-\code{,1,2,3}
-
-\code{1,,0.3,0.6}
-
-\code{2,0.5,,0.1}
-
-\code{3,0.2,0.4,}}
+\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
+algorithm. Row and column indices represent states.}
 }
 \value{
 A data frame listing the state probabilities of every node in
