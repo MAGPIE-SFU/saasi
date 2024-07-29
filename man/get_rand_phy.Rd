@@ -4,14 +4,14 @@
 \alias{get_rand_phy}
 \title{TODO}
 \usage{
-get_rand_phy(seed, max_taxa, params_file, q_matrix_file, plot = FALSE)
+get_rand_phy(seed, max_taxa, params, q_matrix_file, plot = FALSE)
 }
 \arguments{
 \item{seed}{TODO}
 
 \item{max_taxa}{TODO}
 
-\item{params_file}{TODO}
+\item{params}{TODO}
 
 \item{q_matrix_file}{TODO}
 

@@ -6,28 +6,27 @@
 #'
 #' @param seed TODO
 #' @param max_taxa TODO
-#' @param params_file TODO
+#' @param params TODO
 #' @param q_matrix_file TODO
 #' @param plot TODO
 #' @return TODO
 #' @export
-get_rand_phy <- function(seed, max_taxa, params_file, q_matrix_file,
+get_rand_phy <- function(seed, max_taxa, params, q_matrix_file,
                          plot = FALSE) {
   set.seed(seed)
 
-  params_df <- read.csv(file.path(params_file))
   q_matrix <- get_q_matrix(q_matrix_file)
   q_vector <- as.vector(t(q_matrix))
   q_vector <- q_vector[!is.na(q_vector)]
 
-  pars <- c(params_df$lambda,
-            params_df$mu,
+  pars <- c(params$lambda,
+            params$mu,
             q_vector)
 
   phy <- diversitree::tree.musse(pars, max.taxa = max_taxa, x0 = 1)
 
   if (plot) {
-    nstate <- nrow(params_df)
+    nstate <- nrow(params)
     plot(diversitree::history.from.sim.discrete(phy, 1:nstate), phy)
     ape::tiplabels(frame = "circle", cex = 0.5)
     ape::nodelabels(frame = "circle", cex = 0.5)

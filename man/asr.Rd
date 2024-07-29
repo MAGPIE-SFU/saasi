@@ -4,26 +4,24 @@
 \alias{asr}
 \title{Ancestral state reconstruction.}
 \usage{
-asr(phy, params_file, q_matrix_file)
+asr(phy, params, q_matrix_file)
 }
 \arguments{
 \item{phy}{A \code{phylo} phylogenetic tree (ape format). Must contain
 \code{tip.state}.}
 
-\item{params_file}{Path to CSV file containing parameters used in ancestral
-state reconstruction algorithm. Must have the following header row:
-\code{state,freq,lambda,mu,psi}. The state values should be a 1-based
-sequence of natural numbers: \code{1, 2, ..., \emph{n}}.
+\item{params}{Data frame containing non-q parameters used in ancestral
+state reconstruction algorithm. Must have the following column names:
+\code{state}, \code{freq}, \code{lambda}, \code{mu}, \code{psi}. The state
+values should be a 1-based sequence of natural numbers:
+\code{1, 2, ..., \emph{n}}.
 
-Example:
-
-\code{state,freq,lambda,mu,psi}
-
-\code{1,0.2,3,0.02,1}
-
-\code{2,0.3,3,0.02,1}
-
-\code{3,0.5,3,0.02,1}}
+Example:\tabular{lllll}{
+   \strong{state} \tab \strong{freq} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
+   1 \tab 0.2 \tab 3 \tab 0.02 \tab 1 \cr
+   2 \tab 0.3 \tab 3 \tab 0.02 \tab 1 \cr
+   3 \tab 0.5 \tab 3 \tab 0.02 \tab 1 \cr
+}}
 
 \item{q_matrix_file}{Path to CSV file containing q matrix used in ancestral
 state reconstruction algorithm. Must have column and row headers

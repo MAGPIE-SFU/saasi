@@ -4,20 +4,18 @@
 #'
 #' @param phy A \code{phylo} phylogenetic tree (ape format). Must contain
 #' \code{tip.state}.
-#' @param params_file Path to CSV file containing parameters used in ancestral
-#' state reconstruction algorithm. Must have the following header row:
-#' \code{state,freq,lambda,mu,psi}. The state values should be a 1-based
-#' sequence of natural numbers: \code{1, 2, ..., \emph{n}}.
+#' @param params Data frame containing non-q parameters used in ancestral
+#' state reconstruction algorithm. Must have the following column names:
+#' \code{state}, \code{freq}, \code{lambda}, \code{mu}, \code{psi}. The state
+#' values should be a 1-based sequence of natural numbers:
+#' \code{1, 2, ..., \emph{n}}.
 #'
 #' Example:
-#'
-#' \code{state,freq,lambda,mu,psi}
-#'
-#' \code{1,0.2,3,0.02,1}
-#'
-#' \code{2,0.3,3,0.02,1}
-#'
-#' \code{3,0.5,3,0.02,1}
+#' | **state** | **freq** | **lambda** | **mu** | **psi** |
+#' | :--- | :--- | :--- | :--- | :--- |
+#' | 1 | 0.2 | 3 | 0.02 | 1 |
+#' | 2 | 0.3 | 3 | 0.02 | 1 |
+#' | 3 | 0.5 | 3 | 0.02 | 1 |
 #' @param q_matrix_file Path to CSV file containing q matrix used in ancestral
 #' state reconstruction algorithm. Must have column and row headers
 #' listing state values in \code{params_file}.
@@ -34,12 +32,11 @@
 #' @return A data frame listing the state probabilities of every node in
 #' \code{phy}.
 #' @export
-asr <- function(phy, params_file, q_matrix_file) {
+asr <- function(phy, params, q_matrix_file) {
   # TODO validate parameters
-  params_df <- read.csv(file.path(params_file))
   q_matrix <- get_q_matrix(q_matrix_file)
 
-  nstate <- nrow(params_df)
+  nstate <- nrow(params)
   nleaf_node <- phy[["Nnode"]]
   # Total number of nodes == number of non-leaf nodes * 2 + 1
   nnode <- nleaf_node * 2 + 1
@@ -54,7 +51,8 @@ asr <- function(phy, params_file, q_matrix_file) {
                                  max_depth,
                                  post_order_edges)
 
-  backwards_likelihoods_list <- get_backwards_likelihoods_list(params_df,
+  backwards_likelihoods_list <- get_backwards_likelihoods_list(phy,
+                                                               params,
                                                                q_matrix,
                                                                nstate,
                                                                nnode,
@@ -62,7 +60,8 @@ asr <- function(phy, params_file, q_matrix_file) {
                                                                topology_df)
 
   state_probabilities_list <- get_state_probabilities_list(
-    params_df,
+    phy,
+    params,
     q_matrix,
     nstate,
     nnode,
@@ -132,7 +131,7 @@ get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
 #' TODO
 #'
 #' @param phy TODO
-#' @param params_df TODO
+#' @param params TODO
 #' @param q_matrix TODO
 #' @param nstate TODO
 #' @param nnode TODO
@@ -142,7 +141,7 @@ get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
 #' list[[x]][[y]] is the likelihood for state y in node x.
 #' @noRd
 get_backwards_likelihoods_list <- function(phy,
-                                           params_df,
+                                           params,
                                            q_matrix,
                                            nstate,
                                            nnode,
@@ -153,7 +152,7 @@ get_backwards_likelihoods_list <- function(phy,
   # Populate leaf node likelihoods for backwards time equations
   invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
     state <- phy[["tip.state"]][[i]]
-    state_freq <- params_df$freq[params_df$state == state]
+    state_freq <- params$freq[params$state == state]
     backwards_likelihoods_list[[i]][[state]] <<- state_freq
   }))
 
@@ -172,7 +171,7 @@ get_backwards_likelihoods_list <- function(phy,
     likelihoods <- get_backwards_likelihoods(left_likelihoods,
                                              right_likelihoods,
                                              left_t0, right_t0, tf,
-                                             params_df, q_matrix)
+                                             params, q_matrix)
     backwards_likelihoods_list[[node]] <<- likelihoods
   }))
 
@@ -182,7 +181,7 @@ get_backwards_likelihoods_list <- function(phy,
 #' TODO
 #'
 #' @param phy TODO
-#' @param params_df TODO
+#' @param params TODO
 #' @param q_matrix TODO
 #' @param nstate TODO
 #' @param nnode TODO
@@ -194,7 +193,7 @@ get_backwards_likelihoods_list <- function(phy,
 #' list[[x]][[y]] is the probability of state y in node x.
 #' @noRd
 get_state_probabilities_list <- function(phy,
-                                         params_df,
+                                         params,
                                          q_matrix,
                                          nstate,
                                          nnode,
@@ -211,8 +210,8 @@ get_state_probabilities_list <- function(phy,
   }))
 
   state_probabilities_list[[root_node]] <- (
-    backwards_likelihoods_list[[root_node]] * params_df$freq
-    / (sum(backwards_likelihoods_list[[root_node]] * params_df$freq))
+    backwards_likelihoods_list[[root_node]] * params$freq
+    / (sum(backwards_likelihoods_list[[root_node]] * params$freq))
   )
 
   # Populate internal node state probabilities
@@ -230,7 +229,7 @@ get_state_probabilities_list <- function(phy,
 
     likelihoods <- get_forwards_likelihoods(parent_state_probabilities,
                                             t0, tf,
-                                            params_df, q_matrix)
+                                            params, q_matrix)
     state_probabilities_list[[node]] <<- (
       backwards_likelihoods_list[[node]] * likelihoods
       / sum(backwards_likelihoods_list[[node]] * likelihoods)
