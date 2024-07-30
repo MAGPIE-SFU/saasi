@@ -1,13 +1,7 @@
-#' TODO
+#' Generates state likelihoods for a node from the state likelihoods of the node
+#' children.
 #'
-#' @param left_likelihoods TODO
-#' @param right_likelihoods TODO
-#' @param left_t0 TODO
-#' @param right_t0 TODO
-#' @param tf TODO
-#' @param params_df TODO
-#' @param q_matrix TODO
-#' @return TODO
+#' @return Vector of state likelihoods.
 #' @noRd
 get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
                                       left_t0, right_t0, tf,
@@ -22,14 +16,9 @@ get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
   return(likelihoods / sum(likelihoods))
 }
 
-#' TODO
+#' State likelihoods from one child node only.
 #'
-#' @param child_likelihoods TODO
-#' @param t0 TODO
-#' @param tf TODO
-#' @param params_df TODO
-#' @param q_matrix TODO
-#' @return TODO
+#' @return Vector of state likelihoods.
 #' @noRd
 backwards_likelihoods_helper <- function(child_likelihoods,
                                          t0,
@@ -103,14 +92,10 @@ backwards_likelihoods_helper <- function(child_likelihoods,
 }
 
 
-#' TODO
+#' Generates state likelihoods for a node from the state likelihoods of the node
+#' parent.
 #'
-#' @param parent_state_probabilities TODO
-#' @param t0 TODO
-#' @param tf TODO
-#' @param params_df TODO
-#' @param q_matrix TODO
-#' @return TODO
+#' @return Vector of state likelihoods.
 #' @noRd
 get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
                                      params_df, q_matrix) {
