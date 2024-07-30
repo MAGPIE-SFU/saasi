@@ -11,11 +11,9 @@
 #' @param plot TODO
 #' @return TODO
 #' @export
-get_rand_phy <- function(seed, max_taxa, params_df, q_matrix_file,
-                         plot = FALSE) {
+get_rand_phy <- function(seed, max_taxa, params_df, q_matrix, plot = FALSE) {
   set.seed(seed)
 
-  q_matrix <- get_q_matrix(q_matrix_file)
   q_vector <- as.vector(t(q_matrix))
   q_vector <- q_vector[!is.na(q_vector)]
 

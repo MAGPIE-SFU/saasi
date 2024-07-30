@@ -4,7 +4,7 @@
 \alias{get_rand_phy}
 \title{TODO}
 \usage{
-get_rand_phy(seed, max_taxa, params_df, q_matrix_file, plot = FALSE)
+get_rand_phy(seed, max_taxa, params_df, q_matrix, plot = FALSE)
 }
 \arguments{
 \item{seed}{TODO}
@@ -13,9 +13,9 @@ get_rand_phy(seed, max_taxa, params_df, q_matrix_file, plot = FALSE)
 
 \item{params_df}{TODO}
 
-\item{q_matrix_file}{TODO}
-
 \item{plot}{TODO}
+
+\item{q_matrix_file}{TODO}
 }
 \value{
 TODO
