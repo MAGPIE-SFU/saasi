@@ -2,7 +2,7 @@
 % Please edit documentation in R/asrproject.R
 \name{asr}
 \alias{asr}
-\title{Ancestral state reconstruction.}
+\title{Ancestral state reconstruction}
 \usage{
 asr(phy, params_df, q_matrix)
 }

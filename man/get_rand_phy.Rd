@@ -2,26 +2,35 @@
 % Please edit documentation in R/tree_generator.R
 \name{get_rand_phy}
 \alias{get_rand_phy}
-\title{TODO}
+\title{Random tree generation}
 \usage{
 get_rand_phy(seed, max_taxa, params_df, q_matrix, plot = FALSE)
 }
 \arguments{
-\item{seed}{TODO}
+\item{seed}{Integer vector used in random number generation.}
 
-\item{max_taxa}{TODO}
+\item{max_taxa}{Maximum number of leaf nodes to generate.}
 
-\item{params_df}{TODO}
+\item{params_df}{Data frame containing non-q parameters used in ancestral
+state reconstruction algorithm. Must have the following column names:
+\code{state}, \code{freq}, \code{lambda}, \code{mu}, and \code{psi}. The state values should be a
+1-based sequence of natural numbers: \code{1}, \code{2}, ..., \emph{\code{n}}.
 
-\item{plot}{TODO}
+Example:\tabular{lllll}{
+   \strong{state} \tab \strong{freq} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
+   1 \tab 0.2 \tab 3 \tab 0.02 \tab 1 \cr
+   2 \tab 0.3 \tab 3 \tab 0.02 \tab 1 \cr
+   3 \tab 0.5 \tab 3 \tab 0.02 \tab 1 \cr
+}}
 
-\item{q_matrix_file}{TODO}
+\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
+algorithm. Row and column indices represent states.}
+
+\item{plot}{If \code{TRUE}, a plot of the returned tree is generated.}
 }
 \value{
-TODO
+A \code{phylo} phylogenetic tree (ape format).
 }
 \description{
-two_sampled_states_phy <-
-get_rand_phy(3, 20, "two_sampled_states_params.csv",
-"two_sampled_states_q.csv", plot = TRUE)
+Get a random tree that can be passed to \link{asr}.
 }

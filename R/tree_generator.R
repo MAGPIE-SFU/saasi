@@ -1,15 +1,12 @@
-#' TODO
+#' Random tree generation
 #'
-#' two_sampled_states_phy <-
-#' get_rand_phy(3, 20, "two_sampled_states_params.csv",
-#' "two_sampled_states_q.csv", plot = TRUE)
+#' Get a random tree that can be passed to [asrproject::asr].
 #'
-#' @param seed TODO
-#' @param max_taxa TODO
-#' @param params_df TODO
-#' @param q_matrix_file TODO
-#' @param plot TODO
-#' @return TODO
+#' @param seed Integer vector used in random number generation.
+#' @param max_taxa Maximum number of leaf nodes to generate.
+#' @param plot If `TRUE`, a plot of the returned tree is generated.
+#' @return A `phylo` phylogenetic tree (ape format).
+#' @inheritParams asr
 #' @export
 get_rand_phy <- function(seed, max_taxa, params_df, q_matrix, plot = FALSE) {
   set.seed(seed)

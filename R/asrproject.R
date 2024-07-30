@@ -1,4 +1,4 @@
-#' Ancestral state reconstruction.
+#' Ancestral state reconstruction
 #'
 #' Get the internal node state probabilities of a tree with defined leaf states.
 #'
