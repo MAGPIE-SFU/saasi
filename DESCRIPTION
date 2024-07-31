@@ -1,12 +1,12 @@
 Package: asrproject
-Title: What the Package Does (One Line, Title Case)
+Title: Ancestral State Reconstruction, While Accounting for Sampling Bias
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+    person("Ivan", "Gill", email = "ivan_gill@sfu.ca", role = c("aut", "cre")),
+    person("Yexuan", "Song", email = "yexuan_song@sfu.ca", role = "aut"))
+Description: Ancestral state reconstruction method that accounts for variation
+  in sampling rate among locations.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
