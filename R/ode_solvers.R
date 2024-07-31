@@ -88,7 +88,7 @@ backwards_likelihoods_helper <- function(child_likelihoods,
     sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df))
   )
 
-  return(tail(sol, n = 1)[1 + 1:nstate])
+  return(utils::tail(sol, n = 1)[1 + 1:nstate])
 }
 
 
