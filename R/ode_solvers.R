@@ -33,14 +33,14 @@ backwards_likelihoods_helper <- function(child_likelihoods,
       # States 1...n
       dD_equations_list <- lapply(seq_len(nstate), function(i) {
         # With i =/= j:
-        # * Ψ[-i] is Ψ[j]
+        # * psi[-i] is psi[j]
         # * q[i,][-i] is q[i, j]
         # * y[i + nstate] is Ei
         # * y[1:nstate][-i] is Dj
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          -(λ[i] + μ[i] + sum(Ψ[-i] + q[i, ][-i])) * y[i]
-          + 2 * λ[i] * y[i + nstate] * y[i]
+          -(lambda[i] + mu[i] + sum(psi[-i] + q[i, ][-i])) * y[i]
+          + 2 * lambda[i] * y[i + nstate] * y[i]
           + sum(q[i, ][-i] * y[1:nstate][-i])
         )
       })
@@ -48,14 +48,14 @@ backwards_likelihoods_helper <- function(child_likelihoods,
       # States 1...n
       dE_equations_list <- lapply(seq_len(nstate), function(i) {
         # With i =/= j:
-        # * Ψ[-i] is Ψ[j]
+        # * psi[-i] is psi[j]
         # * q[i,][-i] is q[i, j]
         # * y[i + nstate] is Ei
         # * y[nstate + 1:nstate][-i] is Ej
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          μ[i] - (λ[i] + μ[i] + sum(Ψ[-i] + q[i, ][-i])) * y[i + nstate]
-          + λ[i] * y[i + nstate]^2
+          mu[i] - (lambda[i] + mu[i] + sum(psi[-i] + q[i, ][-i]))
+          * y[i + nstate] + lambda[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
       })
@@ -71,9 +71,9 @@ backwards_likelihoods_helper <- function(child_likelihoods,
   names(y) <- seq_len(nstate * 2)
 
   times <- seq(0, tf, by = tf / 100)
-  parms <- list(λ = params_df$lambda,
-                μ = params_df$mu,
-                Ψ = params_df$psi,
+  parms <- list(lambda = params_df$lambda,
+                mu = params_df$mu,
+                psi = params_df$psi,
                 q = q_matrix,
                 nstate = nstate)
 
@@ -107,14 +107,14 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
       # States 1...n
       dD_equations_list <- lapply(seq_len(nstate), function(i) {
         # With i =/= j:
-        # * Ψ[-i] is Ψ[j]
+        # * psi[-i] is psi[j]
         # * q[i,][-i] is q[i, j]
         # * y[i + nstate] is Ei
         # * y[1:nstate][-i] is Dj
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(-(
-          -(λ[i] + μ[i] + sum(Ψ[-i] + q[i, ][-i])) * y[i]
-          + 2 * λ[i] * y[i + nstate] * y[i]
+          -(lambda[i] + mu[i] + sum(psi[-i] + q[i, ][-i])) * y[i]
+          + 2 * lambda[i] * y[i + nstate] * y[i]
           + sum(q[i, ][-i] * y[1:nstate][-i])
         ))
       })
@@ -122,14 +122,14 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
       # States 1...n
       dE_equations_list <- lapply(seq_len(nstate), function(i) {
         # With i =/= j:
-        # * Ψ[-i] is Ψ[j]
+        # * psi[-i] is psi[j]
         # * q[i,][-i] is q[i, j]
         # * y[i + nstate] is Ei
         # * y[nstate + 1:nstate][-i] is Ej
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          μ[i] - (λ[i] + μ[i] + sum(Ψ[-i] + q[i, ][-i])) * y[i + nstate]
-          + λ[i] * y[i + nstate]^2
+          mu[i] - (lambda[i] + mu[i] + sum(psi[-i] + q[i, ][-i]))
+          * y[i + nstate] + lambda[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
       })
@@ -146,9 +146,9 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
   # Increment time in the positive direction because otherwise the ode solver
   # can run into errors with negative numbers being smaller than machine min.
   x <- seq(0, t0, by = t0 / 100)
-  parms <- list(λ = params_df$lambda,
-                μ = params_df$mu,
-                Ψ = params_df$psi,
+  parms <- list(lambda = params_df$lambda,
+                mu = params_df$mu,
+                psi = params_df$psi,
                 q = q_matrix,
                 nstate = nstate)
 
