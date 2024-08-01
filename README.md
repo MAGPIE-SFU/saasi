@@ -1,0 +1,74 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# asrproject
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Ancestral state reconstruction method that accounts for variation in
+sampling rate among locations.
+
+## Installation
+
+You can install the development version of asrproject from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ivansg44/asr_project")
+```
+
+## Example
+
+``` r
+library(asrproject)
+
+phy <- readRDS(file.path("data", "two_sampled_states_phy.rds"))
+params_df <- readRDS(file.path("data", "two_sampled_states_params_df.rds"))
+q_matrix <- readRDS(file.path("data", "two_sampled_states_q_matrix.rds"))
+
+options(scipen = 999)
+# Probabilities of each node in `phy` being in state 1 or 2
+asr(phy, params_df, q_matrix)
+#>                   1             2
+#> sp1  1.000000000000 0.00000000000
+#> sp2  1.000000000000 0.00000000000
+#> sp3  1.000000000000 0.00000000000
+#> sp4  1.000000000000 0.00000000000
+#> sp5  1.000000000000 0.00000000000
+#> sp6  0.000000000000 1.00000000000
+#> sp7  1.000000000000 0.00000000000
+#> sp8  1.000000000000 0.00000000000
+#> sp9  1.000000000000 0.00000000000
+#> sp10 0.000000000000 1.00000000000
+#> sp11 0.000000000000 1.00000000000
+#> sp12 0.000000000000 1.00000000000
+#> sp13 0.000000000000 1.00000000000
+#> sp14 1.000000000000 0.00000000000
+#> sp15 1.000000000000 0.00000000000
+#> sp16 1.000000000000 0.00000000000
+#> sp17 0.000000000000 1.00000000000
+#> sp18 0.000000000000 1.00000000000
+#> sp19 0.000000000000 1.00000000000
+#> sp20 0.000000000000 1.00000000000
+#> nd1  0.805359856810 0.19464014319
+#> nd2  0.005022087957 0.99497791204
+#> nd3  0.994757493690 0.00524250631
+#> nd4  0.999312656820 0.00068734318
+#> nd5  0.997609977223 0.00239002278
+#> nd6  0.849837796968 0.15016220303
+#> nd7  0.999859891114 0.00014010889
+#> nd8  0.994470311010 0.00552968899
+#> nd9  0.998656652659 0.00134334734
+#> nd10 0.990664535224 0.00933546478
+#> nd11 0.001248387820 0.99875161218
+#> nd12 0.999109156954 0.00089084305
+#> nd13 0.990350243598 0.00964975640
+#> nd14 0.885816285421 0.11418371458
+#> nd15 0.000052703029 0.99994729697
+#> nd16 0.000163545930 0.99983645407
+#> nd17 0.000050344169 0.99994965583
+#> nd18 0.999949596926 0.00005040307
+#> nd19 0.000007121851 0.99999287815
+```

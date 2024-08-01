@@ -1,0 +1,45 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# asrproject
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Ancestral state reconstruction method that accounts for variation in sampling
+rate among locations.
+
+## Installation
+
+You can install the development version of asrproject from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ivansg44/asr_project")
+```
+
+## Example
+
+```{r example}
+library(asrproject)
+
+phy <- readRDS(file.path("data", "two_sampled_states_phy.rds"))
+params_df <- readRDS(file.path("data", "two_sampled_states_params_df.rds"))
+q_matrix <- readRDS(file.path("data", "two_sampled_states_q_matrix.rds"))
+
+options(scipen = 999)
+# Probabilities of each node in `phy` being in state 1 or 2
+asr(phy, params_df, q_matrix)
+```
