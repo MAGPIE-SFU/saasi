@@ -15,8 +15,8 @@ You can install the development version of asrproject from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("ivansg44/asr_project")
+# install.packages("remotes")
+remotes::install_github("ivansg44/asr_project")
 ```
 
 ## Example
