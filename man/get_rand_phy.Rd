@@ -32,5 +32,5 @@ algorithm. Row and column indices represent states.}
 A \code{phylo} phylogenetic tree (ape format).
 }
 \description{
-Get a random tree that can be passed to \link{asr}.
+Get a random tree that can be passed to \link{saasi}.
 }

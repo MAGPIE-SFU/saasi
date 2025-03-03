@@ -39,7 +39,7 @@ backwards_likelihoods_helper <- function(child_likelihoods,
         # * y[1:nstate][-i] is Dj
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          -(lambda[i] + mu[i] + sum(psi[-i] + q[i, ][-i])) * y[i]
+          -(lambda[i] + mu[i] + psi[i] + sum(q[i, ][-i])) * y[i]
           + 2 * lambda[i] * y[i + nstate] * y[i]
           + sum(q[i, ][-i] * y[1:nstate][-i])
         )
@@ -54,7 +54,7 @@ backwards_likelihoods_helper <- function(child_likelihoods,
         # * y[nstate + 1:nstate][-i] is Ej
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          mu[i] - (lambda[i] + mu[i] + sum(psi[-i] + q[i, ][-i]))
+          mu[i] - (lambda[i] + mu[i] + psi[i] + sum(q[i, ][-i]))
           * y[i + nstate] + lambda[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
@@ -65,8 +65,8 @@ backwards_likelihoods_helper <- function(child_likelihoods,
   }
 
 
-  # D1...Dn are NA, and E1...En are 1
-  y <- c(rep(NA, nstate), rep(1, nstate))
+  # D1...Dn are child likelihoods, and E1...En are 1
+  y <- c(child_likelihoods, rep(1, nstate))
   # Need to explicitly name index or events_df does not work
   names(y) <- seq_len(nstate * 2)
 
@@ -88,7 +88,13 @@ backwards_likelihoods_helper <- function(child_likelihoods,
     sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df))
   )
 
-  return(utils::tail(sol, n = 1)[1 + 1:nstate])
+  ret <- utils::tail(sol, n = 1)[1 + 1:nstate]
+  if (any(is.nan(ret))) {
+    # if the value is nan, assign the likelihood to the previous likelihood,
+    # because the value is too close so that the ode cannot tell the difference.
+    return(child_likelihoods)
+  }
+  return(ret)
 }
 
 
@@ -106,17 +112,13 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
     with(as.list(c(y, parms)), {
       # States 1...n
       dD_equations_list <- lapply(seq_len(nstate), function(i) {
-        # With i =/= j:
-        # * psi[-i] is psi[j]
-        # * q[i,][-i] is q[i, j]
-        # * y[i + nstate] is Ei
-        # * y[1:nstate][-i] is Dj
-        # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
-        return(-(
-          -(lambda[i] + mu[i] + sum(psi[-i] + q[i, ][-i])) * y[i]
-          + 2 * lambda[i] * y[i + nstate] * y[i]
+        # NOTE: for the anagenetic speciation, the only way that a
+        # state could change is due to transistion events
+        # see saasi.clad for cladogenetic change equation
+        return(
+          -(sum(q[i, ][-i]) * y[i])
           + sum(q[i, ][-i] * y[1:nstate][-i])
-        ))
+        )
       })
 
       # States 1...n
@@ -128,7 +130,7 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
         # * y[nstate + 1:nstate][-i] is Ej
         # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          mu[i] - (lambda[i] + mu[i] + sum(psi[-i] + q[i, ][-i]))
+          mu[i] - (lambda[i] + mu[i] + psi[i] + sum(q[i, ][-i]))
           * y[i + nstate] + lambda[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
@@ -138,14 +140,12 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
     })
   }
 
-  # D1...Dn are parent state probabilities, and E1...En are NA
-  yini <- c(parent_state_probabilities, rep(NA, nstate))
-  # D1...Dn are NA, and E1...En are 0
-  yend <- c(rep(NA, nstate), rep(0, nstate))
+  # D1...Dn are parent state probabilities, and E1...En are 1
+  y <- c(parent_state_probabilities, rep(1, nstate))
 
   # Increment time in the positive direction because otherwise the ode solver
   # can run into errors with negative numbers being smaller than machine min.
-  x <- seq(0, t0, by = t0 / 100)
+  times <- seq(0, t0, by = t0 / 100)
   parms <- list(lambda = params_df$lambda,
                 mu = params_df$mu,
                 psi = params_df$psi,
@@ -156,18 +156,11 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
   suppressWarnings(
     # Run opposite directions because of positively increasing x. Should not
     # affect result.
-    sol <- bvpSolve::bvpshoot(yend,
-                              x,
-                              func,
-                              yini,
-                              parms,
-                              method = deSolve::lsoda)
+    sol <- deSolve::ode(y, times, func, parms, method = "ode45", rtol = 1e20)
   )
 
   # Closest index to tf
-  closest_index <- which.min(abs(sol[, "x"] - tf))
-
+  closest_index <- which.min(abs(sol[, 1] - tf))
   likelihoods <- unname(sol[closest_index, 1 + 1:nstate])
-
-  return(likelihoods / sum(likelihoods))
+  return(likelihoods)
 }

@@ -1,4 +1,4 @@
-#' Ancestral state reconstruction
+#' Sampling Aware Ancestral State Inference
 #'
 #' Get the internal node state probabilities of a tree with defined leaf states.
 #'
@@ -19,7 +19,7 @@
 #' algorithm. Row and column indices represent states.
 #' @return A data frame listing the state probabilities of every node in `phy`.
 #' @export
-asr <- function(phy, params_df, q_matrix) {
+saasi <- function(phy, params_df, q_matrix) {
   nstate <- nrow(params_df)
   nleaf_node <- phy[["Nnode"]]
   # Total number of nodes == number of non-leaf nodes * 2 + 1
@@ -127,11 +127,13 @@ get_backwards_likelihoods_list <- function(phy,
 
     left_likelihoods <- backwards_likelihoods_list[[left]]
     right_likelihoods <- backwards_likelihoods_list[[right]]
-    likelihoods <- get_backwards_likelihoods(left_likelihoods,
-                                             right_likelihoods,
+    likelihoods <- get_backwards_likelihoods(abs(left_likelihoods),
+                                             abs(right_likelihoods),
                                              left_t0, right_t0, tf,
                                              params_df, q_matrix)
-    backwards_likelihoods_list[[node]] <<- likelihoods
+    abs_likelihoods <- abs(likelihoods)
+    norm_likelihoods <- abs_likelihoods / sum(abs_likelihoods)
+    backwards_likelihoods_list[[node]] <<- norm_likelihoods
   }))
 
   return(backwards_likelihoods_list)
@@ -160,9 +162,10 @@ get_state_probabilities_list <- function(phy,
     state_probabilities_list[[i]][[state]] <<- 1
   }))
 
+  norm_freq <- log(rev(params_df$freq))
   state_probabilities_list[[root_node]] <- (
-    backwards_likelihoods_list[[root_node]] * params_df$freq
-    / (sum(backwards_likelihoods_list[[root_node]] * params_df$freq))
+    backwards_likelihoods_list[[root_node]] * norm_freq
+    / (sum(backwards_likelihoods_list[[root_node]] * norm_freq))
   )
 
   # Populate internal node state probabilities
@@ -173,17 +176,24 @@ get_state_probabilities_list <- function(phy,
     }
 
     parent <- topology_df$parent[topology_df$id == node]
-    parent_state_probabilities <- state_probabilities_list[[parent]]
+    parent_state_probabilities <- (
+      state_probabilities_list[[parent]] * backwards_likelihoods_list[[node]]
+    )
+    abs_parent_state_probabilities <- abs(parent_state_probabilities)
+    norm_probabilities <- (
+      abs_parent_state_probabilities / sum(abs_parent_state_probabilities)
+    )
 
     t0 <- topology_df$t_root[topology_df$id == parent]
     tf <- topology_df$t_root[topology_df$id == node]
 
-    likelihoods <- get_forwards_likelihoods(parent_state_probabilities,
+    likelihoods <- get_forwards_likelihoods(norm_probabilities,
                                             t0, tf,
                                             params_df, q_matrix)
+    abs_likelihoods <- abs(likelihoods)
     state_probabilities_list[[node]] <<- (
-      backwards_likelihoods_list[[node]] * likelihoods
-      / sum(backwards_likelihoods_list[[node]] * likelihoods)
+      backwards_likelihoods_list[[node]] * abs_likelihoods
+      / sum(backwards_likelihoods_list[[node]] * abs_likelihoods)
     )
   }))
 

@@ -81,21 +81,6 @@
       ],
       "Hash": "b299c6741ca9746fb227debcb0f9fb6c"
     },
-    "bvpSolve": {
-      "Package": "bvpSolve",
-      "Version": "1.4.4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "deSolve",
-        "grDevices",
-        "graphics",
-        "rootSolve",
-        "stats"
-      ],
-      "Hash": "8e3801593697670c9b27d388bdb7b074"
-    },
     "cachem": {
       "Package": "cachem",
       "Version": "1.1.0",
@@ -392,19 +377,6 @@
         "yaml"
       ],
       "Hash": "27f9502e1cdbfa195f94e03b0f517484"
-    },
-    "rootSolve": {
-      "Package": "rootSolve",
-      "Version": "1.8.2.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "graphics",
-        "stats"
-      ],
-      "Hash": "b8fbe639ed0e0e4f4c80498f4411ec5f"
     },
     "sass": {
       "Package": "sass",
