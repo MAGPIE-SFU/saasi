@@ -160,16 +160,20 @@ me.to.ape.bisse <- function(x, root.state) {
       hist <- hist[order(hist$idx2), ]
   }
 
-  phy <- reorder(structure(list(edge = cbind(x$parent2, x$idx2),
-                                Nnode = Nnode,
-                                tip.label = tip.label,
-                                tip.state = tip.state,
-                                node.label = node.label,
-                                node.state = node.state,
-                                edge.length = x$len,
-                                orig = x,
-                                hist = hist),
-                           class = "phylo"))
+  phy <- ape::reorder.phylo(structure(
+    list(
+      edge = cbind(x$parent2, x$idx2),
+      Nnode = Nnode,
+      tip.label = tip.label,
+      tip.state = tip.state,
+      node.label = node.label,
+      node.state = node.state,
+      edge.length = x$len,
+      orig = x,
+      hist = hist
+    ),
+    class = "phylo"
+  ))
   phy$edge.state <- x$state[match(phy$edge[, 2], x$idx2)]
   phy
 }
