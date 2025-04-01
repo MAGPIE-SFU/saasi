@@ -2,3 +2,4 @@
 
 export(saasi)
 export(sim_bds_tree)
+export(sim_mle_lm)
