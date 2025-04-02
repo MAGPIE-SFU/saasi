@@ -1,13 +1,20 @@
-# c1
+#' Helper fn for `probability_density`.
+#'
+#' @noRd
 c1 <- function(lambda, mu, psi) {
   return(abs(sqrt((lambda - mu - psi)^2 + (4 * lambda * psi))))
 }
 
-# c2
+#' Helper fn for `probability_density`.
+#'
+#' @noRd
 c2 <- function(lambda, mu, psi) {
   return(-(lambda - mu - psi) / (c1(lambda, mu, psi)))
 }
 
+#' Helper fn for `probability_density`.
+#'
+#' @noRd
 q <- function(lambda, mu, psi, t) {
   d1 <- 2 * (1 - (c2(lambda, mu, psi))^2)
   d2 <- exp(-c1(lambda, mu, psi) * t) * (1 - c2(lambda, mu, psi))^2
@@ -15,6 +22,9 @@ q <- function(lambda, mu, psi, t) {
   return(d1 + d2 + d3)
 }
 
+#' Helper fn for `mle_lm`.
+#'
+#' @noRd
 probability_density <- function(lambda, mu, psi,
                                 internal_node_times, leaf_node_times) {
   # Add checks for invalid inputs
@@ -27,10 +37,21 @@ probability_density <- function(lambda, mu, psi,
   return(ret)
 }
 
-#' foo
+#' Estimate speciation/extinction rates for a tree
+#'
+#' This is done by method of maximum likelihood. Mostly implemented by
+#' \href{https://github.com/yexuansong}{@yexuansong}, from methods described in
+#' \href{https://doi.org/10.1093/molbev/msr217}{Stadler et al. (2012)}.
+#'
+#' @param phy A `phylo` phylogenetic tree (`ape` format).
+#' @param lambda An initial "guess" for speciation, used in subsequent formulae.
+#' @param mu An initial "guess" for extinction, used in subsequent formulae.
+#' @param psi Sampling rate.
+#' @param method See `method` parameter in \link{mle}.
+#' @return A two-element vector containing speciation and extinction values
+#' estimated from `phy`.
 #'@export
-sim_mle_lm <- function(phy, lambda = 2, mu = 0.5, psi = 0.5,
-                       method = "L-BFGS-B") {
+mle_lm <- function(phy, lambda = 2, mu = 0.5, psi = 0.5, method = "L-BFGS-B") {
   node_depths <- ape::node.depth.edgelength(phy)
   node_times <- max(node_depths) - node_depths
   # Total number of nodes == number of non-leaf nodes * 2 + 1
