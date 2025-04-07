@@ -41,5 +41,5 @@ q_matrix <- readRDS(file.path("data", "two_sampled_states_q_matrix.rds"))
 
 options(scipen = 999)
 # Probabilities of each node in `phy` being in state 1 or 2
-asr(phy, params_df, q_matrix)
+saasi(phy, params_df, q_matrix, plot = TRUE, cex = 0.75)
 ```
