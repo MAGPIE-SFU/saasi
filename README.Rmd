@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# asrproject
+# saasi
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -23,17 +23,18 @@ rate among locations.
 
 ## Installation
 
-You can install the development version of asrproject from [GitHub](https://github.com/) with:
+You can install the development version of saasi from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("ivansg44/asr_project")
+remotes::install_github("ivansg44/saasi")
 ```
 
 ## Example
 
 ```{r example}
-library(asrproject)
+library(saasi)
 
 phy <- readRDS(file.path("data", "two_sampled_states_phy.rds"))
 params_df <- readRDS(file.path("data", "two_sampled_states_params_df.rds"))

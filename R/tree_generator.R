@@ -180,7 +180,7 @@ me.to.ape.bisse <- function(x, root.state) {
 
 #' Simulate a birth/death/sampling tree
 #'
-#' This tree can be passed to [asrproject::saasi], and will include speciation,
+#' This tree can be passed to [saasi::saasi], and will include speciation,
 #' extinction, sampling, and mutation events.
 #'
 #' @param x0 Natural number used as root state in the returned tree. Must be a

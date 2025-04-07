@@ -1,5 +1,5 @@
-Package: asrproject
-Title: Ancestral State Reconstruction, While Accounting for Sampling Bias
+Package: saasi
+Title: Sampling Aware Ancestral State Inference
 Version: 0.0.0.9000
 Authors@R: c(
     person("Ivan", "Gill", email = "ivan_gill@sfu.ca", role = c("aut", "cre")),

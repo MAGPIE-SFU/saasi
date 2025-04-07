@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# asrproject
+# saasi
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -11,18 +11,18 @@ sampling rate among locations.
 
 ## Installation
 
-You can install the development version of asrproject from
+You can install the development version of saasi from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("ivansg44/asr_project")
+remotes::install_github("ivansg44/saasi")
 ```
 
 ## Example
 
 ``` r
-library(asrproject)
+library(saasi)
 
 phy <- readRDS(file.path("data", "two_sampled_states_phy.rds"))
 params_df <- readRDS(file.path("data", "two_sampled_states_params_df.rds"))
