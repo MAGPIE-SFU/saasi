@@ -4,7 +4,7 @@
 \alias{saasi}
 \title{Sampling Aware Ancestral State Inference}
 \usage{
-saasi(phy, params_df, q_matrix)
+saasi(phy, params_df, q_matrix, plot = FALSE, cex = 1)
 }
 \arguments{
 \item{phy}{A \code{phylo} phylogenetic tree (ape format). Must contain
@@ -24,6 +24,11 @@ Example:\tabular{lllll}{
 
 \item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
 algorithm. Row and column indices represent states.}
+
+\item{plot}{If \code{TRUE}, a plot of \code{phy} with overlaid state labels will be
+rendered.}
+
+\item{cex}{See \code{cex} parameter in \link{nodelabels}.}
 }
 \value{
 A data frame listing the state probabilities of every node in \code{phy}.

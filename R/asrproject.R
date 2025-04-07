@@ -17,15 +17,17 @@
 #' | 3 | 0.5 | 3 | 0.02 | 1 |
 #' @param q_matrix Numeric q matrix used in ancestral state reconstruction
 #' algorithm. Row and column indices represent states.
+#' @param plot If `TRUE`, a plot of `phy` with overlaid state labels will be
+#' rendered.
+#' @param cex See `cex` parameter in \link{nodelabels}.
 #' @return A data frame listing the state probabilities of every node in `phy`.
 #' @export
-saasi <- function(phy, params_df, q_matrix) {
+saasi <- function(phy, params_df, q_matrix, plot = FALSE, cex = 1) {
   nstate <- nrow(params_df)
-  nleaf_node <- phy[["Nnode"]]
   # Total number of nodes == number of non-leaf nodes * 2 + 1
-  nnode <- nleaf_node * 2 + 1
+  nnode <- phy[["Nnode"]] * 2 + 1
   # Root node ID == number of leaf nodes + 1 == number of internal nodes + 2.
-  root_node <- nleaf_node + 2
+  root_node <- phy[["Nnode"]] + 2
 
   node_depths <- ape::node.depth.edgelength(phy)
   max_depth <- max(node_depths)
@@ -58,6 +60,32 @@ saasi <- function(phy, params_df, q_matrix) {
   state_probabilities_df <- get_state_probabilities_df(phy,
                                                        nstate,
                                                        state_probabilities_list)
+
+  if (plot) {
+    # https://stackoverflow.com/a/17735894
+    highest_likelihoods <-
+      apply(state_probabilities_df, 1, function(e) which(e == max(e)))
+
+    # https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
+    # Will serve up to n states == len of vector; afterwards recycles colors
+    state_colors <- c("#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3",
+                      "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd",
+                      "#ccebc5", "#ffed6f")
+    # Map likelihoods to colors
+    highest_likelihood_colors <-
+      sapply(highest_likelihoods,
+             function(e) state_colors[[e %% (length(state_colors) + 1)]])
+
+    ape::plot.phylo(phy, label.offset = 0.05)
+    ape::tiplabels(highest_likelihoods[1:(phy[["Nnode"]] + 1)],
+                   frame = "circle",
+                   cex = cex,
+                   bg = highest_likelihood_colors)
+    ape::nodelabels(highest_likelihoods[-(1:(phy[["Nnode"]] + 1))],
+                    frame = "circle",
+                    cex = cex,
+                    bg = highest_likelihood_colors)
+  }
 
   return(state_probabilities_df)
 }
