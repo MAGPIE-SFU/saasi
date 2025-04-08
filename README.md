@@ -19,7 +19,9 @@ You can install the development version of saasi from
 remotes::install_github("ivansg44/saasi")
 ```
 
-## Example
+## Examples
+
+### Ancestral state reconstruction
 
 ``` r
 library(saasi)
@@ -33,7 +35,7 @@ options(scipen = 999)
 saasi(phy, params_df, q_matrix, plot = TRUE, cex = 0.75)
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-asr-1.png" width="100%" />
 
     #>                   1             2
     #> sp1  1.000000000000 0.00000000000
@@ -75,3 +77,36 @@ saasi(phy, params_df, q_matrix, plot = TRUE, cex = 0.75)
     #> nd17 0.000028328123 0.99997167188
     #> nd18 0.999983687957 0.00001631204
     #> nd19 0.000007392738 0.99999260726
+
+### Simulate a birth/death/sampling tree
+
+``` r
+library(saasi)
+
+params_df <- readRDS(file.path("data", "three_sampled_states_params_df.rds"))
+q_matrix <- readRDS(file.path("data", "three_sampled_states_q_matrix.rds"))
+
+# Tree in `ape` `phylo` format; root state specified as 1
+sim_bds_tree(params_df, q_matrix, 1)
+#> 
+#> Phylogenetic tree with 158 tips and 157 internal nodes.
+#> 
+#> Tip labels:
+#>   sp1, sp2, sp3, sp4, sp6, sp7, ...
+#> Node labels:
+#>   nd1, nd2, nd3, nd6, nd11, nd31, ...
+#> 
+#> Rooted; includes branch lengths.
+```
+
+### Estimate speciation/extinction rates
+
+``` r
+library(saasi)
+
+phy <- readRDS(file.path("data", "three_sampled_states_phy.rds"))
+
+# Estimate `lambda` and `mu` params for a phylogeny, by method of max likelihood
+mle_lm(phy)
+#> [1] 8.379745 0.050000
+```

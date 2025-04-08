@@ -31,9 +31,11 @@ You can install the development version of saasi from
 remotes::install_github("ivansg44/saasi")
 ```
 
-## Example
+## Examples
 
-```{r example}
+### Ancestral state reconstruction
+
+```{r asr}
 library(saasi)
 
 phy <- readRDS(file.path("data", "two_sampled_states_phy.rds"))
@@ -43,4 +45,27 @@ q_matrix <- readRDS(file.path("data", "two_sampled_states_q_matrix.rds"))
 options(scipen = 999)
 # Probabilities of each node in `phy` being in state 1 or 2
 saasi(phy, params_df, q_matrix, plot = TRUE, cex = 0.75)
+```
+
+### Simulate a birth/death/sampling tree
+
+```{r sim_bds_tree}
+library(saasi)
+
+params_df <- readRDS(file.path("data", "three_sampled_states_params_df.rds"))
+q_matrix <- readRDS(file.path("data", "three_sampled_states_q_matrix.rds"))
+
+# Tree in `ape` `phylo` format; root state specified as 1
+sim_bds_tree(params_df, q_matrix, 1)
+```
+
+### Estimate speciation/extinction rates
+
+```{r mle_lm}
+library(saasi)
+
+phy <- readRDS(file.path("data", "three_sampled_states_phy.rds"))
+
+# Estimate `lambda` and `mu` params for a phylogeny, by method of max likelihood
+mle_lm(phy)
 ```
