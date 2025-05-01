@@ -1,71 +1,142 @@
 ---
-output: github_document
+title: "saasi"
+output: html_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
-
-# saasi
-
-<!-- badges: start -->
-<!-- badges: end -->
-
-Ancestral state reconstruction method that accounts for variation in sampling
-rate among locations.
-
-## Installation
-
-You can install the development version of saasi from
-[GitHub](https://github.com/) with:
-
-``` r
-# install.packages("remotes")
-remotes::install_github("ivansg44/saasi")
-```
-
-## Examples
-
-### Ancestral state reconstruction
-
-```{r asr}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 library(saasi)
-
-phy <- readRDS(file.path("data", "two_sampled_states_phy.rds"))
-params_df <- readRDS(file.path("data", "two_sampled_states_params_df.rds"))
-q_matrix <- readRDS(file.path("data", "two_sampled_states_q_matrix.rds"))
-
-options(scipen = 999)
-# Probabilities of each node in `phy` being in state 1 or 2
-saasi(phy, params_df, q_matrix, plot = TRUE, cex = 0.75)
+library(diversitree)
+library(tidytree)
+library(ggtree)
+library(ggplot2)
+library(ggimage)
 ```
 
-### Simulate a birth/death/sampling tree
+## saasi package
 
-```{r sim_bds_tree}
-library(saasi)
+This is a demo showing how to use the saasi package.
 
-params_df <- readRDS(file.path("data", "three_sampled_states_params_df.rds"))
-q_matrix <- readRDS(file.path("data", "three_sampled_states_q_matrix.rds"))
+To run saasi, we need (1). a phylogenetic tree (class phylo) (2). speciation, 
+extinction and sampling rates (class data.frame) and (3). transition rate matrix
+(class matrix). The output will be a data frame that showing the probabilities 
+of each node in state $i$.
 
-# Tree in `ape` `phylo` format; root state specified as 1
-sim_bds_tree(params_df, q_matrix, 1)
+## simulation
+
+To simulate a birth-death-sampling tree, we need to specify speciation, 
+extinction, sampling rates and transition rates.
+
+```{r parameters}
+pars <- data.frame(state=c(1,2),freq=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
+
+qij_matrix <- function(k) {
+  mat <- matrix(0.15, nrow = k, ncol = k)  
+  diag(mat) <- NA  
+  return(mat)
+}
+q_matrix = qij_matrix(2)
+
+set.seed(1)
+
+phy <- sim_bds_tree(pars, q_matrix, x0=1, max_taxa = 300, max_t = 300,
+             include_extinct = FALSE)
+
+plot(phy)
+
 ```
 
-### Estimate speciation/extinction rates
+## Modifying tree
 
-```{r mle_lm}
-library(saasi)
+You might notice that the tree also include all the tips at the present day.
+This is because the simulation stop at the max time. To drop the tips at the 
+present day, we need to 
 
-phy <- readRDS(file.path("data", "three_sampled_states_phy.rds"))
+```{r modified}
 
-# Estimate `lambda` and `mu` params for a phylogeny, by method of max likelihood
-mle_lm(phy)
+k=2
+phy <- prune(phy)
+h <- history.from.sim.discrete(phy, 1:k)
+
+true_phy_info <- as_tibble(phy)
+phy_data <- c(factor(h$tip.state),factor(h$node.state))
+true_phy_info$State <- phy_data
+true_phy <- ggtree(phy)
+true_phy <- true_phy  %<+% true_phy_info + geom_point(aes(color=State),size=2) +
+  ggtitle("True Phylogeny") +
+  theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
+true_phy
+node_depths <- node.depth.edgelength(phy)
+tmrca <- max(node_depths)
+tips_to_drop <- phy$tip.label[abs(node_depths[1:length(phy$tip.label)] - tmrca) <= 0.01]
+new_phy <- drop.tip(phy, tips_to_drop)
+phy_our <- new_phy
+true_phy_info_new <- as_tibble(new_phy)
+phy_data <- c(factor(h$tip.state),factor(h$node.state))
+true_phy_info_new <- true_phy_info_new %>% mutate(State = phy_data[label])
+new_phy$tip.state <- new_phy$tip.state[setdiff(names(new_phy$tip.state), tips_to_drop)]
+phy <- new_phy
+true_phy_new <- ggtree(phy)
+true_phy_new <- true_phy_new  %<+% true_phy_info_new + geom_point(aes(color=State),size=2) +
+  ggtitle("True Phylogeny - without present day tips") +
+  theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
+true_phy_new
 ```
+
+## Ancestral state inference
+
+Now we can use the simulated tree to do ancestral state inference.
+First, we test what does the ace do
+
+
+```{r ace}
+library(ape)
+ace_phy <- phy
+ace_phy$node.label <- NULL
+# Note: Do not have this problem if use earlier version `ape`
+# Error in names(obj$ace) <- phy$node.label : 
+# attempt to set an attribute on NULL
+
+ace_phy$tip.state <- ace_phy$tip.state[setdiff(names(ace_phy$tip.state), tips_to_drop)]
+asr_ace<-ace(ace_phy$tip.state, ace_phy,type = "discrete", model="ER")
+
+ace_node_lik <- as.data.frame(asr_ace$lik.anc)
+ace_node_lik$node <- 1:new_phy$Nnode + Ntip(new_phy)
+
+ace_pie <- nodepie(ace_node_lik,cols=1:k)
+
+p1 <- ggtree(ace_phy)
+p1 <- p1 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
+  ggtitle("ace") +
+  theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
+p1 <- inset(p1, ace_pie,width = 0.07,height = 0.07,hjust=0.005)
+p1
+
+
+
+```
+
+
+We see that ace would infer that most of the internal nodes are in State 2 
+instead of State 1.
+
+Now let's try saasi 
+
+
+```{r saasi}
+result <- saasi(phy,pars,q_matrix)
+node_result <-  result[-(1:22), ]
+node_result
+node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
+our_pie <- nodepie(node_result,cols=1:k)
+
+p2 <- ggtree(ace_phy)
+p2 <- p2 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
+  ggtitle("SAASI") +
+  theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
+p2 <- inset(p2, our_pie,width = 0.07,height = 0.07,hjust=0.005)
+p2
+```
+Now saasi infers most of the internal nodes correctly. 
+
+
