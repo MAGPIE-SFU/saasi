@@ -117,7 +117,7 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
         # see saasi.clad for cladogenetic change equation
         return(
           -(sum(q[i, ][-i]) * y[i])
-          + sum(q[i, ][-i] * y[1:nstate][-i])
+          + sum(t(q)[i, ][-i] * y[1:nstate][-i])
         )
       })
 
