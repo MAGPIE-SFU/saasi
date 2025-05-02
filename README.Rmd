@@ -13,13 +13,12 @@
  )
 ```
  
-# saasi
+# Sampling Aware Ancestral State Inference (saasi)
  
 <!-- badges: start -->
 <!-- badges: end -->
  
-Ancestral state reconstruction method that accounts for variation in sampling
-rate among locations.
+Saasi is an ancestral state reconstruction method that accounts for variation in sampling rates among locations or traits. 
  
 ## Installation
  
@@ -28,7 +27,7 @@ You can install the development version of saasi from
  
 ``` r
  # install.packages("remotes")
- remotes::install_github("ivansg44/saasi")
+ remotes::install_github("MAGPIE-SFU/saasi")
 ```
  
 
@@ -42,18 +41,20 @@ library(ggplot2)
 library(ggimage)
 ```
 
-## saasi package
+## The saasi package
 
 This is a demo showing how to use the saasi package.
 
-To run saasi, we need (1). a phylogenetic tree (class phylo) (2). speciation, 
-extinction and sampling rates (class data.frame) and (3). transition rate matrix
-(class matrix). The output will be a data frame that showing the probabilities 
-of each node in state $i$.
+To run saasi, we need (1) a phylogenetic tree (class `phylo`), (2) speciation, 
+extinction and sampling rates (class `data.frame`), and (3) a transition rate matrix
+(class `matrix`). The output will be a data frame that containing the probabilities 
+of each state for each internal node of the phylogenetic tree.
 
-## simulation
+## A simulation
 
-To simulate a birth-death-sampling tree, we need to specify speciation, 
+We will first simulate a tree with known rates, and known internal node states, to illustrate saasi's ancestral state inferences. 
+
+We simulate a birth-death-sampling tree, for which we need to specify speciation, 
 extinction, sampling rates and transition rates.
 
 ```{r parameters}
@@ -77,9 +78,8 @@ plot(phy)
 
 ## Modifying tree
 
-You might notice that the tree also include all the tips at the present day.
-This is because the simulation stop at the max time. To drop the tips at the 
-present day, we need to 
+You might notice that the tree includes all the tips at the present day.
+This is because the simulation stopped at the maximum allowed time. In pathogen phylogenetics and phylogeography applications, we typically do not have heterochronous sequences (from the present). In this simulation, we therefore drop the tips at the present day. 
 
 ```{r modified}
 
@@ -115,7 +115,7 @@ true_phy_new
 ## Ancestral state inference
 
 Now we can use the simulated tree to do ancestral state inference.
-First, we test what does the ace do
+The function `ace` in the `ape` package does ancestral character (here, state) estimation without considering sampling rates, and it is a natural comparison for saasi since it is widely used in large-scale phylogeographic reconstructions. Comparing `saasi`'s reconstructions to `ace`'s illustrates the impact of adjusting for sampling differences. 
 
 
 ```{r ace}
@@ -146,10 +146,10 @@ p1
 ```
 
 
-We see that ace would infer that most of the internal nodes are in State 2 
+We see that `ace` would infer that most of the internal nodes are in State 2 
 instead of State 1.
 
-Now let's try saasi 
+Now let's try `saasi`.
 
 
 ```{r saasi}
@@ -166,6 +166,7 @@ p2 <- p2 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
 p2 <- inset(p2, our_pie,width = 0.07,height = 0.07,hjust=0.005)
 p2
 ```
-Now saasi infers most of the internal nodes correctly. 
+
+Due to accounting for the sampling differences `saasi` infers most of the internal nodes correctly. 
 
 
