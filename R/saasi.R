@@ -140,7 +140,6 @@ get_backwards_likelihoods_list <- function(phy,
   invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
     state <- phy[["tip.state"]][[i]]
     state_freq <- params_df$psi[params_df$state == state]
-    print(state_freq)
     backwards_likelihoods_list[[i]][[state]] <<- state_freq
   }))
   
