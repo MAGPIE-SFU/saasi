@@ -1,21 +1,22 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-\# saasi
+# Sampling Aware Ancestral State Inference (saasi)
 
-<!-- badges: start --> <!-- badges: end -->
+<!-- badges: start -->
+<!-- badges: end -->
 
 Saasi is an ancestral state reconstruction method that accounts for
 variation in sampling rates among locations or traits.
 
-\## Installation
+## Installation
 
 You can install the development version of saasi from
 [GitHub](https://github.com/) with:
 
-    # install.packages("remotes")
-    remotes::install_github("MAGPIE-SFU/saasi")
+     # install.packages("remotes")
+     remotes::install_github("MAGPIE-SFU/saasi")
 
-## saasi package
+## The saasi package
 
 This is a demo showing how to use the saasi package.
 
@@ -53,10 +54,10 @@ speciation, extinction, sampling rates and transition rates.
 
 ## Modifying tree
 
-You might notice that the tree also include all the tips at the present
-day. This is because the simulation stopped at the maximum allowed time.
-In pathogen phylogenetics and phylogeography applications, we typically
-do not have heterochronous sequences (from the present). In this
+You might notice that the tree includes all the tips at the present day.
+This is because the simulation stopped at the maximum allowed time. In
+pathogen phylogenetics and phylogeography applications, we typically do
+not have heterochronous sequences (from the present). In this
 simulation, we therefore drop the tips at the present day.
 
 
@@ -188,9 +189,10 @@ Now let’s try `saasi`.
     p2 <- inset(p2, our_pie,width = 0.07,height = 0.07,hjust=0.005)
     p2
 
-<img src="man/figures/README-saasi-1.png" width="100%" /> Due to
-accounting for the sampling differences `saasi` infers most of the
-internal nodes correctly.
+<img src="man/figures/README-saasi-1.png" width="100%" />
+
+Due to accounting for the sampling differences `saasi` infers most of
+the internal nodes correctly.
 
 ## Parameter estimations - Speciation and Extinction
 
@@ -313,10 +315,11 @@ Now we rerun `saasi` with estimated parameters.
 
     p3 <- ggtree(ace_phy)
     p3 <- p3 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
-      ggtitle("SAASI - estimated parameters") +
+      ggtitle("SAASI - using estimated parameters") +
       theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
     p3 <- inset(p3, our_pie,width = 0.07,height = 0.07,hjust=0.005)
     p3
 
 <img src="man/figures/README-rerun saasi with estimated parameters-1.png" width="100%" />
+
 The result is slightly different than using the true parameters.
