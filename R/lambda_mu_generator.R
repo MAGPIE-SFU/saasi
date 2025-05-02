@@ -48,10 +48,15 @@ probability_density <- function(lambda, mu, psi,
 #' @param mu An initial "guess" for extinction, used in subsequent formulae.
 #' @param psi Sampling rate.
 #' @param method See `method` parameter in \link{mle}.
+#' @param lower A two-element vector containing the lower bound of the speciation 
+#' and extinction values (geater than 0), the default is c(0.001,0.001).
+#' @param upper A two-element vector containing the upper bound of the speciation 
+#' and extinction values, should be similar to the sampling rate, still need to find
+#' a better justification for the upcoming version.
 #' @return A two-element vector containing speciation and extinction values
 #' estimated from `phy`.
 #'@export
-mle_lm <- function(phy, lambda = 2, mu = 0.5, psi = 0.5, method = "L-BFGS-B") {
+mle_lm <- function(phy, lambda, mu, psi, method = "L-BFGS-B", lower = c(0.001,0.001), upper) {
   node_depths <- ape::node.depth.edgelength(phy)
   node_times <- max(node_depths) - node_depths
   # Total number of nodes == number of non-leaf nodes * 2 + 1
@@ -69,8 +74,8 @@ mle_lm <- function(phy, lambda = 2, mu = 0.5, psi = 0.5, method = "L-BFGS-B") {
   fit <- stats4::mle(negative_log_likelihood,
                      start = list(lambda = lambda, mu = mu),
                      method = method,
-                     lower = c(0.1, 0.05),
-                     upper = c(10, 10))
+                     lower = lower,
+                     upper = upper)
 
   ret <- unname(c(stats4::coef(fit)[1], stats4::coef(fit)[2]))
   return(ret)
