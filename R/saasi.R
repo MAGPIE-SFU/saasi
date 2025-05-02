@@ -228,9 +228,9 @@ get_state_probabilities_list <- function(phy,
 }
 
 #' Convert state probabilities list to data frame.
-#'
-#'  Data frame of state probabilities in each node in phy.
-#'
+#' @return List of state probabilities.
+#' Data frame of state probabilities in each node in phy.
+#' @noRd
 get_state_probabilities_df <- function(phy, nstate, state_probabilities_list) {
   state_probabilities_df <-
     as.data.frame(do.call(rbind, state_probabilities_list))
