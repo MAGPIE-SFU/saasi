@@ -18,8 +18,7 @@
  <!-- badges: start -->
  <!-- badges: end -->
  
- Ancestral state reconstruction method that accounts for variation in sampling
- rate among locations.
+Saasi is an ancestral state reconstruction method that accounts for variation in sampling rates among locations or traits. 
  
  ## Installation
  
@@ -28,7 +27,7 @@
  
  ``` r
  # install.packages("remotes")
- remotes::install_github("ivansg44/saasi")
+ remotes::install_github("MAGPIE-SFU/saasi")
  ```
  
 
@@ -46,18 +45,19 @@ library(ggimage)
 
 This is a demo showing how to use the saasi package.
 
-To run saasi, we need (1). a phylogenetic tree (class phylo) (2). speciation, 
-extinction and sampling rates (class data.frame) and (3). transition rate matrix
-(class matrix). The output will be a data frame that showing the probabilities 
-of each node in state $i$.
+To run saasi, we need (1) a phylogenetic tree (class `phylo`), (2) speciation, 
+extinction and sampling rates (class `data.frame`), and (3) a transition rate matrix
+(class `matrix`). The output will be a data frame that containing the probabilities 
+of each state for each internal node of the phylogenetic tree.
 
-## simulation
+## A simulation
+We will first simulate a tree with known rates, and known internal node states, to illustrate saasi's ancestral state inferences. 
 
-To simulate a birth-death-sampling tree, we need to specify speciation, 
+We simulate a birth-death-sampling tree, for which we need to specify speciation, 
 extinction, sampling rates and transition rates.
 
 ```{r parameters}
-pars <- data.frame(state=c(1,2),freq=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
+pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
 
 qij_matrix <- function(k) {
   mat <- matrix(0.15, nrow = k, ncol = k)  
@@ -78,8 +78,8 @@ plot(phy)
 ## Modifying tree
 
 You might notice that the tree also include all the tips at the present day.
-This is because the simulation stop at the max time. To drop the tips at the 
-present day, we need to 
+This is because the simulation stopped at the maximum allowed time. In pathogen phylogenetics and phylogeography applications, we typically do not have heterochronous sequences (from the present). In this simulation, we therefore drop the tips at the present day. 
+
 
 ```{r modified}
 
@@ -115,7 +115,8 @@ true_phy_new
 ## Ancestral state inference
 
 Now we can use the simulated tree to do ancestral state inference.
-First, we test what does the ace do
+The function `ace` in the `ape` package does ancestral character (here, state) estimation without considering sampling rates, and it is a natural comparison for saasi since it is widely used in large-scale phylogeographic reconstructions. Comparing `saasi`'s reconstructions to `ace`'s illustrates the impact of adjusting for sampling differences. 
+
 
 
 ```{r ace}
@@ -146,10 +147,11 @@ p1
 ```
 
 
-We see that ace would infer that most of the internal nodes are in State 2 
+We see that `ace` would infer that most of the internal nodes are in State 2 
 instead of State 1.
 
-Now let's try saasi 
+Now let's try `saasi`.
+
 
 
 ```{r saasi}
@@ -166,6 +168,88 @@ p2 <- p2 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
 p2 <- inset(p2, our_pie,width = 0.07,height = 0.07,hjust=0.005)
 p2
 ```
-Now saasi infers most of the internal nodes correctly. 
+Due to accounting for the sampling differences `saasi` infers most of the internal nodes correctly. 
+
+## Parameter estimations - Speciation and Extinction
+
+Suppose we do not know the speciation and extinction rates for each state, but 
+we have some knowledge about the sampling rates (e.g. per year/month, this should
+algin with your tree time). We estimate the 
+speciation and extinction rates using the method described in
+\href{https://doi.org/10.1093/molbev/msr217}{Stadler et al. (2012)}.
+
+```{r estimates}
+
+estimates <- mle_lm(phy,lambda = 2, mu = 0.1, psi = 1,lower = c(0.001,0.001), upper = c(5,5))
+
+estimates[1]
+estimates[2]
+```
 
 
+This MLE approach should be robust to different initial guesses, for example:
+
+```{r estimates alternative}
+
+estimates <- mle_lm(phy,lambda = 100, mu = 100, psi = 1,lower = c(0.001,0.001), upper = c(500,500))
+
+estimates[1]
+estimates[2]
+```
+However, sometimes the algorithm might cause an error: Error: L-BFGS-B needs
+finite values of `fn' of Complex Objective Function. This is due to a large 
+branch length (the value exceed the .Machine$double.xmax), we need to set the upper bound smaller. 
+
+TODO: for future versions, will find a more consistent way of finding the 
+estimates.
+
+## Parameter estimations - Transition
+
+If the transition rates are also unknown, one easy way of estimating transition rates
+is using `ace`:
+
+```{r estimates qij}
+
+# a function that convert the ace estimates to a matrix (one of the inputs in saasi)
+replace_matrix_with_vector <- function(matrix, vector) {
+  for (i in 1:nrow(matrix)) {
+    for (j in 1:ncol(matrix)) {
+      matrix[i,j] <- vector[matrix[i,j]]
+    }
+  }
+  return(matrix)
+}
+
+# TODO: will add this to the utility function
+
+q_matrix_est <- replace_matrix_with_vector(asr_ace$index.matrix,asr_ace$rates)
+q_matrix_est
+```
+
+Now we rerun `saasi` with estimated parameters.
+
+```{r rerun saasi with estimated parameters}
+pars_est <- data.frame(state=c(1,2),
+                   prior=c(0.5,0.5),
+                   lambda=rep(estimates[1],2),
+                   mu=rep(estimates[2],2),
+                   psi=c(.1,1))
+
+result <- saasi(phy,pars_est,q_matrix_est)
+
+# now draw the plot
+
+node_result <-  result[-(1:22), ]
+node_result
+node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
+our_pie <- nodepie(node_result,cols=1:k)
+
+p3 <- ggtree(ace_phy)
+p3 <- p3 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
+  ggtitle("SAASI - estimated parameters") +
+  theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
+p3 <- inset(p3, our_pie,width = 0.07,height = 0.07,hjust=0.005)
+p3
+
+```
+The result is slightly different than using the true parameters.
