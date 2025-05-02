@@ -140,6 +140,7 @@ get_backwards_likelihoods_list <- function(phy,
   invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
     state <- phy[["tip.state"]][[i]]
     state_freq <- params_df$psi[params_df$state == state]
+    print(state_freq)
     backwards_likelihoods_list[[i]][[state]] <<- state_freq
   }))
   
@@ -227,14 +228,15 @@ get_state_probabilities_list <- function(phy,
   return(state_probabilities_list)
 }
 
-#' #' Convert state probabilities list to data frame.
-#' #'
-#' #'  Data frame of state probabilities in each node in phy.
-#' #' 
-#' get_state_probabilities_df <- function(phy, nstate, state_probabilities_list) {
-#'   state_probabilities_df <-
-#'     as.data.frame(do.call(rbind, state_probabilities_list))
-#'   row.names(state_probabilities_df) <-
-#'     c(phy[["tip.label"]], phy[["node.label"]])
-#'   names(state_probabilities_df) <- seq_len(nstate)
-#'   return(state_probabilities_df)
+#' Convert state probabilities list to data frame.
+#'
+#'  Data frame of state probabilities in each node in phy.
+#'
+get_state_probabilities_df <- function(phy, nstate, state_probabilities_list) {
+  state_probabilities_df <-
+    as.data.frame(do.call(rbind, state_probabilities_list))
+  row.names(state_probabilities_df) <-
+    c(phy[["tip.label"]], phy[["node.label"]])
+  names(state_probabilities_df) <- seq_len(nstate)
+  return(state_probabilities_df)
+}
