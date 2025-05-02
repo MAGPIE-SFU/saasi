@@ -198,7 +198,7 @@ the internal nodes correctly.
 
 Suppose we do not know the speciation and extinction rates for each
 state, but we have some knowledge about the sampling rates (e.g. per
-year/month, this should algin with your tree time). We estimate the
+year/month, this should align with your tree time). We estimate the
 speciation and extinction rates using the method described in .
 
 
