@@ -169,10 +169,9 @@ Now let's try `saasi`.
 
 ```{r saasi}
 result <- saasi(phy,pars,q_matrix)
-node_result <-  result[-(1:22), ]
-node_result
-node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-our_pie <- nodepie(node_result,cols=1:k)
+
+result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
+our_pie <- nodepie(result,cols=1:k)
 
 p4 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
   ggtitle("SAASI") +
@@ -252,10 +251,8 @@ result <- saasi(phy,pars_est,q_matrix_est)
 
 # now draw the plot
 
-node_result <-  result[-(1:22), ]
-node_result
-node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-our_pie <- nodepie(node_result,cols=1:k)
+result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
+our_pie <- nodepie(result,cols=1:k)
 
 p5 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
   ggtitle("SAASI - using estimated parameters") +
@@ -266,3 +263,46 @@ p5
 ```
 
 The result is slightly different than using the true parameters.
+
+
+
+## Using saasi on general trees
+
+Just like `ace`, `saasi` works on binary trees that contains tip.state and edge.length
+
+Let's generate a tree using `rtree`, and randomly assign states to the tips. 
+
+```{r generating tree }
+
+set.seed(1)
+
+# generate a tree
+random_phy <- rtree(20)
+
+# randomly assign each tip a state (State 1 or State 2)
+tip_states <- sample(1:2, size=20, replace=TRUE)
+names(tip_states) <- random_phy$tip.label
+
+random_phy$tip.state <- tip_states
+```
+
+We can run `ace`
+
+```{r random tree ace}
+
+asr_result <- ace(random_phy$tip.state, random_phy, type = "discrete", model = "ER")
+asr_result$lik.anc
+```
+
+We can also run `saasi`
+
+```{r random tree saasi}
+
+pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
+
+q_matrix = qij_matrix(2)
+
+saasi_result <- saasi(random_phy,pars,q_matrix)
+
+saasi_result
+```

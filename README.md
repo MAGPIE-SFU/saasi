@@ -141,54 +141,9 @@ State 2 instead of State 1.
 Now let’s try `saasi`.
 
     result <- saasi(phy,pars,q_matrix)
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    node_result <-  result[-(1:22), ]
-    node_result
-    #>                  1            2
-    #> nd1   9.823748e-01 1.762524e-02
-    #> nd2   9.994883e-01 5.116896e-04
-    #> nd12  9.987111e-01 1.288924e-03
-    #> nd21  9.787996e-01 2.120035e-02
-    #> nd5   9.898658e-01 1.013425e-02
-    #> nd6   9.952304e-01 4.769618e-03
-    #> nd10  9.327190e-01 6.728104e-02
-    #> nd57  9.733160e-01 2.668404e-02
-    #> nd59  9.999765e-01 2.352009e-05
-    #> nd60  8.618374e-03 9.913816e-01
-    #> nd74  3.123013e-06 9.999969e-01
-    #> nd137 1.984286e-04 9.998016e-01
-    #> nd3   8.695732e-01 1.304268e-01
-    #> nd14  9.903516e-01 9.648396e-03
-    #> nd31  8.159245e-01 1.840755e-01
-    #> nd27  2.219324e-03 9.977807e-01
-    #> nd38  4.649731e-05 9.999535e-01
-    #> nd29  5.227208e-03 9.947728e-01
-    #> nd81  2.417753e-03 9.975822e-01
-    #> nd112 1.710792e-05 9.999829e-01
-    #> nd193 4.968901e-05 9.999503e-01
-    node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-    our_pie <- nodepie(node_result,cols=1:k)
+
+    result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
+    our_pie <- nodepie(result,cols=1:k)
 
     p4 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
       ggtitle("SAASI") +
@@ -268,57 +223,11 @@ Now we rerun `saasi` with estimated parameters.
                        psi=c(.1,1))
 
     result <- saasi(phy,pars_est,q_matrix_est)
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
-    #> [1] 0.1
-    #> [1] 1
-    #> [1] 1
 
     # now draw the plot
 
-    node_result <-  result[-(1:22), ]
-    node_result
-    #>                  1           2
-    #> nd1   0.9160470232 0.083952977
-    #> nd2   0.9742168326 0.025783167
-    #> nd12  0.9481213625 0.051878637
-    #> nd21  0.8426787951 0.157321205
-    #> nd5   0.8937366628 0.106263337
-    #> nd6   0.9080256571 0.091974343
-    #> nd10  0.7577604048 0.242239595
-    #> nd57  0.8924616573 0.107538343
-    #> nd59  0.9989037047 0.001096295
-    #> nd60  0.0579786364 0.942021364
-    #> nd74  0.0001308276 0.999869172
-    #> nd137 0.0049735937 0.995026406
-    #> nd3   0.6781574304 0.321842570
-    #> nd14  0.8850996242 0.114900376
-    #> nd31  0.6209197684 0.379080232
-    #> nd27  0.0509743572 0.949025643
-    #> nd38  0.0012343549 0.998765645
-    #> nd29  0.0723530922 0.927646908
-    #> nd81  0.0343703316 0.965629668
-    #> nd112 0.0006489199 0.999351080
-    #> nd193 0.0014922413 0.998507759
-    node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-    our_pie <- nodepie(node_result,cols=1:k)
+    result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
+    our_pie <- nodepie(result,cols=1:k)
 
     p5 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
       ggtitle("SAASI - using estimated parameters") +
@@ -329,3 +238,80 @@ Now we rerun `saasi` with estimated parameters.
 <img src="man/figures/README-rerun saasi with estimated parameters-1.png" width="100%" />
 
 The result is slightly different than using the true parameters.
+
+## Using saasi on general trees
+
+Just like `ace`, `saasi` works on binary trees that contains tip.state
+and edge.length
+
+Let’s generate a tree using `rtree`, and randomly assign states to the
+tips.
+
+
+    set.seed(1)
+
+    # generate a tree
+    random_phy <- rtree(20)
+
+    # randomly assign each tip a state (State 1 or State 2)
+    tip_states <- sample(1:2, size=20, replace=TRUE)
+    names(tip_states) <- random_phy$tip.label
+
+    random_phy$tip.state <- tip_states
+
+We can run `ace`
+
+
+    asr_result <- ace(random_phy$tip.state, random_phy, type = "discrete", model = "ER")
+    asr_result$lik.anc
+    #>            1         2
+    #> 21 0.5000000 0.5000000
+    #> 22 0.5000000 0.5000000
+    #> 23 0.5000000 0.5000000
+    #> 24 0.5000000 0.5000000
+    #> 25 0.5000000 0.5000000
+    #> 26 0.3889657 0.6110343
+    #> 27 0.5000000 0.5000000
+    #> 28 0.5000000 0.5000000
+    #> 29 0.5000000 0.5000000
+    #> 30 0.5008183 0.4991817
+    #> 31 0.5052387 0.4947613
+    #> 32 0.5000000 0.5000000
+    #> 33 0.5000000 0.5000000
+    #> 34 0.5000000 0.5000000
+    #> 35 0.5000000 0.5000000
+    #> 36 0.5000000 0.5000000
+    #> 37 0.5021837 0.4978163
+    #> 38 0.5000000 0.5000000
+    #> 39 0.5000000 0.5000000
+
+We can also run `saasi`
+
+
+    pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
+
+    q_matrix = qij_matrix(2)
+
+    saasi_result <- saasi(random_phy,pars,q_matrix)
+
+    saasi_result
+    #>              1            2
+    #> 21 0.958960383 0.0410396172
+    #> 22 0.935936391 0.0640636086
+    #> 23 0.228740911 0.7712590889
+    #> 24 0.539770862 0.4602291378
+    #> 25 0.798543482 0.2014565177
+    #> 26 0.000134941 0.9998650590
+    #> 27 0.998046844 0.0019531559
+    #> 28 0.999003986 0.0009960143
+    #> 29 0.998772971 0.0012270291
+    #> 30 0.999816557 0.0001834426
+    #> 31 0.984376816 0.0156231845
+    #> 32 0.994829442 0.0051705582
+    #> 33 0.934861493 0.0651385069
+    #> 34 0.980159459 0.0198405408
+    #> 35 0.997810113 0.0021898874
+    #> 36 0.999621323 0.0003786767
+    #> 37 0.996337122 0.0036628776
+    #> 38 0.988079980 0.0119200197
+    #> 39 0.002604712 0.9973952876
