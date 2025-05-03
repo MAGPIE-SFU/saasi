@@ -16,14 +16,14 @@ sim_bds_tree(
 \arguments{
 \item{params_df}{Data frame containing non-q parameters used in ancestral
 state reconstruction algorithm. Must have the following column names:
-\code{state}, \code{freq}, \code{lambda}, \code{mu}, and \code{psi}. The state values should be a
+\code{state}, \code{prior}, \code{lambda}, \code{mu}, and \code{psi}. The state values should be a
 1-based sequence of natural numbers: \code{1}, \code{2}, ..., \emph{\code{n}}.
 
 Example:\tabular{lllll}{
-   \strong{state} \tab \strong{freq} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
-   1 \tab 0.2 \tab 3 \tab 0.02 \tab 1 \cr
-   2 \tab 0.3 \tab 3 \tab 0.02 \tab 1 \cr
-   3 \tab 0.5 \tab 3 \tab 0.02 \tab 1 \cr
+   \strong{state} \tab \strong{prior} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
+   1 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
+   2 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
+   3 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
 }}
 
 \item{q_matrix}{Numeric q matrix used in ancestral state reconstruction

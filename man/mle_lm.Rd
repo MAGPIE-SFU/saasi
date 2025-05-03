@@ -4,7 +4,15 @@
 \alias{mle_lm}
 \title{Estimate speciation/extinction rates for a tree}
 \usage{
-mle_lm(phy, lambda = 2, mu = 0.5, psi = 0.5, method = "L-BFGS-B")
+mle_lm(
+  phy,
+  lambda,
+  mu,
+  psi,
+  method = "L-BFGS-B",
+  lower = c(0.001, 0.001),
+  upper
+)
 }
 \arguments{
 \item{phy}{A \code{phylo} phylogenetic tree (\code{ape} format).}
@@ -16,6 +24,13 @@ mle_lm(phy, lambda = 2, mu = 0.5, psi = 0.5, method = "L-BFGS-B")
 \item{psi}{Sampling rate.}
 
 \item{method}{See \code{method} parameter in \link{mle}.}
+
+\item{lower}{A two-element vector containing the lower bound of the speciation
+and extinction values (geater than 0), the default is c(0.001,0.001).}
+
+\item{upper}{A two-element vector containing the upper bound of the speciation
+and extinction values, should be similar to the sampling rate, still need to find
+a better justification for the upcoming version.}
 }
 \value{
 A two-element vector containing speciation and extinction values
