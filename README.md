@@ -72,13 +72,11 @@ Now we can plot the tree
     p1
 
 <img src="man/figures/README-plot raw tree-1.png" width="100%" /> \##
-Modifying tree
-
-You might notice that the tree includes all the tips at the present day.
-This is because the simulation stopped at the maximum allowed time. In
-pathogen phylogenetics and phylogeography applications, we typically do
-not have heterochronous sequences (from the present). In this
-simulation, we therefore drop the tips at the present day.
+Modifying tree You might notice that the tree includes all the tips at
+the present day. This is because the simulation stopped at the maximum
+allowed time. In pathogen phylogenetics and phylogeography applications,
+we typically do not have heterochronous sequences (from the present). In
+this simulation, we therefore drop the tips at the present day.
 
     # find the height of the tree
     node_depths <- node.depth.edgelength(phy)
