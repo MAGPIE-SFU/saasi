@@ -120,7 +120,7 @@ phy$tip.state <- phy$tip.state[setdiff(names(phy$tip.state), tips_to_drop)]
 ```
 
 We can generate a tree that does not contain present day tips.
-``` {r plotting new tree}
+```{r plotting new tree}
 
 p2 <- ggtree(phy) %<+% true_phy_info_new + geom_point(aes(color=State),size=2) +
   ggtitle("True Phylogeny - without present day tips") +
