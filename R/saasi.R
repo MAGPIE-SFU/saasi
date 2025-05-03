@@ -218,9 +218,9 @@ get_state_probabilities_list <- function(phy,
   }))
   internal_node_ids <- root_node:nnode
   
-  node_prob <- matrix(unlist(state_probabilities_list[internal_node_ids]),ncol=k,byrow = TRUE)
+  node_prob <- matrix(unlist(state_probabilities_list[internal_node_ids]),ncol=nstate,byrow = TRUE)
   node_lik <- as.data.frame(node_prob,row.names = internal_node_ids)
-  colnames(node_lik) = c(1:k)
+  colnames(node_lik) = c(1:nstate)
   return(node_lik)
 }
 
