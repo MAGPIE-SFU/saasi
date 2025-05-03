@@ -39,6 +39,7 @@ library(tidytree)
 library(ggtree)
 library(ggplot2)
 library(ggimage)
+
 ```
 
 ## The saasi package
@@ -102,7 +103,6 @@ p1
 
 You might notice that the tree includes all the tips at the present day.
 This is because the simulation stopped at the maximum allowed time. In pathogen phylogenetics and phylogeography applications, we typically do not have heterochronous sequences (from the present). In this simulation, we therefore drop the tips at the present day. 
-
 ```{r modified}
 # find the height of the tree
 node_depths <- node.depth.edgelength(phy)
@@ -192,7 +192,7 @@ Suppose we do not know the speciation and extinction rates for each state, but
 we have some knowledge about the sampling rates (e.g. per year/month, this should
 align with your tree time). We estimate the 
 speciation and extinction rates using the method described in
-\href{https://doi.org/10.1093/molbev/msr217}{Stadler et al. (2012)}.
+[Stadler et al. (2012)](https://doi.org/10.1093/molbev/msr217).
 
 ```{r estimates}
 

@@ -164,7 +164,8 @@ the internal nodes correctly.
 Suppose we do not know the speciation and extinction rates for each
 state, but we have some knowledge about the sampling rates (e.g. per
 year/month, this should align with your tree time). We estimate the
-speciation and extinction rates using the method described in .
+speciation and extinction rates using the method described in [Stadler
+et al. (2012)](https://doi.org/10.1093/molbev/msr217).
 
 
     estimates <- mle_lm(phy,lambda = 2, mu = 0.1, psi = 1,lower = c(0.001,0.001), upper = c(5,5))
