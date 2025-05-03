@@ -115,7 +115,7 @@ phylogeographic reconstructions. Comparing `saasi`’s reconstructions to
 `ace`’s illustrates the impact of adjusting for sampling differences.
 
     library(ape)
-    k=2
+
     ace_phy <- phy
     ace_phy$node.label <- NULL
     # Note: Do not have this problem if use earlier version `ape`
@@ -146,7 +146,7 @@ Now let’s try `saasi`.
     result <- saasi(phy,pars,q_matrix)
 
     result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-    our_pie <- nodepie(result,cols=1:k)
+    our_pie <- nodepie(result,cols=1:2)
 
     p4 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
       ggtitle("SAASI") +
@@ -230,7 +230,7 @@ Now we rerun `saasi` with estimated parameters.
     # now draw the plot
 
     result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-    our_pie <- nodepie(result,cols=1:k)
+    our_pie <- nodepie(result,cols=1:2)
 
     p5 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
       ggtitle("SAASI - using estimated parameters") +
