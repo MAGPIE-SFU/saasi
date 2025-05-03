@@ -57,10 +57,6 @@ saasi <- function(phy, params_df, q_matrix, plot = FALSE, cex = 1) {
     backwards_likelihoods_list
   )
   
-  state_probabilities_df <- get_state_probabilities_df(phy,
-                                                       nstate,
-                                                       state_probabilities_list)
-  
   if (plot) {
     # https://stackoverflow.com/a/17735894
     highest_likelihoods <-
@@ -87,7 +83,7 @@ saasi <- function(phy, params_df, q_matrix, plot = FALSE, cex = 1) {
                     bg = highest_likelihood_colors)
   }
   
-  return(state_probabilities_df)
+  return(state_probabilities_list)
 }
 
 #' Get data frame representation of tree topology.
@@ -223,19 +219,23 @@ get_state_probabilities_list <- function(phy,
       / sum(backwards_likelihoods_list[[node]] * abs_likelihoods)
     )
   }))
+  internal_node_ids <- root_node:nnode
   
-  return(state_probabilities_list)
+  node_prob <- matrix(unlist(state_probabilities_list[internal_node_ids]),ncol=k,byrow = TRUE)
+  node_lik <- as.data.frame(node_prob,row.names = internal_node_ids)
+  colnames(node_lik) = c(1:k)
+  return(node_lik)
 }
 
 #' Convert state probabilities list to data frame.
-#' @return List of state probabilities.
+#'  List of state probabilities.
 #' Data frame of state probabilities in each node in phy.
-#' @noRd
-get_state_probabilities_df <- function(phy, nstate, state_probabilities_list) {
-  state_probabilities_df <-
-    as.data.frame(do.call(rbind, state_probabilities_list))
-  row.names(state_probabilities_df) <-
-    c(phy[["tip.label"]], phy[["node.label"]])
-  names(state_probabilities_df) <- seq_len(nstate)
-  return(state_probabilities_df)
-}
+#' 
+# get_state_probabilities_df <- function(phy, nstate, state_probabilities_list) {
+#   state_probabilities_df <-
+#     as.data.frame(do.call(rbind, state_probabilities_list))
+#   row.names(state_probabilities_df) <-
+#     c(phy[["tip.label"]], phy[["node.label"]])
+#   names(state_probabilities_df) <- seq_len(nstate)
+#   return(state_probabilities_df)
+# }
