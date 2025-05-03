@@ -105,6 +105,8 @@ This is because the simulation stopped at the maximum allowed time. In pathogen 
 
 ```{r modified}
 # find the height of the tree
+node_depths <- node.depth.edgelength(phy)
+
 tmrca <- max(node_depths)
 
 # check which tips are at the present day
@@ -136,6 +138,7 @@ The function `ace` in the `ape` package does ancestral character (here, state) e
 
 ```{r ace}
 library(ape)
+k=2
 ace_phy <- phy
 ace_phy$node.label <- NULL
 # Note: Do not have this problem if use earlier version `ape`
@@ -146,9 +149,9 @@ ace_phy$tip.state <- ace_phy$tip.state[setdiff(names(ace_phy$tip.state), tips_to
 asr_ace<-ace(ace_phy$tip.state, ace_phy,type = "discrete", model="ER")
 
 ace_node_lik <- as.data.frame(asr_ace$lik.anc)
-ace_node_lik$node <- 1:new_phy$Nnode + Ntip(new_phy)
+ace_node_lik$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
 
-ace_pie <- nodepie(ace_node_lik,cols=1:k)
+ace_pie <- nodepie(ace_node_lik,cols=1:2)
 
 p3 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
   ggtitle("ace") +

@@ -81,6 +81,8 @@ not have heterochronous sequences (from the present). In this
 simulation, we therefore drop the tips at the present day.
 
     # find the height of the tree
+    node_depths <- node.depth.edgelength(phy)
+
     tmrca <- max(node_depths)
 
     # check which tips are at the present day
@@ -113,6 +115,7 @@ phylogeographic reconstructions. Comparing `saasi`’s reconstructions to
 `ace`’s illustrates the impact of adjusting for sampling differences.
 
     library(ape)
+    k=2
     ace_phy <- phy
     ace_phy$node.label <- NULL
     # Note: Do not have this problem if use earlier version `ape`
@@ -123,9 +126,9 @@ phylogeographic reconstructions. Comparing `saasi`’s reconstructions to
     asr_ace<-ace(ace_phy$tip.state, ace_phy,type = "discrete", model="ER")
 
     ace_node_lik <- as.data.frame(asr_ace$lik.anc)
-    ace_node_lik$node <- 1:new_phy$Nnode + Ntip(new_phy)
+    ace_node_lik$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
 
-    ace_pie <- nodepie(ace_node_lik,cols=1:k)
+    ace_pie <- nodepie(ace_node_lik,cols=1:2)
 
     p3 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
       ggtitle("ace") +
