@@ -34,6 +34,9 @@ states, to illustrate saasi’s ancestral state inferences.
 We simulate a birth-death-sampling tree, for which we need to specify
 speciation, extinction, sampling rates and transition rates.
 
+Simulation is based on the `diversitree` package, by adding sampling
+events through time.
+
     pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
 
     qij_matrix <- function(k) {
@@ -43,16 +46,33 @@ speciation, extinction, sampling rates and transition rates.
     }
     q_matrix = qij_matrix(2)
 
+Once the diversification parameters are defined, we can create a tree
+using `sim_bds_tree`.
+
+    # set seed
     set.seed(1)
+
+    # create the tree object
 
     phy <- sim_bds_tree(pars, q_matrix, x0=1, max_taxa = 300, max_t = 300,
                  include_extinct = FALSE)
 
-    plot(phy)
+Now we can plot the tree
 
-<img src="man/figures/README-parameters-1.png" width="100%" />
 
-## Modifying tree
+    # extract transition histories
+    h <- history.from.sim.discrete(phy, 1:2)
+
+    true_phy_info <- as_tibble(phy)
+    true_phy_info$State <- c(factor(h$tip.state),factor(h$node.state))
+
+    p1 <- ggtree(phy) %<+% true_phy_info + geom_point(aes(color=State),size=2) +
+      ggtitle("True Phylogeny") +
+      theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
+    p1
+
+<img src="man/figures/README-plot raw tree-1.png" width="100%" /> \##
+Modifying tree
 
 You might notice that the tree includes all the tips at the present day.
 This is because the simulation stopped at the maximum allowed time. In
@@ -60,39 +80,28 @@ pathogen phylogenetics and phylogeography applications, we typically do
 not have heterochronous sequences (from the present). In this
 simulation, we therefore drop the tips at the present day.
 
-
-    k=2
-    phy <- prune(phy)
-    h <- history.from.sim.discrete(phy, 1:k)
-
-    true_phy_info <- as_tibble(phy)
-    phy_data <- c(factor(h$tip.state),factor(h$node.state))
-    true_phy_info$State <- phy_data
-    true_phy <- ggtree(phy)
-    true_phy <- true_phy  %<+% true_phy_info + geom_point(aes(color=State),size=2) +
-      ggtitle("True Phylogeny") +
-      theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    true_phy
-
-<img src="man/figures/README-modified-1.png" width="100%" />
-
-    node_depths <- node.depth.edgelength(phy)
+    # find the height of the tree
     tmrca <- max(node_depths)
+
+    # check which tips are at the present day
     tips_to_drop <- phy$tip.label[abs(node_depths[1:length(phy$tip.label)] - tmrca) <= 0.01]
-    new_phy <- drop.tip(phy, tips_to_drop)
-    phy_our <- new_phy
-    true_phy_info_new <- as_tibble(new_phy)
-    phy_data <- c(factor(h$tip.state),factor(h$node.state))
-    true_phy_info_new <- true_phy_info_new %>% mutate(State = phy_data[label])
-    new_phy$tip.state <- new_phy$tip.state[setdiff(names(new_phy$tip.state), tips_to_drop)]
-    phy <- new_phy
-    true_phy_new <- ggtree(phy)
-    true_phy_new <- true_phy_new  %<+% true_phy_info_new + geom_point(aes(color=State),size=2) +
+
+    # create the new tree by dropping the tips at the present day
+    phy <- drop.tip(phy, tips_to_drop)
+
+    true_phy_info_new <- as_tibble(phy) %>% mutate(State = c(factor(h$tip.state),factor(h$node.state))[label])
+    phy$tip.state <- phy$tip.state[setdiff(names(phy$tip.state), tips_to_drop)]
+
+We can generate a tree that does not contain present day tips.
+
+
+    p2 <- ggtree(phy) %<+% true_phy_info_new + geom_point(aes(color=State),size=2) +
       ggtitle("True Phylogeny - without present day tips") +
       theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    true_phy_new
 
-<img src="man/figures/README-modified-2.png" width="100%" />
+    p2
+
+<img src="man/figures/README-plotting new tree-1.png" width="100%" />
 
 ## Ancestral state inference
 
@@ -118,12 +127,11 @@ phylogeographic reconstructions. Comparing `saasi`’s reconstructions to
 
     ace_pie <- nodepie(ace_node_lik,cols=1:k)
 
-    p1 <- ggtree(ace_phy)
-    p1 <- p1 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
+    p3 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
       ggtitle("ace") +
       theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    p1 <- inset(p1, ace_pie,width = 0.07,height = 0.07,hjust=0.005)
-    p1
+    p3 <- inset(p3, ace_pie,width = 0.07,height = 0.07,hjust=0.005)
+    p3
 
 <img src="man/figures/README-ace-1.png" width="100%" />
 
@@ -182,12 +190,11 @@ Now let’s try `saasi`.
     node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
     our_pie <- nodepie(node_result,cols=1:k)
 
-    p2 <- ggtree(ace_phy)
-    p2 <- p2 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
+    p4 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
       ggtitle("SAASI") +
       theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    p2 <- inset(p2, our_pie,width = 0.07,height = 0.07,hjust=0.005)
-    p2
+    p4 <- inset(p4, our_pie,width = 0.07,height = 0.07,hjust=0.005)
+    p4
 
 <img src="man/figures/README-saasi-1.png" width="100%" />
 
@@ -313,12 +320,11 @@ Now we rerun `saasi` with estimated parameters.
     node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
     our_pie <- nodepie(node_result,cols=1:k)
 
-    p3 <- ggtree(ace_phy)
-    p3 <- p3 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
+    p5 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
       ggtitle("SAASI - using estimated parameters") +
       theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    p3 <- inset(p3, our_pie,width = 0.07,height = 0.07,hjust=0.005)
-    p3
+    p5 <- inset(p5, our_pie,width = 0.07,height = 0.07,hjust=0.005)
+    p5
 
 <img src="man/figures/README-rerun saasi with estimated parameters-1.png" width="100%" />
 
