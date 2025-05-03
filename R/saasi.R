@@ -17,9 +17,6 @@
 #' | 3 | 1/3 | 3 | 0.02 | 1 |
 #' @param q_matrix Numeric q matrix used in ancestral state reconstruction
 #' algorithm. Row and column indices represent states.
-#' @param plot If `TRUE`, a plot of `phy` with overlaid state labels will be
-#' rendered.
-#' @param cex See `cex` parameter in \link{nodelabels}.
 #' @return A data frame listing the state probabilities of every node in `phy`.
 #' @export
 saasi <- function(phy, params_df, q_matrix) {
