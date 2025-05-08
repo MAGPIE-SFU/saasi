@@ -2,8 +2,8 @@
 #'
 #' Get the internal node state probabilities of a tree with defined leaf states.
 #'
-#' @param phy A `phylo` phylogenetic tree (ape format). Must contain
-#' `tip.state`.
+#' @param phy A `phylo` phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
+#' `tip.state`. `tip.state` should also be in numeric values (1:n).
 #' @param params_df Data frame containing non-q parameters used in ancestral
 #' state reconstruction algorithm. Must have the following column names:
 #' `state`, `prior`, `lambda`, `mu`, and `psi`. The state values should be a
@@ -20,6 +20,50 @@
 #' @return A data frame listing the state probabilities of every node in `phy`.
 #' @export
 saasi <- function(phy, params_df, q_matrix) {
+  
+  # Adding warning messages 
+  
+  # Checking if the tip states are presented as numeric values
+  if(!is.numeric(phy$tip.state)){
+    stop("Convert tip state to numeric values.")
+  }
+  
+  # Checking if the tree is binary 
+  if(!ape::is.binary.phylo(phy)){
+    stop("The phylogenetic tree needs to be a binary tree.")
+  }
+  
+  # Checking if the tree is a rooted tree
+  if(!ape::is.rooted.phylo(phy)){
+    stop("The phylogenetic tree needs to be a rooted tree.")
+  }
+  
+  
+  required_cols <- c("state", "prior", "lambda", "mu", "psi")
+  
+  # Check if input is a data frame
+  if (!is.data.frame(params_df)) {
+    stop("Input must be a data frame.")
+  }
+  
+  # Check for required column names
+  if (!all(required_cols %in% colnames(params_df))) {
+    stop(sprintf("Missing required columns: %s", 
+                 paste(setdiff(required_cols, colnames(params_df)), collapse = ", ")))
+  }
+  
+  # Check that 'state' is a sequence of 1-based natural numbers
+  if (!is.numeric(params_df$state)) {
+    stop("'state' column must be a sequence of numerical values (1, 2, ..., n).")
+  }
+  
+  # Checking the number of unique states in tip.state matches the number of states
+  # in params_df$state
+  
+  if(!length(unique(phy$tip.state)) == length(params_df$state)){
+    stop("The number of states does not match.")
+  }
+  
   nstate <- nrow(params_df)
   # Total number of nodes == number of non-leaf nodes * 2 + 1
   nnode <- phy[["Nnode"]] * 2 + 1
@@ -29,6 +73,7 @@ saasi <- function(phy, params_df, q_matrix) {
   node_depths <- ape::node.depth.edgelength(phy)
   max_depth <- max(node_depths)
   post_order_edges <- ape::reorder.phylo(phy, "postorder")[["edge"]]
+  
   topology_df <- get_topology_df(nnode,
                                  node_depths,
                                  max_depth,
