@@ -197,8 +197,8 @@ get_backwards_likelihoods_list <- function(phy,
                                              abs(right_likelihoods),
                                              left_t0, right_t0, tf,
                                              params_df, q_matrix)
-    abs_likelihoods <- abs(likelihoods)
-    norm_likelihoods <- abs_likelihoods / sum(abs_likelihoods)
+    #abs_likelihoods <- abs(likelihoods)
+    #norm_likelihoods <- abs_likelihoods / sum(abs_likelihoods)
     backwards_likelihoods_list[[node]] <<- norm_likelihoods
   }))
   
@@ -246,7 +246,7 @@ get_state_probabilities_list <- function(phy,
     )
     abs_parent_state_probabilities <- abs(parent_state_probabilities)
     norm_probabilities <- (
-      abs_parent_state_probabilities / sum(abs_parent_state_probabilities)
+      params_df$lambda*abs_parent_state_probabilities / sum(params_df$lambda*abs_parent_state_probabilities)
     )
     
     t0 <- topology_df$t_root[topology_df$id == parent]
@@ -255,10 +255,10 @@ get_state_probabilities_list <- function(phy,
     likelihoods <- get_forwards_likelihoods(norm_probabilities,
                                             t0, tf,
                                             params_df, q_matrix)
-    abs_likelihoods <- abs(likelihoods)
+    #abs_likelihoods <- abs(likelihoods)
     state_probabilities_list[[node]] <<- (
-      backwards_likelihoods_list[[node]] * abs_likelihoods
-      / sum(backwards_likelihoods_list[[node]] * abs_likelihoods)
+      backwards_likelihoods_list[[node]] * likelihoods
+      / sum(backwards_likelihoods_list[[node]] * likelihoods)
     )
   }))
   internal_node_ids <- root_node:nnode
