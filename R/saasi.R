@@ -199,7 +199,7 @@ get_backwards_likelihoods_list <- function(phy,
                                              params_df, q_matrix)
     #abs_likelihoods <- abs(likelihoods)
     #norm_likelihoods <- abs_likelihoods / sum(abs_likelihoods)
-    backwards_likelihoods_list[[node]] <<- norm_likelihoods
+    backwards_likelihoods_list[[node]] <<- likelihoods # note changed by CC 
   }))
   
   return(backwards_likelihoods_list)
