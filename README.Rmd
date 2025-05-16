@@ -63,14 +63,9 @@ through time.
 ```{r parameters}
 pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
 
-qij_matrix <- function(k) {
-  mat <- matrix(0.15, nrow = k, ncol = k)  
-  diag(mat) <- NA  
-  return(mat)
-}
-q_matrix = qij_matrix(2)
-
+q_matrix <- matrix(0.15, 2,2); diag(q_matrix) <- NA
 ```
+
 Once the diversification parameters are defined, we can create a tree using `sim_bds_tree`.
 
 ```{r generate tree}
@@ -266,7 +261,7 @@ p5
 
 ```
 
-The result is slightly different than using the true parameters.
+The result is slightly different what we obtain using the true parameters.
 
 
 
@@ -290,7 +285,7 @@ names(tip_states) <- random_phy$tip.label
 random_phy$tip.state <- tip_states
 ```
 
-We can run `ace`
+We can run `ace`:
 
 ```{r random tree ace}
 
@@ -298,13 +293,13 @@ asr_result <- ace(random_phy$tip.state, random_phy, type = "discrete", model = "
 asr_result$lik.anc
 ```
 
-We can also run `saasi`
+We can also run `saasi`:
 
 ```{r random tree saasi}
 
 pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
 
-q_matrix = qij_matrix(2)
+q_matrix = matrix(0.15, 2,2); diag(q_matrix)=NA 
 
 saasi_result <- saasi(random_phy,pars,q_matrix)
 

@@ -39,12 +39,7 @@ events through time.
 
     pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
 
-    qij_matrix <- function(k) {
-      mat <- matrix(0.15, nrow = k, ncol = k)  
-      diag(mat) <- NA  
-      return(mat)
-    }
-    q_matrix = qij_matrix(2)
+    q_matrix <- matrix(0.15, 2,2); diag(q_matrix) <- NA
 
 Once the diversification parameters are defined, we can create a tree
 using `sim_bds_tree`.
@@ -239,7 +234,8 @@ Now we rerun `saasi` with estimated parameters.
 
 <img src="man/figures/README-rerun saasi with estimated parameters-1.png" width="100%" />
 
-The result is slightly different than using the true parameters.
+The result is slightly different what we obtain using the true
+parameters.
 
 ## Using saasi on general trees
 
@@ -261,7 +257,7 @@ tips.
 
     random_phy$tip.state <- tip_states
 
-We can run `ace`
+We can run `ace`:
 
 
     asr_result <- ace(random_phy$tip.state, random_phy, type = "discrete", model = "ER")
@@ -287,12 +283,12 @@ We can run `ace`
     #> 38 0.5000000 0.5000000
     #> 39 0.5000000 0.5000000
 
-We can also run `saasi`
+We can also run `saasi`:
 
 
     pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
 
-    q_matrix = qij_matrix(2)
+    q_matrix = matrix(0.15, 2,2); diag(q_matrix)=NA 
 
     saasi_result <- saasi(random_phy,pars,q_matrix)
 
