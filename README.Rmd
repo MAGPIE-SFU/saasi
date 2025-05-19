@@ -219,18 +219,8 @@ is using `ace`:
 ```{r estimates qij}
 
 # a function that convert the ace estimates to a matrix (one of the inputs in saasi)
-replace_matrix_with_vector <- function(matrix, vector) {
-  for (i in 1:nrow(matrix)) {
-    for (j in 1:ncol(matrix)) {
-      matrix[i,j] <- vector[matrix[i,j]]
-    }
-  }
-  return(matrix)
-}
 
-# TODO: will add this to the utility function
-
-q_matrix_est <- replace_matrix_with_vector(asr_ace$index.matrix,asr_ace$rates)
+q_matrix_est <- extract_ace_q(asr_ace)
 q_matrix_est
 ```
 
