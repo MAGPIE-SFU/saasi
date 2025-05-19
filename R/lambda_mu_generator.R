@@ -39,7 +39,7 @@ probability_density <- function(lambda, mu, psi,
 
 #' Estimate speciation/extinction rates for a tree
 #'
-#' This is done by method of maximum likelihood. Mostly implemented by
+#' This is done with a maximum likelihood method,  implemented mainly by
 #' \href{https://github.com/yexuansong}{@yexuansong}, from methods described in
 #' \href{https://doi.org/10.1093/molbev/msr217}{Stadler et al. (2012)}.
 #'
@@ -78,5 +78,6 @@ mle_lm <- function(phy, lambda, mu, psi, method = "L-BFGS-B", lower = c(0.001,0.
                      upper = upper)
 
   ret <- unname(c(stats4::coef(fit)[1], stats4::coef(fit)[2]))
+  names(ret) = c("speciation","extinction")
   return(ret)
 }

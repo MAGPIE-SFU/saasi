@@ -37,7 +37,7 @@ A two-element vector containing speciation and extinction values
 estimated from \code{phy}.
 }
 \description{
-This is done by method of maximum likelihood. Mostly implemented by
+This is done with a maximum likelihood method,  implemented mainly by
 \href{https://github.com/yexuansong}{@yexuansong}, from methods described in
 \href{https://doi.org/10.1093/molbev/msr217}{Stadler et al. (2012)}.
 }

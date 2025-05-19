@@ -207,12 +207,9 @@ estimates[1]
 estimates[2]
 ```
 
-However, sometimes the algorithm might cause an error: Error: L-BFGS-B needs
+However, sometimes there is an error: L-BFGS-B needs
 finite values of `fn' of Complex Objective Function. This is due to a large 
-branch length (the value exceed the .Machine$double.xmax), we need to set the upper bound smaller. 
-
-TODO: for future versions, will find a more consistent way of finding the 
-estimates.
+branch length (the value exceed the .Machine$double.xmax), so we need to set the upper bound to a smaller value. 
 
 ## Parameter estimations - Transition
 

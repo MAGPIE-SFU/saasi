@@ -3,11 +3,11 @@
 #' Get the internal node state probabilities of a tree with defined leaf states.
 #'
 #' @param phy A `phylo` phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
-#' `tip.state`. `tip.state` should also be in numeric values (1:n).
+#' `tip.state`. `tip.state` can be names of the states, or numeric values (1:n).
 #' @param params_df Data frame containing non-q parameters used in ancestral
 #' state reconstruction algorithm. Must have the following column names:
-#' `state`, `prior`, `lambda`, `mu`, and `psi`. The state values should be a
-#' 1-based sequence of natural numbers: `1`, `2`, ..., *`n`*.
+#' `state`, `prior`, `lambda`, `mu`, and `psi`. The `prior` values refer to the baseline
+#' probabilities of the states (used at the root of the tree). 
 #'
 #' Example:
 #' | **state** | **prior** | **lambda** | **mu** | **psi** |
@@ -16,7 +16,7 @@
 #' | 2 | 1/3 | 3 | 0.02 | 1 |
 #' | 3 | 1/3 | 3 | 0.02 | 1 |
 #' @param q_matrix Numeric q matrix used in ancestral state reconstruction
-#' algorithm. Row and column indices represent states.
+#' algorithm. Row and column indices or names represent states.
 #' @return A data frame listing the state probabilities of every node in `phy`.
 #' @export
 saasi <- function(phy, params_df, q_matrix) {
@@ -25,7 +25,17 @@ saasi <- function(phy, params_df, q_matrix) {
   
   # Checking if the tip states are presented as numeric values
   if(!is.numeric(phy$tip.state)){
-    stop("Convert tip state to numeric values.")
+    # stop("Convert tip state to numeric values.")
+      if( !all(sort(rownames(q_matrix))==sort(params_df$state))) {
+          stop("State names and q names need to agree and be present only once") 
+      } else {
+      params_df$statename = params_df$state
+      params_df$state = as.numeric(factor(params_df$statename)) # numeric state
+      params_df = params_df[order(params_df$state), ]
+      # reorder q if necessary, so its order corresponds to the numeric state 
+      q_matrix = q_matrix[ order(as.numeric(factor(rownames(q_matrix)))),
+                           order(as.numeric(factor(colnames(q_matrix))))]
+      }
   }
   
   # Checking if the tree is binary 

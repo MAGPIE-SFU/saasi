@@ -164,9 +164,11 @@ et al. (2012)](https://doi.org/10.1093/molbev/msr217).
     estimates <- mle_lm(phy,lambda = 2, mu = 0.1, psi = 1,lower = c(0.001,0.001), upper = c(5,5))
 
     estimates[1]
-    #> [1] 2.086275
+    #> speciation 
+    #>   2.086275
     estimates[2]
-    #> [1] 0.001
+    #> extinction 
+    #>      0.001
 
 This MLE approach should be robust to different initial guesses, for
 example:
@@ -175,17 +177,16 @@ example:
     estimates <- mle_lm(phy,lambda = 100, mu = 100, psi = 1,lower = c(0.001,0.001), upper = c(500,500))
 
     estimates[1]
-    #> [1] 2.086275
+    #> speciation 
+    #>   2.086275
     estimates[2]
-    #> [1] 0.001
+    #> extinction 
+    #>      0.001
 
-However, sometimes the algorithm might cause an error: Error: L-BFGS-B
-needs finite values of \`fn’ of Complex Objective Function. This is due
-to a large branch length (the value exceed the .Machine$double.xmax), we
-need to set the upper bound smaller.
-
-TODO: for future versions, will find a more consistent way of finding
-the estimates.
+However, sometimes there is an error: L-BFGS-B needs finite values of
+\`fn’ of Complex Objective Function. This is due to a large branch
+length (the value exceed the .Machine$double.xmax), so we need to set
+the upper bound to a smaller value.
 
 ## Parameter estimations - Transition
 
