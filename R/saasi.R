@@ -29,6 +29,8 @@ saasi <- function(phy, params_df, q_matrix) {
       if( !all(sort(rownames(q_matrix))==sort(params_df$state))) {
           stop("State names and q names need to agree and be present only once") 
       } else {
+          phy$tip.statename = phy$tip.state
+          phy$tip.state = as.numeric(factor(phy$tip.state)) # makes it numeric 
       params_df$statename = params_df$state
       params_df$state = as.numeric(factor(params_df$statename)) # numeric state
       params_df = params_df[order(params_df$state), ]
@@ -276,6 +278,9 @@ get_state_probabilities_list <- function(phy,
   node_prob <- matrix(unlist(state_probabilities_list[internal_node_ids]),ncol=nstate,byrow = TRUE)
   node_lik <- as.data.frame(node_prob,row.names = internal_node_ids)
   colnames(node_lik) = c(1:nstate)
+  if(!is.null(phy$tip.statename)){
+      colnames(node_lik) = levels(factor(phy$tip.statename))
+  }
   return(node_lik)
 }
 
