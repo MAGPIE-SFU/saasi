@@ -6,7 +6,9 @@
 <!-- badges: end -->
 
 Saasi is an ancestral state reconstruction method that accounts for
-variation in sampling rates among locations or traits.
+variation in sampling rates among locations or traits. It is described
+in the recent preprint by Song *et al.*:
+<https://www.biorxiv.org/content/10.1101/2025.05.20.655151v1>.
 
 ## Installation
 

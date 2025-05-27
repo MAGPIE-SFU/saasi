@@ -17,7 +17,8 @@
 #' | 3 | 1/3 | 3 | 0.02 | 1 |
 #' @param q_matrix Numeric q matrix used in ancestral state reconstruction
 #' algorithm. Row and column indices or names represent states.
-#' @return A data frame listing the state probabilities of every node in `phy`.
+#' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond
+#' to the node IDs. 
 #' @export
 saasi <- function(phy, params_df, q_matrix) {
   
