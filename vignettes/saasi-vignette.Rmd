@@ -1,0 +1,97 @@
+---
+title: "Sampling Aware Ancestral State Inference"
+author: "Yexuan Song"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{An Introduction to SAASI}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+ 
+ <!-- README.md is generated from README.Rmd. Please edit that file -->
+ 
+```{r, include = FALSE}
+ knitr::opts_chunk$set(
+   collapse = TRUE,
+   comment = "#>",
+   fig.path = "man/figures/README-",
+   out.width = "100%"
+ )
+```
+ 
+# Introduction
+ 
+<!-- badges: start -->
+<!-- badges: end -->
+ 
+This vignette serves two major proposes:
+
+(1). How to do the ancestral state inference using
+sassi on a phylogenetic tree of interest.
+
+(2). How to visualize the inference results on the tree.
+
+
+# saasi
+
+## Phylogenetic tree 
+
+The tree that you are interested in to infer ancestral states using `saasi'
+should be a timed - rooted binary tree, including tip states
+(either geographic locations or some certain traits). 
+
+## Getting input parameters
+
+In addition to a phylogenetic tree, saasi also requires the user to know the 
+phylodynamic parameters (speciation, extinction, transition & sampling).
+
+Note that the user should have some knowledge about the sampling difference 
+between states of interest (or for testing different sampling scenarios).
+
+The speciation and extinction rates (per unit time, should be consistent 
+with the time scale of the tree) can be estimated using "mle_lm" function. 
+The method is described in 
+[Stadler et al. (2012)](https://doi.org/10.1093/molbev/msr217).
+
+
+```{r speciation and extinction}
+
+```
+
+
+Transition rates can be estimated using `ace'.
+
+
+```{r tranistion}
+
+```
+
+## Running saasi
+
+```{r saasi}
+
+```
+
+
+## transition rate adjustment
+
+```{r transition adj}
+
+```
+
+
+# Visualization
+
+There are two major ways of visualizing saasi's output:
+
+(1). Phylogenetic tree, internal nodes are pie charts represent probabilities.
+
+(2). Alluvial plot, showing the overall movements between states.
+
+## Phylogenetic tree visualization
+
+
+## Alluvial plot visualization
+
+
