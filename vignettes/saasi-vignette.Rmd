@@ -126,7 +126,7 @@ saasi_result_with_adjusted_qij <- saasi(bird.orders,pars,adj_qij)
 A quick way of checking the result is by using the default functions 
 (`tiplabels` & `nodelabels`) in `ape`.
 
-```{r visualization}
+```{r, echo = TRUE, results = 'hide', fig.show = 'hide'}
 plot(bird.orders, label.offset = 1)
 
 color <- c("#E41A1C", "#377EB8")
@@ -141,7 +141,7 @@ nodelabels(pie = saasi_result,
 
 ```
 
-```{r visualization2}
+```{r,echo = TRUE, results = 'hide', fig.show = 'hide'}
 plot(bird.orders, label.offset = 1)
 
 color <- c("#E41A1C", "#377EB8")
