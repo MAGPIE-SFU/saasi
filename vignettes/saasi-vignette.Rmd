@@ -2,7 +2,11 @@
 title: "Sampling Aware Ancestral State Inference"
 author: "Yexuan Song"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    toc: true
+  pdf_document:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{An Introduction to SAASI}
   %\VignetteEngine{knitr::rmarkdown}
@@ -21,6 +25,8 @@ vignette: >
    out.width = "100%"
  )
 ```
+ 
+ 
  
 # Introduction
  
