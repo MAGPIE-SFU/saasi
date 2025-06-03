@@ -69,9 +69,7 @@ q_adjust <- function(qij_matrix,state,sampling_diff){
   
   if(sampling_diff <= 1){
     updated_qij[,index] = updated_qij[,index]/fit_func_higher(1/sampling_diff)
-    print(fit_func_higher(1/sampling_diff))
     updated_qij[index,] = updated_qij[index,]/fit_func_lower(1/sampling_diff)
-    print(fit_func_lower(1/sampling_diff))
   } else {
     updated_qij[,index] = updated_qij[,index]/fit_func_lower(sampling_diff)
     updated_qij[index,] = updated_qij[index,]/fit_func_higher(sampling_diff)
