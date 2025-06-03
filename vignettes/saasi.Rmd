@@ -8,8 +8,8 @@ output:
   pdf_document:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Sampling Aware Ancestral State Inference}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{saasi}
   %\VignetteEncoding{UTF-8}
 ---
  <!-- setwd("/Users/yexuan-magpie/Desktop/MSc_thesis_implementation/saasi") -->
@@ -32,9 +32,9 @@ vignette: >
 <!-- badges: end -->
  
 
-This vignette serves as a guide of how to use the `saasi` package.
+This vignette serves as a guide on how to use the `saasi` package.
 
-Note: In the future version it will also include a guide of how to 
+Note: In the future version, it will also include a guide on how to 
 visualize the inference results (phylogenetic tree  and 
 alluvial plot visualization).
 
@@ -51,9 +51,9 @@ alluvial plot visualization).
 ## Phylogenetic tree 
 
 The tree that you are interested in to infer ancestral states using `saasi'
-should be a timed - rooted binary tree, including tip states
-(either geographic locations or some certain traits). The traits should be 
-discrete traits.
+should be a timed-rooted binary tree, including tip states
+(either geographic locations or certain traits). The traits should be 
+discrete.
 
 In this vignette, we will go through saasi's workflow using 
 a bird tree example in the `ape` package.
@@ -111,11 +111,11 @@ saasi_result <- saasi(bird.orders,pars,ace_qij)
 
 ## transition rate adjustment
 
-Sometimes the transition rate adjustment using `ace` is biased due to uneven
+Sometimes, the transition rate adjustment using `ace` is biased due to uneven
 sampling. We implement a quick way of adjusting the transition rates based on
 the sampling assumptions.
 
-Suppose in this example State 1 samples 1/9.
+Suppose that in this example, State 1 at one-ninth sampling.
 
 ```{r transition adj}
 
@@ -130,7 +130,7 @@ saasi_result_with_adjusted_qij <- saasi(bird.orders,pars,adj_qij)
 A quick way of checking the result is by using the default functions 
 (`tiplabels` & `nodelabels`) in `ape`.
 
-```{r plot}
+```{r, echo = TRUE, results = 'hide', fig.show = 'hide'} 
 plot(bird.orders, label.offset = 1)
 
 color <- c("#E41A1C", "#377EB8")
@@ -147,7 +147,7 @@ nodelabels(pie = saasi_result,
 
 <!-- {r, echo = TRUE, results = 'hide', fig.show = 'hide'} -->
 
-```{r plot2}
+```{r, echo = TRUE, results = 'hide', fig.show = 'hide'} 
 plot(bird.orders, label.offset = 1)
 
 color <- c("#E41A1C", "#377EB8")

@@ -37,7 +37,7 @@ adj_qij <- q_adjust(ace_qij,"1",1/9)
 saasi_result_with_adjusted_qij <- saasi(bird.orders,pars,adj_qij)
 
 
-## ----plot---------------------------------------------------------------------
+## ----echo = TRUE, results = 'hide', fig.show = 'hide'-------------------------
 plot(bird.orders, label.offset = 1)
 
 color <- c("#E41A1C", "#377EB8")
@@ -51,7 +51,7 @@ nodelabels(pie = saasi_result,
            cex = 0.2)# plotting
 
 
-## ----plot2--------------------------------------------------------------------
+## ----echo = TRUE, results = 'hide', fig.show = 'hide'-------------------------
 plot(bird.orders, label.offset = 1)
 
 color <- c("#E41A1C", "#377EB8")
