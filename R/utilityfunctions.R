@@ -77,22 +77,22 @@ q_adjust <- function(qij_matrix,state,sampling_diff){
   return(updated_qij)
 }
 
-#' Tree visualization using ggtree 
-#' 
-#' This function creates the ggtree object that visualize the tree, which includes
-#' tip states and inferred node state probabilities. Note, the `ggtree` package 
-#' should be loaded before using this function.
-#' 
-#' @param phy A `phylo` phylogenetic tree.
-#' @param asi Ancestral state inference using `saasi` or other methods.
-#' @return A phylogenetic tree that contain tip states and inferred node state probabilities.
-#' @export
-plot_ggtree <- function(phy,asi){
-  if (!requireNamespace("ggtree", quietly = TRUE)) {
-    stop("Package 'ggtree' is required but not installed. Please install it with BiocManager::install(`ggtree`)", call. = FALSE)
-  }
-
-}
+# Tree visualization using ggtree 
+# 
+# This function creates the ggtree object that visualize the tree, which includes
+# tip states and inferred node state probabilities. Note, the `ggtree` package 
+# should be loaded before using this function.
+# 
+# @param phy A `phylo` phylogenetic tree.
+# @param asi Ancestral state inference using `saasi` or other methods.
+# @return A phylogenetic tree that contain tip states and inferred node state probabilities.
+# @export
+# plot_ggtree <- function(phy,asi){
+#   if (!requireNamespace("ggtree", quietly = TRUE)) {
+#     stop("Package 'ggtree' is required but not installed. Please install it with BiocManager::install(`ggtree`)", call. = FALSE)
+#   }
+# 
+# }
 
 
 
