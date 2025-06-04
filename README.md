@@ -18,6 +18,9 @@ You can install the development version of saasi from
      # install.packages("remotes")
      remotes::install_github("MAGPIE-SFU/saasi")
 
+The user may also need to install the following packages before running
+the demo: “diversitree”,“tidytree”,“ggtree”,“ggplot2” & “ggimage”.
+
 ## The saasi package
 
 This is a demo showing how to use the saasi package.

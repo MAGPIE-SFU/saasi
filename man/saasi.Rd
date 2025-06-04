@@ -26,7 +26,8 @@ Example:\tabular{lllll}{
 algorithm. Row and column indices or names represent states.}
 }
 \value{
-A data frame listing the state probabilities of every node in \code{phy}.
+A data frame listing the state probabilities of every node in \code{phy}. The row names correspond
+to the node IDs.
 }
 \description{
 Get the internal node state probabilities of a tree with defined leaf states.

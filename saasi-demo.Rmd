@@ -240,13 +240,12 @@ result <- saasi(phy,pars_est,q_matrix_est)
 # now draw the plot
 
 node_result <-  result[-(1:22), ]
-node_result
 node_result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
 our_pie <- nodepie(node_result,cols=1:k)
 
 p3 <- ggtree(ace_phy)
 p3 <- p3 %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
-  ggtitle("SAASI - estimated parameters") +
+  ggtitle("SAASI - using estimated parameters") +
   theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
 p3 <- inset(p3, our_pie,width = 0.07,height = 0.07,hjust=0.005)
 p3

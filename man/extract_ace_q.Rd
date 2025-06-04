@@ -2,8 +2,7 @@
 % Please edit documentation in R/utilityfunctions.R
 \name{extract_ace_q}
 \alias{extract_ace_q}
-\title{Construct a rate matrix q using the output of ace
-This function is here because ace returns rates and an index matrix, not a matrix of rates.}
+\title{Construct a rate matrix q using the output of ace}
 \usage{
 extract_ace_q(aceoutput)
 }
@@ -14,6 +13,5 @@ extract_ace_q(aceoutput)
 A rate matrix q in the form saasi needs
 }
 \description{
-Construct a rate matrix q using the output of ace
 This function is here because ace returns rates and an index matrix, not a matrix of rates.
 }

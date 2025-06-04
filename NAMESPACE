@@ -2,5 +2,6 @@
 
 export(extract_ace_q)
 export(mle_lm)
+export(q_adjust)
 export(saasi)
 export(sim_bds_tree)
