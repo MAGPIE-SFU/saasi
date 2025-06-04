@@ -12,7 +12,7 @@
 
 <meta name="author" content="Yexuan Song" />
 
-<meta name="date" content="2025-06-03" />
+<meta name="date" content="2025-06-04" />
 
 <title>Sampling Aware Ancestral State Inference</title>
 
@@ -341,7 +341,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore">Sampling Aware Ancestral State
 Inference</h1>
 <h4 class="author">Yexuan Song</h4>
-<h4 class="date">2025-06-03</h4>
+<h4 class="date">2025-06-04</h4>
 
 
 <div id="TOC">
@@ -354,7 +354,7 @@ tree</a></li>
 <li><a href="#getting-input-parameters" id="toc-getting-input-parameters">Getting input parameters</a></li>
 <li><a href="#running-saasi" id="toc-running-saasi">Running
 saasi</a></li>
-<li><a href="#transition-rate-adjustment" id="toc-transition-rate-adjustment">transition rate adjustment</a></li>
+<li><a href="#transition-rate-adjustment" id="toc-transition-rate-adjustment">Transition rate adjustment</a></li>
 </ul></li>
 <li><a href="#visualization" id="toc-visualization">Visualization</a></li>
 </ul>
@@ -425,11 +425,12 @@ al. (2012)</a>.</p>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>saasi_result <span class="ot">&lt;-</span> <span class="fu">saasi</span>(bird.orders,pars,ace_qij)</span></code></pre></div>
 </div>
 <div id="transition-rate-adjustment" class="section level2">
-<h2>transition rate adjustment</h2>
+<h2>Transition rate adjustment</h2>
 <p>Sometimes, the transition rate adjustment using <code>ace</code> is
 biased due to uneven sampling. We implement a quick way of adjusting the
 transition rates based on the sampling assumptions.</p>
-<p>Suppose that in this example, State 1 at one-ninth sampling.</p>
+<p>Suppose that in this example, State 1 is sampled at 1/9 the rate of
+sampling of other states.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>adj_qij <span class="ot">&lt;-</span> <span class="fu">q_adjust</span>(ace_qij,<span class="st">&quot;1&quot;</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>saasi_result_with_adjusted_qij <span class="ot">&lt;-</span> <span class="fu">saasi</span>(bird.orders,pars,adj_qij)</span></code></pre></div>

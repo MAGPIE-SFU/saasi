@@ -109,14 +109,13 @@ saasi_result <- saasi(bird.orders,pars,ace_qij)
 ```
 
 
-## transition rate adjustment
+## Transition rate adjustment
 
 Sometimes, the transition rate adjustment using `ace` is biased due to uneven
 sampling. We implement a quick way of adjusting the transition rates based on
 the sampling assumptions.
 
-Suppose that in this example, State 1 at one-ninth sampling.
-
+Suppose that in this example, State 1 is sampled at 1/9 the rate of sampling of other states.
 ```{r transition adj}
 
 adj_qij <- q_adjust(ace_qij,"1",1/9)
