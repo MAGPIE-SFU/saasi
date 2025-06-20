@@ -1,3 +1,6 @@
+
+# NOTE: This does not function correctly, still trying to fix the bugs
+
 #' Sampling Aware Ancestral State Inference, assuming sampling through time
 #'
 #' Get the internal node state probabilities of a tree with defined leaf states.
@@ -302,3 +305,6 @@ get_state_probabilities_list <- function(phy,
 #   names(state_probabilities_df) <- seq_len(nstate)
 #   return(state_probabilities_df)
 # }
+
+
+
