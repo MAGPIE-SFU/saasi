@@ -96,3 +96,139 @@ q_adjust <- function(qij_matrix,state,sampling_diff){
 
 
 
+#' @param time_points Vector of time points where psi changes (boundary points)
+#' @param psi_matrix Matrix where each row corresponds to psi values for each interval
+#'                   Should have (length(time_points) + 1) rows for stepwise intervals
+#' @return Data frame ready to use with saasi
+#' 
+#' @details 
+#' For stepwise psi functions:
+#' - n time points create n+1 intervals
+#' - psi_matrix should have n+1 rows (one for each interval)
+#' 
+#' Example:
+#' time_points = c(5, 10) creates intervals [0,5), [5,10), [10,∞)
+#' psi_matrix should have 3 rows for these 3 intervals
+create_psi_stepwise <- function(time_points, psi_matrix) {
+  # Calculate expected number of intervals
+  n_intervals <- length(time_points) + 1
+  n_provided <- nrow(psi_matrix)
+  
+  # FIXED: Validate that we have the right number of rows for intervals
+  if (n_provided != n_intervals) {
+    stop("For stepwise psi: psi_matrix should have ", n_intervals, " rows (one for each interval), but got ", n_provided, " rows.\n",
+         "With ", length(time_points), " time points, you get ", n_intervals, " intervals:\n",
+         if (length(time_points) == 0) {
+           "  [0, ∞)"
+         } else if (length(time_points) == 1) {
+           paste0("  [0, ", time_points[1], "), [", time_points[1], ", ∞)")
+         } else {
+           paste0("  [0, ", time_points[1], "), ",
+                  paste0("[", time_points[-length(time_points)], ", ", time_points[-1], ")", collapse = ", "),
+                  ", [", time_points[length(time_points)], ", ∞)")
+         })
+  }
+  
+  if (!is.numeric(time_points)) {
+    stop("time_points must be numeric")
+  }
+  
+  if (!is.numeric(psi_matrix)) {
+    stop("psi_matrix must be numeric")
+  }
+  
+  # For stepwise functions, we need to create a mapping from time points to intervals
+  # We'll store the interval definitions implicitly in the data frame structure
+  
+  if (length(time_points) == 0) {
+    # Special case: constant psi (no time points)
+    psi_df <- data.frame(
+      time = 0,  # Dummy time point
+      psi_matrix
+    )
+  } else {
+    # Create a data frame that represents the stepwise function
+    # We store the time boundaries, and the extraction function will handle intervals
+    psi_df <- data.frame(
+      time = c(0, time_points),  # Include 0 as start point
+      rbind(psi_matrix[1, ], psi_matrix[-1, ])  # First row for [0, time1), then rest
+    )
+  }
+  
+  # Sort by time
+  psi_df <- psi_df[order(psi_df$time), ]
+  
+  # Reset row names
+  rownames(psi_df) <- NULL
+  
+  # Add metadata about the original intervals
+  attr(psi_df, "stepwise_intervals") <- TRUE
+  attr(psi_df, "original_time_points") <- time_points
+  attr(psi_df, "n_intervals") <- n_intervals
+  
+  return(psi_df)
+}
+
+#' Helper function to get psi at time for stepwise intervals
+#' MODIFIED to work correctly with the new stepwise structure
+get_psi_at_time_stepwise <- function(time_point, psi_df) {
+  # Input validation
+  if (!is.numeric(time_point)) {
+    stop("time_point must be numeric, got: ", class(time_point))
+  }
+  
+  if (!is.data.frame(psi_df)) {
+    stop("psi_df must be a data frame, got: ", class(psi_df))
+  }
+  
+  if (nrow(psi_df) == 0) {
+    stop("psi_df is empty")
+  }
+  
+  # Check if this is a stepwise psi_df
+  if (!is.null(attr(psi_df, "stepwise_intervals"))) {
+    # Handle stepwise intervals correctly
+    original_time_points <- attr(psi_df, "original_time_points")
+    
+    if (length(original_time_points) == 0) {
+      # Constant psi case
+      return(as.numeric(psi_df[1, -1]))
+    }
+    
+    # Find which interval the time_point falls into
+    if (time_point < original_time_points[1]) {
+      # First interval [0, time1)
+      return(as.numeric(psi_df[1, -1]))
+    } else if (time_point >= original_time_points[length(original_time_points)]) {
+      # Last interval [timeN, ∞)
+      return(as.numeric(psi_df[nrow(psi_df), -1]))
+    } else {
+      # Middle interval
+      interval_idx <- max(which(original_time_points <= time_point))
+      return(as.numeric(psi_df[interval_idx + 1, -1]))  # +1 because first row is for [0, time1)
+    }
+  } else {
+    # Fallback to original logic for backward compatibility
+    time_col <- psi_df[, 1]
+    psi_cols <- psi_df[, -1, drop = FALSE]
+    
+    if (is.unsorted(time_col)) {
+      sort_order <- order(time_col)
+      time_col <- time_col[sort_order]
+      psi_cols <- psi_cols[sort_order, , drop = FALSE]
+    }
+    
+    if (time_point < time_col[1]) {
+      result <- as.numeric(psi_cols[1, ])
+    } else if (time_point >= time_col[length(time_col)]) {
+      result <- as.numeric(psi_cols[nrow(psi_cols), ])
+    } else {
+      interval_idx <- max(which(time_col <= time_point))
+      result <- as.numeric(psi_cols[interval_idx, ])
+    }
+    
+    return(result)
+  }
+}
+
+
