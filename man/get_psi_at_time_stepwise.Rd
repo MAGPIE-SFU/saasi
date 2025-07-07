@@ -13,9 +13,15 @@ get_psi_at_time_stepwise(time_point, psi_df)
 
 \item{psi_df}{Data frame with time-dependent psi values.
 First column: time, remaining columns: psi values for each state}
+
+\item{time_points}{The time step}
+
+\item{psi_matrix}{sampling rate matrix}
 }
 \value{
 Vector of psi values for each state at the given time point
+
+A sampling rate
 }
 \description{
 Get psi values at specific time using step function (constant within intervals)
