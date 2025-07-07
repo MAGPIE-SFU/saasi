@@ -1,4 +1,3 @@
-
 # NOTE: This does not function correctly, still trying to fix the bugs
 
 #' Sampling Aware Ancestral State Inference, assuming sampling through time
@@ -30,18 +29,18 @@ saasi <- function(phy, params_df, q_matrix) {
   # Checking if the tip states are presented as numeric values
   if(!is.numeric(phy$tip.state)){
     # stop("Convert tip state to numeric values.")
-      if( !all(sort(rownames(q_matrix))==sort(params_df$state))) {
-          stop("State names and q names need to agree and be present only once") 
-      } else {
-          phy$tip.statename = phy$tip.state
-          phy$tip.state = as.numeric(factor(phy$tip.state)) # makes it numeric 
+    if( !all(sort(rownames(q_matrix))==sort(params_df$state))) {
+      stop("State names and q names need to agree and be present only once") 
+    } else {
+      phy$tip.statename = phy$tip.state
+      phy$tip.state = as.numeric(factor(phy$tip.state)) # makes it numeric 
       params_df$statename = params_df$state
       params_df$state = as.numeric(factor(params_df$statename)) # numeric state
       params_df = params_df[order(params_df$state), ]
       # reorder q if necessary, so its order corresponds to the numeric state 
       q_matrix = q_matrix[ order(as.numeric(factor(rownames(q_matrix)))),
                            order(as.numeric(factor(colnames(q_matrix))))]
-      }
+    }
   }
   
   # Checking if the tree is binary 
@@ -56,16 +55,36 @@ saasi <- function(phy, params_df, q_matrix) {
   
   
   # Checking time-dependent psi
-  if (is.data.frame(params_df$psi)) {
-    # psi is time-dependent - validate format
-    if (ncol(params_df$psi) != nrow(params_df) + 1) {
+  # Store original psi for later restoration
+  original_psi <- params_df$psi
+  psi_time_df <- NULL
+  
+  # Check if psi is time-dependent and extract appropriately
+  if (is.list(params_df$psi) && length(params_df$psi) > 0 && is.data.frame(params_df$psi[[1]])) {
+    # psi is a list of data frames (time-dependent)
+    psi_time_df <- params_df$psi[[1]]  # Extract the data frame
+    
+    # Validate structure
+    if (ncol(psi_time_df) != nrow(params_df) + 1) {
       stop("Time-dependent psi data frame must have time column plus one column per state")
     }
-    # Store time-dependent psi separately
+    
+    # Replace psi with placeholder values for validation
+    params_df$psi <- rep(1, nrow(params_df))
+    
+  } else if (is.data.frame(params_df$psi)) {
+    # psi is directly a data frame (time-dependent)
     psi_time_df <- params_df$psi
-    # Create a temporary constant psi for validation (will be replaced during ODE solving)
-    params_df$psi <- rep(1, nrow(params_df))  # placeholder values
+    
+    # Validate structure
+    if (ncol(psi_time_df) != nrow(params_df) + 1) {
+      stop("Time-dependent psi data frame must have time column plus one column per state")
+    }
+    
+    # Replace psi with placeholder values for validation
+    params_df$psi <- rep(1, nrow(params_df))
   }
+  # If psi is numeric, no changes needed - it's constant psi
   
   required_cols <- c("state", "prior", "lambda", "mu", "psi")
   
@@ -80,10 +99,21 @@ saasi <- function(phy, params_df, q_matrix) {
                  paste(setdiff(required_cols, colnames(params_df)), collapse = ", ")))
   }
   
-  # Restore time-dependent psi if it was provided
-  if (exists("psi_time_df")) {
-    params_df$psi <- psi_time_df
+  
+  # Check that 'state' is a sequence of 1-based natural numbers
+  if (!is.numeric(params_df$state)) {
+    stop("'state' column must be a sequence of numerical values (1, 2, ..., n).")
   }
+  
+  # Checking the number of unique states in tip.state matches the number of states
+  # in params_df$state
+  
+  if(!length(unique(phy$tip.state)) == length(params_df$state)){
+    stop("The number of states does not match.")
+  }
+  
+  # Restore the original psi data for use in the algorithm
+  params_df$psi <- original_psi
   
   nstate <- nrow(params_df)
   # Total number of nodes == number of non-leaf nodes * 2 + 1
@@ -107,6 +137,8 @@ saasi <- function(phy, params_df, q_matrix) {
                                                                nnode,
                                                                post_order_edges,
                                                                topology_df)
+  
+  #print(backwards_likelihoods_list)
   
   state_probabilities_list <- get_state_probabilities_list(
     phy,
@@ -194,11 +226,42 @@ get_backwards_likelihoods_list <- function(phy,
                                            post_order_edges,
                                            topology_df) {
   backwards_likelihoods_list <- rep(list(rep(0, nstate)), nnode)
-  
+  #print(backwards_likelihoods_list)
   # Populate leaf node likelihoods for backwards time equations
+  # invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
+  #   state <- phy[["tip.state"]][[i]]
+  #   state_freq <- params_df$psi[params_df$state == state]
+  #   
+  #   # adding a statment if state_freq is not numeric (i.e. we have segment)
+  #   # The time is forward, so the value should be the last column
+  #   
+  #   if(!is.numeric(state_freq)){
+  #     unlist <- state_freq[[1]][-1,] # get the last row
+  #     state_freq <- unlist[-1,][1,state+1]
+  #   }
+  #   
+  #   backwards_likelihoods_list[[i]][[state]] <<- state_freq
+  # }))
+  #print(backwards_likelihoods_list)
+  
   invisible(lapply(seq_along(phy[["tip.state"]]), function(i) {
     state <- phy[["tip.state"]][[i]]
     state_freq <- params_df$psi[params_df$state == state]
+    
+    if (!is.numeric(state_freq)) {
+      # state_freq is a list containing a data frame
+      psi_df <- state_freq[[1]]
+      
+      # Get the tip time (present day = 0 in your time scheme)
+      tip_time <- topology_df$t_root[topology_df$id == i]  # This should be 0 for tips
+      
+      # Get psi value at tip time for this state
+      # Use the stepwise function to get psi at this time
+      psi_at_tip_time <- get_psi_at_time_stepwise(tip_time, psi_df)
+      state_freq <- psi_at_tip_time[state]
+      
+    } # else state_freq is already numeric (constant psi case)
+    
     backwards_likelihoods_list[[i]][[state]] <<- state_freq
   }))
   
@@ -213,13 +276,29 @@ get_backwards_likelihoods_list <- function(phy,
     right_t0 <- topology_df$t_root[topology_df$id == right]
     
     left_likelihoods <- backwards_likelihoods_list[[left]]
+    #print(1)
+    #print(left_likelihoods)
     right_likelihoods <- backwards_likelihoods_list[[right]]
+    #print(2)
+    #print(right_likelihoods)
+    
+    # print("left_t0")
+    # print(left_t0)
+    # 
+    # print("right_t0")
+    # print(right_t0)
+    # 
+    # print("tf")
+    # print(tf)
+    # 
     likelihoods <- get_backwards_likelihoods(abs(left_likelihoods),
                                              abs(right_likelihoods),
                                              left_t0, right_t0, tf,
                                              params_df, q_matrix)
     #abs_likelihoods <- abs(likelihoods)
     #norm_likelihoods <- abs_likelihoods / sum(abs_likelihoods)
+    # print(likelihoods)
+    # print("i")
     backwards_likelihoods_list[[node]] <<- likelihoods # note changed by CC 
   }))
   
@@ -288,7 +367,7 @@ get_state_probabilities_list <- function(phy,
   node_lik <- as.data.frame(node_prob,row.names = internal_node_ids)
   colnames(node_lik) = c(1:nstate)
   if(!is.null(phy$tip.statename)){
-      colnames(node_lik) = levels(factor(phy$tip.statename))
+    colnames(node_lik) = levels(factor(phy$tip.statename))
   }
   return(node_lik)
 }
@@ -305,6 +384,3 @@ get_state_probabilities_list <- function(phy,
 #   names(state_probabilities_df) <- seq_len(nstate)
 #   return(state_probabilities_df)
 # }
-
-
-
