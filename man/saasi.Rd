@@ -2,7 +2,7 @@
 % Please edit documentation in R/saasi.R
 \name{saasi}
 \alias{saasi}
-\title{Sampling Aware Ancestral State Inference}
+\title{Sampling Aware Ancestral State Inference, assuming sampling through time}
 \usage{
 saasi(phy, params_df, q_matrix)
 }
