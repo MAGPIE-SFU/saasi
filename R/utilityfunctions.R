@@ -96,19 +96,14 @@ q_adjust <- function(qij_matrix,state,sampling_diff){
 
 
 
-#' @param time_points Vector of time points where psi changes (boundary points)
-#' @param psi_matrix Matrix where each row corresponds to psi values for each interval
-#'                   Should have (length(time_points) + 1) rows for stepwise intervals
-#' @return Data frame ready to use with saasi
+
+
+#' Sampling rate
 #' 
-#' @details 
-#' For stepwise psi functions:
-#' - n time points create n+1 intervals
-#' - psi_matrix should have n+1 rows (one for each interval)
-#' 
-#' Example:
-#' time_points = c(5, 10) creates intervals [0,5), [5,10), [10,∞)
-#' psi_matrix should have 3 rows for these 3 intervals
+#' @param time_points The time step
+#' @param psi_matrix sampling rate matrix
+#' @return A sampling rate
+#' @export
 create_psi_stepwise <- function(time_points, psi_matrix) {
   # Calculate expected number of intervals
   n_intervals <- length(time_points) + 1
@@ -171,6 +166,11 @@ create_psi_stepwise <- function(time_points, psi_matrix) {
 
 #' Helper function to get psi at time for stepwise intervals
 #' MODIFIED to work correctly with the new stepwise structure
+#' 
+#' @param time_points The time step
+#' @param psi_matrix sampling rate matrix
+#' @return A sampling rate
+#' @export
 get_psi_at_time_stepwise <- function(time_point, psi_df) {
   # Input validation
   if (!is.numeric(time_point)) {
