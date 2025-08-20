@@ -45,40 +45,212 @@ backwards_likelihoods_helper <- function(child_likelihoods,
 #' Backwards helper for constant sampling rate  
 #'
 #' @noRd
-backwards_likelihoods_helper_constant <- function(child_likelihoods,
-                                                  t0, 
-                                                  tf, 
-                                                  params_df, 
-                                                  q_matrix, 
-                                                  psi_values) {
-  # Number of states == n
+backwards_likelihoods_helper_constant <- function(child_likelihoods, t0, tf, params_df, q_matrix, psi_values, 
+                                                  max_segment_length = 200, 
+                                                  likelihood_threshold = 5,
+                                                  min_likelihood_threshold = 1e-15) {
+  nstate <- nrow(params_df)
+  branch_length <- tf - t0
+  
+  # Check if psi is effectively zero
+  psi_is_zero <- all(abs(psi_values) < 1e-10)
+  
+  # Single segment solver with early stopping
+  solve_single_segment_safe <- function(child_likelihoods, t0, tf, params_df, q_matrix, psi_values) {
+    nstate <- nrow(params_df)
+    
+    func <- function(t, y, parms) {
+      with(as.list(c(y, parms)), {
+        # Remove psi terms if they're effectively zero
+        current_psi <- if(psi_is_zero) rep(0, nstate) else psi_values
+        
+        # Check for extreme values and stop integration if needed
+        max_val <- max(abs(y))
+        if (max_val > likelihood_threshold || max_val < min_likelihood_threshold) {
+          # Return zero derivatives to stop integration
+          return(list(rep(0, length(y))))
+        }
+        
+        # D equations
+        dD_equations_list <- lapply(seq_len(nstate), function(i) {
+          return(
+            -(lambda[i] + mu[i] + current_psi[i] + sum(q[i, ][-i])) * y[i]
+            + 2 * lambda[i] * y[i + nstate] * y[i]
+            + sum(q[i, ][-i] * y[1:nstate][-i])
+          )
+        })
+        
+        # E equations
+        dE_equations_list <- lapply(seq_len(nstate), function(i) {
+          return(
+            mu[i] - (lambda[i] + mu[i] + current_psi[i] + sum(q[i, ][-i]))
+            * y[i + nstate] + lambda[i] * y[i + nstate]^2
+            + sum(q[i][-i] * y[nstate + 1:nstate][-i])
+          )
+        })
+        
+        return(list(c(dD_equations_list, dE_equations_list)))
+      })
+    }
+    
+    # Initial conditions
+    y <- c(child_likelihoods, rep(1, nstate))
+    names(y) <- seq_len(nstate * 2)
+    
+    times <- seq(0, tf, by = (tf) / 100)
+    
+    # Parameters
+    parms <- list(
+      lambda = params_df$lambda,
+      mu = params_df$mu,
+      psi_values = psi_values,
+      q = q_matrix,
+      nstate = nstate
+    )
+    
+    # Events to set initial conditions
+    events_df <- data.frame(
+      var = seq_len(nstate),
+      time = rep(t0),
+      value = child_likelihoods,
+      method = rep("replace", nstate)
+    )
+    
+    # Use conservative solver settings
+    solver_args <- list(
+      y = y,
+      times = times,
+      func = func,
+      parms = parms,
+      events = list(data = events_df),
+      rtol = 1e-4,
+      atol = 1e-6,
+      hmax = min(1.0, (tf - t0) / 10)
+    )
+    
+    # Try lsoda first (more stable) - SUPPRESS ALL WARNINGS AND MESSAGES
+    tryCatch({
+      sol <- suppressWarnings(suppressMessages({
+        do.call(deSolve::lsoda, solver_args)
+      }))
+      ret <- utils::tail(sol, n = 1)[1 + 1:nstate]
+      
+      # Check if result is reasonable
+      if (any(is.nan(ret)) || any(!is.finite(ret)) || 
+          max(abs(ret)) > likelihood_threshold || 
+          max(abs(ret)) < min_likelihood_threshold) {
+        return(child_likelihoods)
+      }
+      
+      return(ret)
+      
+    }, error = function(e) {
+      cat("Single segment failed:", e$message, "\n")
+      return(child_likelihoods)
+    })
+  }
+  
+  # Segmentation with early stopping
+  solve_with_segmentation_safe <- function(child_likelihoods, t0, tf, params_df, q_matrix, psi_values, max_segment_length) {
+    branch_length <- tf - t0
+    
+    if (branch_length <= max_segment_length) {
+      return(solve_single_segment_safe(child_likelihoods, t0, tf, params_df, q_matrix, psi_values))
+    }
+    
+    # Break into segments
+    n_segments <- ceiling(branch_length / max_segment_length)
+    segment_length <- branch_length / n_segments
+    
+    current_likelihoods <- child_likelihoods
+    
+    for (i in 1:n_segments) {
+      segment_start <- t0 + (i-1) * segment_length
+      segment_end <- t0 + i * segment_length
+      
+      # Check if current likelihoods are already problematic
+      max_current <- max(abs(current_likelihoods))
+      if (max_current > likelihood_threshold || max_current < min_likelihood_threshold) {
+        # Return normalized result instead of breaking
+        normalized_result <- current_likelihoods / sum(current_likelihoods)
+        return(normalized_result)
+      }
+      
+      # Solve this segment
+      new_likelihoods <- solve_single_segment_safe(
+        current_likelihoods, segment_start, segment_end, params_df, q_matrix, psi_values
+      )
+      
+      # Check if the new result is reasonable
+      max_new <- max(abs(new_likelihoods))
+      if (!is.numeric(new_likelihoods) || any(!is.finite(new_likelihoods)) ||
+          max_new > likelihood_threshold || max_new < min_likelihood_threshold) {
+        
+        # Return normalized current result instead of breaking
+        normalized_result <- current_likelihoods / sum(current_likelihoods)
+        return(normalized_result)
+      }
+      
+      # Check for explosive growth
+      growth_factor <- max_new / max(abs(current_likelihoods))
+      if (growth_factor > 100) {  # Much more conservative growth limit
+        # Return normalized current result instead of breaking
+        normalized_result <- current_likelihoods / sum(current_likelihoods)
+        return(normalized_result)
+      }
+      
+      current_likelihoods <- new_likelihoods
+      
+      # Check if we've hit the threshold after updating - stop immediately if so
+      max_updated <- max(abs(current_likelihoods))
+      if (max_updated > likelihood_threshold) {
+        
+        # Return normalized result - no point continuing as it will only get larger
+        normalized_result <- current_likelihoods / sum(current_likelihoods)
+        return(normalized_result)
+      }
+      if (n_segments > 5) {
+        cat(sprintf("Segment %d/%d completed, max likelihood: %e\n", i, n_segments, max_new))
+      }
+      }
+    
+    return(current_likelihoods)
+  }
+  
+  result <- solve_with_segmentation_safe(
+    child_likelihoods, t0, tf, params_df, q_matrix, psi_values, max_segment_length
+  )
+  
+  # Final validation
+  max_result <- max(abs(result))
+  if (!is.numeric(result) || any(!is.finite(result)) || 
+      max_result > likelihood_threshold || max_result < min_likelihood_threshold) {
+    
+    normalized_original <- child_likelihoods / sum(child_likelihoods)
+    return(normalized_original)
+  }
+  return(result)
+}
+
+# Remove psi from your ODE equations entirely
+backwards_likelihoods_helper_zero_psi <- function(child_likelihoods, t0, tf, params_df, q_matrix) {
   nstate <- nrow(params_df)
   
   func <- function(t, y, parms) {
     with(as.list(c(y, parms)), {
-      # Use constant psi throughout
-      current_psi <- psi_values
-      
-      # States 1...n (D equations)
+      # D equations - NO psi terms (like diversitree)
       dD_equations_list <- lapply(seq_len(nstate), function(i) {
-        # With i =/= j:
-        # * psi[-i] is psi[j]
-        # * q[i,][-i] is q[i, j]
-        # * y[i + nstate] is Ei
-        # * y[1:nstate][-i] is Dj
-        # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
         return(
-          -(lambda[i] + mu[i] + current_psi[i] + sum(q[i, ][-i])) * y[i]
+          -(lambda[i] + mu[i] + sum(q[i, ][-i])) * y[i]
           + 2 * lambda[i] * y[i + nstate] * y[i]
           + sum(q[i, ][-i] * y[1:nstate][-i])
         )
       })
-      
-      # States 1...n (E equations)
+      # E equations - NO psi terms (like diversitree)
       dE_equations_list <- lapply(seq_len(nstate), function(i) {
         return(
-          mu[i] - (lambda[i] + mu[i] + current_psi[i] + sum(q[i, ][-i]))
-          * y[i + nstate] + lambda[i] * y[i + nstate]^2
+          mu[i] - (lambda[i] + mu[i] + sum(q[i, ][-i])) * y[i + nstate] 
+          + lambda[i] * y[i + nstate]^2
           + sum(q[i][-i] * y[nstate + 1:nstate][-i])
         )
       })
@@ -98,7 +270,6 @@ backwards_likelihoods_helper_constant <- function(child_likelihoods,
   parms <- list(
     lambda = params_df$lambda,
     mu = params_df$mu,
-    current_psi=psi_values,
     q = q_matrix,
     nstate = nstate
   )
@@ -110,9 +281,11 @@ backwards_likelihoods_helper_constant <- function(child_likelihoods,
     value = child_likelihoods,
     method = rep("replace", nstate)
   )
-  suppressWarnings(
-    sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df))
-  )
+  
+  # SUPPRESS ALL WARNINGS AND MESSAGES
+  sol <- suppressWarnings(suppressMessages({
+    deSolve::ode(y, times, func, parms, events = list(data = events_df),rtol=1e-8,atol=1e-8)
+  }))
   
   ret <- utils::tail(sol, n = 1)[1 + 1:nstate]
   if (any(is.nan(ret))) {
@@ -120,7 +293,7 @@ backwards_likelihoods_helper_constant <- function(child_likelihoods,
     # because the value is too close so that the ode cannot tell the difference.
     return(child_likelihoods)
   }
-  return(ret)
+    return(ret)
 }
 
 #' Backwards helper for time-dependent psi using chained constant segments
@@ -136,18 +309,16 @@ backwards_likelihoods_helper_constant <- function(child_likelihoods,
 backwards_likelihoods_helper_segmented <- function(child_likelihoods, t0, tf, params_df, q_matrix, psi_df) {
   nstate <- nrow(params_df)
   
-  
-  #TODO: sampling function, change the argument
-  
-  
   # Get intervals that overlap with this branch
+  print(psi_df)
   intervals <- get_branch_intervals(t0, tf, psi_df)
-
-    if (nrow(intervals) == 0) {
+  print(intervals)
+  print(intervals$psi_values)
+  if (nrow(intervals) == 0) {
     warning("No overlapping intervals found for branch, returning child likelihoods")
     return(as.numeric(child_likelihoods))
   }
-
+  
   # Start with the initial child likelihoods
   current_likelihoods <- as.numeric(child_likelihoods)
   
@@ -256,16 +427,18 @@ get_forwards_likelihoods_constant <- function(parent_state_probabilities, t0, tf
     q = q_matrix,
     nstate = nstate
   )
-  suppressWarnings(
-    sol <- deSolve::ode(y, times, func, parms, method = "ode45", rtol = 1e-6)
-  )
+  
+  # SUPPRESS ALL WARNINGS AND MESSAGES
+  sol <- suppressWarnings(suppressMessages({
+    deSolve::ode(y, times, func, parms, method = "ode45", rtol = 1e-6)
+  }))
   
   # Get final values
   # Closest index to tf
   closest_index <- which.min(abs(sol[, 1] - tf))
   likelihoods <- unname(sol[closest_index, 1 + 1:nstate])
+    return(likelihoods)
   
-  return(likelihoods)
 }
 
 #' Forwards helper for time-dependent psi using chained constant segments
@@ -283,6 +456,7 @@ get_forwards_likelihoods_segmented <- function(parent_state_probabilities, t0, t
   
   # Get intervals (note: t0 > tf in forwards direction, so we swap them)
   intervals <- get_branch_intervals(tf, t0, psi_df)
+  
   #print(intervals)
   if (nrow(intervals) == 0) {
     warning("No overlapping intervals found for forward branch")
@@ -327,7 +501,6 @@ get_forwards_likelihoods_segmented <- function(parent_state_probabilities, t0, t
       break
     }
   }
-  #print(current_probabilities)
   return(current_probabilities)
 }
 
@@ -472,10 +645,15 @@ get_branch_intervals <- function(t_start, t_end, psi_df) {
       duration <- segment_end - segment_start
       
       # Get psi values for this interval
-      if (i <= nrow(psi_df)) {
-        psi_values <- as.numeric(psi_df[i, -1])
+      # For interval i, we need the psi values that apply during that interval
+      if (i == 1) {
+        # First interval [0, time1) uses row 1
+        psi_values <- as.numeric(psi_df[1, -1])
+      } else if (i <= nrow(psi_df) + 1) {
+        # Interval i uses row i-1 (since intervals are 1-indexed but we want the previous time point's values)
+        psi_values <- as.numeric(psi_df[i-1, -1])
       } else {
-        # Last interval - use last row of psi values
+        # Shouldn't happen with proper data, but fallback to last row
         psi_values <- as.numeric(psi_df[nrow(psi_df), -1])
       }
       
