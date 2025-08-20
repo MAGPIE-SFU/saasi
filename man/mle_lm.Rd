@@ -10,8 +10,8 @@ mle_lm(
   mu,
   psi,
   method = "L-BFGS-B",
-  lower = c(0.001, 0.001),
-  upper
+  lower = c(0.001, 0.001, 0.001),
+  upper = c(2, 1, 1)
 )
 }
 \arguments{
@@ -25,19 +25,17 @@ mle_lm(
 
 \item{method}{See \code{method} parameter in \link{mle}.}
 
-\item{lower}{A two-element vector containing the lower bound of the speciation
-and extinction values (geater than 0), the default is c(0.001,0.001).}
+\item{lower}{A three-element vector containing the lower bound of the speciation,
+extinction, and sampling rate values (greater than 0), the default is c(0.001,0.001,0.001).}
 
-\item{upper}{A two-element vector containing the upper bound of the speciation
-and extinction values, should be similar to the sampling rate, still need to find
-a better justification for the upcoming version.}
+\item{upper}{A three-element vector containing the upper bound of the speciation,
+extinction, and sampling rate values.}
 }
 \value{
-A two-element vector containing speciation and extinction values
-estimated from \code{phy}.
+A fitted mle object containing speciation, extinction, and sampling rate estimates.
 }
 \description{
-This is done with a maximum likelihood method,  implemented mainly by
+This is done with a maximum likelihood method, implemented mainly by
 \href{https://github.com/yexuansong}{@yexuansong}, from methods described in
 \href{https://doi.org/10.1093/molbev/msr217}{Stadler et al. (2012)}.
 }
