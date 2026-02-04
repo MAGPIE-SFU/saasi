@@ -41,8 +41,9 @@ Saasi is an ancestral state reconstruction method that accounts for variation in
  ```
  
  Before running this demo, please make sure the following packages are installed:
+ saasi, diversitree, tidytree, ape, phytools, readr
  
-```{r setup}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(saasi)
 library(diversitree)

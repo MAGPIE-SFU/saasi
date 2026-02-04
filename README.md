@@ -28,37 +28,7 @@ remotes::install_github("MAGPIE-SFU/saasi", ref = "saasi-maintaining")
 ```
 
 Before running this demo, please make sure the following packages are
-installed:
-
-``` r
-knitr::opts_chunk$set(echo = TRUE)
-library(saasi)
-library(diversitree)
-#> Loading required package: ape
-library(tidytree)
-#> If you use the ggtree package suite in published research, please cite
-#> the appropriate paper(s):
-#> 
-#> G Yu. Data Integration, Manipulation and Visualization of Phylogenetic
-#> Trees (1st ed.). Chapman and Hall/CRC. 2022. ISBN: 9781032233574
-#> 
-#> Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam.
-#> ggtree: an R package for visualization and annotation of phylogenetic
-#> trees with their covariates and other associated data. Methods in
-#> Ecology and Evolution. 2017, 8(1):28-36. doi:10.1111/2041-210X.12628
-#> 
-#> Attaching package: 'tidytree'
-#> The following objects are masked from 'package:ape':
-#> 
-#>     drop.tip, keep.tip
-#> The following object is masked from 'package:stats':
-#> 
-#>     filter
-library(ape)
-library(phytools)
-#> Loading required package: maps
-library(readr)
-```
+installed: saasi, diversitree, tidytree, ape, phytools, readr
 
 ## saasi package
 
@@ -136,9 +106,9 @@ Q <- estimate_transition_rates(ebola_tree,method = 'simmap',model = 'SYM')
 #> 
 #> Q =
 #>                  Guinea    Liberia Sierra Leone
-#> Guinea       -0.4718132  0.2604072    0.2114061
-#> Liberia       0.2604072 -0.3697032    0.1092960
-#> Sierra Leone  0.2114061  0.1092960   -0.3207021
+#> Guinea       -0.4711388  0.2597255    0.2114133
+#> Liberia       0.2597255 -0.3690431    0.1093176
+#> Sierra Leone  0.2114133  0.1093176   -0.3207309
 #> (estimated using likelihood);
 #> and (mean) root node prior probabilities
 #> pi =
@@ -195,9 +165,9 @@ Q <- estimate_transition_rates(testing_ebola,method = 'simmap',model = 'SYM')
 #> 
 #> Q =
 #>                 Guinea   Liberia Sierra Leone
-#> Guinea       -342.1827  171.0913     171.0913
-#> Liberia       171.0913 -342.1827     171.0913
-#> Sierra Leone  171.0913  171.0913    -342.1827
+#> Guinea       -342.1927  171.0963     171.0963
+#> Liberia       171.0963 -342.1927     171.0963
+#> Sierra Leone  171.0963  171.0963    -342.1927
 #> (estimated using likelihood);
 #> and (mean) root node prior probabilities
 #> pi =
