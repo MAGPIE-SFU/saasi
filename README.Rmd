@@ -42,7 +42,7 @@ Saasi is an ancestral state reconstruction method that accounts for variation in
  
  Before running this demo, please make sure the following packages are installed:
  
-```{r setup, include=FALSE}
+```{r setup}
 knitr::opts_chunk$set(echo = TRUE)
 library(saasi)
 library(diversitree)
