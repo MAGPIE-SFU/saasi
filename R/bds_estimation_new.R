@@ -1,16 +1,45 @@
+#' Calculate c1 parameter for birth-death-sampling model
+#'
+#' @param lambda Speciation rate
+#' @param mu Extinction rate
+#' @param psi Sampling rate
+#' @return Value of c1
+#' @keywords internal
 c1 <- function(lambda, mu, psi){
   abs(sqrt((lambda - mu - psi)^2 + 4 * lambda * psi))
 }
 
+#' Calculate c2 parameter for birth-death-sampling model
+#'
+#' @param lambda Speciation rate
+#' @param mu Extinction rate
+#' @param psi Sampling rate
+#' @return Value of c2
+#' @keywords internal
 c2 <- function(lambda, mu, psi){
   (-lambda + mu + psi) / c1(lambda, mu, psi)
 }
 
+#' Numerically stable log-sum-exp function
+#'
+#' @param a First log value
+#' @param b Second log value
+#' @param c Third log value
+#' @return log(exp(a) + exp(b) + exp(c))
+#' @keywords internal
 logsumexp <- function(a, b, c){
   m <- pmax(a, pmax(b, c))
   m + log(exp(a - m) + exp(b - m) + exp(c - m))
 }
 
+#' Calculate log of q function for birth-death-sampling model
+#'
+#' @param t Time values
+#' @param lambda Speication rate
+#' @param mu Extinction rate
+#' @param psi Sampling rate
+#' @return Log of q function values
+#' @keywords internal
 log_q <- function(t, lambda, mu, psi){
   c1v <- c1(lambda, mu, psi)
   c2v <- c2(lambda, mu, psi)
@@ -25,6 +54,14 @@ log_q <- function(t, lambda, mu, psi){
   logsumexp(A, B, C)
 }
 
+#' Calculate log-likelihood under the general birth-death-sampling model
+#'
+#' @param phy A phylo object
+#' @param lambda Speication rate
+#' @param mu Extinction rate
+#' @param psi Sampling rate
+#' @return Log-likelihood value
+#' @keywords internal
 log_ge <- function(phy, lambda, mu, psi){
   node_depths <- ape::node.depth.edgelength(phy)
   node_times <- max(node_depths) - node_depths
@@ -39,6 +76,18 @@ log_ge <- function(phy, lambda, mu, psi){
   return(log_lik)
 }
 
+
+#' Estimate net diversification rate from lineage-through-time data
+#'
+#' Estimates the parameter 'a' (lambda - mu - psi) by fitting a linear model
+#' to the log-transformed lineage counts over time (LTT), using a trimmed portion
+#' of the internal node times.
+#'
+#' @param phy A phylo object with branch lengths
+#' @param trim Numeric vector of length 2 specifying quantiles for trimming.
+#'   Default is c(0.10, 0.50), using the middle 40% of node times.
+#' @return Estimated net diversification rate (a = lambda - mu - psi)
+#' @keywords internal
 estimate_a <- function(phy, trim = c(0.10, 0.50)){
   
   if(length(trim) != 2 || !is.numeric(trim) || any(trim < 0) || any(trim > 1) || trim[1] >= trim[2]){
@@ -60,6 +109,21 @@ estimate_a <- function(phy, trim = c(0.10, 0.50)){
   unname(coef(fit)[2])
 }
 
+#' Generate starting points for optimization
+#'
+#' Creates valid starting points for lambda and psi that satisfy all constraints
+#' including R0 bounds, removal rate bounds, and growth requirements.
+#'
+#' @param n_starts Number of starting points to generate
+#' @param mu Extinction rate (fixed)
+#' @param psi_max Maximum sampling rate per unit time
+#' @param psi_min Minimum sampling rate
+#' @param r0_min Minimum basic reproductive number (lambda/(mu+psi))
+#' @param r0_max Maximum basic reproductive number
+#' @param removal_rate_min Minimum removal rate (1/(mu+psi))
+#' @param removal_rate_max Maximum removal rate (1/(mu+psi))
+#' @return List of starting point vectors, each with a valid lambda and psi
+#' @keywords internal
 generate_starting_points <- function(
     n_starts,
     mu,
@@ -128,7 +192,21 @@ generate_starting_points <- function(
   return(starts)
 }
 
-# Estimating lambda and psi given fixed mu
+#' Fit birth-death-sampling model with fixed extinction rate
+#'
+#' Estimates lambda (speication rate) and psi (sampling rate) using maximum likelihood
+#' with a fixed mu (extinction rate), subject to some epidemiological constraints.
+#'
+#' @param phy A phylo object with branch lengths
+#' @param mu Fixed extinction rate
+#' @param n_starts Number of starting points
+#' @param psi_max Maximum sampling rate 
+#' @param r0_min Minimum R0 
+#' @param r0_max Maximum R0
+#' @param infectious_period_min Minimum infectious period (1/(mu+psi))
+#' @param infectious_period_max Maximum infectious period (1/(mu+psi))
+#' @return List containing estimated parameters and diagnostics
+#' @keywords internal
 fit_bd_fixed_mu <- function(
     phy,
     mu,
@@ -286,12 +364,58 @@ fit_bd_fixed_mu <- function(
   )
 }
 
-# Main estimation function
+#' Estimate birth-death-sampling parameters
+#'
+#' Estimates lambda (speciation rate) and psi (sampling rate) for
+#' a phylogenetic tree. The function enforces
+#' epidemiological constraints including R0 bounds and infectious period limits.
+#'
+#' The estimation proceeds in two steps:
+#' \enumerate{
+#'   \item Maximum likelihood estimation with fixed mu to get estimates for (lambda/(mu+psi))
+#'   \item Using lineage-through-time plot to estimate net diversification rate (lambda - mu - psi)
+#' }
+#'
+#' With mu known, we can estimate lambda and psi using the above estimates.
+#'
+#' If the two-step method produces estimates that violate constraints or is
+#' numerically unstable, the function falls back to the MLE estimates from step 1.
+#'
+#' @param phy A phylo object with branch lengths. Must be rooted and binary.
+#' @param mu Fixed extinction rate (required)
+#' @param trim Numeric vector of length 2 specifying quantiles for trimming
+#'   node times in LTT. Default c(0.10, 0.50).
+#' @param n_starts Number of starting points for multi-start optimization. Default 100.
+#' @param force_two_step Logical. If TRUE, uses two-step estimates even if they
+#'   violate constraints. Default FALSE.
+#' @param psi_max Maximum sampling rate per unit time. Default 7.
+#' @param r0_min Minimum basic reproductive number (R0 = lambda/(mu+psi)). Default 1.
+#' @param r0_max Maximum basic reproductive number. Default 5.
+#' @param infectious_period_min Minimum infectious period (1/(mu+psi)). Default NULL.
+#' @param infectious_period_max Maximum infectious period (1/(mu+psi)). Default NULL.
+#'
+#' @return An object of class "bds_estimate" containing:
+#' \itemize{
+#'   \item lambda: Estimated speciation rate
+#'   \item psi: Estimated sampling rate
+#'   \item mu: Fixed death rate (input)
+#'   \item r0: Estimated basic reproductive number (lambda/(mu+psi))
+#'   \item infectious_period: Estimated infectious period
+#'   \item method: Estimation method used ("two_step_constrained", "mle_constrained", or "two_step_forced")
+#'   \item a: Net diversification rate (lambda - mu - psi) from LTT
+#'   \item b: Ratio lambda/(mu + psi) from MLE
+#'   \item n_tips: Number of tips in the tree
+#'   \item n_nodes: Number of internal nodes
+#'   \item mle_fit: Full MLE fit object from step 1
+#'   \item constraints: List of constraint parameters used
+#' }
+#'
+#' @export
 estimate_bds_parameters <- function(
     phy,
     mu,
     trim = c(0.10, 0.50),
-    n_starts = 10,
+    n_starts = 100,
     force_two_step = FALSE,
     psi_max = 7,
     r0_min = 1,
