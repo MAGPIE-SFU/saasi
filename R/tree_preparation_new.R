@@ -101,7 +101,9 @@ prepare_tree_for_saasi <- function(tree,
   } 
   
   if(!is.null(drop_states) && !is.null(tree$tip.state)){
+    print("here")
     all_drop <- c(NA, drop_states)
+    print(all_drop)
     tree <- drop_tips_by_state(tree, all_drop)
   } 
   return(tree)
@@ -130,6 +132,7 @@ drop_tips_by_state <- function(tree, drop_values) {
     if (length(dv) == 1 && is.na(dv)) {
       # Drop NA
       tips_to_drop <- c(tips_to_drop, which(is.na(tree$tip.state)))
+      print(tips_to_drop)
     } else {
       # Drop tips matching this value
       tips_to_drop <- c(tips_to_drop,
@@ -137,13 +140,16 @@ drop_tips_by_state <- function(tree, drop_values) {
     }
   }
   tips_to_drop <- unique(tips_to_drop)
-  
+  print(tips_to_drop)
   if(length(tips_to_drop) == 0){
     return(tree)
   }
   tip_labels_to_drop <- tree$tip.label[tips_to_drop]
+  print(tip_labels_to_drop)
   new_tree <- ape::drop.tip(tree, tip_labels_to_drop)
   
+  tips_to_keep <- setdiff(1:length(tree$tip.label), tips_to_drop)
+  new_tree$tip.state <- tree$tip.state[tips_to_keep]
   return(new_tree)
 }
 
