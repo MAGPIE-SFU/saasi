@@ -15,8 +15,20 @@ You can install the development version of saasi from
 
 ``` r
 # install.packages("remotes")
+
 remotes::install_github("MAGPIE-SFU/saasi")
 ```
+
+For this particular branch, use:
+
+``` r
+# install.packages("remotes")
+
+remotes::install_github("MAGPIE-SFU/saasi", ref = "saasi-maintaining")
+```
+
+Before running this demo, please make sure the following packages are
+installed:
 
 ## saasi package
 
@@ -42,12 +54,12 @@ For the next example, download the data from Nextstrain:
 
 ``` r
 # Read the tree file and metadata (replace with your own directory)
-tree <- read.tree("update_R/testing_data/nextstrain_ebola_ebov-2013_timetree.nwk")
-metadata <- read_tsv("update_R/testing_data/nextstrain_ebola_ebov-2013_metadata.tsv")
+tree <- read.tree("testing_data_nextstrain/nextstrain_ebola_ebov-2013_timetree.nwk")
+metadata <- read_tsv("testing_data_nextstrain/nextstrain_ebola_ebov-2013_metadata.tsv")
 #> Rows: 1493 Columns: 8
-#> ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── Column specification ────────────────────────────────────────────────────────
 #> Delimiter: "\t"
-#> chr  (7): strain, country, division, author, author__url, accession, accession__url
+#> chr  (7): strain, country, division, author, author__url, accession, accessi...
 #> date (1): date
 #> 
 #> ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -94,9 +106,9 @@ Q <- estimate_transition_rates(ebola_tree,method = 'simmap',model = 'SYM')
 #> 
 #> Q =
 #>                  Guinea    Liberia Sierra Leone
-#> Guinea       -0.4713492  0.2599519    0.2113973
-#> Liberia       0.2599519 -0.3692725    0.1093206
-#> Sierra Leone  0.2113973  0.1093206   -0.3207179
+#> Guinea       -0.4713605  0.2599535    0.2114071
+#> Liberia       0.2599535 -0.3669409    0.1069874
+#> Sierra Leone  0.2114071  0.1069874   -0.3183945
 #> (estimated using likelihood);
 #> and (mean) root node prior probabilities
 #> pi =
@@ -105,14 +117,19 @@ Q <- estimate_transition_rates(ebola_tree,method = 'simmap',model = 'SYM')
 #> Done.
 
 # Estimate the rates
+# For ebola, we assume the total infectious period 1/(mu+psi) is between 
+# 20 - 40 days (20/365 - 40/365 years)
+# The bound for mu+psi is [9.125,18.25]
+# We further assume psi > mu (user can also assume mu > psi)
+# Set mu = 5
 rates <- estimate_bds_parameters(
     ebola_tree,
-    mu = 5,
-    r0_max = 3,
+    mu = 5, 
+    r0_max = 3, 
     r0_min = 1.5,
     psi_max = 15,
-    infectious_period_min = 20/365, # convert to years
-    infectious_period_max = 40/365, # convert to years
+    infectious_period_min = 20/365, # convert days to years
+    infectious_period_max = 40/365, # convert days to years
     n_starts = 100)
 
 # Setting up parameters
@@ -121,39 +138,42 @@ pars1 <- create_params_template(colnames(Q),lambda = rates$lambda,mu = rates$mu,
 # Run saasi analysis
 saasi_ebola <- saasi(ebola_tree,pars1,Q)
 
-# Plot and save the result
-p1 <- plot_saasi(ebola_tree,saasi_ebola,save_file = "ebola_equal_psix.png")
+# Plot and save the result, set save_file = NULL to not save file
+p1 <- plot_saasi(ebola_tree,saasi_ebola,save_file = "ebola_equal_psi.png")
 
-# Different set up, we assume Liberia samples less than other countries
+# Try a different set up, we assume Liberia samples less than other countries
 pars2 <- create_params_template(colnames(Q),lambda = rates$lambda,mu = rates$mu,psi = c(rates$psi,rates$psi/2,rates$psi))
 
-# Rerun analysis and save the result
+# Rerun analysis and save the result, set save_file = NULL to not save file
 saasi_ebola2 <- saasi(ebola_tree,pars2,Q)
 
-p2 <- plot_saasi(ebola_tree,saasi_ebola2,save_file = "ebola_unequal_psix.png")
+p2 <- plot_saasi(ebola_tree,saasi_ebola2,save_file = "ebola_unequal_psi.png")
 ```
 
 ``` r
-# Sanity check, Q gets large if we randomly shuffle the tip.state
+# Notice that the transition rate matrix Q is relatively small compare to the other rates.
+# This is due to lack of transition events between states.
+# For sanity check, randomly shuffle the tip.state
 
 testing_ebola <- ebola_tree
 set.seed(123) 
 testing_ebola$tip.state <- sample(testing_ebola$tip.state)
 
-Q <- estimate_transition_rates(tesing_ebola,method = 'simmap',model = 'SYM')
+Q <- estimate_transition_rates(testing_ebola,method = 'simmap',model = 'SYM')
 #> make.simmap is sampling character histories conditioned on
 #> the transition matrix
 #> 
 #> Q =
 #>                 Guinea   Liberia Sierra Leone
-#> Guinea       -342.1867  171.0933     171.0933
-#> Liberia       171.0933 -342.1867     171.0933
-#> Sierra Leone  171.0933  171.0933    -342.1867
+#> Guinea       -342.2087  171.1043     171.1043
+#> Liberia       171.1043 -342.2087     171.1043
+#> Sierra Leone  171.1043  171.1043    -342.2087
 #> (estimated using likelihood);
 #> and (mean) root node prior probabilities
 #> pi =
 #>       Guinea      Liberia Sierra Leone 
 #>    0.3333333    0.3333333    0.3333333
 #> Done.
-# qij gets extremely large
+
+# Now Q gets extremely large
 ```
