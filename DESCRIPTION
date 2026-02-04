@@ -9,11 +9,12 @@ Description: Ancestral state reconstruction method that accounts for variation
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Imports: 
     ape,
     deSolve,
     diversitree,
-    stats4
+    stats4,
+    phytools,
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
