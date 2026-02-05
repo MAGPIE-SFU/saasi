@@ -21,22 +21,22 @@
 #' to the node IDs. 
 #' @export
 saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
-  ## PRE-PROCESSING
+  ## INPUT CHECKS
+  
   # Check compatibility of phy with SAASI
-  # - If not, send a message to the user and run the formatting function
   if( !check_tree_compatibility(phy) ) {
     stop("`phy` is not compatible with `saasi`. Please use the `prepare_tree_for_saasi` function to reformat your `phylo` object.")
   }
   
   # Check that q_matrix is compatible, it must:
   # - be a square matrix
-  # - have rows summing to 0
+  # - have rows summing to 0 (a threshold of 1e-10 is used to account small numerical issues)
   # - both rows and columns must have names
   if( nrow(q_matrix) != ncol(q_matrix) ) {
     stop(paste0("The transition rate matrix must be square. Current input has ", nrow(q_matrix), " rows and ", ncol(q_matrix), " columns."))
   }
-  if( any(rowSums(q_matrix) != 0) ) {
-    stop("The rows of the transition rate matrix must sum to 1.")
+  if( any(abs(rowSums(q_matrix)) > 1e-10) ) {
+    stop("The rows of the transition rate matrix must sum to 0.")
   }
   if( is.null(rownames(q_matrix)) || is.null(colnames(q_matrix)) ) {
     stop("Both rows and columns of the transition rate matrix should have names corresponding to the traits.")
@@ -59,6 +59,12 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
   } else if( sum(lambda > 0) == 0 ) {
     stop("At least one birth rate (lambda) must be positive.")
   }
+  
+  # Check if the tree is likely not a timed tree
+  # - If the median branch length is less than 1e-3, flag it as being potentially not a timed tree
+  if( quantile(phy$edge.length, probs=0.5) <= 1e-3 )
+    warning("The median branch length in your tree is less than 0.001. Please double-check that your tree is a timed tree.")
+  
   
   # Define params_df
   params_df <- create_params_template(rownames(q_matrix), lambda, mu, psi, prior)
@@ -219,7 +225,7 @@ get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
 #' state reconstruction algorithm.
 #'
 #' @return List of state likelihoods used in backwards time equations.
-#' list[[x]][[y]] is the likelihood for state y in node x.
+#' `list[[x]][[y]]` is the likelihood for state y in node x.
 #' @noRd
 get_backwards_likelihoods_list <- function(phy,
                                            params_df,
@@ -265,7 +271,7 @@ get_backwards_likelihoods_list <- function(phy,
 #' reconstruction algorithm.
 #'
 #' @return List of ancestral state probabilities.
-#' list[[x]][[y]] is the probability of state y in node x.
+#' `list[[x]][[y]]` is the probability of state y in node x.
 #' @noRd
 get_state_probabilities_list <- function(phy,
                                          params_df,
