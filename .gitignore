@@ -61,3 +61,7 @@ rsconnect/
 
 # End of https://www.toptal.com/developers/gitignore/api/r
 
+/doc/
+doc/
+vignettes/*.html
+vignettes/*.R
