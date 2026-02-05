@@ -26,5 +26,6 @@ Default using ace, if fails use simmap instead
 }
 \examples{
 # Symmetric model
-q_matrix <- estimate_transition_rates(tree, model = "SYM")
+data(ebola_tree)
+q_matrix <- estimate_transition_rates(ebola_tree, model = "SYM")
 }

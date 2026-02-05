@@ -35,7 +35,7 @@ plot_saasi <- function(tree,
   n_states <- length(unique(tree$tip.state))
   
   if(is.null(colors)){
-    colors <- rainbow(n_states)
+    colors <- grDevices::rainbow(n_states)
   }
   
   if(length(colors) < n_states){
@@ -49,7 +49,7 @@ plot_saasi <- function(tree,
   
   # Open file device if saving
   if(!is.null(save_file)){
-    png(save_file, width = width, height = height, res = res)
+	  grDevices::png(save_file, width = width, height = height, res = res)
   }
   
   # Plotting 
@@ -62,7 +62,7 @@ plot_saasi <- function(tree,
                   piecol = colors[1:ncol(saasi_result)],
                   cex = node_cex)
   
-  legend("topleft",
+  graphics::legend("topleft",
          legend = levels(state_factor),
          col = colors[1:n_states],
          pch = 19,
@@ -71,7 +71,7 @@ plot_saasi <- function(tree,
          cex = 0.8)
   
   if(!is.null(save_file)){
-    dev.off()
+	  grDevices::dev.off()
   }
   invisible(colors)
 }
@@ -151,7 +151,8 @@ create_params_template <- function(states,
 #' @export
 #' @examples
 #' # Symmetric model
-#' q_matrix <- estimate_transition_rates(tree, model = "SYM")
+#' data(ebola_tree)
+#' q_matrix <- estimate_transition_rates(ebola_tree, model = "SYM")
 estimate_transition_rates <- function(tree, 
                                       model = "ER", 
                                       custom_q = NULL,

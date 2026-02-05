@@ -2,8 +2,7 @@
 ^renv\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^data$
-^LICENSE\.md$
+^data-raw$
 ^README\.Rmd$
 ^doc$
 ^Meta$
