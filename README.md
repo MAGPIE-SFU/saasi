@@ -54,8 +54,8 @@ For the next example, download the data from Nextstrain:
 
 ``` r
 # Read the tree file and metadata (replace with your own directory)
-tree <- read.tree("testing_data_nextstrain/nextstrain_ebola_ebov-2013_timetree.nwk")
-metadata <- read_tsv("testing_data_nextstrain/nextstrain_ebola_ebov-2013_metadata.tsv")
+tree <- read.tree("data-raw/nextstrain_ebola_ebov-2013_timetree.nwk")
+metadata <- read_tsv("data-raw/nextstrain_ebola_ebov-2013_metadata.tsv")
 #> Rows: 1493 Columns: 8
 #> ── Column specification ────────────────────────────────────────────────────────
 #> Delimiter: "\t"

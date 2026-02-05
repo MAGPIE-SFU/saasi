@@ -35,7 +35,7 @@ make.tree.bisse_modified <- function(pars, k, max.taxa = Inf, max.t = Inf, x0) {
     ## When does an event happen?
     r.n <- r.i * n.i
     r.tot <- sum(r.n)
-    dt <- rexp(1, r.tot)
+    dt <- stats::rexp(1, r.tot)
     t <- t + dt
 
     if (t > max.t) {
