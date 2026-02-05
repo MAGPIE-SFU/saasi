@@ -1,6 +1,6 @@
 Package: saasi
 Title: Sampling Aware Ancestral State Inference
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: c(
     person("Ivan", "Gill", email = "ivan_gill@sfu.ca", role = c("aut", "cre")),
     person("Yexuan", "Song", email = "yexuan_song@sfu.ca", role = "aut"))
@@ -18,3 +18,6 @@ Imports:
     phytools,
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
+Depends: 
+    R (>= 3.5)
+LazyData: true
