@@ -35,7 +35,7 @@ plot_saasi <- function(tree,
   n_states <- length(unique(tree$tip.state))
   
   if(is.null(colors)){
-    colors <- rainbow(n_states)
+    colors <- grDevices::rainbow(n_states)
   }
   
   if(length(colors) < n_states){
@@ -49,7 +49,7 @@ plot_saasi <- function(tree,
   
   # Open file device if saving
   if(!is.null(save_file)){
-    png(save_file, width = width, height = height, res = res)
+	  grDevices::png(save_file, width = width, height = height, res = res)
   }
   
   # Plotting 
@@ -62,7 +62,7 @@ plot_saasi <- function(tree,
                   piecol = colors[1:ncol(saasi_result)],
                   cex = node_cex)
   
-  legend("topleft",
+  graphics::legend("topleft",
          legend = levels(state_factor),
          col = colors[1:n_states],
          pch = 19,
@@ -71,7 +71,7 @@ plot_saasi <- function(tree,
          cex = 0.8)
   
   if(!is.null(save_file)){
-    dev.off()
+	  grDevices::dev.off()
   }
   invisible(colors)
 }
@@ -139,8 +139,8 @@ create_params_template <- function(states,
 }
 
 
-#' Estimates transition rates using ace or fitMk.
-#' Default using ace, if fails use fitMk instead
+#' Estimates transition rates using ace or simmap.
+#' Default using ace, if fails use simmap instead
 #'
 #' @param tree A phylo object with tip.state attribute
 #' @param model Transition model: "ER" (equal rates), "SYM" (symmetric), 
@@ -151,7 +151,8 @@ create_params_template <- function(states,
 #' @export
 #' @examples
 #' # Symmetric model
-#' q_matrix <- estimate_transition_rates(tree, model = "SYM")
+#' data(ebola_tree)
+#' q_matrix <- estimate_transition_rates(ebola_tree, model = "SYM")
 estimate_transition_rates <- function(tree, 
                                       model = "ER", 
                                       custom_q = NULL,
@@ -172,7 +173,7 @@ estimate_transition_rates <- function(tree,
   q_matrix <- NULL
   primary_method <- method
   if(method == "ace"){
-    fallback_method = "fitMk"
+    fallback_method = "simmap"
   }
   else{
     fallback_method = "ace"
@@ -182,7 +183,7 @@ estimate_transition_rates <- function(tree,
     q_matrix <- try_ace(tree, tip_states, model)
   } 
   else{
-    q_matrix <- try_fitMk(tree, tip_states, model)
+    q_matrix <- try_simmap(tree, tip_states, model)
   }
   
   # If primary failed, try the other method
@@ -193,13 +194,13 @@ estimate_transition_rates <- function(tree,
       q_matrix <- try_ace(tree, tip_states, model)
     } 
     else{
-      q_matrix <- try_fitMk(tree, tip_states, model)
+      q_matrix <- try_simmap(tree, tip_states, model)
     }
   }
   
   # If both failed
   if(is.null(q_matrix)){
-    stop("Both ace and fitMk failed to estimate transition rates. Check your tip.states, it may contains NA.")
+    stop("Both ace and simmap failed to estimate transition rates. Check your tip.states, it may contains NA.")
   }
   return(q_matrix)
 }
@@ -240,22 +241,22 @@ try_ace <- function(tree, tip_states, model){
   return(result)
 }
 
-#' Estimate Q using fitMk
+#' Estimate Q using simmap
 #' @noRd
-try_fitMk <- function(tree, tip_states, model) {
+try_simmap <- function(tree, tip_states, model) {
   result <- tryCatch(
     withCallingHandlers(
       {states_named <- tree$tip.state
-        names(states_named) <- tree$tip.label
-        fitMk_result <- phytools::fitMk(tree, states_named, model = model, Q = "empirical")
-        fitMk_result$Q
+      names(states_named) <- tree$tip.label
+      simmap_result <- phytools::make.simmap(tree, states_named, model = model, Q = "empirical")
+      simmap_result$Q
       },
       warning = function(w) {
-        message("fitMk warning: ", conditionMessage(w))
+        message("simmap warning: ", conditionMessage(w))
       }
     ),
     error = function(e) {
-      message("fitMk failed: ", e$message)
+      message("simmap failed: ", e$message)
       NULL
     }
   )
