@@ -30,12 +30,12 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
   
   # Check that q_matrix is compatible, it must:
   # - be a square matrix
-  # - have rows summing to 1
+  # - have rows summing to 0
   # - both rows and columns must have names
   if( nrow(q_matrix) != ncol(q_matrix) ) {
     stop(paste0("The transition rate matrix must be square. Current input has ", nrow(q_matrix), " rows and ", ncol(q_matrix), " columns."))
   }
-  if( any(rowSums(q_matrix) != 1) ) {
+  if( any(rowSums(q_matrix) != 0) ) {
     stop("The rows of the transition rate matrix must sum to 1.")
   }
   if( is.null(rownames(q_matrix)) || is.null(colnames(q_matrix)) ) {
@@ -51,7 +51,7 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
   }
   if( any(psi < 0) ) {
     stop("All sampling rates (psi) must be non-negative.")
-  } else if( sort(colnames(q_matrix)[sum(psi > 0) > 0]) != sort(unique(phy$tip.state)) ) {
+  } else if( any(sort(colnames(q_matrix)[sum(psi > 0) > 0]) != sort(unique(phy$tip.state))) ) {
     stop("Sampling rate (psi) must be positive for all observed traits.")
   }
   if( any(lambda < 0) ) {
