@@ -102,11 +102,11 @@ estimate_a <- function(phy, trim = c(0.10, 0.50)){
   bt <- bt[bt > 0]
   L <- 1 + seq_along(bt)
   
-  tmin <- quantile(bt, trim[1])
-  tmax <- quantile(bt, trim[2])
+  tmin <- stats::quantile(bt, trim[1])
+  tmax <- stats::quantile(bt, trim[2])
   keep <- bt >= tmin & bt <= tmax
-  fit <- lm(log(L[keep]) ~ bt[keep])
-  unname(coef(fit)[2])
+  fit <- stats::lm(log(L[keep]) ~ bt[keep])
+  unname(stats::coef(fit)[2])
 }
 
 #' Generate starting points for optimization
@@ -158,8 +158,8 @@ generate_starting_points <- function(
   attempt <- 0
   while(length(starts) < n_starts && attempt < max_attempts){
     attempt <- attempt + 1
-    lambda_ini <- runif(1, lambda_min, lambda_max)
-    psi_ini <- runif(1, psi_min, psi_max)
+    lambda_ini <- stats::runif(1, lambda_min, lambda_max)
+    psi_ini <- stats::runif(1, psi_min, psi_max)
     
     removal_rate <- mu + psi_ini
     r0_ini <- lambda_ini / removal_rate
@@ -318,7 +318,7 @@ fit_bd_fixed_mu <- function(
   for(i in seq_along(starts)){
     start_i <- starts[[i]]
     fit <- tryCatch({
-      optim(
+      stats::optim(
         par     = start_i,
         fn      = loglik,
         method  = "L-BFGS-B",

@@ -14,6 +14,9 @@ Imports:
     ape,
     deSolve,
     diversitree,
+    stats,
+    grDevices,
+    graphics,
     phytools,
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
