@@ -151,7 +151,8 @@ create_params_template <- function(states,
 #' @export
 #' @examples
 #' # Symmetric model
-#' q_matrix <- estimate_transition_rates(tree, model = "SYM")
+#' data(ebola_tree)
+#' q_matrix <- estimate_transition_rates(ebola_tree, model = "SYM")
 estimate_transition_rates <- function(tree, 
                                       model = "ER", 
                                       custom_q = NULL,
