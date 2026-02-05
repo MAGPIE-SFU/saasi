@@ -139,20 +139,34 @@ create_params_template <- function(states,
 }
 
 
-#' Estimates transition rates using ace or simmap.
-#' Default using ace, if fails use simmap instead
-#'
-#' @param tree A phylo object with tip.state attribute
-#' @param model Transition model: "ER" (equal rates), "SYM" (symmetric), 
-#'   "ARD" (all rates different), or "custom" (default: "ER")
-#' @param custom_q Custom Q matrix (only used if model = "custom")
-#' @param method Which method to use.
-#' @return A transition rate matrix (Q matrix) ready for SAASI
+#' Estimate the transition rate matrix of the discrete trait process
+#' 
+#' `estimate_transition_rates()` computes a maximum likelihood estimate of the transition rate matrix \eqn{Q} governing the discrete trait process.
+#' The discrete traits evolve according to a Markov process with transition rate matrix \eqn{Q} such that element \eqn{q_{ij}} is the instantaneous rate of transitioning from state \eqn{i} to state \eqn{j}.
+#' 
+#' The `model` parameters controls the structure of \eqn{Q}. 
+#' `"ER"` specifies equal rates for all transitions, \eqn{q_{ij}=q} for all traits \eqn{i,j}. 
+#' `"SYM"` specifies a symmetric transition rate matrix, \eqn{q_{ij}=q_{ji}} for all traits \eqn{i,j}.
+#' `"ARD"` places no structural constraints and allows all traits to be different, \eqn{q_{ij}\ne q_{kl}} for all traits \eqn{i,j,k,l}.
+#' `"custom"` allows the user to specify a structure for \eqn{Q}. This structure must be supplied through the `custom_q` parameter.
+#' 
+#' The `method` parameter allows the user to select a preferred method between `ace` and `simmap`, however if the preferred method fails the other will be used instead.
+#' If `ace` is selected, the maximum likelihood estimator is computed using the [ape::ace()] function.
+#' If `simmap` is selected, the [phytools::make.simmap()] function is used to fit \eqn{Q} to the provided phylogenetic tree.
+#' 
+#' @param tree A phylo object with a tip.state attribute assigning traits to all tips.
+#' @param model The form of the transition rate matrix. Possible values are `"ER"`, `"SYM"`, `"ARD"`, and `"custom"`. The default value is `"ER"`.
+#' @param custom_q A user-specified transition rate matrix (only used if `model = "custom"`).
+#' @param method The method used to perform the estimation. Possible values are `"ace"` or `"simmap"`.
+#' @return A transition rate matrix that has been fit to the observed phylogeny. This matrix will be compatible with other `saasi` functions.
 #' @export
 #' @examples
-#' # Symmetric model
+#' # Load a timed phylogenetic tree for Ebola
 #' data(ebola_tree)
-#' q_matrix <- estimate_transition_rates(ebola_tree, model = "SYM")
+#' 
+#' # Use the simmap function to estimate the rate transition matrix
+#' # Impose a symmetric form on the matrix
+#' q_matrix <- estimate_transition_rates(tree, model = "SYM")
 estimate_transition_rates <- function(tree, 
                                       model = "ER", 
                                       custom_q = NULL,
@@ -163,7 +177,7 @@ estimate_transition_rates <- function(tree,
     }
   }
   
-  if(!model %in% c("ER", "SYM", "ARD")){
+  if(!model %in% c("ER", "SYM", "ARD", "custom")){
     stop("model must be one of the following: 'ER', 'SYM', 'ARD', or 'custom'")
   }
   
