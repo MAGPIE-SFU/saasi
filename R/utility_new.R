@@ -139,8 +139,8 @@ create_params_template <- function(states,
 }
 
 
-#' Estimates transition rates using ace or simmap.
-#' Default using ace, if fails use simmap instead
+#' Estimates transition rates using ace or fitMk.
+#' Default using ace, if fails use fitMk instead
 #'
 #' @param tree A phylo object with tip.state attribute
 #' @param model Transition model: "ER" (equal rates), "SYM" (symmetric), 
@@ -173,7 +173,7 @@ estimate_transition_rates <- function(tree,
   q_matrix <- NULL
   primary_method <- method
   if(method == "ace"){
-    fallback_method = "simmap"
+    fallback_method = "fitMk"
   }
   else{
     fallback_method = "ace"
@@ -183,7 +183,7 @@ estimate_transition_rates <- function(tree,
     q_matrix <- try_ace(tree, tip_states, model)
   } 
   else{
-    q_matrix <- try_simmap(tree, tip_states, model)
+    q_matrix <- try_fitMk(tree, tip_states, model)
   }
   
   # If primary failed, try the other method
@@ -194,13 +194,13 @@ estimate_transition_rates <- function(tree,
       q_matrix <- try_ace(tree, tip_states, model)
     } 
     else{
-      q_matrix <- try_simmap(tree, tip_states, model)
+      q_matrix <- try_fitMk(tree, tip_states, model)
     }
   }
   
   # If both failed
   if(is.null(q_matrix)){
-    stop("Both ace and simmap failed to estimate transition rates. Check your tip.states, it may contains NA.")
+    stop("Both ace and fitMk failed to estimate transition rates. Check your tip.states, it may contains NA.")
   }
   return(q_matrix)
 }
@@ -241,22 +241,22 @@ try_ace <- function(tree, tip_states, model){
   return(result)
 }
 
-#' Estimate Q using simmap
+#' Estimate Q using fitMk
 #' @noRd
-try_simmap <- function(tree, tip_states, model) {
+try_fitMk <- function(tree, tip_states, model) {
   result <- tryCatch(
     withCallingHandlers(
       {states_named <- tree$tip.state
         names(states_named) <- tree$tip.label
-        simmap_result <- phytools::make.simmap(tree, states_named, model = model, Q = "empirical")
-        simmap_result$Q
+        fitMk_result <- phytools::fitMk(tree, states_named, model = model, Q = "empirical")
+        fitMk_result$Q
       },
       warning = function(w) {
-        message("simmap warning: ", conditionMessage(w))
+        message("fitMk warning: ", conditionMessage(w))
       }
     ),
     error = function(e) {
-      message("simmap failed: ", e$message)
+      message("fitMk failed: ", e$message)
       NULL
     }
   )

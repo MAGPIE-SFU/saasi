@@ -1,0 +1,357 @@
+strain	date	clade	region	country	host	author	accession	accession__url
+PQ441952	1971-12-31 (1971-02-16 - 1971-12-31)	Clade I	Africa	Angola	Homo sapiens	Peng et al.	PQ441952	https://www.ncbi.nlm.nih.gov/nuccore/PQ441952
+KX982182	2016-03-16	Clade I	Africa	Angola	Homo sapiens	Simon-Loriere et al.	KX982182	https://www.ncbi.nlm.nih.gov/nuccore/KX982182
+PQ186341	1993-02-22	Clade II	Africa	Kenya	Homo sapiens	Zhang et al.	PQ186341	https://www.ncbi.nlm.nih.gov/nuccore/PQ186341
+PQ441951	2003-03-09 (2003-01-01 - 2003-12-31)	Clade II	Africa	Sudan	Homo sapiens	Peng et al.	PQ441951	https://www.ncbi.nlm.nih.gov/nuccore/PQ441951
+PQ186358	2003-11-09 (2003-01-01 - 2003-12-31)	Clade II	Africa	Sudan	Homo sapiens	Zhang et al.	PQ186358	https://www.ncbi.nlm.nih.gov/nuccore/PQ186358
+PQ186348	1966-10-26 (1966-01-01 - 1966-12-31)	Clade III	Africa	Ethiopia	Homo sapiens	Zhang et al.	PQ186348	https://www.ncbi.nlm.nih.gov/nuccore/PQ186348
+MW960207	2018-01-01 (2018-01-01 - 2018-11-21)	Clade III	Africa	Central African Republic	Homo sapiens	Simo Tchetgna et al.	MW960207	https://www.ncbi.nlm.nih.gov/nuccore/MW960207
+JN620362	2010-10-31 (2010-10-04 - 2010-10-31)	Clade III	Africa	Uganda	Homo sapiens	McMullan et al.	JN620362	https://www.ncbi.nlm.nih.gov/nuccore/JN620362
+JX898869	1973-01-01 (1973-01-01 - 1973-11-25)	Clade IV	Africa	Côte d'Ivoire	Aedes africanus	Stock et al.	JX898869	https://www.ncbi.nlm.nih.gov/nuccore/JX898869
+PQ186340	1970-01-01 (1970-01-01 - 1970-11-25)	Clade IV	Africa	Nigeria	Homo sapiens	Zhang et al.	PQ186340	https://www.ncbi.nlm.nih.gov/nuccore/PQ186340
+PQ186353	1970-01-01 (1970-01-01 - 1970-11-25)	Clade IV	Africa	Nigeria	Homo sapiens	Zhang et al.	PQ186353	https://www.ncbi.nlm.nih.gov/nuccore/PQ186353
+KU978763	1946-12-31 (1946-06-20 - 1946-12-31)	Clade IV	Africa	Nigeria	Homo sapiens	Guerbois et al.	KU978763	https://www.ncbi.nlm.nih.gov/nuccore/KU978763
+PQ441956	1987-05-23	Clade IV	Africa	Nigeria	Homo sapiens	Peng et al.	PQ441956	https://www.ncbi.nlm.nih.gov/nuccore/PQ441956
+PQ186356	1983-11-30 (1983-11-04 - 1983-11-30)	Clade IV	Africa	Burkina Faso	Homo sapiens	Zhang et al.	PQ186356	https://www.ncbi.nlm.nih.gov/nuccore/PQ186356
+PQ186357	1983-11-01 (1983-11-01 - 1983-11-27)	Clade IV	Africa	Burkina Faso	Homo sapiens	Zhang et al.	PQ186357	https://www.ncbi.nlm.nih.gov/nuccore/PQ186357
+PQ186346	1983-09-27 (1983-01-01 - 1983-12-31)	Clade IV	Africa	Burkina Faso	Homo sapiens	Zhang et al.	PQ186346	https://www.ncbi.nlm.nih.gov/nuccore/PQ186346
+KU978765	1965-08-23	Clade V	Africa	Guinea-Bissau	Homo sapiens	Guerbois et al.	KU978765	https://www.ncbi.nlm.nih.gov/nuccore/KU978765
+PQ441953	1965-12-31 (1965-04-17 - 1965-12-31)	Clade V	Africa	Senegal	Homo sapiens	Peng et al.	PQ441953	https://www.ncbi.nlm.nih.gov/nuccore/PQ441953
+PQ186347	2022-01-01 (2022-01-01 - 2022-11-25)	Clade V	Africa	Senegal	Macaca mulatta	Zhang et al.	PQ186347	https://www.ncbi.nlm.nih.gov/nuccore/PQ186347
+JX898876	2001-01-01 (2001-01-01 - 2001-11-25)	Clade V	Africa	Senegal	Aedes furcifer	Stock et al.	JX898876	https://www.ncbi.nlm.nih.gov/nuccore/JX898876
+PQ186355	1979-12-31 (1979-05-13 - 1979-12-31)	Clade V	Africa	Senegal	Homo sapiens	Zhang et al.	PQ186355	https://www.ncbi.nlm.nih.gov/nuccore/PQ186355
+MK060080	1979-10-30	Clade V	Africa	Senegal	Homo sapiens	Amraoui et al.	MK060080	https://www.ncbi.nlm.nih.gov/nuccore/MK060080
+JX898881	2005-01-09 (2005-01-01 - 2005-12-31)	Clade V	Africa	Senegal	Aedes luteocephalus	Stock et al.	JX898881	https://www.ncbi.nlm.nih.gov/nuccore/JX898881
+JX898878	2005-01-09 (2005-01-01 - 2005-12-31)	Clade V	Africa	Senegal	Aedes furcifer	Stock et al.	JX898878	https://www.ncbi.nlm.nih.gov/nuccore/JX898878
+JX898879	2005-01-09 (2005-01-01 - 2005-12-31)	Clade V	Africa	Senegal	Aedes taylori	Stock et al.	JX898879	https://www.ncbi.nlm.nih.gov/nuccore/JX898879
+JX898880	2005-01-09 (2005-01-01 - 2005-12-31)	Clade V	Africa	Senegal	Aedes luteocephalus	Stock et al.	JX898880	https://www.ncbi.nlm.nih.gov/nuccore/JX898880
+JX898877	2005-01-09 (2005-01-01 - 2005-12-31)	Clade V	Africa	Senegal	Aedes furcifer	Stock et al.	JX898877	https://www.ncbi.nlm.nih.gov/nuccore/JX898877
+JX898870	1996-01-01 (1996-01-01 - 1996-11-14)	Clade V	Africa	Senegal	Aedes furcifer	Stock et al.	JX898870	https://www.ncbi.nlm.nih.gov/nuccore/JX898870
+JX898868	1995-12-31 (1995-02-13 - 1995-12-31)	Clade V	Africa	Senegal	Homo sapiens	Stock et al.	JX898868	https://www.ncbi.nlm.nih.gov/nuccore/JX898868
+OM066735	2021-10-26	Clade V	Africa	Ghana	Homo sapiens	Bonney et al.	OM066735	https://www.ncbi.nlm.nih.gov/nuccore/OM066735
+OM066737	2021-11-04	Clade V	Africa	Ghana	Homo sapiens	Bonney et al.	OM066737	https://www.ncbi.nlm.nih.gov/nuccore/OM066737
+OM066736	2021-11-04	Clade V	Africa	Ghana	Homo sapiens	Bonney et al.	OM066736	https://www.ncbi.nlm.nih.gov/nuccore/OM066736
+JX898875	2000-12-31 (2000-02-10 - 2000-12-31)	Clade V	Africa	Senegal	Aedes furcifer	Stock et al.	JX898875	https://www.ncbi.nlm.nih.gov/nuccore/JX898875
+JX898874	2000-03-02 (2000-01-01 - 2000-12-31)	Clade V	Africa	Senegal	Aedes taylori	Stock et al.	JX898874	https://www.ncbi.nlm.nih.gov/nuccore/JX898874
+JX898873	2000-10-07 (2000-01-01 - 2000-12-31)	Clade V	Africa	Senegal	Aedes furcifer	Stock et al.	JX898873	https://www.ncbi.nlm.nih.gov/nuccore/JX898873
+MN958078	2018-12-31 (2018-03-06 - 2018-12-31)	Clade V	Africa	Nigeria	Homo sapiens	Ajogbasile et al.	MN958078	https://www.ncbi.nlm.nih.gov/nuccore/MN958078
+MK457700	2018-10-14	Clade V	Africa	Nigeria	Homo sapiens	Ajogbasile et al.	MK457700	https://www.ncbi.nlm.nih.gov/nuccore/MK457700
+OR075002	2020-11-01 (2020-11-01 - 2020-11-27)	Clade V	Africa	Nigeria	Homo sapiens	Oguzie et al.	OR075002	https://www.ncbi.nlm.nih.gov/nuccore/OR075002
+MK457701	2018-10-22	Clade V	Africa	Nigeria	Homo sapiens	Ajogbasile et al.	MK457701	https://www.ncbi.nlm.nih.gov/nuccore/MK457701
+MK292067	2018-11-19	Clade V	Europe	Netherlands	Homo sapiens	Phan et al.	MK292067	https://www.ncbi.nlm.nih.gov/nuccore/MK292067
+MZ595195	2020-12-31 (2020-02-19 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595195	https://www.ncbi.nlm.nih.gov/nuccore/MZ595195
+MZ595194	2020-01-01 (2020-01-01 - 2020-10-30)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595194	https://www.ncbi.nlm.nih.gov/nuccore/MZ595194
+MZ595185	2020-01-01 (2020-01-01 - 2020-10-30)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595185	https://www.ncbi.nlm.nih.gov/nuccore/MZ595185
+MZ595183	2020-01-01 (2020-01-01 - 2020-09-28)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595183	https://www.ncbi.nlm.nih.gov/nuccore/MZ595183
+MZ595189	2020-06-07 (2020-01-01 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595189	https://www.ncbi.nlm.nih.gov/nuccore/MZ595189
+MZ595186	2020-12-31 (2020-04-18 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595186	https://www.ncbi.nlm.nih.gov/nuccore/MZ595186
+MZ595188	2020-01-01 (2020-01-01 - 2020-09-28)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595188	https://www.ncbi.nlm.nih.gov/nuccore/MZ595188
+MZ595187	2020-01-01 (2020-01-01 - 2020-10-21)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595187	https://www.ncbi.nlm.nih.gov/nuccore/MZ595187
+MZ595198	2020-01-01 (2020-01-01 - 2020-10-24)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595198	https://www.ncbi.nlm.nih.gov/nuccore/MZ595198
+MZ595190	2020-12-31 (2020-03-19 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595190	https://www.ncbi.nlm.nih.gov/nuccore/MZ595190
+MZ595197	2020-07-25 (2020-01-01 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595197	https://www.ncbi.nlm.nih.gov/nuccore/MZ595197
+MZ595192	2020-11-20 (2020-01-01 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595192	https://www.ncbi.nlm.nih.gov/nuccore/MZ595192
+MZ595191	2020-11-20 (2020-01-01 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595191	https://www.ncbi.nlm.nih.gov/nuccore/MZ595191
+MZ595196	2020-01-21 (2020-01-01 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595196	https://www.ncbi.nlm.nih.gov/nuccore/MZ595196
+MZ595184	2020-10-31 (2020-01-01 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595184	https://www.ncbi.nlm.nih.gov/nuccore/MZ595184
+MZ595193	2020-05-23 (2020-01-01 - 2020-12-31)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595193	https://www.ncbi.nlm.nih.gov/nuccore/MZ595193
+MZ595199	2020-01-01 (2020-01-01 - 2020-09-26)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595199	https://www.ncbi.nlm.nih.gov/nuccore/MZ595199
+MZ595203	2020-12-31 (2020-05-27 - 2020-12-31)	Clade V	Africa	Senegal	Homo sapiens	Diagne et al.	MZ595203	https://www.ncbi.nlm.nih.gov/nuccore/MZ595203
+MZ595182	2020-01-01 (2020-01-01 - 2020-09-26)	Clade V	Africa	Senegal	Culicidae	Diagne et al.	MZ595182	https://www.ncbi.nlm.nih.gov/nuccore/MZ595182
+PX379992	2024-10-01 (2024-10-01 - 2024-10-28)	Clade V	Africa	Senegal	Culicidae	Gaye et al.	PX379992	https://www.ncbi.nlm.nih.gov/nuccore/PX379992
+PX379995	2024-10-01 (2024-10-01 - 2024-10-28)	Clade V	Africa	Senegal	Culicidae	Gaye et al.	PX379995	https://www.ncbi.nlm.nih.gov/nuccore/PX379995
+PX379994	2024-10-31 (2024-10-04 - 2024-10-31)	Clade V	Africa	Senegal	Culicidae	Gaye et al.	PX379994	https://www.ncbi.nlm.nih.gov/nuccore/PX379994
+PX379996	2024-10-06 (2024-10-01 - 2024-10-31)	Clade V	Africa	Senegal	Culicidae	Gaye et al.	PX379996	https://www.ncbi.nlm.nih.gov/nuccore/PX379996
+PX379990	2024-10-06 (2024-10-01 - 2024-10-31)	Clade V	Africa	Senegal	Culicidae	Gaye et al.	PX379990	https://www.ncbi.nlm.nih.gov/nuccore/PX379990
+PX379993	2024-10-01 (2024-10-01 - 2024-10-31)	Clade V	Africa	Senegal	Culicidae	Gaye et al.	PX379993	https://www.ncbi.nlm.nih.gov/nuccore/PX379993
+PX379991	2024-10-31 (2024-10-04 - 2024-10-31)	Clade V	Africa	Senegal	Culicidae	Gaye et al.	PX379991	https://www.ncbi.nlm.nih.gov/nuccore/PX379991
+ON323052	2020-12-14	Clade V	Africa	Nigeria	Homo sapiens	Shaibu et al.	ON323052	https://www.ncbi.nlm.nih.gov/nuccore/ON323052
+ON323053	2020-12-14	Clade V	Africa	Nigeria	Homo sapiens	Shaibu et al.	ON323053	https://www.ncbi.nlm.nih.gov/nuccore/ON323053
+ON323054	2020-12-14	Clade V	Africa	Nigeria	Homo sapiens	Shaibu et al.	ON323054	https://www.ncbi.nlm.nih.gov/nuccore/ON323054
+ON402371	2020-12-14	Clade V	Africa	Nigeria	Homo sapiens	Shaibu et al.	ON402371	https://www.ncbi.nlm.nih.gov/nuccore/ON402371
+JX898872	1995-11-15 (1995-01-01 - 1995-12-31)	Clade V	Africa	Senegal	Aedes aegypti	Stock et al.	JX898872	https://www.ncbi.nlm.nih.gov/nuccore/JX898872
+JX898871	1995-11-15 (1995-01-01 - 1995-12-31)	Clade V	Africa	Senegal	Aedes aegypti	Stock et al.	JX898871	https://www.ncbi.nlm.nih.gov/nuccore/JX898871
+MW249089	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249089	https://www.ncbi.nlm.nih.gov/nuccore/MW249089
+MW249084	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249084	https://www.ncbi.nlm.nih.gov/nuccore/MW249084
+MW249092	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249092	https://www.ncbi.nlm.nih.gov/nuccore/MW249092
+MW249090	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249090	https://www.ncbi.nlm.nih.gov/nuccore/MW249090
+MW249087	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249087	https://www.ncbi.nlm.nih.gov/nuccore/MW249087
+MW249085	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249085	https://www.ncbi.nlm.nih.gov/nuccore/MW249085
+MW249086	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249086	https://www.ncbi.nlm.nih.gov/nuccore/MW249086
+MW249095	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249095	https://www.ncbi.nlm.nih.gov/nuccore/MW249095
+MW249091	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249091	https://www.ncbi.nlm.nih.gov/nuccore/MW249091
+MW249078	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249078	https://www.ncbi.nlm.nih.gov/nuccore/MW249078
+MW249077	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249077	https://www.ncbi.nlm.nih.gov/nuccore/MW249077
+MW249094	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249094	https://www.ncbi.nlm.nih.gov/nuccore/MW249094
+MW249081	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249081	https://www.ncbi.nlm.nih.gov/nuccore/MW249081
+MW249088	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249088	https://www.ncbi.nlm.nih.gov/nuccore/MW249088
+MZ285906	1927-12-31 (1927-07-09 - 1927-12-31)	Clade V	Africa	Senegal	Homo sapiens	Strother et al.	MZ285906	https://www.ncbi.nlm.nih.gov/nuccore/MZ285906
+PX648516	2023-11-04	Clade V				Hansen et al.	PX648516	https://www.ncbi.nlm.nih.gov/nuccore/PX648516
+MF926243	2015-01-01 (2015-01-01 - 2015-11-25)	Clade V	Europe	France	Cricetinae	Klitting et al.	MF926243	https://www.ncbi.nlm.nih.gov/nuccore/MF926243
+MF405338	1927-12-31 (1927-09-17 - 1927-12-31)	Clade V	Africa	Ghana	Homo sapiens	Klitting et al.	MF405338	https://www.ncbi.nlm.nih.gov/nuccore/MF405338
+KU978764	1941-06-06	Clade V	Africa	Sudan	Homo sapiens	Guerbois et al.	KU978764	https://www.ncbi.nlm.nih.gov/nuccore/KU978764
+MW158362	1997-07-31 (1997-07-04 - 1997-07-31)	Clade V	South America	Ecuador	Homo sapiens	Queiroz et al.	MW158362	https://www.ncbi.nlm.nih.gov/nuccore/MW158362
+GQ379163	2007-10-22 (2007-10-01 - 2007-10-31)	Clade V	South America	Peru	Homo sapiens	Whittembury et al.	GQ379163	https://www.ncbi.nlm.nih.gov/nuccore/GQ379163
+GQ379162	2007-10-01 (2007-10-01 - 2007-10-28)	Clade V	South America	Peru	Homo sapiens	Whittembury et al.	GQ379162	https://www.ncbi.nlm.nih.gov/nuccore/GQ379162
+OR882684	2003-01-01 (2003-01-01 - 2003-11-25)	Clade V	Europe	United Kingdom		Li et al.	OR882684	https://www.ncbi.nlm.nih.gov/nuccore/OR882684
+MW158363	1966-12-31 (1966-08-18 - 1966-12-31)	Clade V	North America	USA	Homo sapiens	Queiroz et al.	MW158363	https://www.ncbi.nlm.nih.gov/nuccore/MW158363
+MW158358	2004-01-01 (2004-01-01 - 2004-11-25)	Clade V	South America	Peru	Homo sapiens	Queiroz et al.	MW158358	https://www.ncbi.nlm.nih.gov/nuccore/MW158358
+MF289572	2017-06-01 (2017-06-01 - 2017-06-27)	Clade V	Asia	Singapore		Chua et al.	MF289572	https://www.ncbi.nlm.nih.gov/nuccore/MF289572
+MG922934	2017-12-31 (2017-03-28 - 2017-12-31)	Clade V	Europe	Germany	Homo sapiens	Eisermann et al.	MG922934	https://www.ncbi.nlm.nih.gov/nuccore/MG922934
+PP025904	2018-04-13	Clade V	Europe	Spain		Mendoza et al.	PP025904	https://www.ncbi.nlm.nih.gov/nuccore/PP025904
+MN708493	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708493	https://www.ncbi.nlm.nih.gov/nuccore/MN708493
+MN708494	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708494	https://www.ncbi.nlm.nih.gov/nuccore/MN708494
+MW249080	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249080	https://www.ncbi.nlm.nih.gov/nuccore/MW249080
+MN708495	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708495	https://www.ncbi.nlm.nih.gov/nuccore/MN708495
+MN708491	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708491	https://www.ncbi.nlm.nih.gov/nuccore/MN708491
+MW249074	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249074	https://www.ncbi.nlm.nih.gov/nuccore/MW249074
+MW249076	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249076	https://www.ncbi.nlm.nih.gov/nuccore/MW249076
+MN708488	2019-02-07	Clade V	Europe	France		Kum et al.	MN708488	https://www.ncbi.nlm.nih.gov/nuccore/MN708488
+OR700702	2023-08-01 (2023-08-01 - 2023-08-28)	Clade V	Oceania	Australia	Homo sapiens	Aziz et al.	OR700702	https://www.ncbi.nlm.nih.gov/nuccore/OR700702
+MN708492	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708492	https://www.ncbi.nlm.nih.gov/nuccore/MN708492
+DQ118157	2004-12-31 (2004-03-29 - 2004-12-31)	Clade V	Europe	Spain		Doblas et al.	DQ118157	https://www.ncbi.nlm.nih.gov/nuccore/DQ118157
+MW158360	2011-03-01 (2011-03-01 - 2011-03-31)	Clade V	South America	Peru	Homo sapiens	Queiroz et al.	MW158360	https://www.ncbi.nlm.nih.gov/nuccore/MW158360
+MW249075	2019-02-07	Clade V	Europe	France	Homo sapiens	Bakoa et al.	MW249075	https://www.ncbi.nlm.nih.gov/nuccore/MW249075
+MN708490	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708490	https://www.ncbi.nlm.nih.gov/nuccore/MN708490
+MN708489	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708489	https://www.ncbi.nlm.nih.gov/nuccore/MN708489
+MN708496	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708496	https://www.ncbi.nlm.nih.gov/nuccore/MN708496
+MN708497	2019-02-07	Clade V	Europe	Belgium		Kum et al.	MN708497	https://www.ncbi.nlm.nih.gov/nuccore/MN708497
+JX949181	2012-07-03	Clade V	North America	USA		Amanna et al.	JX949181	https://www.ncbi.nlm.nih.gov/nuccore/JX949181
+MT505351	2020-05-19	Clade V	North America	USA		Baker et al.	MT505351	https://www.ncbi.nlm.nih.gov/nuccore/MT505351
+MT505352	2020-05-19	Clade V	North America	USA		Baker et al.	MT505352	https://www.ncbi.nlm.nih.gov/nuccore/MT505352
+OM938990	2019-01-01 (2019-01-01 - 2019-10-05)	Clade V	Europe	France		Esson et al.	OM938990	https://www.ncbi.nlm.nih.gov/nuccore/OM938990
+OM938989	2018-01-01 (2018-01-01 - 2018-10-10)	Clade V	Europe	France		Esson et al.	OM938989	https://www.ncbi.nlm.nih.gov/nuccore/OM938989
+OM938988	2016-12-27 (2016-01-01 - 2016-12-31)	Clade V	Europe	France		Esson et al.	OM938988	https://www.ncbi.nlm.nih.gov/nuccore/OM938988
+JF912181	1983-01-01 (1983-01-01 - 1983-11-20)	Clade VII	South America	Brazil	Homo sapiens	Nunes et al.	JF912181	https://www.ncbi.nlm.nih.gov/nuccore/JF912181
+MW158359	1998-01-20	Clade VII	South America	Peru	Homo sapiens	Queiroz et al.	MW158359	https://www.ncbi.nlm.nih.gov/nuccore/MW158359
+PQ186354	1997-07-01 (1997-07-01 - 1997-07-28)	Clade VII	South America	Ecuador	Homo sapiens	Zhang et al.	PQ186354	https://www.ncbi.nlm.nih.gov/nuccore/PQ186354
+MW158361	1995-05-19	Clade VII	South America	Peru	Homo sapiens	Queiroz et al.	MW158361	https://www.ncbi.nlm.nih.gov/nuccore/MW158361
+PQ186350	1995-01-30	Clade VII	South America	Peru	Homo sapiens	Zhang et al.	PQ186350	https://www.ncbi.nlm.nih.gov/nuccore/PQ186350
+PQ186339	1998-03-13	Clade VII	South America	Peru	Homo sapiens	Zhang et al.	PQ186339	https://www.ncbi.nlm.nih.gov/nuccore/PQ186339
+PQ181571	1998-03-13	Clade VII	South America	Peru	Homo sapiens	Peng et al.	PQ181571	https://www.ncbi.nlm.nih.gov/nuccore/PQ181571
+PP477075	2023-04-11	Clade VII	South America	Colombia	Homo sapiens	Perez-Restrepo et al.	PP477075	https://www.ncbi.nlm.nih.gov/nuccore/PP477075
+PQ186349	2006-02-18	Clade VII	South America	Bolivia	Homo sapiens	Zhang et al.	PQ186349	https://www.ncbi.nlm.nih.gov/nuccore/PQ186349
+MF004382	1999-01-01	Clade VII	South America	Bolivia	Homo sapiens	Baronti et al.	MF004382	https://www.ncbi.nlm.nih.gov/nuccore/MF004382
+MW158339	1960-09-23	Clade VI	South America	Brazil	Cebus sp.	Queiroz et al.	MW158339	https://www.ncbi.nlm.nih.gov/nuccore/MW158339
+MW158340	1968-06-06	Clade VI	South America	Brazil	Saguinus midas	Queiroz et al.	MW158340	https://www.ncbi.nlm.nih.gov/nuccore/MW158340
+MW158338	1955-01-21	Clade VI	South America	Brazil	Simiiformes	Queiroz et al.	MW158338	https://www.ncbi.nlm.nih.gov/nuccore/MW158338
+PQ186344	1971-05-20	Clade VI	South America	Brazil	Homo sapiens	Zhang et al.	PQ186344	https://www.ncbi.nlm.nih.gov/nuccore/PQ186344
+JF912183	1984-12-31 (1984-02-12 - 1984-12-31)	Clade VI	South America	Brazil	Homo sapiens	Nunes et al.	JF912183	https://www.ncbi.nlm.nih.gov/nuccore/JF912183
+JF912184	1987-12-31 (1987-02-25 - 1987-12-31)	Clade VI	South America	Brazil	Homo sapiens	Nunes et al.	JF912184	https://www.ncbi.nlm.nih.gov/nuccore/JF912184
+JF912179	1980-01-01 (1980-01-01 - 1980-12-02)	Clade VI	South America	Brazil	Haemagogus	Nunes et al.	JF912179	https://www.ncbi.nlm.nih.gov/nuccore/JF912179
+PQ441954	1993-05-12	Clade VI	South America	Brazil	Homo sapiens	Peng et al.	PQ441954	https://www.ncbi.nlm.nih.gov/nuccore/PQ441954
+MW158341	1991-06-21	Clade VI	South America	Brazil	Alouatta sp.	Queiroz et al.	MW158341	https://www.ncbi.nlm.nih.gov/nuccore/MW158341
+JF912186	1994-12-31 (1994-02-18 - 1994-12-31)	Clade VI	South America	Brazil	Homo sapiens	Nunes et al.	JF912186	https://www.ncbi.nlm.nih.gov/nuccore/JF912186
+PQ441955	1974-01-31 (1974-01-01 - 1974-12-31)	Clade VI	North America	Panama	Homo sapiens	Peng et al.	PQ441955	https://www.ncbi.nlm.nih.gov/nuccore/PQ441955
+OR119828	1974-12-31 (1974-03-10 - 1974-12-31)	Clade VI	North America	Panama	Homo sapiens	Marano et al.	OR119828	https://www.ncbi.nlm.nih.gov/nuccore/OR119828
+MW158343	1973-02-16	Clade VI	South America	Brazil	Haemagogus	Queiroz et al.	MW158343	https://www.ncbi.nlm.nih.gov/nuccore/MW158343
+MW158344	1985-06-16	Clade VI	South America	Brazil	Haemagogus janthinomys	Queiroz et al.	MW158344	https://www.ncbi.nlm.nih.gov/nuccore/MW158344
+PQ186345	1981-05-07	Clade VI	South America	Brazil	Homo sapiens	Zhang et al.	PQ186345	https://www.ncbi.nlm.nih.gov/nuccore/PQ186345
+JF912180	1981-12-31 (1981-03-11 - 1981-12-31)	Clade VI	South America	Brazil	Homo sapiens	Nunes et al.	JF912180	https://www.ncbi.nlm.nih.gov/nuccore/JF912180
+PQ186352	1985-01-01 (1985-01-01 - 1985-11-22)	Clade VI	South America	Colombia	Homo sapiens	Zhang et al.	PQ186352	https://www.ncbi.nlm.nih.gov/nuccore/PQ186352
+PQ186342	1991-11-30 (1991-11-04 - 1991-11-30)	Clade VI	South America	Brazil	Homo sapiens	Zhang et al.	PQ186342	https://www.ncbi.nlm.nih.gov/nuccore/PQ186342
+JF912185	1992-12-31 (1992-02-11 - 1992-12-31)	Clade VI	South America	Brazil	Sabethes	Nunes et al.	JF912185	https://www.ncbi.nlm.nih.gov/nuccore/JF912185
+JF912182	1984-01-01 (1984-01-01 - 1984-11-23)	Clade VI	South America	Brazil	Homo sapiens	Nunes et al.	JF912182	https://www.ncbi.nlm.nih.gov/nuccore/JF912182
+MW158347	1989-02-22	Clade VI	South America	Trinidad and Tobago	Alouatta sp.	Queiroz et al.	MW158347	https://www.ncbi.nlm.nih.gov/nuccore/MW158347
+MW158346	1989-01-20	Clade VI	South America	Trinidad and Tobago	Sabethes chloropterus	Queiroz et al.	MW158346	https://www.ncbi.nlm.nih.gov/nuccore/MW158346
+MW158345	1988-12-14	Clade VI	South America	Trinidad and Tobago	Haemagogus janthinomys	Queiroz et al.	MW158345	https://www.ncbi.nlm.nih.gov/nuccore/MW158345
+MW158348	1995-01-01 (1995-01-01 - 1995-11-22)	Clade VI	South America	Trinidad and Tobago	Haemagogus	Queiroz et al.	MW158348	https://www.ncbi.nlm.nih.gov/nuccore/MW158348
+MW158349	2004-12-31 (2004-02-12 - 2004-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Queiroz et al.	MW158349	https://www.ncbi.nlm.nih.gov/nuccore/MW158349
+MW158364	2009-01-22	Clade VI	South America	Trinidad and Tobago	Coquillettidia venezuelensis	Queiroz et al.	MW158364	https://www.ncbi.nlm.nih.gov/nuccore/MW158364
+HM582851	2009-12-31 (2009-03-28 - 2009-12-31)	Clade VI	South America	Trinidad and Tobago	Alouatta seniculus	Auguste et al.	HM582851	https://www.ncbi.nlm.nih.gov/nuccore/HM582851
+MW158366	2009-01-16	Clade VI	South America	Trinidad and Tobago	Culex spissipes	Queiroz et al.	MW158366	https://www.ncbi.nlm.nih.gov/nuccore/MW158366
+MW158367	2009-01-16	Clade VI	South America	Trinidad and Tobago	Coquillettidia venezuelensis	Queiroz et al.	MW158367	https://www.ncbi.nlm.nih.gov/nuccore/MW158367
+MW158365	2008-12-05	Clade VI	South America	Trinidad and Tobago	Mansonia titillans	Queiroz et al.	MW158365	https://www.ncbi.nlm.nih.gov/nuccore/MW158365
+MF347613	2017-01-01 (2017-01-01 - 2017-11-22)	Clade VI	South America	Suriname	Homo sapiens	Oude Munnink et al.	MF347613	https://www.ncbi.nlm.nih.gov/nuccore/MF347613
+PQ186343	1998-04-16	Clade VI	South America	Brazil	Homo sapiens	Zhang et al.	PQ186343	https://www.ncbi.nlm.nih.gov/nuccore/PQ186343
+JF912189	2001-12-31 (2001-02-23 - 2001-12-31)	Clade VI	South America	Brazil	Haemagogus leucocelaenus	Nunes et al.	JF912189	https://www.ncbi.nlm.nih.gov/nuccore/JF912189
+ON022718	2000-04-27	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022718	https://www.ncbi.nlm.nih.gov/nuccore/ON022718
+MW158342	2000-02-07	Clade VI	South America	Brazil	Alouatta sp.	Queiroz et al.	MW158342	https://www.ncbi.nlm.nih.gov/nuccore/MW158342
+MG969501	2001-03-07	Clade VI	South America	Brazil	Homo sapiens	Bonaldo et al.	MG969501	https://www.ncbi.nlm.nih.gov/nuccore/MG969501
+JF912187	2000-12-31 (2000-02-22 - 2000-12-31)	Clade VI	South America	Brazil	Homo sapiens	Nunes et al.	JF912187	https://www.ncbi.nlm.nih.gov/nuccore/JF912187
+JF912188	2000-01-01 (2000-01-01 - 2000-10-19)	Clade VI	South America	Brazil	Homo sapiens	Nunes et al.	JF912188	https://www.ncbi.nlm.nih.gov/nuccore/JF912188
+MH018101	2003-08-15	Clade VI	South America	Brazil	Homo sapiens	Faria et al.	MH018101	https://www.ncbi.nlm.nih.gov/nuccore/MH018101
+MH018100	2003-03-15	Clade VI	South America	Brazil	Homo sapiens	Faria et al.	MH018100	https://www.ncbi.nlm.nih.gov/nuccore/MH018100
+ON022720	2000-01-18	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022720	https://www.ncbi.nlm.nih.gov/nuccore/ON022720
+ON022717	2000-01-18	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022717	https://www.ncbi.nlm.nih.gov/nuccore/ON022717
+JF912190	2002-01-01 (2002-01-01 - 2002-11-18)	Clade VI	South America	Brazil	Homo sapiens	Nunes et al.	JF912190	https://www.ncbi.nlm.nih.gov/nuccore/JF912190
+KY861728	2008-02-09	Clade VI	South America	Brazil	Alouatta	Bonaldo et al.	KY861728	https://www.ncbi.nlm.nih.gov/nuccore/KY861728
+PP869889	2024-01-31 (2024-01-04 - 2024-01-31)	Clade VI	South America	Colombia	Homo sapiens	Pardo et al.	PP869889	https://www.ncbi.nlm.nih.gov/nuccore/PP869889
+MF370543	2017-03-03	Clade VI	South America	Brazil	Alouatta sp.	Cruz et al.	MF370543	https://www.ncbi.nlm.nih.gov/nuccore/MF370543
+PQ276810	2022-06-15	Clade VI	South America	Brazil	Haemagogus janthinomys	Bernardi et al.	PQ276810	https://www.ncbi.nlm.nih.gov/nuccore/PQ276810
+MW158350	2004-06-15 (2004-01-01 - 2004-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Queiroz et al.	MW158350	https://www.ncbi.nlm.nih.gov/nuccore/MW158350
+KM388817	2004-06-19 (2004-01-01 - 2004-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Auguste et al.	KM388817	https://www.ncbi.nlm.nih.gov/nuccore/KM388817
+MW158357	2010-04-18 (2010-01-01 - 2010-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Queiroz et al.	MW158357	https://www.ncbi.nlm.nih.gov/nuccore/MW158357
+KM388816	2010-04-23 (2010-01-01 - 2010-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Auguste et al.	KM388816	https://www.ncbi.nlm.nih.gov/nuccore/KM388816
+MW158354	2005-01-01 (2005-01-01 - 2005-09-29)	Clade VI	South America	Venezuela	Homo sapiens	Queiroz et al.	MW158354	https://www.ncbi.nlm.nih.gov/nuccore/MW158354
+KM388814	2005-01-01 (2005-01-01 - 2005-10-22)	Clade VI	South America	Venezuela	Homo sapiens	Auguste et al.	KM388814	https://www.ncbi.nlm.nih.gov/nuccore/KM388814
+PQ186351	2005-10-21 (2005-01-01 - 2005-12-31)	Clade VI	South America	Venezuela	Homo sapiens	Zhang et al.	PQ186351	https://www.ncbi.nlm.nih.gov/nuccore/PQ186351
+MW158353	2005-10-21 (2005-01-01 - 2005-12-31)	Clade VI	South America	Venezuela	Homo sapiens	Queiroz et al.	MW158353	https://www.ncbi.nlm.nih.gov/nuccore/MW158353
+MW158356	2007-02-28 (2007-01-01 - 2007-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Queiroz et al.	MW158356	https://www.ncbi.nlm.nih.gov/nuccore/MW158356
+KM388815	2007-12-31 (2007-04-15 - 2007-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Auguste et al.	KM388815	https://www.ncbi.nlm.nih.gov/nuccore/KM388815
+MW158351	2005-01-01 (2005-01-01 - 2005-09-29)	Clade VI	South America	Venezuela	Alouatta seniculus	Queiroz et al.	MW158351	https://www.ncbi.nlm.nih.gov/nuccore/MW158351
+MW158352	2005-01-01 (2005-01-01 - 2005-09-28)	Clade VI	South America	Venezuela	Alouatta seniculus	Queiroz et al.	MW158352	https://www.ncbi.nlm.nih.gov/nuccore/MW158352
+MW158355	2006-09-15 (2006-01-01 - 2006-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Queiroz et al.	MW158355	https://www.ncbi.nlm.nih.gov/nuccore/MW158355
+KM388818	2006-12-31 (2006-07-08 - 2006-12-31)	Clade VI	South America	Venezuela	Alouatta seniculus	Auguste et al.	KM388818	https://www.ncbi.nlm.nih.gov/nuccore/KM388818
+ON022716	2004-11-26	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022716	https://www.ncbi.nlm.nih.gov/nuccore/ON022716
+PV710597	2025-02-20	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710597	https://www.ncbi.nlm.nih.gov/nuccore/PV710597
+PV710593	2025-02-20	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710593	https://www.ncbi.nlm.nih.gov/nuccore/PV710593
+PV710600	2025-02-25	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710600	https://www.ncbi.nlm.nih.gov/nuccore/PV710600
+PV710591	2025-02-20	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710591	https://www.ncbi.nlm.nih.gov/nuccore/PV710591
+PV710595	2025-02-20	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710595	https://www.ncbi.nlm.nih.gov/nuccore/PV710595
+PV710601	2025-02-28	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710601	https://www.ncbi.nlm.nih.gov/nuccore/PV710601
+PV710594	2025-02-19	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710594	https://www.ncbi.nlm.nih.gov/nuccore/PV710594
+PV710604	2025-03-10	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710604	https://www.ncbi.nlm.nih.gov/nuccore/PV710604
+PV710603	2025-03-05	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710603	https://www.ncbi.nlm.nih.gov/nuccore/PV710603
+PV710602	2025-03-04	Clade VI	South America	Brazil	Homo sapiens	das Gracas Dantas Andrade et al.	PV710602	https://www.ncbi.nlm.nih.gov/nuccore/PV710602
+OP508573	2020-12-08	Clade VI	South America	Brazil	Alouatta caraya	Giovanetti et al.	OP508573	https://www.ncbi.nlm.nih.gov/nuccore/OP508573
+OP508575	2020-11-06	Clade VI	South America	Brazil	Alouatta caraya	Giovanetti et al.	OP508575	https://www.ncbi.nlm.nih.gov/nuccore/OP508575
+OP508572	2020-12-03	Clade VI	South America	Brazil	Alouatta caraya	Giovanetti et al.	OP508572	https://www.ncbi.nlm.nih.gov/nuccore/OP508572
+OP508571	2020-12-03	Clade VI	South America	Brazil	Callithrix penicillata	Giovanetti et al.	OP508571	https://www.ncbi.nlm.nih.gov/nuccore/OP508571
+OP508574	2020-11-06	Clade VI	South America	Brazil	Alouatta caraya	Giovanetti et al.	OP508574	https://www.ncbi.nlm.nih.gov/nuccore/OP508574
+OP508576	2021-09-14	Clade VI	South America	Brazil		Giovanetti et al.	OP508576	https://www.ncbi.nlm.nih.gov/nuccore/OP508576
+OQ572696	2021-09-30	Clade VI	South America	Brazil	Sabethes chloropterus	de Oliveira et al.	OQ572696	https://www.ncbi.nlm.nih.gov/nuccore/OQ572696
+OQ572695	2021-09-30	Clade VI	South America	Brazil	Sabethes chloropterus	de Oliveira et al.	OQ572695	https://www.ncbi.nlm.nih.gov/nuccore/OQ572695
+OL519589	2021-08-25	Clade VI	South America	Brazil	Alouatta caraya	Andrade et al.	OL519589	https://www.ncbi.nlm.nih.gov/nuccore/OL519589
+OP508580	2022-01-17	Clade VI	South America	Brazil		Giovanetti et al.	OP508580	https://www.ncbi.nlm.nih.gov/nuccore/OP508580
+OP508584	2022-01-19	Clade VI	South America	Brazil		Giovanetti et al.	OP508584	https://www.ncbi.nlm.nih.gov/nuccore/OP508584
+OP508577	2022-01-17	Clade VI	South America	Brazil		Giovanetti et al.	OP508577	https://www.ncbi.nlm.nih.gov/nuccore/OP508577
+OP508578	2022-01-17	Clade VI	South America	Brazil		Giovanetti et al.	OP508578	https://www.ncbi.nlm.nih.gov/nuccore/OP508578
+OP508589	2022-01-17	Clade VI	South America	Brazil		Giovanetti et al.	OP508589	https://www.ncbi.nlm.nih.gov/nuccore/OP508589
+OP508588	2022-03-12	Clade VI	South America	Brazil		Giovanetti et al.	OP508588	https://www.ncbi.nlm.nih.gov/nuccore/OP508588
+OP508582	2022-01-18	Clade VI	South America	Brazil		Giovanetti et al.	OP508582	https://www.ncbi.nlm.nih.gov/nuccore/OP508582
+OP508583	2022-01-17	Clade VI	South America	Brazil		Giovanetti et al.	OP508583	https://www.ncbi.nlm.nih.gov/nuccore/OP508583
+OP508585	2022-01-17	Clade VI	South America	Brazil		Giovanetti et al.	OP508585	https://www.ncbi.nlm.nih.gov/nuccore/OP508585
+OP508586	2022-01-17	Clade VI	South America	Brazil		Giovanetti et al.	OP508586	https://www.ncbi.nlm.nih.gov/nuccore/OP508586
+OP508581	2022-01-18	Clade VI	South America	Brazil		Giovanetti et al.	OP508581	https://www.ncbi.nlm.nih.gov/nuccore/OP508581
+PV563871	2025-01-09	Clade VI	South America	Brazil	Aedes albopictus	Sacchi et al.	PV563871	https://www.ncbi.nlm.nih.gov/nuccore/PV563871
+PQ879118	2024-12-26	Clade VI	South America	Brazil		Sacchi et al.	PQ879118	https://www.ncbi.nlm.nih.gov/nuccore/PQ879118
+PV563872	2025-01-09	Clade VI	South America	Brazil	Aedes albopictus	Sacchi et al.	PV563872	https://www.ncbi.nlm.nih.gov/nuccore/PV563872
+PQ879117	2024-12-26	Clade VI	South America	Brazil		Sacchi et al.	PQ879117	https://www.ncbi.nlm.nih.gov/nuccore/PQ879117
+PQ879116	2024-12-26	Clade VI	South America	Brazil		Sacchi et al.	PQ879116	https://www.ncbi.nlm.nih.gov/nuccore/PQ879116
+PQ879115	2024-12-26	Clade VI	South America	Brazil		Sacchi et al.	PQ879115	https://www.ncbi.nlm.nih.gov/nuccore/PQ879115
+OR052147	2023-04-28	Clade VI	South America	Brazil	Homo sapiens	Sacchi et al.	OR052147	https://www.ncbi.nlm.nih.gov/nuccore/OR052147
+OQ675592	2023-02-24	Clade VI	South America	Brazil	Callicebus nigrifrons	Sacchi et al.	OQ675592	https://www.ncbi.nlm.nih.gov/nuccore/OQ675592
+PV710589	2024-04-03	Clade VI	South America	Brazil	Primates	das Gracas Dantas Andrade et al.	PV710589	https://www.ncbi.nlm.nih.gov/nuccore/PV710589
+PV710592	2024-10-21	Clade VI	South America	Brazil	Primates	das Gracas Dantas Andrade et al.	PV710592	https://www.ncbi.nlm.nih.gov/nuccore/PV710592
+PV710590	2024-10-21	Clade VI	South America	Brazil	Primates	das Gracas Dantas Andrade et al.	PV710590	https://www.ncbi.nlm.nih.gov/nuccore/PV710590
+PV710588	2024-05-13	Clade VI	South America	Brazil	Primates	das Gracas Dantas Andrade et al.	PV710588	https://www.ncbi.nlm.nih.gov/nuccore/PV710588
+PV710585	2024-08-13	Clade VI	South America	Brazil	Primates	das Gracas Dantas Andrade et al.	PV710585	https://www.ncbi.nlm.nih.gov/nuccore/PV710585
+PV710583	2025-01-24	Clade VI	South America	Brazil	Primates	das Gracas Dantas Andrade et al.	PV710583	https://www.ncbi.nlm.nih.gov/nuccore/PV710583
+PV710582	2025-02-07	Clade VI	South America	Brazil	Primates	das Gracas Dantas Andrade et al.	PV710582	https://www.ncbi.nlm.nih.gov/nuccore/PV710582
+PV454340	2025-03-19	Clade VI	South America	Brazil	Sapajus sp.	Sacchi et al.	PV454340	https://www.ncbi.nlm.nih.gov/nuccore/PV454340
+PQ602526	2024-09-18	Clade VI	South America	Brazil		Sacchi et al.	PQ602526	https://www.ncbi.nlm.nih.gov/nuccore/PQ602526
+PQ963937	2024-12-20	Clade VI	South America	Brazil		Sacchi et al.	PQ963937	https://www.ncbi.nlm.nih.gov/nuccore/PQ963937
+PV563866	2025-02-17	Clade VI	South America	Brazil	Homo sapiens	Sacchi et al.	PV563866	https://www.ncbi.nlm.nih.gov/nuccore/PV563866
+PV710581	2025-01-20	Clade VI	South America	Brazil	Primates	das Gracas Dantas Andrade et al.	PV710581	https://www.ncbi.nlm.nih.gov/nuccore/PV710581
+PV454339	2025-03-12	Clade VI	South America	Brazil		Sacchi et al.	PV454339	https://www.ncbi.nlm.nih.gov/nuccore/PV454339
+PV563868	2025-03-02	Clade VI	South America	Brazil	Homo sapiens	Sacchi et al.	PV563868	https://www.ncbi.nlm.nih.gov/nuccore/PV563868
+PV563865	2025-02-12	Clade VI	South America	Brazil	Homo sapiens	Sacchi et al.	PV563865	https://www.ncbi.nlm.nih.gov/nuccore/PV563865
+ON022410	2017-04-06	Clade VI	South America	Brazil	Callithrix penicillata	Hill et al.	ON022410	https://www.ncbi.nlm.nih.gov/nuccore/ON022410
+ON022419	2017-11-05	Clade VI	South America	Brazil	Primates	Hill et al.	ON022419	https://www.ncbi.nlm.nih.gov/nuccore/ON022419
+ON022376	2018-04-11	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022376	https://www.ncbi.nlm.nih.gov/nuccore/ON022376
+MT497520	2016-10-10	Clade VI	South America	Brazil	Sapajus sp.	Hill et al.	MT497520	https://www.ncbi.nlm.nih.gov/nuccore/MT497520
+ON022311	2016-12-19	Clade VI	South America	Brazil	Primates	Hill et al.	ON022311	https://www.ncbi.nlm.nih.gov/nuccore/ON022311
+MH666056	2016-11-16	Clade VI	South America	Brazil	Alouatta sp.	Cunha et al.	MH666056	https://www.ncbi.nlm.nih.gov/nuccore/MH666056
+ON022288	2016-11-16	Clade VI	South America	Brazil	Primates	Hill et al.	ON022288	https://www.ncbi.nlm.nih.gov/nuccore/ON022288
+ON022700	2016-11-17	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022700	https://www.ncbi.nlm.nih.gov/nuccore/ON022700
+MT497523	2016-11-16	Clade VI	South America	Brazil	Alouatta sp.	Hill et al.	MT497523	https://www.ncbi.nlm.nih.gov/nuccore/MT497523
+MF370549	2015-08-26	Clade VI	South America	Brazil	Simiiformes	Cardoso et al.	MF370549	https://www.ncbi.nlm.nih.gov/nuccore/MF370549
+ON022445	2018-01-22	Clade VI	South America	Brazil	Callithrix	Hill et al.	ON022445	https://www.ncbi.nlm.nih.gov/nuccore/ON022445
+ON022271	2018-01-16	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022271	https://www.ncbi.nlm.nih.gov/nuccore/ON022271
+ON022420	2017-12-13	Clade VI	South America	Brazil	Alouatta caraya	Hill et al.	ON022420	https://www.ncbi.nlm.nih.gov/nuccore/ON022420
+ON022462	2018-04-13	Clade VI	South America	Brazil	Callithrix	Hill et al.	ON022462	https://www.ncbi.nlm.nih.gov/nuccore/ON022462
+ON502435	2017-01-06	Clade VI	South America	Brazil	Homo sapiens	Adelino et al.	ON502435	https://www.ncbi.nlm.nih.gov/nuccore/ON502435
+ON502417	2018-01-20	Clade VI	South America	Brazil	Homo sapiens	Adelino et al.	ON502417	https://www.ncbi.nlm.nih.gov/nuccore/ON502417
+ON502406	2017-01-21	Clade VI	South America	Brazil	Homo sapiens	Adelino et al.	ON502406	https://www.ncbi.nlm.nih.gov/nuccore/ON502406
+MH560359	2017-01-31 (2017-01-04 - 2017-01-31)	Clade VI	South America	Brazil	Homo sapiens	Figueiredo et al.	MH560359	https://www.ncbi.nlm.nih.gov/nuccore/MH560359
+MF370536	2016-09-02	Clade VI	South America	Brazil	Alouatta sp.	Cruz et al.	MF370536	https://www.ncbi.nlm.nih.gov/nuccore/MF370536
+ON022259	2018-01-02	Clade VI	South America	Brazil	Callithrix penicillata	Hill et al.	ON022259	https://www.ncbi.nlm.nih.gov/nuccore/ON022259
+MF370534	2016-04-05	Clade VI	South America	Brazil	Callithrix penicillata	Cruz et al.	MF370534	https://www.ncbi.nlm.nih.gov/nuccore/MF370534
+MF370533	2017-01-11	Clade VI	South America	Brazil	Homo sapiens	Cruz et al.	MF370533	https://www.ncbi.nlm.nih.gov/nuccore/MF370533
+MN643089	2017-10-19	Clade VI	South America	Brazil	Alouatta guariba	Abreu et al.	MN643089	https://www.ncbi.nlm.nih.gov/nuccore/MN643089
+MN506281	2017-04-26	Clade VI	South America	Brazil		Abreu et al.	MN506281	https://www.ncbi.nlm.nih.gov/nuccore/MN506281
+MK583168	2018-02-11	Clade VI	South America	Brazil	Homo sapiens	Cunha et al.	MK583168	https://www.ncbi.nlm.nih.gov/nuccore/MK583168
+MN506280	2017-05-07	Clade VI	South America	Brazil		Abreu et al.	MN506280	https://www.ncbi.nlm.nih.gov/nuccore/MN506280
+ON022433	2018-02-26	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022433	https://www.ncbi.nlm.nih.gov/nuccore/ON022433
+MH018084	2017-02-09	Clade VI	South America	Brazil	Callithrix sp.	Faria et al.	MH018084	https://www.ncbi.nlm.nih.gov/nuccore/MH018084
+ON022530	2018-01-25	Clade VI	South America	Brazil	Primates	Hill et al.	ON022530	https://www.ncbi.nlm.nih.gov/nuccore/ON022530
+ON022533	2018-02-11	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022533	https://www.ncbi.nlm.nih.gov/nuccore/ON022533
+ON022520	2017-03-07	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022520	https://www.ncbi.nlm.nih.gov/nuccore/ON022520
+ON022442	2018-04-17	Clade VI	South America	Brazil	Callithrix	Hill et al.	ON022442	https://www.ncbi.nlm.nih.gov/nuccore/ON022442
+MK333804	2015-08-17	Clade VI	South America	Brazil	Sapajus libidinosus	Delatorre et al.	MK333804	https://www.ncbi.nlm.nih.gov/nuccore/MK333804
+OQ932915	2016-09-24	Clade VI	South America	Brazil	Haemagogus janthinomys	Cruz et al.	OQ932915	https://www.ncbi.nlm.nih.gov/nuccore/OQ932915
+ON022302	2016-11-03	Clade VI	South America	Brazil	Culicidae	Hill et al.	ON022302	https://www.ncbi.nlm.nih.gov/nuccore/ON022302
+ON022301	2016-11-03	Clade VI	South America	Brazil	Culicidae	Hill et al.	ON022301	https://www.ncbi.nlm.nih.gov/nuccore/ON022301
+ON022300	2016-11-03	Clade VI	South America	Brazil	Culicidae	Hill et al.	ON022300	https://www.ncbi.nlm.nih.gov/nuccore/ON022300
+ON022600	2016-12-13	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022600	https://www.ncbi.nlm.nih.gov/nuccore/ON022600
+ON022703	2016-11-04	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022703	https://www.ncbi.nlm.nih.gov/nuccore/ON022703
+ON022611	2017-04-17	Clade VI	South America	Brazil	Primates	Hill et al.	ON022611	https://www.ncbi.nlm.nih.gov/nuccore/ON022611
+MT497521	2016-10-13	Clade VI	South America	Brazil	Alouatta sp.	Hill et al.	MT497521	https://www.ncbi.nlm.nih.gov/nuccore/MT497521
+ON022698	2016-11-16	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022698	https://www.ncbi.nlm.nih.gov/nuccore/ON022698
+ON022702	2016-11-07	Clade VI	South America	Brazil	Sapajus	Hill et al.	ON022702	https://www.ncbi.nlm.nih.gov/nuccore/ON022702
+ON022701	2016-11-17	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022701	https://www.ncbi.nlm.nih.gov/nuccore/ON022701
+ON022696	2019-01-15	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022696	https://www.ncbi.nlm.nih.gov/nuccore/ON022696
+OQ714324	2018-01-04	Clade VI	South America	Brazil	Primates	Claro et al.	OQ714324	https://www.ncbi.nlm.nih.gov/nuccore/OQ714324
+MT497522	2016-11-15	Clade VI	South America	Brazil	Alouatta sp.	Hill et al.	MT497522	https://www.ncbi.nlm.nih.gov/nuccore/MT497522
+MW034590	2016-11-01	Clade VI	South America	Brazil	Alouatta caraya	Siconelli et al.	MW034590	https://www.ncbi.nlm.nih.gov/nuccore/MW034590
+ON022390	2017-04-06	Clade VI	South America	Brazil	Alouatta caraya	Hill et al.	ON022390	https://www.ncbi.nlm.nih.gov/nuccore/ON022390
+ON022312	2018-03-24	Clade VI	South America	Brazil	Callithrix	Hill et al.	ON022312	https://www.ncbi.nlm.nih.gov/nuccore/ON022312
+MK583156	2018-01-23	Clade VI	South America	Brazil	Homo sapiens	Cunha et al.	MK583156	https://www.ncbi.nlm.nih.gov/nuccore/MK583156
+ON022667	2017-12-20	Clade VI	South America	Brazil	Primates	Hill et al.	ON022667	https://www.ncbi.nlm.nih.gov/nuccore/ON022667
+ON022648	2017-09-20	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022648	https://www.ncbi.nlm.nih.gov/nuccore/ON022648
+ON022563	2019-01-20	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022563	https://www.ncbi.nlm.nih.gov/nuccore/ON022563
+ON022560	2019-02-06	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022560	https://www.ncbi.nlm.nih.gov/nuccore/ON022560
+ON022344	2018-02-01	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022344	https://www.ncbi.nlm.nih.gov/nuccore/ON022344
+OQ714245	2018-01-11	Clade VI	South America	Brazil	Culicidae	Claro et al.	OQ714245	https://www.ncbi.nlm.nih.gov/nuccore/OQ714245
+OQ714293	2018-01-15	Clade VI	South America	Brazil	Primates	Claro et al.	OQ714293	https://www.ncbi.nlm.nih.gov/nuccore/OQ714293
+OQ714277	2017-12-12	Clade VI	South America	Brazil	Primates	Claro et al.	OQ714277	https://www.ncbi.nlm.nih.gov/nuccore/OQ714277
+OQ714315	2017-12-23	Clade VI	South America	Brazil	Primates	Claro et al.	OQ714315	https://www.ncbi.nlm.nih.gov/nuccore/OQ714315
+OQ714308	2017-12-27	Clade VI	South America	Brazil	Primates	Claro et al.	OQ714308	https://www.ncbi.nlm.nih.gov/nuccore/OQ714308
+OQ714244	2018-01-11	Clade VI	South America	Brazil	Culicidae	Claro et al.	OQ714244	https://www.ncbi.nlm.nih.gov/nuccore/OQ714244
+MK760660	2018-01-11	Clade VI	Europe	Netherlands	Homo sapiens	Phan et al.	MK760660	https://www.ncbi.nlm.nih.gov/nuccore/MK760660
+MK760666	2018-01-12	Clade VI	Europe	Netherlands	Homo sapiens	Phan et al.	MK760666	https://www.ncbi.nlm.nih.gov/nuccore/MK760666
+MK760665	2018-01-19	Clade VI	Europe	Netherlands	Homo sapiens	Phan et al.	MK760665	https://www.ncbi.nlm.nih.gov/nuccore/MK760665
+MK760664	2018-01-14	Clade VI	Europe	Netherlands	Homo sapiens	Phan et al.	MK760664	https://www.ncbi.nlm.nih.gov/nuccore/MK760664
+MK760661	2018-01-11	Clade VI	Europe	Netherlands	Homo sapiens	Phan et al.	MK760661	https://www.ncbi.nlm.nih.gov/nuccore/MK760661
+MK760663	2018-01-13	Clade VI	Europe	Netherlands	Homo sapiens	Phan et al.	MK760663	https://www.ncbi.nlm.nih.gov/nuccore/MK760663
+MK760662	2018-01-12	Clade VI	Europe	Netherlands	Homo sapiens	Phan et al.	MK760662	https://www.ncbi.nlm.nih.gov/nuccore/MK760662
+ON022295	2018-04-23	Clade VI	South America	Brazil	Haemagogus leucocelaenus	Hill et al.	ON022295	https://www.ncbi.nlm.nih.gov/nuccore/ON022295
+ON022583	2018-06-05	Clade VI	South America	Brazil	Alouatta	Hill et al.	ON022583	https://www.ncbi.nlm.nih.gov/nuccore/ON022583
+MZ604851	2019-01-01 (2019-01-01 - 2019-10-21)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604851	https://www.ncbi.nlm.nih.gov/nuccore/MZ604851
+MZ604867	2019-08-06 (2019-01-01 - 2019-12-31)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604867	https://www.ncbi.nlm.nih.gov/nuccore/MZ604867
+MZ604850	2019-02-10 (2019-01-01 - 2019-12-31)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604850	https://www.ncbi.nlm.nih.gov/nuccore/MZ604850
+ON022676	2019-04-16	Clade VI	South America	Brazil	Primates	Hill et al.	ON022676	https://www.ncbi.nlm.nih.gov/nuccore/ON022676
+MZ604874	2019-02-07 (2019-01-01 - 2019-12-31)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604874	https://www.ncbi.nlm.nih.gov/nuccore/MZ604874
+MZ604852	2019-02-07 (2019-01-01 - 2019-12-31)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604852	https://www.ncbi.nlm.nih.gov/nuccore/MZ604852
+MZ604839	2019-01-01 (2019-01-01 - 2019-10-06)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604839	https://www.ncbi.nlm.nih.gov/nuccore/MZ604839
+MZ604846	2019-12-31 (2019-04-14 - 2019-12-31)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604846	https://www.ncbi.nlm.nih.gov/nuccore/MZ604846
+OP508708	2021-02-22	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508708	https://www.ncbi.nlm.nih.gov/nuccore/OP508708
+OP508706	2020-01-21	Clade VI	South America	Brazil		Giovanetti et al.	OP508706	https://www.ncbi.nlm.nih.gov/nuccore/OP508706
+MZ604871	2019-04-11 (2019-01-01 - 2019-12-31)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604871	https://www.ncbi.nlm.nih.gov/nuccore/MZ604871
+MZ604857	2019-01-01 (2019-01-01 - 2019-09-27)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604857	https://www.ncbi.nlm.nih.gov/nuccore/MZ604857
+OP508688	2019-04-29	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508688	https://www.ncbi.nlm.nih.gov/nuccore/OP508688
+MW308135	2019-01-20	Clade VI	South America	Brazil	Homo sapiens	Cunha et al.	MW308135	https://www.ncbi.nlm.nih.gov/nuccore/MW308135
+MZ604843	2019-02-01 (2019-01-01 - 2019-12-31)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604843	https://www.ncbi.nlm.nih.gov/nuccore/MZ604843
+MZ604847	2019-02-01 (2019-01-01 - 2019-12-31)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604847	https://www.ncbi.nlm.nih.gov/nuccore/MZ604847
+MZ604838	2019-01-01 (2019-01-01 - 2019-09-26)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604838	https://www.ncbi.nlm.nih.gov/nuccore/MZ604838
+ON022552	2019-02-24	Clade VI	South America	Brazil	Homo sapiens	Hill et al.	ON022552	https://www.ncbi.nlm.nih.gov/nuccore/ON022552
+MZ604841	2019-01-01 (2019-01-01 - 2019-09-25)	Clade VI	South America	Brazil	Homo sapiens	Salles et al.	MZ604841	https://www.ncbi.nlm.nih.gov/nuccore/MZ604841
+OP508696	2020-01-06	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508696	https://www.ncbi.nlm.nih.gov/nuccore/OP508696
+OP508681	2020-04-22	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508681	https://www.ncbi.nlm.nih.gov/nuccore/OP508681
+MZ712141	2021-02-03	Clade VI	South America	Brazil	Alouatta guariba clamitans	Andrade et al.	MZ712141	https://www.ncbi.nlm.nih.gov/nuccore/MZ712141
+OP508663	2021-02-22	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508663	https://www.ncbi.nlm.nih.gov/nuccore/OP508663
+OP508700	2020-01-20	Clade VI	South America	Brazil	Alouatta guariba clamitans	Giovanetti et al.	OP508700	https://www.ncbi.nlm.nih.gov/nuccore/OP508700
+OP508678	2021-04-28	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508678	https://www.ncbi.nlm.nih.gov/nuccore/OP508678
+OP508698	2021-05-02	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508698	https://www.ncbi.nlm.nih.gov/nuccore/OP508698
+OP508671	2021-04-13	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508671	https://www.ncbi.nlm.nih.gov/nuccore/OP508671
+MZ712148	2021-02-22	Clade VI	South America	Brazil	Alouatta guariba clamitans	Andrade et al.	MZ712148	https://www.ncbi.nlm.nih.gov/nuccore/MZ712148
+MZ712147	2021-02-22	Clade VI	South America	Brazil	Alouatta guariba clamitans	Andrade et al.	MZ712147	https://www.ncbi.nlm.nih.gov/nuccore/MZ712147
+MZ712129	2021-02-22	Clade VI	South America	Brazil	Alouatta guariba clamitans	Andrade et al.	MZ712129	https://www.ncbi.nlm.nih.gov/nuccore/MZ712129
+MZ712138	2021-03-03	Clade VI	South America	Brazil	Alouatta guariba clamitans	Andrade et al.	MZ712138	https://www.ncbi.nlm.nih.gov/nuccore/MZ712138
+MZ712131	2021-02-19	Clade VI	South America	Brazil	Alouatta guariba clamitans	Andrade et al.	MZ712131	https://www.ncbi.nlm.nih.gov/nuccore/MZ712131
+OP508691	2021-02-19	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508691	https://www.ncbi.nlm.nih.gov/nuccore/OP508691
+MZ712133	2021-02-25	Clade VI	South America	Brazil	Alouatta guariba clamitans	Andrade et al.	MZ712133	https://www.ncbi.nlm.nih.gov/nuccore/MZ712133
+OP508690	2021-04-09	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508690	https://www.ncbi.nlm.nih.gov/nuccore/OP508690
+OP508702	2021-04-11	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508702	https://www.ncbi.nlm.nih.gov/nuccore/OP508702
+OP508680	2021-05-04	Clade VI	South America	Brazil	Alouatta sp.	Giovanetti et al.	OP508680	https://www.ncbi.nlm.nih.gov/nuccore/OP508680

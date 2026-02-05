@@ -1,0 +1,182 @@
+---
+title: "Sampling Aware Ancestral State Inference"
+author: "Yexuan Song"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+  pdf_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Sampling Aware Ancestral State Inference}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+ <!-- setwd("/Users/yexuan-magpie/Desktop/MSc_thesis_implementation/saasi") -->
+ <!-- README.md is generated from README.Rmd. Please edit that file -->
+ 
+```{r, include = FALSE}
+ knitr::opts_chunk$set(
+   collapse = TRUE,
+   comment = "#>",
+   fig.path = "man/figures/README-",
+   out.width = "100%"
+ )
+```
+ 
+
+```{r setup}
+library(saasi)
+library(diversitree)
+library(tidytree)
+library(ape)
+library(phytools)
+library(readr)
+
+```
+
+# Introduction
+ 
+ 
+ 
+<!-- badges: start -->
+<!-- badges: end -->
+ 
+
+This vignette serves as a guide of how to use the `saasi` package.
+
+ 
+Saasi is an ancestral state reconstruction method that accounts for variation in sampling rates among locations or traits. 
+ 
+ ## Installation
+ 
+ You can install the development version of saasi from
+ [GitHub](https://github.com/) with:
+ 
+ ``` r
+ # install.packages("remotes")
+ 
+ remotes::install_github("MAGPIE-SFU/saasi")
+ 
+ ```
+
+# Overview
+
+This is a demo showing how to use the saasi package.
+
+saasi requires the following argument:
+(1) a phylogenetic tree (class `phylo`). The tree should satisfy the following 
+properties: rooted, binary, branch length in units of time and positive, 
+has tree$tip.state and has no missing states. Check `check_tree_compatibility` function
+for details. In addition, `prepare_tree_for_saasi` function helps the user to 
+prepare a tree that is compatible with saasi.
+(2) speciation, extinction and sampling rates (class `data.frame`). These rates 
+can be estimated using the function `estimate_bds_parameters`.
+(3) a transition rate matrix (class `matrix`). 
+The output will be a data frame that contains the probabilities 
+of each state for each internal node of the phylogenetic tree. The Q matrix 
+can be estimated using the function `estimate_transition_rates`.
+
+## Example: Ebola 2013-2016 West African Ebola Epidemic
+
+### Read tree and load metadata
+
+For the next example, download the data from Nextstrain:
+https://nextstrain.org/ebola/ebov-2013?c=country
+
+```{r Nextstrain Ebola}
+tree <- ape::read.tree(system.file("extdata", "nextstrain_ebola_ebov-2013_timetree.nwk", package = "saasi"))
+metadata <- readr::read_tsv(system.file("extdata", "nextstrain_ebola_ebov-2013_metadata.tsv", package = "saasi"))
+
+```
+
+First, create a data.frame contains strains and states. 
+The first column of the data.frame should match tree$tip.label, 
+the second column is of the data.frame should be the state that you are 
+interested in. User can ignore this if the tree$tip.state exists.
+
+```{r Tip.state}
+tip_data <- data.frame(
+  tip_label = metadata$strain,
+  state = metadata$country
+)
+
+```
+
+### Modify the tree such that it is compatible with saasi
+
+User can apply the function `prepare_tree_for_saasi` to make the tree compatible with saasi.
+To check if the tree is compatible, use the function `check_tree_compatibility`.
+
+```{r}
+ebola_tree <- prepare_tree_for_saasi(tree,tip_data)
+```
+
+### Estimating transition rates
+User can estimate transition rates matrix Q using the function `estimate_transition_rates`.
+
+```{r}
+Q <- estimate_transition_rates(ebola_tree,method = 'simmap',model = 'SYM')
+```
+
+### Estimating Speciation and Sampling rate
+User can estimate speciation and sampling rates using the function `estimate_bds_parameters`.
+User should be some knowledge about the expected removal rate (1/mu) for the 
+disease of interest, saasi requires the extinction rate mu to be known.
+To obtain a better estimation for the overall speciation and sampling rates,
+user should have the knowledge about the maximum and minimum R0, as well as 
+the upper and lower bound for the total removal rate (1/(mu+psi)).
+
+For ebola, we assume the total infectious period 1/((mu+psi)) is between 
+20 to 40 days. In the unit of year, the total removal rate is between 
+[365/40 = 9.125 and 365/20 = 18.25], which is the lower and upper bound for 
+mu + psi. If we assume the removal rate mu = 5, this gives us the bound
+for the overall sampling rate between [4.125, 13.25]. In this example, we assume
+that r0_max = 3 and r0_min = 1.5.
+
+```{r}
+rates <- estimate_bds_parameters(
+    ebola_tree,
+    mu = 5, 
+    r0_max = 3, 
+    r0_min = 1.5,
+    psi_max = 15,
+    infectious_period_min = 20/365, # convert days to years
+    infectious_period_max = 40/365, # convert days to years
+    n_starts = 100)
+```
+
+
+
+### Setting up input 
+
+```{r}
+pars1 <- create_params_template(colnames(Q),lambda = rates$lambda,mu = rates$mu,psi = rates$psi)
+
+```
+
+
+### Run saasi analysis
+
+```{r}
+saasi_ebola <- saasi(ebola_tree,pars1,Q)
+```
+
+### Plot and save the result
+User can use the built-in function to `plot_saasi`, set save_file = NULL to not save file.
+
+```{r}
+p1 <- plot_saasi(ebola_tree,saasi_ebola,save_file = "ebola_equal_psi.png")
+```
+
+### Run saasi with a different set of parameters
+User can use a different set of parameters, if we assume that Liberia samples 
+less than other countries.
+
+```{r}
+pars2 <- create_params_template(colnames(Q),lambda = rates$lambda,mu = rates$mu,psi = c(rates$psi,rates$psi/2,rates$psi))
+
+saasi_ebola2 <- saasi(ebola_tree,pars2,Q)
+
+p2 <- plot_saasi(ebola_tree,saasi_ebola2,save_file = "ebola_unequal_psi.png")
+```
