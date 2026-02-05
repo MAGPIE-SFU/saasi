@@ -20,7 +20,49 @@
 #' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond
 #' to the node IDs. 
 #' @export
-saasi <- function(phy, params_df, q_matrix) {
+saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
+  ## PRE-PROCESSING
+  # Check compatibility of phy with SAASI
+  # - If not, send a message to the user and run the formatting function
+  if( !check_tree_compatibility(phy) ) {
+    stop("`phy` is not compatible with `saasi`. Please use the `prepare_tree_for_saasi` function to reformat your `phylo` object.")
+  }
+  
+  # Check that q_matrix is compatible, it must:
+  # - be a square matrix
+  # - have rows summing to 1
+  # - both rows and columns must have names
+  if( nrow(q_matrix) != ncol(q_matrix) ) {
+    stop(paste0("The transition rate matrix must be square. Current input has ", nrow(q_matrix), " rows and ", ncol(q_matrix), " columns."))
+  }
+  if( any(rowSums(q_matrix) != 1) ) {
+    stop("The rows of the transition rate matrix must sum to 1.")
+  }
+  if( is.null(rownames(q_matrix)) || is.null(colnames(q_matrix)) ) {
+    stop("Both rows and columns of the transition rate matrix should have names corresponding to the traits.")
+  }
+  
+  # Check birth-death-sampling rates
+  # - mu: all must be non-negative
+  # - lambda: all must be non-negative and at least one must be positive
+  # - psi: all must be non-negative and at least one must be positive
+  if( any(mu < 0) ) {
+    stop("All death rates (mu) must be non-negative.")
+  }
+  if( any(psi < 0) ) {
+    stop("All sampling rates (psi) must be non-negative.")
+  } else if( sort(colnames(q_matrix)[sum(psi > 0) > 0]) != sort(unique(phy$tip.state)) ) {
+    stop("Sampling rate (psi) must be positive for all observed traits.")
+  }
+  if( any(lambda < 0) ) {
+    stop("All birth rates (lambda) must be non-negative.")
+  } else if( sum(lambda > 0) == 0 ) {
+    stop("At least one birth rate (lambda) must be positive.")
+  }
+  
+  # Define params_df
+  params_df <- create_params_template(rownames(q_matrix), lambda, mu, psi, prior)
+  
   
   # Adding warning messages 
   
@@ -40,6 +82,7 @@ saasi <- function(phy, params_df, q_matrix) {
                            order(as.numeric(factor(colnames(q_matrix))))]
       }
   }
+  
   
   # Checking if the tree is binary 
   if(!ape::is.binary.phylo(phy)){
