@@ -4,14 +4,12 @@
 \alias{estimate_transition_rates}
 \title{Estimate the transition rate matrix of the discrete trait process}
 \usage{
-estimate_transition_rates(tree, model = "ER", custom_q = NULL, method = "ace")
+estimate_transition_rates(tree, matrix_structure = "ER", method = "ace")
 }
 \arguments{
 \item{tree}{A phylo object with a tip.state attribute assigning traits to all tips.}
 
-\item{model}{The form of the transition rate matrix. Possible values are \code{"ER"}, \code{"SYM"}, \code{"ARD"}, and \code{"custom"}. The default value is \code{"ER"}.}
-
-\item{custom_q}{A user-specified transition rate matrix (only used if \code{model = "custom"}).}
+\item{matrix_structure}{The form of the transition rate matrix. Can either be a numeric matrix or one of the following strings: \code{"ER"}, \code{"SYM"}, and \code{"ARD"} (see details). The default value is \code{"ER"}.}
 
 \item{method}{The method used to perform the estimation. Possible values are \code{"ace"} or \code{"simmap"}.}
 }
@@ -27,7 +25,7 @@ The \code{model} parameters controls the structure of \eqn{Q}.
 \code{"ER"} specifies equal rates for all transitions, \eqn{q_{ij}=q} for all traits \eqn{i,j}.
 \code{"SYM"} specifies a symmetric transition rate matrix, \eqn{q_{ij}=q_{ji}} for all traits \eqn{i,j}.
 \code{"ARD"} places no structural constraints and allows all traits to be different, \eqn{q_{ij}\ne q_{kl}} for all traits \eqn{i,j,k,l}.
-\code{"custom"} allows the user to specify a structure for \eqn{Q}. This structure must be supplied through the \code{custom_q} parameter.
+If another grouping of transition rates is desired this can be input as a numeric matrix such that each entry has a matrix with a positive integer and all entries with the same value will share a rate.
 
 The \code{method} parameter allows the user to select a preferred method between \code{ace} and \code{simmap}, however if the preferred method fails the other will be used instead.
 If \code{ace} is selected, the maximum likelihood estimator is computed using the \code{\link[ape:ace]{ape::ace()}} function.
@@ -38,6 +36,11 @@ If \code{simmap} is selected, the \code{\link[phytools:make.simmap]{phytools::ma
 data(ebola_tree)
 
 # Use the simmap function to estimate the rate transition matrix
-# Impose a symmetric form on the matrix
-q_matrix <- estimate_transition_rates(tree, model = "SYM")
+# - Impose a symmetric form on the matrix
+Q <- estimate_transition_rates(tree, matrix_structure = "SYM")
+
+# Use ace to estimate the rate transition matrix
+# - Impose a structure such that transitions to or from Guinea happen at a different rate than Liberia or Sierra Leone
+struct <- matrix(c(0, 1, 1, 1, 0, 2, 1, 2, 0), nrow=3, ncol=3)
+Q <- estimate_transition_rates(tree, matrix_structure = struct)
 }

@@ -148,15 +148,14 @@ create_params_template <- function(states,
 #' `"ER"` specifies equal rates for all transitions, \eqn{q_{ij}=q} for all traits \eqn{i,j}. 
 #' `"SYM"` specifies a symmetric transition rate matrix, \eqn{q_{ij}=q_{ji}} for all traits \eqn{i,j}.
 #' `"ARD"` places no structural constraints and allows all traits to be different, \eqn{q_{ij}\ne q_{kl}} for all traits \eqn{i,j,k,l}.
-#' `"custom"` allows the user to specify a structure for \eqn{Q}. This structure must be supplied through the `custom_q` parameter.
+#' If another grouping of transition rates is desired this can be input as a numeric matrix such that each entry has a matrix with a positive integer and all entries with the same value will share a rate.
 #' 
 #' The `method` parameter allows the user to select a preferred method between `ace` and `simmap`, however if the preferred method fails the other will be used instead.
 #' If `ace` is selected, the maximum likelihood estimator is computed using the [ape::ace()] function.
 #' If `simmap` is selected, the [phytools::make.simmap()] function is used to fit \eqn{Q} to the provided phylogenetic tree.
 #' 
 #' @param tree A phylo object with a tip.state attribute assigning traits to all tips.
-#' @param model The form of the transition rate matrix. Possible values are `"ER"`, `"SYM"`, `"ARD"`, and `"custom"`. The default value is `"ER"`.
-#' @param custom_q A user-specified transition rate matrix (only used if `model = "custom"`).
+#' @param matrix_structure The form of the transition rate matrix. Can either be a numeric matrix or one of the following strings: `"ER"`, `"SYM"`, and `"ARD"` (see details). The default value is `"ER"`.
 #' @param method The method used to perform the estimation. Possible values are `"ace"` or `"simmap"`.
 #' @return A transition rate matrix that has been fit to the observed phylogeny. This matrix will be compatible with other `saasi` functions.
 #' @export
@@ -165,20 +164,22 @@ create_params_template <- function(states,
 #' data(ebola_tree)
 #' 
 #' # Use the simmap function to estimate the rate transition matrix
-#' # Impose a symmetric form on the matrix
-#' q_matrix <- estimate_transition_rates(tree, model = "SYM")
+#' # - Impose a symmetric form on the matrix
+#' Q <- estimate_transition_rates(tree, matrix_structure = "SYM")
+#' 
+#' # Use ace to estimate the rate transition matrix
+#' # - Impose a structure such that transitions to or from Guinea happen at a different rate than Liberia or Sierra Leone
+#' struct <- matrix(c(0, 1, 1, 1, 0, 2, 1, 2, 0), nrow=3, ncol=3)
+#' Q <- estimate_transition_rates(tree, matrix_structure = struct)
 estimate_transition_rates <- function(tree, 
-                                      model = "ER", 
-                                      custom_q = NULL,
+                                      matrix_structure = "ER",
                                       method = "ace") {
-    if(model == "custom"){
-    if(is.null(custom_q)){
-      stop("Must provide custom_q if model = 'custom'")
-    }
-  }
-  
-  if(!model %in% c("ER", "SYM", "ARD", "custom")){
-    stop("model must be one of the following: 'ER', 'SYM', 'ARD', or 'custom'")
+
+  if(is.character(matrix_structure)) {
+    if( !(matrix_structure %in% c("ER", "SYM", "ARD")) )
+      stop("matrix_structure must be either a numeric matrix or one of the following strings: 'ER', 'SYM', or 'ARD'")
+  } else if(!is.matrix(matrix_structure)) {
+    stop("matrix_structure must be either a numeric matrix or one of the following strings: 'ER', 'SYM', or 'ARD'")
   }
   
   # Convert tip.state to factor if needed
@@ -194,10 +195,10 @@ estimate_transition_rates <- function(tree,
   }
 
   if(primary_method == "ace"){
-    q_matrix <- try_ace(tree, tip_states, model)
+    q_matrix <- try_ace(tree, tip_states, matrix_structure)
   } 
   else{
-    q_matrix <- try_simmap(tree, tip_states, model)
+    q_matrix <- try_simmap(tree, tip_states, matrix_structure)
   }
   
   # If primary failed, try the other method
@@ -205,10 +206,10 @@ estimate_transition_rates <- function(tree,
   if(is.null(q_matrix)){
     warning("Primary method failed")
     if(fallback_method == "ace"){
-      q_matrix <- try_ace(tree, tip_states, model)
+      q_matrix <- try_ace(tree, tip_states, matrix_structure)
     } 
     else{
-      q_matrix <- try_simmap(tree, tip_states, model)
+      q_matrix <- try_simmap(tree, tip_states, matrix_structure)
     }
   }
   
