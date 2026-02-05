@@ -2,30 +2,42 @@
 % Please edit documentation in R/utility_new.R
 \name{estimate_transition_rates}
 \alias{estimate_transition_rates}
-\title{Estimates transition rates using ace or simmap.
-Default using ace, if fails use simmap instead}
+\title{Estimate the transition rate matrix of the discrete trait process}
 \usage{
 estimate_transition_rates(tree, model = "ER", custom_q = NULL, method = "ace")
 }
 \arguments{
-\item{tree}{A phylo object with tip.state attribute}
+\item{tree}{A phylo object with a tip.state attribute assigning traits to all tips.}
 
-\item{model}{Transition model: "ER" (equal rates), "SYM" (symmetric),
-"ARD" (all rates different), or "custom" (default: "ER")}
+\item{model}{The form of the transition rate matrix. Possible values are \code{"ER"}, \code{"SYM"}, \code{"ARD"}, and \code{"custom"}. The default value is \code{"ER"}.}
 
-\item{custom_q}{Custom Q matrix (only used if model = "custom")}
+\item{custom_q}{A user-specified transition rate matrix (only used if \code{model = "custom"}).}
 
-\item{method}{Which method to use.}
+\item{method}{The method used to perform the estimation. Possible values are \code{"ace"} or \code{"simmap"}.}
 }
 \value{
-A transition rate matrix (Q matrix) ready for SAASI
+A transition rate matrix that has been fit to the observed phylogeny. This matrix will be compatible with other \code{saasi} functions.
 }
 \description{
-Estimates transition rates using ace or simmap.
-Default using ace, if fails use simmap instead
+\code{estimate_transition_rates()} computes a maximum likelihood estimate of the transition rate matrix \eqn{Q} governing the discrete trait process.
+The discrete traits evolve according to a Markov process with transition rate matrix \eqn{Q} such that element \eqn{q_{ij}} is the instantaneous rate of transitioning from state \eqn{i} to state \eqn{j}.
+}
+\details{
+The \code{model} parameters controls the structure of \eqn{Q}.
+\code{"ER"} specifies equal rates for all transitions, \eqn{q_{ij}=q} for all traits \eqn{i,j}.
+\code{"SYM"} specifies a symmetric transition rate matrix, \eqn{q_{ij}=q_{ji}} for all traits \eqn{i,j}.
+\code{"ARD"} places no structural constraints and allows all traits to be different, \eqn{q_{ij}\ne q_{kl}} for all traits \eqn{i,j,k,l}.
+\code{"custom"} allows the user to specify a structure for \eqn{Q}. This structure must be supplied through the \code{custom_q} parameter.
+
+The \code{method} parameter allows the user to select a preferred method between \code{ace} and \code{simmap}, however if the preferred method fails the other will be used instead.
+If \code{ace} is selected, the maximum likelihood estimator is computed using the \code{\link[ape:ace]{ape::ace()}} function.
+If \code{simmap} is selected, the \code{\link[phytools:make.simmap]{phytools::make.simmap()}} function is used to fit \eqn{Q} to the provided phylogenetic tree.
 }
 \examples{
-# Symmetric model
+# Load a timed phylogenetic tree for Ebola
 data(ebola_tree)
-q_matrix <- estimate_transition_rates(ebola_tree, model = "SYM")
+
+# Use the simmap function to estimate the rate transition matrix
+# Impose a symmetric form on the matrix
+q_matrix <- estimate_transition_rates(tree, model = "SYM")
 }
