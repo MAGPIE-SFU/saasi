@@ -106,7 +106,7 @@ Users can estimate the transition rate matrix Q using the function `estimate_tra
 Users can specify the model for the transition rate matrix: 1. Equal rate `ER`,
 2. Symmetric rate `SYM`, 3. All rates different `ARD`, and Custom `custom_q`.
 ```{r Estimate transition rates}
-Q <- estimate_transition_rates(ebola_tree, method = 'simmap', model = 'SYM')
+Q <- estimate_transition_rates(ebola_tree, method = 'simmap', matrix_structure = 'SYM')
 ```
 
 ### Estimating speciation and sampling rates
