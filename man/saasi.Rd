@@ -7,28 +7,24 @@
 saasi(phy, q_matrix, lambda, mu, psi, prior = NULL)
 }
 \arguments{
-\item{phy}{A \code{phylo} phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
-\code{tip.state}. \code{tip.state} can be names of the states, or numeric values (1:n).}
+\item{phy}{The output of \code{prepare_tree_for_saasi}, i.e., a rooted, timed, phylogentic tree of class \code{phylo} with states assigned to each tip.}
 
-\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
-algorithm. Row and column indices or names represent states.}
+\item{q_matrix}{A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column column names in the same order as \code{states}.}
 
-\item{params_df}{Data frame containing non-q parameters used in ancestral
-state reconstruction algorithm. Must have the following column names:
-\code{state}, \code{prior}, \code{lambda}, \code{mu}, and \code{psi}. The \code{prior} values refer to the baseline
-probabilities of the states (used at the root of the tree).
+\item{lambda}{Speciation rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.}
 
-Example:\tabular{lllll}{
-   \strong{state} \tab \strong{prior} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
-   1 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-   2 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-   3 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-}}
+\item{mu}{Extinction rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.}
+
+\item{psi}{Sampling rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.}
+
+\item{prior}{A vector of length equal to the number of states containing prior probabilities for each state. The vector must sum to 1. The \code{prior} values refer to the baseline
+probabilities of the states (used at the root of the tree).}
+
+\item{states}{Vector of state names.}
 }
 \value{
-A data frame listing the state probabilities of every node in \code{phy}. The row names correspond
-to the node IDs.
+A data frame listing the state probabilities of every node in \code{phy}. The row names correspond to the node IDs.
 }
 \description{
-Get the internal node state probabilities of a tree with defined leaf states.
+Compute internal node state probabilities of a tree with defined leaf states.
 }

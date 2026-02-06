@@ -1,25 +1,20 @@
 #' Sampling Aware Ancestral State Inference
 #'
-#' Get the internal node state probabilities of a tree with defined leaf states.
+#' Compute internal node state probabilities of a tree with defined leaf states.
 #'
-#' @param phy A `phylo` phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
-#' `tip.state`. `tip.state` can be names of the states, or numeric values (1:n).
-#' @param params_df Data frame containing non-q parameters used in ancestral
-#' state reconstruction algorithm. Must have the following column names:
-#' `state`, `prior`, `lambda`, `mu`, and `psi`. The `prior` values refer to the baseline
+#' @param phy The output of `prepare_tree_for_saasi`, i.e., a rooted, timed, phylogentic tree of class `phylo` with states assigned to each tip.
+#' @param states Vector of state names.
+#' @param lambda Speciation rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
+#' @param mu Extinction rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
+#' @param psi Sampling rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
+#' @param prior A vector of length equal to the number of states containing prior probabilities for each state. The vector must sum to 1. The `prior` values refer to the baseline
 #' probabilities of the states (used at the root of the tree). 
+#' @param q_matrix A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column column names in the same order as `states`.
+#' 
+#' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond to the node IDs. 
 #'
-#' Example:
-#' | **state** | **prior** | **lambda** | **mu** | **psi** |
-#' | :--- | :--- | :--- | :--- | :--- |
-#' | 1 | 1/3 | 3 | 0.02 | 1 |
-#' | 2 | 1/3 | 3 | 0.02 | 1 |
-#' | 3 | 1/3 | 3 | 0.02 | 1 |
-#' @param q_matrix Numeric q matrix used in ancestral state reconstruction
-#' algorithm. Row and column indices or names represent states.
-#' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond
-#' to the node IDs. 
-#' @export
+#' @example 
+#' 
 saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
   ## INPUT CHECKS
   
@@ -160,39 +155,13 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
     topology_df,
     backwards_likelihoods_list
   )
-  
-  # if (plot) {
-  #   # https://stackoverflow.com/a/17735894
-  #   highest_likelihoods <-
-  #     apply(state_probabilities_df, 1, function(e) which(e == max(e)))
-  #   
-  #   # https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
-  #   # Will serve up to n states == len of vector; afterwards recycles colors
-  #   state_colors <- c("#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3",
-  #                     "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd",
-  #                     "#ccebc5", "#ffed6f")
-  #   # Map likelihoods to colors
-  #   highest_likelihood_colors <-
-  #     sapply(highest_likelihoods,
-  #            function(e) state_colors[[e %% (length(state_colors) + 1)]])
-  #   
-  #   ape::plot.phylo(phy, label.offset = 0.05)
-  #   ape::tiplabels(highest_likelihoods[1:(phy[["Nnode"]] + 1)],
-  #                  frame = "circle",
-  #                  cex = cex,
-  #                  bg = highest_likelihood_colors)
-  #   ape::nodelabels(highest_likelihoods[-(1:(phy[["Nnode"]] + 1))],
-  #                   frame = "circle",
-  #                   cex = cex,
-  #                   bg = highest_likelihood_colors)
-  # }
-  # 
   return(state_probabilities_list)
 }
 
 #' Get data frame representation of tree topology.
 #'
 #' @return Data frame showing the parents, children, and depth of nodes.
+#' @keywords internal
 #' @noRd
 get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
   topology_df <- data.frame(id = seq_len(nnode),
@@ -225,7 +194,8 @@ get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
 #' state reconstruction algorithm.
 #'
 #' @return List of state likelihoods used in backwards time equations.
-#' `list[[x]][[y]]` is the likelihood for state y in node x.
+#' list[[x]][[y]] is the likelihood for state y in node x.
+#' @keywords internal
 #' @noRd
 get_backwards_likelihoods_list <- function(phy,
                                            params_df,
@@ -271,8 +241,9 @@ get_backwards_likelihoods_list <- function(phy,
 #' reconstruction algorithm.
 #'
 #' @return List of ancestral state probabilities.
-#' `list[[x]][[y]]` is the probability of state y in node x.
-#' @noRd
+#' list[[x]][[y]] is the probability of state y in node x.
+#' @keywords internal
+#' @noRd 
 get_state_probabilities_list <- function(phy,
                                          params_df,
                                          q_matrix,
@@ -333,16 +304,3 @@ get_state_probabilities_list <- function(phy,
   }
   return(node_lik)
 }
-
-#' Convert state probabilities list to data frame.
-#'  List of state probabilities.
-#' Data frame of state probabilities in each node in phy.
-#' 
-# get_state_probabilities_df <- function(phy, nstate, state_probabilities_list) {
-#   state_probabilities_df <-
-#     as.data.frame(do.call(rbind, state_probabilities_list))
-#   row.names(state_probabilities_df) <-
-#     c(phy[["tip.label"]], phy[["node.label"]])
-#   names(state_probabilities_df) <- seq_len(nstate)
-#   return(state_probabilities_df)
-# }
