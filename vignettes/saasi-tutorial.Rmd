@@ -17,7 +17,9 @@ vignette: >
    collapse = TRUE,
    comment = "#>",
    fig.width = 7,
-   fig.height = 5
+   fig.height = 5,
+   cache=TRUE,
+   cache.path = "_cache/"
  )
 ```
 ```{r setup}

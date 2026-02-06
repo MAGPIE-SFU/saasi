@@ -1,14 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-\# saasi
+# saasi
 
 <!-- badges: start --> <!-- badges: end -->
 
 Saasi is an ancestral state reconstruction method that accounts for
 variation in sampling rates among locations or traits.
 
-\## Installation
+## Installation
 
 You can install the development version of saasi from
 [GitHub](https://github.com/) with:
