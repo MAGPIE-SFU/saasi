@@ -1,314 +1,179 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Sampling Aware Ancestral State Inference (saasi)
+\# saasi
 
-<!-- badges: start -->
-<!-- badges: end -->
+<!-- badges: start --> <!-- badges: end -->
 
 Saasi is an ancestral state reconstruction method that accounts for
-variation in sampling rates among locations or traits. It is described
-our recent preprint, Song *et al.*:
-<https://www.biorxiv.org/content/10.1101/2025.05.20.655151v1>.
+variation in sampling rates among locations or traits.
 
-## Installation
+\## Installation
 
 You can install the development version of saasi from
 [GitHub](https://github.com/) with:
 
-     # install.packages("remotes")
-     remotes::install_github("MAGPIE-SFU/saasi",build_vignettes = TRUE)
+``` r
+# install.packages("remotes")
 
-The user may also need to install the following packages before running
-the demo: “diversitree”,“tidytree”,“ggtree”,“ggplot2” & “ggimage”.
+remotes::install_github("MAGPIE-SFU/saasi")
+```
 
-User can access vignette using the function `browseVignettes("saasi")`
-or `vignette("saasi")`.
+For this particular branch, use:
 
-## The saasi package
+``` r
+# install.packages("remotes")
+
+remotes::install_github("MAGPIE-SFU/saasi", ref = "saasi-maintaining")
+```
+
+Before running this demo, please make sure the following packages are
+installed: saasi, diversitree, tidytree, ape, phytools, readr
+
+## saasi package
 
 This is a demo showing how to use the saasi package.
 
-To run saasi, we need (1) a phylogenetic tree (class `phylo`), (2)
-speciation, extinction and sampling rates (class `data.frame`), and (3)
-a transition rate matrix (class `matrix`). The output will be a data
-frame that containing the probabilities of each state for each internal
-node of the phylogenetic tree.
-
-## A simulation
-
-We will first simulate a tree with known rates, and known internal node
-states, to illustrate saasi’s ancestral state inferences.
-
-We simulate a birth-death-sampling tree, for which we need to specify
-speciation, extinction, sampling rates and transition rates.
-
-Simulation is based on the `diversitree` package, by adding sampling
-events through time.
-
-    pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
-
-    q_matrix <- matrix(0.15, 2,2); diag(q_matrix) <- NA
-
-Once the diversification parameters are defined, we can create a tree
-using `sim_bds_tree`.
-
-    # set seed
-    set.seed(1)
-
-    # create the tree object
-
-    phy <- sim_bds_tree(pars, q_matrix, x0=1, max_taxa = 300, max_t = 300,
-                 include_extinct = FALSE)
-
-Now we can plot the tree
-
-
-    # extract transition histories
-    h <- history.from.sim.discrete(phy, 1:2)
-
-    true_phy_info <- as_tibble(phy)
-    true_phy_info$State <- c(factor(h$tip.state),factor(h$node.state))
-
-    p1 <- ggtree(phy) %<+% true_phy_info + geom_point(aes(color=State),size=2) +
-      ggtitle("True Phylogeny") +
-      theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    p1
-
-<img src="man/figures/README-plot raw tree-1.png" width="100%" /> You
-might notice that the tree includes all the tips at the present day.
-This is because the simulation stopped at the maximum allowed time. In
-pathogen phylogenetics and phylogeography applications, we typically do
-not have heterochronous sequences (from the present). In this
-simulation, we therefore drop the tips at the present day.
-
-    # find the height of the tree
-    node_depths <- node.depth.edgelength(phy)
-
-    tmrca <- max(node_depths)
-
-    # check which tips are at the present day
-    tips_to_drop <- phy$tip.label[abs(node_depths[1:length(phy$tip.label)] - tmrca) <= 0.01]
-
-    # create the new tree by dropping the tips at the present day
-    phy <- drop.tip(phy, tips_to_drop)
-
-    true_phy_info_new <- as_tibble(phy) %>% mutate(State = c(factor(h$tip.state),factor(h$node.state))[label])
-    phy$tip.state <- phy$tip.state[setdiff(names(phy$tip.state), tips_to_drop)]
-
-We can generate a tree that does not contain present day tips.
-
-
-    p2 <- ggtree(phy) %<+% true_phy_info_new + geom_point(aes(color=State),size=2) +
-      ggtitle("True Phylogeny - without present day tips") +
-      theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-
-    p2
-
-<img src="man/figures/README-plotting new tree-1.png" width="100%" />
-
-## Ancestral state inference
-
-Now we can use the simulated tree to do ancestral state inference. The
-function `ace` in the `ape` package does ancestral character (here,
-state) estimation without considering sampling rates, and it is a
-natural comparison for saasi since it is widely used in large-scale
-phylogeographic reconstructions. Comparing `saasi`’s reconstructions to
-`ace`’s illustrates the impact of adjusting for sampling differences.
-
-    library(ape)
-
-    ace_phy <- phy
-    ace_phy$node.label <- NULL
-    # Note: Do not have this problem if use earlier version `ape`
-    # Error in names(obj$ace) <- phy$node.label : 
-    # attempt to set an attribute on NULL
-
-    ace_phy$tip.state <- ace_phy$tip.state[setdiff(names(ace_phy$tip.state), tips_to_drop)]
-    asr_ace<-ace(ace_phy$tip.state, ace_phy,type = "discrete", model="ER")
-
-    ace_node_lik <- as.data.frame(asr_ace$lik.anc)
-    ace_node_lik$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-
-    ace_pie <- nodepie(ace_node_lik,cols=1:2)
-
-    p3 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
-      ggtitle("ace") +
-      theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    p3 <- inset(p3, ace_pie,width = 0.07,height = 0.07,hjust=0.005)
-    p3
-
-<img src="man/figures/README-ace-1.png" width="100%" />
-
-We see that `ace` would infer that most of the internal nodes are in
-State 2 instead of State 1.
-
-Now let’s try `saasi`.
-
-    result <- saasi(phy,pars,q_matrix)
-
-    result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-    our_pie <- nodepie(result,cols=1:2)
-
-    p4 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
-      ggtitle("SAASI") +
-      theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    p4 <- inset(p4, our_pie,width = 0.07,height = 0.07,hjust=0.005)
-    p4
-
-<img src="man/figures/README-saasi-1.png" width="100%" />
-
-Due to accounting for the sampling differences `saasi` infers most of
-the internal nodes correctly.
-
-## Parameter estimations - Speciation and Extinction
-
-Suppose we do not know the speciation and extinction rates for each
-state, but we have some knowledge about the sampling rates (e.g. per
-year/month, this should align with your tree time). We estimate the
-speciation and extinction rates using the method described in [Stadler
-et al. (2012)](https://doi.org/10.1093/molbev/msr217).
-
-
-    estimates <- mle_lm(phy,lambda = 2, mu = 0.1, psi = 1,lower = c(0.001,0.001), upper = c(5,5))
-
-    estimates[1]
-    #> speciation 
-    #>   2.086275
-    estimates[2]
-    #> extinction 
-    #>      0.001
-
-This MLE approach should be robust to different initial guesses, for
-example:
-
-
-    estimates <- mle_lm(phy,lambda = 100, mu = 100, psi = 1,lower = c(0.001,0.001), upper = c(500,500))
-
-    estimates[1]
-    #> speciation 
-    #>   2.086275
-    estimates[2]
-    #> extinction 
-    #>      0.001
-
-However, sometimes there is an error: L-BFGS-B needs finite values of
-\`fn’ of Complex Objective Function. This is due to a large branch
-length (the value exceed the .Machine$double.xmax), so we need to set
-the upper bound to a smaller value.
-
-## Parameter estimations - Transition
-
-If the transition rates are also unknown, one easy way of estimating
-transition rates is using `ace`:
-
-
-    # a function that convert the ace estimates to a matrix (one of the inputs in saasi)
-
-    q_matrix_est <- extract_ace_q(asr_ace)
-    q_matrix_est
-    #>           1         2
-    #> 1        NA 0.4950541
-    #> 2 0.4950541        NA
-
-Now we rerun `saasi` with estimated parameters.
-
-    pars_est <- data.frame(state=c(1,2),
-                       prior=c(0.5,0.5),
-                       lambda=rep(estimates[1],2),
-                       mu=rep(estimates[2],2),
-                       psi=c(.1,1))
-
-    result <- saasi(phy,pars_est,q_matrix_est)
-
-    # now draw the plot
-
-    result$node <- 1:ace_phy$Nnode + Ntip(ace_phy)
-    our_pie <- nodepie(result,cols=1:2)
-
-    p5 <- ggtree(ace_phy) %<+% true_phy_info_new + geom_tippoint(aes(color=State),size=2)+
-      ggtitle("SAASI - using estimated parameters") +
-      theme(text = element_text(size = 15,family = "serif"),plot.title = element_text(size=15))
-    p5 <- inset(p5, our_pie,width = 0.07,height = 0.07,hjust=0.005)
-    p5
-
-<img src="man/figures/README-rerun saasi with estimated parameters-1.png" width="100%" />
-
-The result is slightly different what we obtain using the true
-parameters.
-
-## Using saasi on general trees
-
-Just like `ace`, `saasi` works on binary trees that contains tip.state
-and edge.length
-
-Let’s generate a tree using `rtree`, and randomly assign states to the
-tips.
-
-
-    set.seed(1)
-
-    # generate a tree
-    random_phy <- rtree(20)
-
-    # randomly assign each tip a state (State 1 or State 2)
-    tip_states <- sample(1:2, size=20, replace=TRUE)
-    names(tip_states) <- random_phy$tip.label
-
-    random_phy$tip.state <- tip_states
-
-We can run `ace`:
-
-
-    asr_result <- ace(random_phy$tip.state, random_phy, type = "discrete", model = "ER")
-    asr_result$lik.anc
-    #>            1         2
-    #> 21 0.5000000 0.5000000
-    #> 22 0.5000000 0.5000000
-    #> 23 0.5000000 0.5000000
-    #> 24 0.5000000 0.5000000
-    #> 25 0.5000000 0.5000000
-    #> 26 0.3889657 0.6110343
-    #> 27 0.5000000 0.5000000
-    #> 28 0.5000000 0.5000000
-    #> 29 0.5000000 0.5000000
-    #> 30 0.5008183 0.4991817
-    #> 31 0.5052387 0.4947613
-    #> 32 0.5000000 0.5000000
-    #> 33 0.5000000 0.5000000
-    #> 34 0.5000000 0.5000000
-    #> 35 0.5000000 0.5000000
-    #> 36 0.5000000 0.5000000
-    #> 37 0.5021837 0.4978163
-    #> 38 0.5000000 0.5000000
-    #> 39 0.5000000 0.5000000
-
-We can also run `saasi`:
-
-
-    pars <- data.frame(state=c(1,2),prior=c(0.5,0.5),lambda=c(3,3),mu=c(0.05,0.05),psi=c(.1,1))
-
-    q_matrix = matrix(0.15, 2,2); diag(q_matrix)=NA 
-
-    saasi_result <- saasi(random_phy,pars,q_matrix)
-
-    saasi_result
-    #>              1            2
-    #> 21 0.958960383 0.0410396172
-    #> 22 0.935936391 0.0640636086
-    #> 23 0.228740911 0.7712590889
-    #> 24 0.539770862 0.4602291378
-    #> 25 0.798543482 0.2014565177
-    #> 26 0.000134941 0.9998650590
-    #> 27 0.998046844 0.0019531559
-    #> 28 0.999003986 0.0009960143
-    #> 29 0.998772971 0.0012270291
-    #> 30 0.999816557 0.0001834426
-    #> 31 0.984376816 0.0156231845
-    #> 32 0.994829442 0.0051705582
-    #> 33 0.934861493 0.0651385069
-    #> 34 0.980159459 0.0198405408
-    #> 35 0.997810113 0.0021898874
-    #> 36 0.999621323 0.0003786767
-    #> 37 0.996337122 0.0036628776
-    #> 38 0.988079980 0.0119200197
-    #> 39 0.002604712 0.9973952876
+saasi requires the following argument: (1) a phylogenetic tree (class
+`phylo`). The tree should satisfy the following properties: rooted,
+binary, branch length in units of time and positive, has tree\$tip.state
+and has no missing states. Check `check_tree_compatibility` function for
+details. In addition, `prepare_tree_for_saasi` function helps the user
+to prepare a tree that is compatible with saasi. (2) speciation,
+extinction and sampling rates (class `data.frame`). These rates can be
+estimated using the function `estimate_bds_parameters`. (3) a transition
+rate matrix (class `matrix`). The output will be a data frame that
+contains the probabilities of each state for each internal node of the
+phylogenetic tree. The Q matrix can be estimated using the function
+`estimate_transition_rates`.
+
+## Example: Ebola 2013-2016 West African Ebola Epidemic
+
+For the next example, download the data from Nextstrain:
+<https://nextstrain.org/ebola/ebov-2013?c=country>
+
+``` r
+# Read the tree file and metadata (replace with your own directory)
+tree <- read.tree("data-raw/nextstrain_ebola_ebov-2013_timetree.nwk")
+metadata <- read_tsv("data-raw/nextstrain_ebola_ebov-2013_metadata.tsv")
+#> Rows: 1493 Columns: 8
+#> ── Column specification ────────────────────────────────────────────────────────
+#> Delimiter: "\t"
+#> chr  (7): strain, country, division, author, author__url, accession, accessi...
+#> date (1): date
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+# Create a data.frame contains strains and states. 
+# The first column should match tree$tip.label, 
+# the second column is the region or country that you are interested in.
+tip_data <- data.frame(
+  tip_label = metadata$strain,
+  state = metadata$country
+)
+
+# Check compatibility
+check_tree_compatibility(tree)
+#> Tree is not compatible with SAASI
+#> Missing internal nodes
+#> Unary nodes present. Suppress with ape::collapse.branches() or re-run multi2di()
+#> Polytomies present. Resolve with multi2di(tree, tol = 1e-8)
+#> Zero-length branches present. Fix with: tree$edge.length[tree$edge.length <= 0] <- 1e-5
+#> Negative branches present. Fix with: tree$edge.length[tree$edge.length <= 0] <- 1e-5
+#> NA tip states present. Remove with drop_tips_by_state(tree, NA)
+#> No tip states. Attach with attach_tip_states() or prepare_tree_for_saasi()
+#> [1] FALSE
+
+# The tree is not compatible. Specifically, the tree is nonbinary, it does
+# not contains tip states, contains negative/zero branch length, and contains
+# polytomy.
+# To fix it, run the following command:
+
+ebola_tree <- prepare_tree_for_saasi(tree,tip_data)
+
+# Check compatibility again
+check_tree_compatibility(ebola_tree)
+#> Tree is compatible with SAASI
+#> [1] TRUE
+
+# The tree is compatible with saasi.
+
+# Estimate the transition rate matrix Q
+Q <- estimate_transition_rates(ebola_tree,method = 'simmap',model = 'SYM')
+#> make.simmap is sampling character histories conditioned on
+#> the transition matrix
+#> 
+#> Q =
+#>                  Guinea    Liberia Sierra Leone
+#> Guinea       -0.4711388  0.2597255    0.2114133
+#> Liberia       0.2597255 -0.3690431    0.1093176
+#> Sierra Leone  0.2114133  0.1093176   -0.3207309
+#> (estimated using likelihood);
+#> and (mean) root node prior probabilities
+#> pi =
+#>       Guinea      Liberia Sierra Leone 
+#>    0.3333333    0.3333333    0.3333333
+#> Done.
+
+# Estimate the rates
+# For ebola, we assume the total infectious period 1/(mu+psi) is between 
+# 20 - 40 days (20/365 - 40/365 years)
+# The bound for mu+psi is [9.125,18.25]
+# We further assume psi > mu (user can also assume mu > psi)
+# Set mu = 5
+rates <- estimate_bds_parameters(
+    ebola_tree,
+    mu = 5, 
+    r0_max = 3, 
+    r0_min = 1.5,
+    psi_max = 15,
+    infectious_period_min = 20/365, # convert days to years
+    infectious_period_max = 40/365, # convert days to years
+    n_starts = 100)
+
+# Setting up parameters
+pars1 <- create_params_template(colnames(Q),lambda = rates$lambda,mu = rates$mu,psi = rates$psi)
+
+# Run saasi analysis
+saasi_ebola <- saasi(ebola_tree,pars1,Q)
+
+# Plot and save the result, set save_file = NULL to not save file
+p1 <- plot_saasi(ebola_tree,saasi_ebola,save_file = "ebola_equal_psi.png")
+
+# Try a different set up, we assume Liberia samples less than other countries
+pars2 <- create_params_template(colnames(Q),lambda = rates$lambda,mu = rates$mu,psi = c(rates$psi,rates$psi/2,rates$psi))
+
+# Rerun analysis and save the result, set save_file = NULL to not save file
+saasi_ebola2 <- saasi(ebola_tree,pars2,Q)
+
+p2 <- plot_saasi(ebola_tree,saasi_ebola2,save_file = "ebola_unequal_psi.png")
+```
+
+``` r
+# Notice that the transition rate matrix Q is relatively small compare to the other rates.
+# This is due to lack of transition events between states.
+# For sanity check, randomly shuffle the tip.state
+
+testing_ebola <- ebola_tree
+set.seed(123) 
+testing_ebola$tip.state <- sample(testing_ebola$tip.state)
+
+Q <- estimate_transition_rates(testing_ebola,method = 'simmap',model = 'SYM')
+#> make.simmap is sampling character histories conditioned on
+#> the transition matrix
+#> 
+#> Q =
+#>                 Guinea   Liberia Sierra Leone
+#> Guinea       -342.1927  171.0963     171.0963
+#> Liberia       171.0963 -342.1927     171.0963
+#> Sierra Leone  171.0963  171.0963    -342.1927
+#> (estimated using likelihood);
+#> and (mean) root node prior probabilities
+#> pi =
+#>       Guinea      Liberia Sierra Leone 
+#>    0.3333333    0.3333333    0.3333333
+#> Done.
+
+# Now Q gets extremely large
+```

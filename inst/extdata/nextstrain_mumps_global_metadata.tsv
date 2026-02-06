@@ -1,0 +1,888 @@
+strain	date	isolate	MuV_genotype	MuV_genotype_nextclade_genome	region	MuV_genotype_nextclade_sh	country	author	accession	accession__url	host
+Enders	2006-12-13	MBC040	A	A	Europe	A	Spain	Mendoza et al.	PP818853	https://www.ncbi.nlm.nih.gov/nuccore/PP818853	
+MuVs/Wisconsin.USA/15.06/FH91[A]	2006-04-30 (2006-04-04 - 2006-04-30)	MuVs/Wisconsin.USA/15.06/FH91[A]	A	A	North America		USA	Moncla et al.	MT859597	https://www.ncbi.nlm.nih.gov/nuccore/MT859597	Homo sapiens
+MuVs/London.GBR/27.14[A]	2014-07-10	MuVs/London.GBR/27.14[A]	A	A	Europe	A	United Kingdom	Morfopoulou et al.	KX223397	https://www.ncbi.nlm.nih.gov/nuccore/KX223397	Homo sapiens
+MuVi/Gyenggi-do.KOR/43.16[I]	2016-10-31	MuVi/Gyenggi-do.KOR/43.16[I]	I	I	Asia	I	South Korea	Kim et al.	MN630058	https://www.ncbi.nlm.nih.gov/nuccore/MN630058	Homo sapiens
+Urabe	1996-09-01 (1996-09-01 - 1996-09-27)	Urabe	B	B	North America	B	Canada	Shah et al.	FJ375178	https://www.ncbi.nlm.nih.gov/nuccore/FJ375178	Homo sapiens
+MuVi/Incheon.KOR/16.08.22[F]	2012-09-13	MuVi/Incheon.KOR/16.08.22[F]	F	F	Asia	F	South Korea	Kim et al.	MN630056	https://www.ncbi.nlm.nih.gov/nuccore/MN630056	Homo sapiens
+MuVi/Zhejiang.CHN/16.08/2	2008-04-18	MuVi/Zhejiang.CHN/16.08/2	F	F	Asia	F	China	He et al.	KF170918	https://www.ncbi.nlm.nih.gov/nuccore/KF170918	Homo sapiens
+MuVi/Zhejiang.CHN/11.06/1	2006-03-16	MuVi/Zhejiang.CHN/11.06/1	F	F	Asia	F	China	He et al.	KF170917	https://www.ncbi.nlm.nih.gov/nuccore/KF170917	Homo sapiens
+MuVi/Zhejiang.CHN/26.05	2005-06-28	MuVi/Zhejiang.CHN/26.05	F	F	Asia	F	China	He et al.	KF170916	https://www.ncbi.nlm.nih.gov/nuccore/KF170916	Homo sapiens
+SP	2007-07-15	SP	F	F	Asia	F	China	Ma et al.	EU884413	https://www.ncbi.nlm.nih.gov/nuccore/EU884413	Homo sapiens
+MuVi/Zhejiang.CHN/19.10	2010-05-14	MuVi/Zhejiang.CHN/19.10	F	F	Asia	F	China	He et al.	KF170919	https://www.ncbi.nlm.nih.gov/nuccore/KF170919	Homo sapiens
+MuVi/Sint Philipsland.NLD/02.08[D]	2008-01-31 (2008-01-04 - 2008-01-31)	MuVi/Sint Philipsland.NLD/02.08[D]	D	D	Europe	D	Netherlands	Cremer et al.	MW819866	https://www.ncbi.nlm.nih.gov/nuccore/MW819866	Homo sapiens
+MuV/California.USA/50.07/1	2007-12-12	MuV/California.USA/50.07/1	K	K	North America	K	USA	Kirkness et al.	JX287386	https://www.ncbi.nlm.nih.gov/nuccore/JX287386	Homo sapiens
+MuVi/Utrecht.NLD/8.19[K]	2019-02-28 (2019-02-04 - 2019-02-28)	MuVi/Utrecht.NLD/8.19[K]	K	K	Europe	K	Netherlands	q et al.	MT238690	https://www.ncbi.nlm.nih.gov/nuccore/MT238690	Homo sapiens
+MuVs/Washington.USA/9.17/FH94[K]	2017-02-28	MuVs/Washington.USA/9.17/FH94[K]	K	K	North America		USA	Moncla et al.	MT859600	https://www.ncbi.nlm.nih.gov/nuccore/MT859600	Homo sapiens
+MuVs/Massachusetts.USA/24.17/5/K	2017-06-06	MuVs/Massachusetts.USA/24.17/5/K	K	K	North America		USA	Byrne et al.	MG986430	https://www.ncbi.nlm.nih.gov/nuccore/MG986430	Homo sapiens
+MuVs/Wisconsin.USA/15.06/FH87[H]	2006-04-01 (2006-04-01 - 2006-04-27)	MuVs/Wisconsin.USA/15.06/FH87[H]	H	H	North America		USA	Moncla et al.	MT859593	https://www.ncbi.nlm.nih.gov/nuccore/MT859593	Homo sapiens
+MuVi-MNG09-024	2009-05-28	MuVi-MNG09-024	H	H	Asia	H	Mongolia	Kidokoro et al.	AB600843	https://www.ncbi.nlm.nih.gov/nuccore/AB600843	Homo sapiens
+MuVi/Gyenggi-do.KOR/26.16[H]	2016-07-31	MuVi/Gyenggi-do.KOR/26.16[H]	H	H	Asia	H	South Korea	Kim et al.	MN630057	https://www.ncbi.nlm.nih.gov/nuccore/MN630057	Homo sapiens
+MuVi/Gyeonggi.KOR/38.10/12[H]	2010-10-04	MuVi/Gyeonggi.KOR/38.10/12[H]	H	H	Asia	H	South Korea	Kim et al.	MN630054	https://www.ncbi.nlm.nih.gov/nuccore/MN630054	Homo sapiens
+MuVi/Incheon.KOR/14.10/4[H]	2010-10-04	MuVi/Incheon.KOR/14.10/4[H]	H	H	Asia	H	South Korea	Kim et al.	MN630055	https://www.ncbi.nlm.nih.gov/nuccore/MN630055	Homo sapiens
+MuVi/Okayama#1079.JPN/24.02[L]	2002-06-10	MuVi/Okayama#1079.JPN/24.02[L]	L	L	Asia	L	Japan	Kidokoro et al.	LC731324	https://www.ncbi.nlm.nih.gov/nuccore/LC731324	Homo sapiens
+MuVi/Mie#C02.JPN/38.99[L]	1999-09-13	MuVi/Mie#C02.JPN/38.99[L]	L	L	Asia	L	Japan	Kidokoro et al.	LC727149	https://www.ncbi.nlm.nih.gov/nuccore/LC727149	Homo sapiens
+MuVi/Mie#R51.JPN/17.99[L]	1999-04-25	MuVi/Mie#R51.JPN/17.99[L]	L	L	Asia	L	Japan	Kidokoro et al.	LC727146	https://www.ncbi.nlm.nih.gov/nuccore/LC727146	Homo sapiens
+MuVi/Mie#R52.JPN/24.99[L]	1999-06-07	MuVi/Mie#R52.JPN/24.99[L]	L	L	Asia	L	Japan	Kidokoro et al.	LC727147	https://www.ncbi.nlm.nih.gov/nuccore/LC727147	Homo sapiens
+MuVi/Mie#R50.JPN/18.99[L]	1999-04-26	MuVi/Mie#R50.JPN/18.99[L]	L	L	Asia	L	Japan	Kidokoro et al.	LC727145	https://www.ncbi.nlm.nih.gov/nuccore/LC727145	Homo sapiens
+MuVi/Mie#R53.JPN/26.99[L]	1999-06-22	MuVi/Mie#R53.JPN/26.99[L]	L	L	Asia	L	Japan	Kidokoro et al.	LC727148	https://www.ncbi.nlm.nih.gov/nuccore/LC727148	Homo sapiens
+MuVi/Chennai.IND/35.12[C]	2012-08-31	MuVi/Chennai.IND/35.12[C]	C	C	Asia	C	India	Vaidya et al.	KF843896	https://www.ncbi.nlm.nih.gov/nuccore/KF843896	Homo sapiens
+MuVs/Assam.IND/23.16[C]	2016-06-29	MuVs/Assam.IND/23.16[C]	C	C	Asia	C	India	Sarmah et al.	OR888547	https://www.ncbi.nlm.nih.gov/nuccore/OR888547	Homo sapiens
+MuVi/Osmanabad.IND/10.12/17[C]	2012-03-11	MuVi/Osmanabad.IND/10.12/17[C]	C	C	Asia	C	India	Vaidya et al.	KF843894	https://www.ncbi.nlm.nih.gov/nuccore/KF843894	Homo sapiens
+MuVi/Osmanabad.IND/10.12/18[C]	2012-03-11	MuVi/Osmanabad.IND/10.12/18[C]	C	C	Asia	C	India	Vaidya et al.	KF843895	https://www.ncbi.nlm.nih.gov/nuccore/KF843895	Homo sapiens
+MuVi/Davangere.IND/01.14[C]	2014-02-02	MuVi/Davangere.IND/01.14[C]	C	C	Asia	C	India	Vaidya et al.	KX953297	https://www.ncbi.nlm.nih.gov/nuccore/KX953297	
+MuVi/Pune.Ind/50.08[C]	2008-12-30	MuVi/Pune.Ind/50.08[C]	C	C	Asia	C	India	Vaidya et al.	KF843893	https://www.ncbi.nlm.nih.gov/nuccore/KF843893	Homo sapiens
+MuVi/Kushinagar.IND/36.13[C]	2013-09-07	MuVi/Kushinagar.IND/36.13[C]	C	C	Asia	C	India	Vaidya et al.	KM385447	https://www.ncbi.nlm.nih.gov/nuccore/KM385447	Homo sapiens
+MuVi/Utrecht.NLD/21.19[C]	2019-05-01 (2019-05-01 - 2019-05-28)	MuVi/Utrecht.NLD/21.19[C]	C	C	Europe	C	Netherlands	q et al.	MT238689	https://www.ncbi.nlm.nih.gov/nuccore/MT238689	Homo sapiens
+MuVi/Ontario.CAN/09.17/5[C]	2017-02-13 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/09.17/5[C]	C	C	North America	C	Canada	Stapleton et al.	MK033748	https://www.ncbi.nlm.nih.gov/nuccore/MK033748	Homo sapiens
+MuVi/Yunnan.CHN/2.19/1	2019-01-17	MuVi/Yunnan.CHN/2.19/1	G	G	Asia	G	China	Zhou et al.	OR822027	https://www.ncbi.nlm.nih.gov/nuccore/OR822027	Homo sapiens
+MuVi/Yunnan.CHN/2.19/2[G]	2019-01-17	MuVi/Yunnan.CHN/2.19/2[G]	G	G	Asia	G	China	Zhou et al.	OR822029	https://www.ncbi.nlm.nih.gov/nuccore/OR822029	Homo sapiens
+MuVi/Yunnan.CHN/2.19/5[G]	2019-01-17	MuVi/Yunnan.CHN/2.19/5[G]	G	G	Asia	G	China	Zhou et al.	OR822028	https://www.ncbi.nlm.nih.gov/nuccore/OR822028	Homo sapiens
+MuVi/Yunnan.CHN/2.19/3[G]	2019-01-17	MuVi/Yunnan.CHN/2.19/3[G]	G	G	Asia	G	China	Zhou et al.	OR822030	https://www.ncbi.nlm.nih.gov/nuccore/OR822030	Homo sapiens
+MuVi/Mie#W32.JPN/37.03[G]	2003-09-09	MuVi/Mie#W32.JPN/37.03[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685492	https://www.ncbi.nlm.nih.gov/nuccore/LC685492	Homo sapiens
+MuVi/Mie#W21.JPN/21.02[G]	2002-05-24	MuVi/Mie#W21.JPN/21.02[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685487	https://www.ncbi.nlm.nih.gov/nuccore/LC685487	Homo sapiens
+MuVi/Mie#W24.JPN/27.02[G]	2002-06-30	MuVi/Mie#W24.JPN/27.02[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685490	https://www.ncbi.nlm.nih.gov/nuccore/LC685490	Homo sapiens
+MuVi/Mie#12.JPN/51.16[G]	2016-12-15	MuVi/Mie#12.JPN/51.16[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685524	https://www.ncbi.nlm.nih.gov/nuccore/LC685524	Homo sapiens
+MuVi/Mie#C12.JPN/31.99[G]	1999-07-29	MuVi/Mie#C12.JPN/31.99[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685479	https://www.ncbi.nlm.nih.gov/nuccore/LC685479	Homo sapiens
+MuVi/Mie#C11.JPN/29.99[G]	1999-07-13	MuVi/Mie#C11.JPN/29.99[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685477	https://www.ncbi.nlm.nih.gov/nuccore/LC685477	Homo sapiens
+MuVi/Mie#C09.JPN/31.99[G]	1999-07-27	MuVi/Mie#C09.JPN/31.99[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685478	https://www.ncbi.nlm.nih.gov/nuccore/LC685478	Homo sapiens
+MuVi/Mie#C08.JPN/48.99[G]	1999-11-25	MuVi/Mie#C08.JPN/48.99[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685480	https://www.ncbi.nlm.nih.gov/nuccore/LC685480	Homo sapiens
+MuVi/Mie#W06.JPN/8.00[G]	2000-02-17	MuVi/Mie#W06.JPN/8.00[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685481	https://www.ncbi.nlm.nih.gov/nuccore/LC685481	Homo sapiens
+MuVi/Mie#W03.JPN/11.00[G]	2000-03-07	MuVi/Mie#W03.JPN/11.00[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685483	https://www.ncbi.nlm.nih.gov/nuccore/LC685483	Homo sapiens
+MuVi/Mie#W05.JPN/11.00[G]	2000-03-08	MuVi/Mie#W05.JPN/11.00[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685484	https://www.ncbi.nlm.nih.gov/nuccore/LC685484	Homo sapiens
+MuVi/Mie#W08.JPN/14.00[G]	2000-03-27	MuVi/Mie#W08.JPN/14.00[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685485	https://www.ncbi.nlm.nih.gov/nuccore/LC685485	Homo sapiens
+MuVi/Mie#W13.JPN/22.01[G]	2001-05-28	MuVi/Mie#W13.JPN/22.01[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685486	https://www.ncbi.nlm.nih.gov/nuccore/LC685486	Homo sapiens
+MuVi/Mie#W07.JPN/8.00[G]	2000-02-18	MuVi/Mie#W07.JPN/8.00[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685482	https://www.ncbi.nlm.nih.gov/nuccore/LC685482	Homo sapiens
+MuVi/Mie#W23.JPN/26.02[G]	2002-06-26	MuVi/Mie#W23.JPN/26.02[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685489	https://www.ncbi.nlm.nih.gov/nuccore/LC685489	Homo sapiens
+MuVi/Mie#W20.JPN/21.02[G]	2002-05-27	MuVi/Mie#W20.JPN/21.02[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685488	https://www.ncbi.nlm.nih.gov/nuccore/LC685488	Homo sapiens
+MuVi/Mie#W37.JPN/30.04[G]	2004-07-20	MuVi/Mie#W37.JPN/30.04[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685493	https://www.ncbi.nlm.nih.gov/nuccore/LC685493	Homo sapiens
+MuVi/Mie#W31.JPN/34.03[G]	2003-08-29	MuVi/Mie#W31.JPN/34.03[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685491	https://www.ncbi.nlm.nih.gov/nuccore/LC685491	Homo sapiens
+MuVi/Mie#W40.JPN/31.04[G]	2004-07-30	MuVi/Mie#W40.JPN/31.04[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685494	https://www.ncbi.nlm.nih.gov/nuccore/LC685494	Homo sapiens
+MuVi/Mie#W41.JPN/8.05[G]	2005-02-18	MuVi/Mie#W41.JPN/8.05[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685495	https://www.ncbi.nlm.nih.gov/nuccore/LC685495	Homo sapiens
+MuVi/Mie#W47.JPN/18.05[G]	2005-04-28	MuVi/Mie#W47.JPN/18.05[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685500	https://www.ncbi.nlm.nih.gov/nuccore/LC685500	Homo sapiens
+MuVi/Mie#09.JPN/36.06[G]	2006-09-02	MuVi/Mie#09.JPN/36.06[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685504	https://www.ncbi.nlm.nih.gov/nuccore/LC685504	Homo sapiens
+MuVi/Mie#03.JPN/24.06[G]	2006-06-10	MuVi/Mie#03.JPN/24.06[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685501	https://www.ncbi.nlm.nih.gov/nuccore/LC685501	Homo sapiens
+MuVi/Mie#13.JPN/29.07[G]	2007-07-22	MuVi/Mie#13.JPN/29.07[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685507	https://www.ncbi.nlm.nih.gov/nuccore/LC685507	Homo sapiens
+MuVi/Mie#11.JPN/28.07[G]	2007-07-09	MuVi/Mie#11.JPN/28.07[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685505	https://www.ncbi.nlm.nih.gov/nuccore/LC685505	Homo sapiens
+MuVi/Mie#17.JPN/31.07[G]	2007-07-27	MuVi/Mie#17.JPN/31.07[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685508	https://www.ncbi.nlm.nih.gov/nuccore/LC685508	Homo sapiens
+MuVi/Mie#14.JPN/32.12[G]	2012-07-31	MuVi/Mie#14.JPN/32.12[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685514	https://www.ncbi.nlm.nih.gov/nuccore/LC685514	Homo sapiens
+MuVi/Mie#16.JPN/37.12[G]	2012-09-05	MuVi/Mie#16.JPN/37.12[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685515	https://www.ncbi.nlm.nih.gov/nuccore/LC685515	Homo sapiens
+MuVi/Mie#10.JPN/29.12[G]	2012-07-11	MuVi/Mie#10.JPN/29.12[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685513	https://www.ncbi.nlm.nih.gov/nuccore/LC685513	Homo sapiens
+MuVi/Mie#W46.JPN/18.05[G]	2005-04-28	MuVi/Mie#W46.JPN/18.05[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685499	https://www.ncbi.nlm.nih.gov/nuccore/LC685499	Homo sapiens
+MuVi/Mie#W44.JPN/8.05[G]	2005-02-20	MuVi/Mie#W44.JPN/8.05[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685496	https://www.ncbi.nlm.nih.gov/nuccore/LC685496	Homo sapiens
+MuVi/Mie#W48.JPN/16.05[G]	2005-04-14	MuVi/Mie#W48.JPN/16.05[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685497	https://www.ncbi.nlm.nih.gov/nuccore/LC685497	Homo sapiens
+MuVi/Mie#W45.JPN/17.05[G]	2005-04-28	MuVi/Mie#W45.JPN/17.05[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685498	https://www.ncbi.nlm.nih.gov/nuccore/LC685498	Homo sapiens
+MuVi/Mie#A09.JPN/19.10[G]	2010-05-03	MuVi/Mie#A09.JPN/19.10[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685511	https://www.ncbi.nlm.nih.gov/nuccore/LC685511	Homo sapiens
+MuVi/Mie#21.JPN/34.08[G]	2008-08-19	MuVi/Mie#21.JPN/34.08[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685509	https://www.ncbi.nlm.nih.gov/nuccore/LC685509	Homo sapiens
+MuVi/Mie#22.JPN/36.08[G]	2008-09-01	MuVi/Mie#22.JPN/36.08[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685510	https://www.ncbi.nlm.nih.gov/nuccore/LC685510	Homo sapiens
+MuVi/Mie#04.JPN/11.16[G]	2016-03-07	MuVi/Mie#04.JPN/11.16[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685522	https://www.ncbi.nlm.nih.gov/nuccore/LC685522	Homo sapiens
+MuVi/Mie#06.JPN/24.06[G]	2006-06-10	MuVi/Mie#06.JPN/24.06[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685502	https://www.ncbi.nlm.nih.gov/nuccore/LC685502	Homo sapiens
+MuVi/Mie#15.JPN/28.07[G]	2007-07-14	MuVi/Mie#15.JPN/28.07[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685506	https://www.ncbi.nlm.nih.gov/nuccore/LC685506	Homo sapiens
+MuVi/Mie#08.JPN/35.06[G]	2006-08-21	MuVi/Mie#08.JPN/35.06[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685503	https://www.ncbi.nlm.nih.gov/nuccore/LC685503	Homo sapiens
+MuVi/Ishikawa#391.JPN/51.15[G]	2015-12-19	MuVi/Ishikawa#391.JPN/51.15[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685520	https://www.ncbi.nlm.nih.gov/nuccore/LC685520	Homo sapiens
+MuVi/Ishikawa#638.JPN/12.16[G]	2016-03-18	MuVi/Ishikawa#638.JPN/12.16[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685523	https://www.ncbi.nlm.nih.gov/nuccore/LC685523	Homo sapiens
+MuVi/Ishikawa#364.JPN/48.15[G]	2015-11-28	MuVi/Ishikawa#364.JPN/48.15[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685519	https://www.ncbi.nlm.nih.gov/nuccore/LC685519	Homo sapiens
+MuVi/Ishikawa#527.JPN/6.16[G]	2016-02-03	MuVi/Ishikawa#527.JPN/6.16[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685521	https://www.ncbi.nlm.nih.gov/nuccore/LC685521	Homo sapiens
+MuVi/Ishikawa#273.JPN/32.15[G]	2015-08-03	MuVi/Ishikawa#273.JPN/32.15[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685517	https://www.ncbi.nlm.nih.gov/nuccore/LC685517	Homo sapiens
+MuVi/Ishikawa#320.JPN/41.15[G]	2015-10-05	MuVi/Ishikawa#320.JPN/41.15[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685518	https://www.ncbi.nlm.nih.gov/nuccore/LC685518	Homo sapiens
+MuVs/Massachusetts.USA/11.17/[G]	2017-03-14	MuVs/Massachusetts.USA/11.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986383	https://www.ncbi.nlm.nih.gov/nuccore/MG986383	Homo sapiens
+MuVs/Massachusetts.USA/9.17/[G]	2017-02-27	MuVs/Massachusetts.USA/9.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986468	https://www.ncbi.nlm.nih.gov/nuccore/MG986468	Homo sapiens
+MuVs/Massachusetts.USA/7.17/[G]	2017-02-13	MuVs/Massachusetts.USA/7.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986422	https://www.ncbi.nlm.nih.gov/nuccore/MG986422	Homo sapiens
+MuVs/Massachusetts.USA/7.17/2[G]	2017-02-18	MuVs/Massachusetts.USA/7.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986415	https://www.ncbi.nlm.nih.gov/nuccore/MG986415	Homo sapiens
+MuVs/Massachusetts.USA/10.17/[G]	2017-03-06	MuVs/Massachusetts.USA/10.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986424	https://www.ncbi.nlm.nih.gov/nuccore/MG986424	Homo sapiens
+MuVs/Massachusetts.USA/10.17/2[G]	2017-03-09	MuVs/Massachusetts.USA/10.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986438	https://www.ncbi.nlm.nih.gov/nuccore/MG986438	Homo sapiens
+MuVs/Massachusetts.USA/13.17/[G]	2017-03-26	MuVs/Massachusetts.USA/13.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986396	https://www.ncbi.nlm.nih.gov/nuccore/MG986396	Homo sapiens
+MuVi/Pune.IND/07.12[G]	2012-02-14	MuVi/Pune.IND/07.12[G]	G	G	Asia	G	India	Vaidya et al.	KF738114	https://www.ncbi.nlm.nih.gov/nuccore/KF738114	Homo sapiens
+MuVi/Dadra&NagarHaveli.IND/42.16/1[G]	2016-10-13	MuVi/Dadra&NagarHaveli.IND/42.16/1[G]	G	G	Asia	G	India	Vaidya et al.	KY604739	https://www.ncbi.nlm.nih.gov/nuccore/KY604739	Homo sapiens
+MuVs/Assam.IND/31.16[G]	2016-08-03	MuVs/Assam.IND/31.16[G]	G	G	Asia	G	India	Sarmah et al.	OR975468	https://www.ncbi.nlm.nih.gov/nuccore/OR975468	Homo sapiens
+MuVs/Assam.IND/3.17[G]	2017-01-19	MuVs/Assam.IND/3.17[G]	G	G	Asia	G	India	Sarmah et al.	OR975469	https://www.ncbi.nlm.nih.gov/nuccore/OR975469	Homo sapiens
+MuVs/BritishColumbia.CAN/24.17[G]	2017-06-13	MuVs/BritishColumbia.CAN/24.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157247	https://www.ncbi.nlm.nih.gov/nuccore/PQ157247	Homo sapiens
+MuVs/BritishColumbia.CAN/40.17[G]	2017-10-04	MuVs/BritishColumbia.CAN/40.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157228	https://www.ncbi.nlm.nih.gov/nuccore/PQ157228	Homo sapiens
+MuVi/NewPlymouth.NZL/30.17[G]	2017-07-24	MuVi/NewPlymouth.NZL/30.17[G]	G	G	Oceania	G	New Zealand	Dilcher et al.	MG765426	https://www.ncbi.nlm.nih.gov/nuccore/MG765426	Homo sapiens
+MuVi/Dunedin.NZL/32.17[G]	2017-08-11	MuVi/Dunedin.NZL/32.17[G]	G	G	Oceania	G	New Zealand	Dilcher et al.	MG765427	https://www.ncbi.nlm.nih.gov/nuccore/MG765427	Homo sapiens
+MuVs/BritishColumbia.CAN/23.17[G]	2017-06-07	MuVs/BritishColumbia.CAN/23.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157250	https://www.ncbi.nlm.nih.gov/nuccore/PQ157250	Homo sapiens
+MuVs/BritishColumbia.CAN/25.17[G]	2017-06-20	MuVs/BritishColumbia.CAN/25.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157245	https://www.ncbi.nlm.nih.gov/nuccore/PQ157245	Homo sapiens
+MuVs/BritishColumbia.CAN/23.17/2[G]	2017-06-07	MuVs/BritishColumbia.CAN/23.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157251	https://www.ncbi.nlm.nih.gov/nuccore/PQ157251	Homo sapiens
+MuVs/Washington.USA/19.17/FH100[G]	2017-05-11	MuVs/Washington.USA/19.17/FH100[G]	G	G	North America	G	USA	Moncla et al.	MT859606	https://www.ncbi.nlm.nih.gov/nuccore/MT859606	Homo sapiens
+MuVs/BritishColumbia.CAN/24.17/2[G]	2017-06-13	MuVs/BritishColumbia.CAN/24.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157249	https://www.ncbi.nlm.nih.gov/nuccore/PQ157249	Homo sapiens
+MuVs/Washington.USA/9.17/FH16[G]	2017-02-28	MuVs/Washington.USA/9.17/FH16[G]	G	G	North America	G	USA	Moncla et al.	MT859522	https://www.ncbi.nlm.nih.gov/nuccore/MT859522	Homo sapiens
+MuVs/Washington.USA/14.17/FH145[G]	2017-04-06	MuVs/Washington.USA/14.17/FH145[G]	G	G	North America	G	USA	Moncla et al.	MT859651	https://www.ncbi.nlm.nih.gov/nuccore/MT859651	Homo sapiens
+MuVs/Washington.USA/5.17/FH104[G]	2017-02-08	MuVs/Washington.USA/5.17/FH104[G]	G	G	North America		USA	Moncla et al.	MT859610	https://www.ncbi.nlm.nih.gov/nuccore/MT859610	Homo sapiens
+MuVs/Washington.USA/8.17/FH142[G]	2017-02-22	MuVs/Washington.USA/8.17/FH142[G]	G	G	North America	G	USA	Moncla et al.	MT859648	https://www.ncbi.nlm.nih.gov/nuccore/MT859648	Homo sapiens
+MuVs/Washington.USA/11.17/FH95[G]	2017-03-15	MuVs/Washington.USA/11.17/FH95[G]	G	G	North America	G	USA	Moncla et al.	MT859601	https://www.ncbi.nlm.nih.gov/nuccore/MT859601	Homo sapiens
+MuVs/Washington.USA/14.17/FH98[G]	2017-04-06	MuVs/Washington.USA/14.17/FH98[G]	G	G	North America	G	USA	Moncla et al.	MT859604	https://www.ncbi.nlm.nih.gov/nuccore/MT859604	Homo sapiens
+MuVi/Islamabad.PAK/1.23	2023-01-19	MuVi/Islamabad.PAK/1.23		G	Asia	G	Pakistan	Umair et al.	OR529432	https://www.ncbi.nlm.nih.gov/nuccore/OR529432	Homo sapiens
+MuVs/Washington.USA/12.17/FH78[G]	2017-03-24	MuVs/Washington.USA/12.17/FH78[G]	G	G	North America		USA	Moncla et al.	MT859584	https://www.ncbi.nlm.nih.gov/nuccore/MT859584	Homo sapiens
+MuVi/Ontario.CAN/13.10[G]	2010-03-31	MuVi/Ontario.CAN/13.10[G]	G	G	North America	G	Canada	Eshaghi et al.	KY006858	https://www.ncbi.nlm.nih.gov/nuccore/KY006858	Homo sapiens
+MuV/Gabon/13/2[G]	2013-03-01	MuV/Gabon/13/2[G]	G	G	Africa	G	Gabon	Maganga et al.	KM597072	https://www.ncbi.nlm.nih.gov/nuccore/KM597072	Homo sapiens
+MuV/Gabon/9.13/2[G]	2013-03-01	MuV/Gabon/9.13/2[G]	G	G	Africa	G	Gabon	Maganga et al.	KJ810514	https://www.ncbi.nlm.nih.gov/nuccore/KJ810514	Homo sapiens
+MuVs/Washington.USA/28.17/FH151[G]	2017-07-12	MuVs/Washington.USA/28.17/FH151[G]	G	G	North America	G	USA	Moncla et al.	MT859657	https://www.ncbi.nlm.nih.gov/nuccore/MT859657	Homo sapiens
+MuVs/Massachusetts.USA/37.16/[G]	2016-09-11	MuVs/Massachusetts.USA/37.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965284	https://www.ncbi.nlm.nih.gov/nuccore/MF965284	Homo sapiens
+MuVi/Yokohama#21.JPN/7.11[G]	2011-02-15	MuVi/Yokohama#21.JPN/7.11[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685512	https://www.ncbi.nlm.nih.gov/nuccore/LC685512	Homo sapiens
+MuVi/Okinawa#50.JPN/29.15[G]	2015-07-13	MuVi/Okinawa#50.JPN/29.15[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685516	https://www.ncbi.nlm.nih.gov/nuccore/LC685516	Homo sapiens
+MuVi/Mie#13.JPN/52.16[G]	2016-12-19	MuVi/Mie#13.JPN/52.16[G]	G	G	Asia	G	Japan	Kidokoro et al.	LC685525	https://www.ncbi.nlm.nih.gov/nuccore/LC685525	Homo sapiens
+MuVi/Islamabad.PAK/14.23	2023-02-04	MuVi/Islamabad.PAK/14.23		G	Asia	G	Pakistan	Umair et al.	OR529433	https://www.ncbi.nlm.nih.gov/nuccore/OR529433	Homo sapiens
+MuVi/Islamabad.PAK/2.25[G]	2025-05-26	MuVi/Islamabad.PAK/2.25[G]	G	G	Asia	G	Pakistan	Fatima et al.	PX789220	https://www.ncbi.nlm.nih.gov/nuccore/PX789220	Homo sapiens
+MuVi/Hyderabad.PAK/1.25[G]	2025-05-26	MuVi/Hyderabad.PAK/1.25[G]	G	G	Asia	G	Pakistan	Fatima et al.	PX789219	https://www.ncbi.nlm.nih.gov/nuccore/PX789219	Homo sapiens
+MuVs/Wisconsin.USA/15.06/FH131[G]	2006-04-01 (2006-04-01 - 2006-04-27)	MuVs/Wisconsin.USA/15.06/FH131[G]	G	G	North America	G	USA	Moncla et al.	MT859637	https://www.ncbi.nlm.nih.gov/nuccore/MT859637	Homo sapiens
+MuVs/Wisconsin.USA/28.06/FH159[G]	2006-07-01 (2006-07-01 - 2006-07-28)	MuVs/Wisconsin.USA/28.06/FH159[G]	G	G	North America		USA	Moncla et al.	MT859665	https://www.ncbi.nlm.nih.gov/nuccore/MT859665	Homo sapiens
+MuVs/Wisconsin.USA/37.06/FH93[G]	2006-09-26 (2006-09-01 - 2006-09-30)	MuVs/Wisconsin.USA/37.06/FH93[G]	G	G	North America	G	USA	Moncla et al.	MT859599	https://www.ncbi.nlm.nih.gov/nuccore/MT859599	Homo sapiens
+MuVs/Wisconsin.USA/41.06/FH99[G]	2006-10-17 (2006-10-01 - 2006-10-31)	MuVs/Wisconsin.USA/41.06/FH99[G]	G	G	North America	G	USA	Moncla et al.	MT859605	https://www.ncbi.nlm.nih.gov/nuccore/MT859605	Homo sapiens
+MuVs/Wisconsin.USA/41.06/FH153[G]	2006-10-17 (2006-10-01 - 2006-10-31)	MuVs/Wisconsin.USA/41.06/FH153[G]	G	G	North America	G	USA	Moncla et al.	MT859659	https://www.ncbi.nlm.nih.gov/nuccore/MT859659	Homo sapiens
+MuVi/Sheffield.GBR/1.05[G]	2005-01-03	MuVi/Sheffield.GBR/1.05[G]	G	G	Europe	G	United Kingdom	Frost et al.	ON148331	https://www.ncbi.nlm.nih.gov/nuccore/ON148331	Homo sapiens
+MuVs/Wisconsin.USA/7.07/FH107[G]	2007-02-28 (2007-02-05 - 2007-02-28)	MuVs/Wisconsin.USA/7.07/FH107[G]	G	G	North America	G	USA	Moncla et al.	MT859613	https://www.ncbi.nlm.nih.gov/nuccore/MT859613	Homo sapiens
+MuVs/Wisconsin.USA/11.07/FH108[G]	2007-03-01 (2007-03-01 - 2007-03-30)	MuVs/Wisconsin.USA/11.07/FH108[G]	G	G	North America	G	USA	Moncla et al.	MT859614	https://www.ncbi.nlm.nih.gov/nuccore/MT859614	Homo sapiens
+MuVs/Wisconsin.USA/11.07/FH109[G]	2007-03-01 (2007-03-01 - 2007-03-30)	MuVs/Wisconsin.USA/11.07/FH109[G]	G	G	North America	G	USA	Moncla et al.	MT859615	https://www.ncbi.nlm.nih.gov/nuccore/MT859615	Homo sapiens
+MuVs/Wisconsin.USA/7.07/FH154[G]	2007-02-01 (2007-02-01 - 2007-02-25)	MuVs/Wisconsin.USA/7.07/FH154[G]	G	G	North America	G	USA	Moncla et al.	MT859660	https://www.ncbi.nlm.nih.gov/nuccore/MT859660	Homo sapiens
+MuVi/Ontario.CAN/04.10[G]	2010-01-28	MuVi/Ontario.CAN/04.10[G]	G	G	North America	G	Canada	Eshaghi et al.	KY006857	https://www.ncbi.nlm.nih.gov/nuccore/KY006857	Homo sapiens
+MuVs/BritishColumbia.CAN/49.09[G]	2009-06-12	MuVs/BritishColumbia.CAN/49.09[G]	G	G	North America	G	Canada	Frost et al.	PQ156992	https://www.ncbi.nlm.nih.gov/nuccore/PQ156992	Homo sapiens
+MuVs/BritishColumbia.CAN/22.09[G]	2009-06-02	MuVs/BritishColumbia.CAN/22.09[G]	G	G	North America	G	Canada	Frost et al.	PQ156993	https://www.ncbi.nlm.nih.gov/nuccore/PQ156993	Homo sapiens
+MuVi/Ontario.CAN/08.17/1[G]	2017-02-01 (2017-02-01 - 2017-02-25)	MuVi/Ontario.CAN/08.17/1[G]	G	G	North America	G	Canada	Stapleton et al.	MK033756	https://www.ncbi.nlm.nih.gov/nuccore/MK033756	Homo sapiens
+MuVs/Massachusetts.USA/12.17/[G]	2017-03-24	MuVs/Massachusetts.USA/12.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986425	https://www.ncbi.nlm.nih.gov/nuccore/MG986425	Homo sapiens
+MuVs/Massachusetts.USA/5.17/[G]	2017-01-30	MuVs/Massachusetts.USA/5.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986414	https://www.ncbi.nlm.nih.gov/nuccore/MG986414	Homo sapiens
+MuVs/Georgia.USA/2.17[G]	2017-01-12	MuVs/Georgia.USA/2.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986466	https://www.ncbi.nlm.nih.gov/nuccore/MG986466	Homo sapiens
+MuVs/Massachusetts.USA/18.17/[G]	2017-05-04	MuVs/Massachusetts.USA/18.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986384	https://www.ncbi.nlm.nih.gov/nuccore/MG986384	Homo sapiens
+MuVs/Massachusetts.USA/19.17/2[G]	2017-05-11	MuVs/Massachusetts.USA/19.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986412	https://www.ncbi.nlm.nih.gov/nuccore/MG986412	Homo sapiens
+MuVs/Massachusetts.USA/23.17/2[G]	2017-06-07	MuVs/Massachusetts.USA/23.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986444	https://www.ncbi.nlm.nih.gov/nuccore/MG986444	Homo sapiens
+MuVs/Massachusetts.USA/22.17/7[G]	2017-06-03	MuVs/Massachusetts.USA/22.17/7[G]	G	G	North America	G	USA	Byrne et al.	MG986405	https://www.ncbi.nlm.nih.gov/nuccore/MG986405	Homo sapiens
+MuVs/CAN/04.06[G]	2006-01-26	MuVs/CAN/04.06[G]	G	G	North America	G	Canada	Frost et al.	PQ157001	https://www.ncbi.nlm.nih.gov/nuccore/PQ157001	Homo sapiens
+MuVs/CAN/06.08[G]	2008-02-04	MuVs/CAN/06.08[G]	G	G	North America	G	Canada	Frost et al.	PQ156996	https://www.ncbi.nlm.nih.gov/nuccore/PQ156996	Homo sapiens
+MuVs/NewBrunswick.CAN/21.07[G]	2007-05-17	MuVs/NewBrunswick.CAN/21.07[G]	G	G	North America	G	Canada	Frost et al.	PQ157000	https://www.ncbi.nlm.nih.gov/nuccore/PQ157000	Homo sapiens
+MuVs/NewBrunswick.CAN/23.07[G]	2007-06-05	MuVs/NewBrunswick.CAN/23.07[G]	G	G	North America	G	Canada	Frost et al.	PQ156999	https://www.ncbi.nlm.nih.gov/nuccore/PQ156999	Homo sapiens
+MuVs/Manitoba.CAN/29.07[G]	2007-07-03	MuVs/Manitoba.CAN/29.07[G]	G	G	North America	G	Canada	Frost et al.	PQ157298	https://www.ncbi.nlm.nih.gov/nuccore/PQ157298	Homo sapiens
+MuVs/BritishColumbia.CAN/25.08[G]	2008-06-13	MuVs/BritishColumbia.CAN/25.08[G]	G	G	North America	G	Canada	Frost et al.	PQ156994	https://www.ncbi.nlm.nih.gov/nuccore/PQ156994	Homo sapiens
+MuVs/BritishColumbia.CAN/10.08[G]	2008-03-04	MuVs/BritishColumbia.CAN/10.08[G]	G	G	North America	G	Canada	Frost et al.	PQ156995	https://www.ncbi.nlm.nih.gov/nuccore/PQ156995	Homo sapiens
+MuVs/Quebec.CAN/26.06[G]	2007-06-22	MuVs/Quebec.CAN/26.06[G]	G	G	North America	G	Canada	Frost et al.	PQ156998	https://www.ncbi.nlm.nih.gov/nuccore/PQ156998	Homo sapiens
+MuVs/Quebec.CAN/33.07[G]	2007-08-15	MuVs/Quebec.CAN/33.07[G]	G	G	North America	G	Canada	Frost et al.	PQ156997	https://www.ncbi.nlm.nih.gov/nuccore/PQ156997	Homo sapiens
+MuVs/BritishColumbia.CAN/04.12[G]	2012-01-27	MuVs/BritishColumbia.CAN/04.12[G]	G	G	North America	G	Canada	Frost et al.	PQ156981	https://www.ncbi.nlm.nih.gov/nuccore/PQ156981	Homo sapiens
+MuV/New York.USA/40.09/1	2009-09-21	MuV/New York.USA/40.09/1	G	G	North America	G	USA	Kirkness et al.	JX287390	https://www.ncbi.nlm.nih.gov/nuccore/JX287390	Homo sapiens
+MuVs/BritishColumbia.CAN/19.12/1[G]	2011-05-13	MuVs/BritishColumbia.CAN/19.12/1[G]	G	G	North America	G	Canada	Frost et al.	PQ156982	https://www.ncbi.nlm.nih.gov/nuccore/PQ156982	Homo sapiens
+MuVs/BritishColumbia.CAN/06.11[G]	2011-02-10	MuVs/BritishColumbia.CAN/06.11[G]	G	G	North America	G	Canada	Frost et al.	PQ156985	https://www.ncbi.nlm.nih.gov/nuccore/PQ156985	Homo sapiens
+MuVs/BritishColumbia.CAN/19.12/3[G]	2011-05-13	MuVs/BritishColumbia.CAN/19.12/3[G]	G	G	North America	G	Canada	Frost et al.	PQ156984	https://www.ncbi.nlm.nih.gov/nuccore/PQ156984	Homo sapiens
+MuVi/Ontario.CAN/37.09[G]	2009-09-13	MuVi/Ontario.CAN/37.09[G]	G	G	North America	G	Canada	Eshaghi et al.	KY006856	https://www.ncbi.nlm.nih.gov/nuccore/KY006856	Homo sapiens
+MuVs/NovaScotia.CAN/39.17[G]	2017-10-27	MuVs/NovaScotia.CAN/39.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157225	https://www.ncbi.nlm.nih.gov/nuccore/PQ157225	Homo sapiens
+MuVs/BritishColumbia.CAN/19.12/2[G]	2011-05-13	MuVs/BritishColumbia.CAN/19.12/2[G]	G	G	North America	G	Canada	Frost et al.	PQ156983	https://www.ncbi.nlm.nih.gov/nuccore/PQ156983	Homo sapiens
+MuVs/Quebec.CAN/39.09[G]	2009-09-29	MuVs/Quebec.CAN/39.09[G]	G	G	North America	G	Canada	Frost et al.	PQ156991	https://www.ncbi.nlm.nih.gov/nuccore/PQ156991	Homo sapiens
+MuVs/Quebec.CAN/06.10[G]	2010-02-10	MuVs/Quebec.CAN/06.10[G]	G	G	North America	G	Canada	Frost et al.	PQ156989	https://www.ncbi.nlm.nih.gov/nuccore/PQ156989	Homo sapiens
+MuVs/Quebec.CAN/30.09[G]	2009-09-22	MuVs/Quebec.CAN/30.09[G]	G	G	North America	G	Canada	Frost et al.	PQ156990	https://www.ncbi.nlm.nih.gov/nuccore/PQ156990	Homo sapiens
+MuVs/Quebec.CAN/16.10[G]	2010-04-16	MuVs/Quebec.CAN/16.10[G]	G	G	North America	G	Canada	Frost et al.	PQ156988	https://www.ncbi.nlm.nih.gov/nuccore/PQ156988	Homo sapiens
+MuVs/Quebec.CAN/37.10[G]	2010-09-15	MuVs/Quebec.CAN/37.10[G]	G	G	North America	G	Canada	Frost et al.	PQ156986	https://www.ncbi.nlm.nih.gov/nuccore/PQ156986	Homo sapiens
+MuVs/Quebec.CAN/18.10[G]	2010-05-04	MuVs/Quebec.CAN/18.10[G]	G	G	North America	G	Canada	Frost et al.	PQ156987	https://www.ncbi.nlm.nih.gov/nuccore/PQ156987	Homo sapiens
+MuVi/Ontario.CAN/38.09/2 [G]	2009-09-17	MuVi/Ontario.CAN/38.09/2 [G]	G	G	North America	G	Canada	Eshaghi et al.	KY680537	https://www.ncbi.nlm.nih.gov/nuccore/KY680537	Homo sapiens
+MuVi/Ontario.CAN/40.09/1 [G]	2009-09-28	MuVi/Ontario.CAN/40.09/1 [G]	G	G	North America	G	Canada	Eshaghi et al.	KY680538	https://www.ncbi.nlm.nih.gov/nuccore/KY680538	Homo sapiens
+MuVi/Ontario.CAN/50.09/3 [G]	2009-12-11	MuVi/Ontario.CAN/50.09/3 [G]	G	G	North America	G	Canada	Eshaghi et al.	KY680540	https://www.ncbi.nlm.nih.gov/nuccore/KY680540	Homo sapiens
+MuVi/Ontario.CAN/50.09/1 [G]	2009-12-13	MuVi/Ontario.CAN/50.09/1 [G]	G	G	North America	G	Canada	Eshaghi et al.	KY680539	https://www.ncbi.nlm.nih.gov/nuccore/KY680539	Homo sapiens
+MuV/New York.USA/01.10	2010-01-04	MuV/New York.USA/01.10	G	G	North America	G	USA	Kirkness et al.	JX287389	https://www.ncbi.nlm.nih.gov/nuccore/JX287389	Homo sapiens
+MuVi/Utrecht.NLD/40.10[G]	2010-10-08	MuVi/Utrecht.NLD/40.10[G]	G	G	Europe	G	Netherlands	Cremer et al.	MW261742	https://www.ncbi.nlm.nih.gov/nuccore/MW261742	Homo sapiens
+MuVs/NewJersey.USA/16.14/2[G]	2014-04-28	MuVs/NewJersey.USA/16.14/2[G]	G	G	North America	G	USA	Bankamp et al.	MG986442	https://www.ncbi.nlm.nih.gov/nuccore/MG986442	Homo sapiens
+MuVs/Indiana.USA/5.14[G]	2014-01-31	MuVs/Indiana.USA/5.14[G]	G	G	North America	G	USA	Bankamp et al.	MG986387	https://www.ncbi.nlm.nih.gov/nuccore/MG986387	Homo sapiens
+MuVs/Wisconsin.USA/20.14/FH86[G]	2014-05-01 (2014-05-01 - 2014-05-28)	MuVs/Wisconsin.USA/20.14/FH86[G]	G	G	North America	G	USA	Moncla et al.	MT859592	https://www.ncbi.nlm.nih.gov/nuccore/MT859592	Homo sapiens
+MuVs/Wisconsin.USA/16.14/FH110[G]	2014-04-01 (2014-04-01 - 2014-04-30)	MuVs/Wisconsin.USA/16.14/FH110[G]	G	G	North America	G	USA	Moncla et al.	MT859616	https://www.ncbi.nlm.nih.gov/nuccore/MT859616	Homo sapiens
+MuVs/Wisconsin.USA/16.14/FH85[G]	2014-04-01 (2014-04-01 - 2014-04-30)	MuVs/Wisconsin.USA/16.14/FH85[G]	G	G	North America	A	USA	Moncla et al.	MT859591	https://www.ncbi.nlm.nih.gov/nuccore/MT859591	Homo sapiens
+MuVs/Wisconsin.USA/24.14/FH112[G]	2014-06-01 (2014-06-01 - 2014-06-27)	MuVs/Wisconsin.USA/24.14/FH112[G]	G	G	North America	G	USA	Moncla et al.	MT859618	https://www.ncbi.nlm.nih.gov/nuccore/MT859618	Homo sapiens
+MuVs/Wisconsin.USA/29.14/FH113[G]	2014-07-01 (2014-07-01 - 2014-07-28)	MuVs/Wisconsin.USA/29.14/FH113[G]	G	G	North America	G	USA	Moncla et al.	MT859619	https://www.ncbi.nlm.nih.gov/nuccore/MT859619	Homo sapiens
+MuVs/Wisconsin.USA/20.14/FH111[G]	2014-05-12 (2014-05-01 - 2014-05-31)	MuVs/Wisconsin.USA/20.14/FH111[G]	G	G	North America	G	USA	Moncla et al.	MT859617	https://www.ncbi.nlm.nih.gov/nuccore/MT859617	Homo sapiens
+MuVs/NewYork.USA/10.14/3[G]	2014-03-04	MuVs/NewYork.USA/10.14/3[G]	G	G	North America	G	USA	Bankamp et al.	MG986436	https://www.ncbi.nlm.nih.gov/nuccore/MG986436	Homo sapiens
+MuVs/NewYork.USA.USA/51.14[G]	2014-12-16	MuVs/NewYork.USA.USA/51.14[G]	G	G	North America	G	USA	Bankamp et al.	MG986410	https://www.ncbi.nlm.nih.gov/nuccore/MG986410	Homo sapiens
+MuVs/NewYork.USA/8.14/[G]	2014-02-20	MuVs/NewYork.USA/8.14/[G]	G	G	North America	G	USA	Bankamp et al.	MG986395	https://www.ncbi.nlm.nih.gov/nuccore/MG986395	Homo sapiens
+MuVs/Ohio.USA/13.14/10[G]	2014-03-30	MuVs/Ohio.USA/13.14/10[G]	G	G	North America	G	USA	Bankamp et al.	MG986451	https://www.ncbi.nlm.nih.gov/nuccore/MG986451	Homo sapiens
+MuVs/Ohio.USA/13.14/6[G]	2014-03-26	MuVs/Ohio.USA/13.14/6[G]	G	G	North America	G	USA	Bankamp et al.	MG986455	https://www.ncbi.nlm.nih.gov/nuccore/MG986455	Homo sapiens
+MuVs/Ohio.USA/12.14/9[G]	2014-03-21	MuVs/Ohio.USA/12.14/9[G]	G	G	North America	G	USA	Bankamp et al.	MG986409	https://www.ncbi.nlm.nih.gov/nuccore/MG986409	Homo sapiens
+MuVs/Michigan.USA/12.14[G]	2014-03-20	MuVs/Michigan.USA/12.14[G]	G	G	North America	G	USA	Bankamp et al.	MG986450	https://www.ncbi.nlm.nih.gov/nuccore/MG986450	Homo sapiens
+MuVs/Ohio.USA/16.14/2[G]	2014-04-15	MuVs/Ohio.USA/16.14/2[G]	G	G	North America	G	USA	Bankamp et al.	MG986390	https://www.ncbi.nlm.nih.gov/nuccore/MG986390	Homo sapiens
+MuVs/Ohio.USA/16.14/1[G]	2014-04-15	MuVs/Ohio.USA/16.14/1[G]	G	G	North America	G	USA	Bankamp et al.	MG986449	https://www.ncbi.nlm.nih.gov/nuccore/MG986449	Homo sapiens
+MuVs/Ohio.USA/13.14/7[G]	2014-03-25	MuVs/Ohio.USA/13.14/7[G]	G	G	North America	G	USA	Bankamp et al.	MG986446	https://www.ncbi.nlm.nih.gov/nuccore/MG986446	Homo sapiens
+MuVs/Ohio.USA/11.14/2[G]	2014-03-16	MuVs/Ohio.USA/11.14/2[G]	G	G	North America	G	USA	Bankamp et al.	MG986426	https://www.ncbi.nlm.nih.gov/nuccore/MG986426	Homo sapiens
+MuVs/Ontario.CAN/35.13[G]	2013-08-30	MuVs/Ontario.CAN/35.13[G]	G	G	North America	G	Canada	Frost et al.	PQ157296	https://www.ncbi.nlm.nih.gov/nuccore/PQ157296	Homo sapiens
+Newfoundland.CAN/05.18[G]	2017-02-02	Newfoundland.CAN/05.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157070	https://www.ncbi.nlm.nih.gov/nuccore/PQ157070	Homo sapiens
+MuVs/NovaScotia.CAN/47.17/2[G]	2017-11-23	MuVs/NovaScotia.CAN/47.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157223	https://www.ncbi.nlm.nih.gov/nuccore/PQ157223	Homo sapiens
+MuVs/Ontario.CAN/36.16[G]	2016-09-08	MuVs/Ontario.CAN/36.16[G]	G	G	North America	G	Canada	Frost et al.	PQ157288	https://www.ncbi.nlm.nih.gov/nuccore/PQ157288	Homo sapiens
+MuVs/Massachusetts.USA/20.16/2[G]	2016-05-20	MuVs/Massachusetts.USA/20.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965312	https://www.ncbi.nlm.nih.gov/nuccore/MF965312	Homo sapiens
+MuVs/Ontario.CAN/27.16[G]	2016-07-08	MuVs/Ontario.CAN/27.16[G]	G	G	North America	G	Canada	Frost et al.	PQ157289	https://www.ncbi.nlm.nih.gov/nuccore/PQ157289	Homo sapiens
+MuVs/BritishColumbia.CAN/47.12[G]	2012-11-21	MuVs/BritishColumbia.CAN/47.12[G]	G	G	North America	G	Canada	Frost et al.	PQ157297	https://www.ncbi.nlm.nih.gov/nuccore/PQ157297	Homo sapiens
+MuVs/Saskatchewan.CAN/40.13[G]	2013-10-04	MuVs/Saskatchewan.CAN/40.13[G]	G	G	North America	G	Canada	Frost et al.	PQ157295	https://www.ncbi.nlm.nih.gov/nuccore/PQ157295	Homo sapiens
+MuVi/Amsterdam.NLD/29.17/1[G]	2017-07-31 (2017-07-04 - 2017-07-31)	MuVi/Amsterdam.NLD/29.17/1[G]	G	G	Europe	G	Netherlands	Bodewes et al.	MT238681	https://www.ncbi.nlm.nih.gov/nuccore/MT238681	Homo sapiens
+MuVi/Beugen.NLD/16.18[G]	2018-04-30 (2018-04-04 - 2018-04-30)	MuVi/Beugen.NLD/16.18[G]	G	G	Europe	G	Netherlands	Bodewes et al.	MT238682	https://www.ncbi.nlm.nih.gov/nuccore/MT238682	Homo sapiens
+MuVi/Deventer.NLD/12.19[G]	2019-03-31 (2019-03-04 - 2019-03-31)	MuVi/Deventer.NLD/12.19[G]	G	G	Europe	G	Netherlands	q et al.	MT238683	https://www.ncbi.nlm.nih.gov/nuccore/MT238683	Homo sapiens
+MuVi/Utrecht.NLD/15.19[G]	2019-04-01 (2019-04-01 - 2019-04-27)	MuVi/Utrecht.NLD/15.19[G]	G	G	Europe	G	Netherlands	q et al.	MT238687	https://www.ncbi.nlm.nih.gov/nuccore/MT238687	Homo sapiens
+MuVs/Quebec.CAN/01.16[G]	2016-01-06	MuVs/Quebec.CAN/01.16[G]	G	G	North America	G	Canada	Frost et al.	PQ157290	https://www.ncbi.nlm.nih.gov/nuccore/PQ157290	Homo sapiens
+MuVs/Massachusetts.USA/26.15/[G]	2015-07-04	MuVs/Massachusetts.USA/26.15/[G]	G	G	North America	G	USA	Byrne et al.	MF965222	https://www.ncbi.nlm.nih.gov/nuccore/MF965222	Homo sapiens
+MuVs/Ontario.CAN/02.15[G]	2015-01-14	MuVs/Ontario.CAN/02.15[G]	G	G	North America	G	Canada	Frost et al.	PQ157292	https://www.ncbi.nlm.nih.gov/nuccore/PQ157292	Homo sapiens
+MuVs/NewJersey.USA/49.14[G]	2014-12-06	MuVs/NewJersey.USA/49.14[G]	G	G	North America	G	USA	Bankamp et al.	MG986418	https://www.ncbi.nlm.nih.gov/nuccore/MG986418	Homo sapiens
+MuVs/NewYork/10.14/2[G]	2014-03-03	MuVs/NewYork/10.14/2[G]	G	G	North America	G	USA	Bankamp et al.	MG986398	https://www.ncbi.nlm.nih.gov/nuccore/MG986398	Homo sapiens
+MuVs/Virginia.USA/51.14[G]	2014-12-19	MuVs/Virginia.USA/51.14[G]	G	G	North America	G	USA	Bankamp et al.	MG986433	https://www.ncbi.nlm.nih.gov/nuccore/MG986433	Homo sapiens
+MuVs/Ontario.CAN/50.14[G]	2014-12-12	MuVs/Ontario.CAN/50.14[G]	G	G	North America	G	Canada	Frost et al.	PQ157293	https://www.ncbi.nlm.nih.gov/nuccore/PQ157293	Homo sapiens
+MuVs/Pennsylvania.USA/51.14[G]	2014-12-16	MuVs/Pennsylvania.USA/51.14[G]	G	G	North America	G	USA	Bankamp et al.	MG986465	https://www.ncbi.nlm.nih.gov/nuccore/MG986465	Homo sapiens
+MuVs/Alberta.CAN/26.15[G]	2014-06-25	MuVs/Alberta.CAN/26.15[G]	G	G	North America	G	Canada	Frost et al.	PQ157294	https://www.ncbi.nlm.nih.gov/nuccore/PQ157294	Homo sapiens
+MuVs/Manitoba.CAN/39.15[G]	2015-09-30	MuVs/Manitoba.CAN/39.15[G]	G	G	North America	G	Canada	Frost et al.	PQ157291	https://www.ncbi.nlm.nih.gov/nuccore/PQ157291	Homo sapiens
+MuVs/NovaScotia.CAN/02.18[G]	2018-01-10	MuVs/NovaScotia.CAN/02.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157121	https://www.ncbi.nlm.nih.gov/nuccore/PQ157121	Homo sapiens
+MuVs/NovaScotia.CAN/07.18[G]	2018-02-17	MuVs/NovaScotia.CAN/07.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157056	https://www.ncbi.nlm.nih.gov/nuccore/PQ157056	Homo sapiens
+MuVs/NovaScotia.CAN/01.18[G]	2018-01-05	MuVs/NovaScotia.CAN/01.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157125	https://www.ncbi.nlm.nih.gov/nuccore/PQ157125	Homo sapiens
+MuVs/NovaScotia.CAN/01.18/2[G]	2018-01-02	MuVs/NovaScotia.CAN/01.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157123	https://www.ncbi.nlm.nih.gov/nuccore/PQ157123	Homo sapiens
+MuVs/NovaScotia.CAN/03.18[G]	2018-01-19	MuVs/NovaScotia.CAN/03.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157118	https://www.ncbi.nlm.nih.gov/nuccore/PQ157118	Homo sapiens
+MuVs/NovaScotia.CAN/06.18/2[G]	2018-02-04	MuVs/NovaScotia.CAN/06.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157076	https://www.ncbi.nlm.nih.gov/nuccore/PQ157076	Homo sapiens
+MuVs/NovaScotia.CAN/13.18/6[G]	2018-03-25	MuVs/NovaScotia.CAN/13.18/6[G]	G	G	North America	G	Canada	Frost et al.	PQ157039	https://www.ncbi.nlm.nih.gov/nuccore/PQ157039	Homo sapiens
+MuVs/NovaScotia.CAN/18.18[G]	2018-04-30	MuVs/NovaScotia.CAN/18.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157028	https://www.ncbi.nlm.nih.gov/nuccore/PQ157028	Homo sapiens
+MuVs/NovaScotia.CAN/13.18/3[G]	2018-03-30	MuVs/NovaScotia.CAN/13.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157036	https://www.ncbi.nlm.nih.gov/nuccore/PQ157036	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/3[G]	2018-02-11	MuVs/NovaScotia.CAN/07.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157058	https://www.ncbi.nlm.nih.gov/nuccore/PQ157058	Homo sapiens
+MuVs/NovaScotia.CAN/15.18/2[G]	2018-04-13	MuVs/NovaScotia.CAN/15.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157031	https://www.ncbi.nlm.nih.gov/nuccore/PQ157031	Homo sapiens
+MuVs/NovaScotia.CAN/13.18/7[G]	2018-03-25	MuVs/NovaScotia.CAN/13.18/7[G]	G	G	North America	G	Canada	Frost et al.	PQ157040	https://www.ncbi.nlm.nih.gov/nuccore/PQ157040	Homo sapiens
+MuVs/NovaScotia.CAN/09.18[G]	2018-03-03	MuVs/NovaScotia.CAN/09.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157047	https://www.ncbi.nlm.nih.gov/nuccore/PQ157047	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/5[G]	2018-02-16	MuVs/NovaScotia.CAN/07.18/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157060	https://www.ncbi.nlm.nih.gov/nuccore/PQ157060	Homo sapiens
+MuVs/NovaScotia.CAN/10.18/2[G]	2018-03-07	MuVs/NovaScotia.CAN/10.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157046	https://www.ncbi.nlm.nih.gov/nuccore/PQ157046	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/8[G]	2018-02-15	MuVs/NovaScotia.CAN/07.18/8[G]	G	G	North America	G	Canada	Frost et al.	PQ157063	https://www.ncbi.nlm.nih.gov/nuccore/PQ157063	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/2[G]	2018-02-14	MuVs/NovaScotia.CAN/07.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157057	https://www.ncbi.nlm.nih.gov/nuccore/PQ157057	Homo sapiens
+MuVs/NovaScotia.CAN/04.18[G]	2018-01-25	MuVs/NovaScotia.CAN/04.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157077	https://www.ncbi.nlm.nih.gov/nuccore/PQ157077	Homo sapiens
+MuVs/NovaScotia.CAN/15.18/1[G]	2018-04-14	MuVs/NovaScotia.CAN/15.18/1[G]	G	G	North America	G	Canada	Frost et al.	PQ157030	https://www.ncbi.nlm.nih.gov/nuccore/PQ157030	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/4[G]	2018-02-11	MuVs/NovaScotia.CAN/07.18/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157059	https://www.ncbi.nlm.nih.gov/nuccore/PQ157059	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/11[G]	2018-02-13	MuVs/NovaScotia.CAN/07.18/11[G]	G	G	North America	G	Canada	Frost et al.	PQ157066	https://www.ncbi.nlm.nih.gov/nuccore/PQ157066	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/9[G]	2018-02-14	MuVs/NovaScotia.CAN/07.18/9[G]	G	G	North America	G	Canada	Frost et al.	PQ157064	https://www.ncbi.nlm.nih.gov/nuccore/PQ157064	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/10[G]	2018-02-14	MuVs/NovaScotia.CAN/07.18/10[G]	G	G	North America	G	Canada	Frost et al.	PQ157065	https://www.ncbi.nlm.nih.gov/nuccore/PQ157065	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/12[G]	2018-02-14	MuVs/NovaScotia.CAN/07.18/12[G]	G	G	North America	G	Canada	Frost et al.	PQ157067	https://www.ncbi.nlm.nih.gov/nuccore/PQ157067	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/7[G]	2018-02-15	MuVs/NovaScotia.CAN/07.18/7[G]	G	G	North America	G	Canada	Frost et al.	PQ157062	https://www.ncbi.nlm.nih.gov/nuccore/PQ157062	Homo sapiens
+MuVs/NovaScotia.CAN/07.18/6[G]	2018-02-16	MuVs/NovaScotia.CAN/07.18/6[G]	G	G	North America	G	Canada	Frost et al.	PQ157061	https://www.ncbi.nlm.nih.gov/nuccore/PQ157061	Homo sapiens
+MuVs/NovaScotia.CAN/10.18[G]	2018-03-09	MuVs/NovaScotia.CAN/10.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157045	https://www.ncbi.nlm.nih.gov/nuccore/PQ157045	Homo sapiens
+MuVs/NovaScotia.CAN/08.18[G]	2018-02-23	MuVs/NovaScotia.CAN/08.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157054	https://www.ncbi.nlm.nih.gov/nuccore/PQ157054	Homo sapiens
+MuVs/NovaScotia.CAN/13.18/2[G]	2018-03-31	MuVs/NovaScotia.CAN/13.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157033	https://www.ncbi.nlm.nih.gov/nuccore/PQ157033	Homo sapiens
+MuVs/NovaScotia.CAN/09.18/2[G]	2018-03-02	MuVs/NovaScotia.CAN/09.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157048	https://www.ncbi.nlm.nih.gov/nuccore/PQ157048	Homo sapiens
+MuVs/NovaScotia.CAN/12.18/2[G]	2018-03-21	MuVs/NovaScotia.CAN/12.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157043	https://www.ncbi.nlm.nih.gov/nuccore/PQ157043	Homo sapiens
+MuVs/NovaScotia.CAN/12.18/3[G]	2018-03-18	MuVs/NovaScotia.CAN/12.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157044	https://www.ncbi.nlm.nih.gov/nuccore/PQ157044	Homo sapiens
+MuVs/NovaScotia.CAN/12.18[G]	2018-03-19	MuVs/NovaScotia.CAN/12.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157042	https://www.ncbi.nlm.nih.gov/nuccore/PQ157042	Homo sapiens
+MuVs/NovaScotia.CAN/13.18/5[G]	2018-03-26	MuVs/NovaScotia.CAN/13.18/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157038	https://www.ncbi.nlm.nih.gov/nuccore/PQ157038	Homo sapiens
+MuVs/NovaScotia.CAN/13.18/4[G]	2018-03-27	MuVs/NovaScotia.CAN/13.18/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157037	https://www.ncbi.nlm.nih.gov/nuccore/PQ157037	Homo sapiens
+MuVs/NovaScotia.CAN/13.18/1[G]	2018-03-31	MuVs/NovaScotia.CAN/13.18/1[G]	G	G	North America	G	Canada	Frost et al.	PQ157032	https://www.ncbi.nlm.nih.gov/nuccore/PQ157032	Homo sapiens
+MuVs/NovaScotia.CAN/16.18[G]	2018-04-19	MuVs/NovaScotia.CAN/16.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157029	https://www.ncbi.nlm.nih.gov/nuccore/PQ157029	Homo sapiens
+MuVs/NovaScotia.CAN/14.18/2[G]	2018-04-03	MuVs/NovaScotia.CAN/14.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157035	https://www.ncbi.nlm.nih.gov/nuccore/PQ157035	Homo sapiens
+MuVs/NovaScotia.CAN/14.18/1[G]	2018-04-03	MuVs/NovaScotia.CAN/14.18/1[G]	G	G	North America	G	Canada	Frost et al.	PQ157034	https://www.ncbi.nlm.nih.gov/nuccore/PQ157034	Homo sapiens
+MuVs/Missouri.USA/29.15/FH114[G]	2015-07-10 (2015-07-01 - 2015-07-31)	MuVs/Missouri.USA/29.15/FH114[G]	G	G	North America	G	USA	Moncla et al.	MT859620	https://www.ncbi.nlm.nih.gov/nuccore/MT859620	Homo sapiens
+MuVs/Illinois.USA/26.15/2[G]	2015-06-24	MuVs/Illinois.USA/26.15/2[G]	G	G	North America	G	USA	Bankamp et al.	MG986460	https://www.ncbi.nlm.nih.gov/nuccore/MG986460	Homo sapiens
+MuVs/Massachusetts.USA/12.16/5[G]	2016-03-22	MuVs/Massachusetts.USA/12.16/5[G]	G	G	North America		USA	Byrne et al.	MF965290	https://www.ncbi.nlm.nih.gov/nuccore/MF965290	Homo sapiens
+MuVs/Wisconsin.USA/42.15/FH115[G]	2015-10-01 (2015-10-01 - 2015-10-28)	MuVs/Wisconsin.USA/42.15/FH115[G]	G	G	North America	G	USA	Moncla et al.	MT859621	https://www.ncbi.nlm.nih.gov/nuccore/MT859621	Homo sapiens
+MuVs/Wisconsin.USA/2.16/FH118[G]	2016-01-31 (2016-01-05 - 2016-01-31)	MuVs/Wisconsin.USA/2.16/FH118[G]	G	G	North America	G	USA	Moncla et al.	MT859624	https://www.ncbi.nlm.nih.gov/nuccore/MT859624	Homo sapiens
+MuVs/Louisiana.USA/29.17[G]	2017-07-21	MuVs/Louisiana.USA/29.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986394	https://www.ncbi.nlm.nih.gov/nuccore/MG986394	Homo sapiens
+MuVs/Texas.USA/27.17[G]	2017-07-03	MuVs/Texas.USA/27.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986380	https://www.ncbi.nlm.nih.gov/nuccore/MG986380	Homo sapiens
+MuVs/Wisconsin.USA/19.16/FH121[G]	2016-05-31 (2016-05-04 - 2016-05-31)	MuVs/Wisconsin.USA/19.16/FH121[G]	G	G	North America	G	USA	Moncla et al.	MT859627	https://www.ncbi.nlm.nih.gov/nuccore/MT859627	Homo sapiens
+MuVs/Wisconsin.USA/24.16/FH120[G]	2016-06-30 (2016-06-04 - 2016-06-30)	MuVs/Wisconsin.USA/24.16/FH120[G]	G	G	North America	G	USA	Moncla et al.	MT859626	https://www.ncbi.nlm.nih.gov/nuccore/MT859626	Homo sapiens
+MuVs/Massachusetts.USA/21.16/[G]	2016-05-24	MuVs/Massachusetts.USA/21.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965260	https://www.ncbi.nlm.nih.gov/nuccore/MF965260	Homo sapiens
+MuVs/Texas.USA/18.17/[G]	2017-05-05	MuVs/Texas.USA/18.17/[G]	G	G	North America	G	USA	Bankamp et al.	MG986457	https://www.ncbi.nlm.nih.gov/nuccore/MG986457	Homo sapiens
+MuVs/Texas.USA/15.17[G]	2017-04-13	MuVs/Texas.USA/15.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986391	https://www.ncbi.nlm.nih.gov/nuccore/MG986391	Homo sapiens
+MuVs/Massachusetts.USA/46.16/4[G]	2016-11-15	MuVs/Massachusetts.USA/46.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965217	https://www.ncbi.nlm.nih.gov/nuccore/MF965217	Homo sapiens
+MuVs/Massachusetts.USA/46.16/2[G]	2016-11-14	MuVs/Massachusetts.USA/46.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965212	https://www.ncbi.nlm.nih.gov/nuccore/MF965212	Homo sapiens
+MuVs/NorthCarolina.USA/11.17/FH136[G]	2017-03-31 (2017-03-04 - 2017-03-31)	MuVs/NorthCarolina.USA/11.17/FH136[G]	G	G	North America	G	USA	Moncla et al.	MT859642	https://www.ncbi.nlm.nih.gov/nuccore/MT859642	Homo sapiens
+MuVs/Quebec.CAN/50.16[G]	2016-12-16	MuVs/Quebec.CAN/50.16[G]	G	G	North America	G	Canada	Frost et al.	PQ157287	https://www.ncbi.nlm.nih.gov/nuccore/PQ157287	Homo sapiens
+MuVs/Ohio.USA/46.17/FH157[G]	2017-11-30 (2017-11-04 - 2017-11-30)	MuVs/Ohio.USA/46.17/FH157[G]	G	G	North America	G	USA	Moncla et al.	MT859663	https://www.ncbi.nlm.nih.gov/nuccore/MT859663	Homo sapiens
+MuVs/Alabama.USA/50.17/FH156[G]	2017-12-01 (2017-12-01 - 2017-12-28)	MuVs/Alabama.USA/50.17/FH156[G]	G	G	North America	G	USA	Moncla et al.	MT859662	https://www.ncbi.nlm.nih.gov/nuccore/MT859662	Homo sapiens
+MuVs/Massachusetts.USA/45.16/5[G]	2016-11-13	MuVs/Massachusetts.USA/45.16/5[G]	G	G	North America	G	USA	Byrne et al.	MF965300	https://www.ncbi.nlm.nih.gov/nuccore/MF965300	Homo sapiens
+MuVs/Massachusetts.USA/45.16/7[G]	2016-11-15	MuVs/Massachusetts.USA/45.16/7[G]	G	G	North America	G	USA	Byrne et al.	MF965271	https://www.ncbi.nlm.nih.gov/nuccore/MF965271	Homo sapiens
+MuVs/Michigan.USA/4.16[G]	2016-01-26	MuVs/Michigan.USA/4.16[G]	G	G	North America	G	USA	Bankamp et al.	MG986419	https://www.ncbi.nlm.nih.gov/nuccore/MG986419	Homo sapiens
+MuVs/Ohio.USA/19.16/FH119[G]	2016-05-01 (2016-05-01 - 2016-05-28)	MuVs/Ohio.USA/19.16/FH119[G]	G	G	North America	G	USA	Moncla et al.	MT859625	https://www.ncbi.nlm.nih.gov/nuccore/MT859625	Homo sapiens
+MuVs/Newfoundland.CAN/04.18[G]	2018-01-27	MuVs/Newfoundland.CAN/04.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157079	https://www.ncbi.nlm.nih.gov/nuccore/PQ157079	Homo sapiens
+MuVs/BritishColumbia.CAN/28.17[G]	2017-07-11	MuVs/BritishColumbia.CAN/28.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157242	https://www.ncbi.nlm.nih.gov/nuccore/PQ157242	Homo sapiens
+MuVi/Eindhoven.NLD/42.18[G]	2018-10-01 (2018-10-01 - 2018-10-28)	MuVi/Eindhoven.NLD/42.18[G]	G	G	Europe	G	Netherlands	q et al.	MT238684	https://www.ncbi.nlm.nih.gov/nuccore/MT238684	Homo sapiens
+MuVs/NovaScotia.CAN/45.17[G]	2017-11-10	MuVs/NovaScotia.CAN/45.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157224	https://www.ncbi.nlm.nih.gov/nuccore/PQ157224	Homo sapiens
+MuVs/NovaScotia.CAN/49.17[G]	2017-12-08	MuVs/NovaScotia.CAN/49.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157218	https://www.ncbi.nlm.nih.gov/nuccore/PQ157218	Homo sapiens
+MuVs/NovaScotia.CAN/48.17[G]	2017-12-01	MuVs/NovaScotia.CAN/48.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157220	https://www.ncbi.nlm.nih.gov/nuccore/PQ157220	Homo sapiens
+MuVs/NovaScotia.CAN/48.17/2[G]	2017-11-30	MuVs/NovaScotia.CAN/48.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157221	https://www.ncbi.nlm.nih.gov/nuccore/PQ157221	Homo sapiens
+MuVi/Gelderland.NLD/26.19/2[G]	2019-06-01 (2019-06-01 - 2019-06-27)	MuVi/Gelderland.NLD/26.19/2[G]	G	G	Europe	G	Netherlands	q et al.	MT238685	https://www.ncbi.nlm.nih.gov/nuccore/MT238685	Homo sapiens
+MuVi/Utrecht.NLD/35.19[G]	2019-08-01 (2019-08-01 - 2019-08-28)	MuVi/Utrecht.NLD/35.19[G]	G	G	Europe	G	Netherlands	q et al.	MT238688	https://www.ncbi.nlm.nih.gov/nuccore/MT238688	Homo sapiens
+MuVs/BritishColumbia.CAN/08.17[G]	2020-02-20	MuVs/BritishColumbia.CAN/08.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157025	https://www.ncbi.nlm.nih.gov/nuccore/PQ157025	Homo sapiens
+MuVi/Noord-Holland.NLD/9.19[G]	2019-02-28 (2019-02-04 - 2019-02-28)	MuVi/Noord-Holland.NLD/9.19[G]	G	G	Europe	G	Netherlands	q et al.	MT238686	https://www.ncbi.nlm.nih.gov/nuccore/MT238686	Homo sapiens
+MuVs/Ontario.CAN/22.19[G]	2019-08-15	MuVs/Ontario.CAN/22.19[G]	G	G	North America	G	Canada	Frost et al.	PQ157026	https://www.ncbi.nlm.nih.gov/nuccore/PQ157026	Homo sapiens
+MuVs/Ontario.CAN/23.19[G]	2019-06-07	MuVs/Ontario.CAN/23.19[G]	G	G	North America	G	Canada	Frost et al.	PQ157027	https://www.ncbi.nlm.nih.gov/nuccore/PQ157027	Homo sapiens
+MuVs/Newfoundland.CAN/10.18/4[G]	2018-03-07	MuVs/Newfoundland.CAN/10.18/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157052	https://www.ncbi.nlm.nih.gov/nuccore/PQ157052	Homo sapiens
+MuVs/Newfoundland.CAN/04.18/2[G]	2018-01-27	MuVs/Newfoundland.CAN/04.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157080	https://www.ncbi.nlm.nih.gov/nuccore/PQ157080	Homo sapiens
+MuVs/Newfoundland.CAN/02.18[G]	2018-01-13	MuVs/Newfoundland.CAN/02.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157122	https://www.ncbi.nlm.nih.gov/nuccore/PQ157122	Homo sapiens
+MuVs/Newfoundland.CAN/04.18/4[G]	2018-01-22	MuVs/Newfoundland.CAN/04.18/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157119	https://www.ncbi.nlm.nih.gov/nuccore/PQ157119	Homo sapiens
+MuVs/Newfoundland.CAN/03.18[G]	2018-01-19	MuVs/Newfoundland.CAN/03.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157120	https://www.ncbi.nlm.nih.gov/nuccore/PQ157120	Homo sapiens
+MuVs/Newfoundland.CAN/06.18[G]	2018-02-07	MuVs/Newfoundland.CAN/06.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157074	https://www.ncbi.nlm.nih.gov/nuccore/PQ157074	Homo sapiens
+MuVs/NovaScotia.CAN/06.18[G]	2018-02-10	MuVs/NovaScotia.CAN/06.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157073	https://www.ncbi.nlm.nih.gov/nuccore/PQ157073	Homo sapiens
+MuVs/Newfoundland.CAN/09.18[G]	2018-02-27	MuVs/Newfoundland.CAN/09.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157053	https://www.ncbi.nlm.nih.gov/nuccore/PQ157053	Homo sapiens
+MuVs/Newfoundland.CAN/07.18/4[G]	2018-02-11	MuVs/Newfoundland.CAN/07.18/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157072	https://www.ncbi.nlm.nih.gov/nuccore/PQ157072	Homo sapiens
+MuVs/Newfoundland.CAN/07.18/3[G]	2018-02-11	MuVs/Newfoundland.CAN/07.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157071	https://www.ncbi.nlm.nih.gov/nuccore/PQ157071	Homo sapiens
+MuVs/Newfoundland.CAN/01.18/2[G]	2018-01-03	MuVs/Newfoundland.CAN/01.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157126	https://www.ncbi.nlm.nih.gov/nuccore/PQ157126	Homo sapiens
+MuVs/Newfoundland.CAN/10.18/1[G]	2018-03-09	MuVs/Newfoundland.CAN/10.18/1[G]	G	G	North America	G	Canada	Frost et al.	PQ157050	https://www.ncbi.nlm.nih.gov/nuccore/PQ157050	Homo sapiens
+MuVs/Newfoundland.CAN/10.18/2[G]	2018-03-09	MuVs/Newfoundland.CAN/10.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157049	https://www.ncbi.nlm.nih.gov/nuccore/PQ157049	Homo sapiens
+MuVs/Newfoundland.CAN/01.18[G]	2018-01-05	MuVs/Newfoundland.CAN/01.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157124	https://www.ncbi.nlm.nih.gov/nuccore/PQ157124	Homo sapiens
+MuVs/Newfoundland.CAN/04.18/3[G]	2018-01-25	MuVs/Newfoundland.CAN/04.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157081	https://www.ncbi.nlm.nih.gov/nuccore/PQ157081	Homo sapiens
+MuVs/Newfoundland.CAN/05.28[G]	2018-01-29	MuVs/Newfoundland.CAN/05.28[G]	G	G	North America	G	Canada	Frost et al.	PQ157078	https://www.ncbi.nlm.nih.gov/nuccore/PQ157078	Homo sapiens
+MuVs/Newfoundland.CAN/05.18[G]	2018-01-30	MuVs/Newfoundland.CAN/05.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157075	https://www.ncbi.nlm.nih.gov/nuccore/PQ157075	Homo sapiens
+MuVs/Newfoundland.CAN/07.18[G]	2018-02-15	MuVs/Newfoundland.CAN/07.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157068	https://www.ncbi.nlm.nih.gov/nuccore/PQ157068	Homo sapiens
+MuVs/Newfoundland.CAN/07.18/2[G]	2018-02-15	MuVs/Newfoundland.CAN/07.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157069	https://www.ncbi.nlm.nih.gov/nuccore/PQ157069	Homo sapiens
+MuVs/Newfoundland.CAN/08.18[G]	2018-02-20	MuVs/Newfoundland.CAN/08.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157055	https://www.ncbi.nlm.nih.gov/nuccore/PQ157055	Homo sapiens
+MuVs/Newfoundland.CAN/13.18[G]	2018-03-26	MuVs/Newfoundland.CAN/13.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157041	https://www.ncbi.nlm.nih.gov/nuccore/PQ157041	Homo sapiens
+MuVs/Newfoundland.CAN/10.18/3[G]	2018-03-07	MuVs/Newfoundland.CAN/10.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157051	https://www.ncbi.nlm.nih.gov/nuccore/PQ157051	Homo sapiens
+MuVs/Wisconsin.USA/46.15/FH117[G]	2015-11-01 (2015-11-01 - 2015-11-26)	MuVs/Wisconsin.USA/46.15/FH117[G]	G	G	North America	G	USA	Moncla et al.	MT859623	https://www.ncbi.nlm.nih.gov/nuccore/MT859623	Homo sapiens
+MuVs/Wisconsin.USA/51.15/FH163[G]	2015-12-05 (2015-12-01 - 2015-12-31)	MuVs/Wisconsin.USA/51.15/FH163[G]	G	G	North America	G	USA	Moncla et al.	MT859669	https://www.ncbi.nlm.nih.gov/nuccore/MT859669	Homo sapiens
+MuVs/Wisconsin.USA/42.15/FH116[G]	2015-10-09 (2015-10-01 - 2015-10-31)	MuVs/Wisconsin.USA/42.15/FH116[G]	G	G	North America	G	USA	Moncla et al.	MT859622	https://www.ncbi.nlm.nih.gov/nuccore/MT859622	Homo sapiens
+MuVs/Pennsylvania.USA/19.16[G]	2016-05-10	MuVs/Pennsylvania.USA/19.16[G]	G	G	North America	G	USA	Bankamp et al.	MG986458	https://www.ncbi.nlm.nih.gov/nuccore/MG986458	Homo sapiens
+MuVs/Massachusetts.USA/19.16/6[G]	2016-05-09	MuVs/Massachusetts.USA/19.16/6[G]	G	G	North America	G	USA	Byrne et al.	MF965315	https://www.ncbi.nlm.nih.gov/nuccore/MF965315	Homo sapiens
+MuVs/Massachusetts.USA/16.16/12[G]	2016-04-21	MuVs/Massachusetts.USA/16.16/12[G]	G	G	North America	G	USA	Byrne et al.	MF965258	https://www.ncbi.nlm.nih.gov/nuccore/MF965258	Homo sapiens
+MuVs/Massachusetts.USA/10.16/10[G]	2016-03-12	MuVs/Massachusetts.USA/10.16/10[G]	G	G	North America	G	USA	Byrne et al.	MF965219	https://www.ncbi.nlm.nih.gov/nuccore/MF965219	Homo sapiens
+MuVs/NewHampshire.USA/8.16/1[G]	2016-02-25	MuVs/NewHampshire.USA/8.16/1[G]	G	G	North America	G	USA	Bankamp et al.	MG986434	https://www.ncbi.nlm.nih.gov/nuccore/MG986434	Homo sapiens
+MuVs/Massachusetts.USA/11.16/6[G]	2016-03-22	MuVs/Massachusetts.USA/11.16/6[G]	G	G	North America	G	USA	Byrne et al.	MF965281	https://www.ncbi.nlm.nih.gov/nuccore/MF965281	Homo sapiens
+MuVs/Massachusetts.USA/14.16/3[G]	2016-04-12	MuVs/Massachusetts.USA/14.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965297	https://www.ncbi.nlm.nih.gov/nuccore/MF965297	Homo sapiens
+MuVs/Massachusetts.USA/13.16/3[G]	2016-03-31	MuVs/Massachusetts.USA/13.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965292	https://www.ncbi.nlm.nih.gov/nuccore/MF965292	Homo sapiens
+MuVs/Massachusetts.USA/11.16/2[G]	2016-03-15	MuVs/Massachusetts.USA/11.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965220	https://www.ncbi.nlm.nih.gov/nuccore/MF965220	Homo sapiens
+MuVs/Massachusetts.USA/10.16/14[G]	2016-03-15	MuVs/Massachusetts.USA/10.16/14[G]	G	G	North America	G	USA	Byrne et al.	MF965248	https://www.ncbi.nlm.nih.gov/nuccore/MF965248	Homo sapiens
+MuVs/Massachusetts.USA/11.16/[G]	2016-03-14	MuVs/Massachusetts.USA/11.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965215	https://www.ncbi.nlm.nih.gov/nuccore/MF965215	Homo sapiens
+MuVs/Massachusetts.USA/10.16/5[G]	2016-03-10	MuVs/Massachusetts.USA/10.16/5[G]	G	G	North America	G	USA	Byrne et al.	MF965253	https://www.ncbi.nlm.nih.gov/nuccore/MF965253	Homo sapiens
+MuVs/Massachusetts.USA/9.16/3[G]	2016-03-05	MuVs/Massachusetts.USA/9.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965286	https://www.ncbi.nlm.nih.gov/nuccore/MF965286	Homo sapiens
+MuVs/Massachusetts.USA/9.16/2[G]	2016-03-06	MuVs/Massachusetts.USA/9.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965302	https://www.ncbi.nlm.nih.gov/nuccore/MF965302	Homo sapiens
+MuVs/Massachusetts.USA/13.16/2[G]	2016-03-30	MuVs/Massachusetts.USA/13.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965267	https://www.ncbi.nlm.nih.gov/nuccore/MF965267	Homo sapiens
+MuVs/Massachusetts.USA/12.16/[G]	2016-03-23	MuVs/Massachusetts.USA/12.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965287	https://www.ncbi.nlm.nih.gov/nuccore/MF965287	Homo sapiens
+MuVs/Massachusetts.USA/10.16/6[G]	2016-03-09	MuVs/Massachusetts.USA/10.16/6[G]	G	G	North America	G	USA	Byrne et al.	MF965205	https://www.ncbi.nlm.nih.gov/nuccore/MF965205	Homo sapiens
+MuVs/Arkansas.USA/46.16/[G]	2016-11-11	MuVs/Arkansas.USA/46.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585605	https://www.ncbi.nlm.nih.gov/nuccore/MK585605	Homo sapiens
+MuVs/Arkansas.USA/46.16/[G]	2016-11-08	MuVs/Arkansas.USA/46.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585591	https://www.ncbi.nlm.nih.gov/nuccore/MK585591	Homo sapiens
+MuVs/Arkansas.USA/43.16/[G]	2016-10-18	MuVs/Arkansas.USA/43.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585585	https://www.ncbi.nlm.nih.gov/nuccore/MK585585	Homo sapiens
+MuVs/Arkansas.USA/47.16/[G]	2016-11-17	MuVs/Arkansas.USA/47.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585573	https://www.ncbi.nlm.nih.gov/nuccore/MK585573	Homo sapiens
+MuVs/Arkansas.USA/45.16/[G]	2016-11-02	MuVs/Arkansas.USA/45.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585607	https://www.ncbi.nlm.nih.gov/nuccore/MK585607	Homo sapiens
+MuVs/Hawaii.USA/24.17	2017-06-12	MuVs/Hawaii.USA/24.17	G	G	North America	G	USA	Stinnett et al.	MT880122	https://www.ncbi.nlm.nih.gov/nuccore/MT880122	Homo sapiens
+MuVs/Hawaii.USA/23.17/2	2017-06-05	MuVs/Hawaii.USA/23.17/2	G	G	North America	G	USA	Stinnett et al.	MT880124	https://www.ncbi.nlm.nih.gov/nuccore/MT880124	Homo sapiens
+MuVs/Hawaii.USA/33.17/4	2017-08-21	MuVs/Hawaii.USA/33.17/4	G	G	North America	G	USA	Stinnett et al.	MT880127	https://www.ncbi.nlm.nih.gov/nuccore/MT880127	Homo sapiens
+MuVs/Hawaii.USA/44.17/12	2017-11-03	MuVs/Hawaii.USA/44.17/12	G	G	North America	G	USA	Stinnett et al.	MT880123	https://www.ncbi.nlm.nih.gov/nuccore/MT880123	Homo sapiens
+MuVs/Hawaii.USA/40.17/2	2017-10-06	MuVs/Hawaii.USA/40.17/2	G	G	North America	G	USA	Stinnett et al.	MT880126	https://www.ncbi.nlm.nih.gov/nuccore/MT880126	Homo sapiens
+MuVs/Hawaii.USA/41.17/2	2017-10-11	MuVs/Hawaii.USA/41.17/2	G	G	North America	G	USA	Stinnett et al.	MT880121	https://www.ncbi.nlm.nih.gov/nuccore/MT880121	Homo sapiens
+MuVs/Hawaii.USA/41.17/	2017-10-13	MuVs/Hawaii.USA/41.17/	G	G	North America	G	USA	Stinnett et al.	MT880125	https://www.ncbi.nlm.nih.gov/nuccore/MT880125	Homo sapiens
+MuVs/Arkansas.USA/41.16/[G]	2016-10-03	MuVs/Arkansas.USA/41.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585597	https://www.ncbi.nlm.nih.gov/nuccore/MK585597	Homo sapiens
+MuVs/Arkansas.USA/43.16/[G]	2016-10-17	MuVs/Arkansas.USA/43.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585590	https://www.ncbi.nlm.nih.gov/nuccore/MK585590	Homo sapiens
+MuVs/Arkansas.USA/13.17/[G]	2017-03-27	MuVs/Arkansas.USA/13.17/[G]	G	G	North America	G	USA	Alkam et al.	MK585572	https://www.ncbi.nlm.nih.gov/nuccore/MK585572	Homo sapiens
+MuVs/Arkansas.USA/13.17/[G]	2017-03-26	MuVs/Arkansas.USA/13.17/[G]	G	G	North America	G	USA	Alkam et al.	MK585574	https://www.ncbi.nlm.nih.gov/nuccore/MK585574	Homo sapiens
+MuVs/Arkansas.USA/44.16/[G]	2016-10-27	MuVs/Arkansas.USA/44.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585578	https://www.ncbi.nlm.nih.gov/nuccore/MK585578	Homo sapiens
+MuVs/Arkansas.USA/5.17/[G]	2017-02-01	MuVs/Arkansas.USA/5.17/[G]	G	G	North America	G	USA	Alkam et al.	MK585586	https://www.ncbi.nlm.nih.gov/nuccore/MK585586	Homo sapiens
+MuVs/Arkansas.USA/47.16/[G]	2016-11-15	MuVs/Arkansas.USA/47.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585577	https://www.ncbi.nlm.nih.gov/nuccore/MK585577	Homo sapiens
+MuVs/Arkansas.USA/47.16/[G]	2016-11-14	MuVs/Arkansas.USA/47.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585603	https://www.ncbi.nlm.nih.gov/nuccore/MK585603	Homo sapiens
+MuVs/Arkansas.USA/41.16/[G]	2016-10-04	MuVs/Arkansas.USA/41.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585596	https://www.ncbi.nlm.nih.gov/nuccore/MK585596	Homo sapiens
+MuVs/Arkansas.USA/44.16/[G]	2016-10-26	MuVs/Arkansas.USA/44.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585598	https://www.ncbi.nlm.nih.gov/nuccore/MK585598	Homo sapiens
+MuVs/Arkansas.USA/47.16/[G]	2016-11-13	MuVs/Arkansas.USA/47.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585594	https://www.ncbi.nlm.nih.gov/nuccore/MK585594	Homo sapiens
+MuVs/Ohio.USA/2.17/FH128[G]	2017-01-16 (2017-01-01 - 2017-01-31)	MuVs/Ohio.USA/2.17/FH128[G]	G	G	North America	G	USA	Moncla et al.	MT859634	https://www.ncbi.nlm.nih.gov/nuccore/MT859634	Homo sapiens
+MuVs/Arkansas.USA/5.17/[G]	2017-02-02	MuVs/Arkansas.USA/5.17/[G]	G	G	North America	G	USA	Alkam et al.	MK585617	https://www.ncbi.nlm.nih.gov/nuccore/MK585617	Homo sapiens
+MuVs/Ohio.USA/7.17/FH130[G]	2017-02-02 (2017-02-01 - 2017-02-28)	MuVs/Ohio.USA/7.17/FH130[G]	G	G	North America	G	USA	Moncla et al.	MT859636	https://www.ncbi.nlm.nih.gov/nuccore/MT859636	Homo sapiens
+MuVs/Arkansas.USA/47.16/[G]	2016-11-16	MuVs/Arkansas.USA/47.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585587	https://www.ncbi.nlm.nih.gov/nuccore/MK585587	Homo sapiens
+MuVs/Arkansas.USA/49.16/[G]	2016-11-29	MuVs/Arkansas.USA/49.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585615	https://www.ncbi.nlm.nih.gov/nuccore/MK585615	Homo sapiens
+MuVs/Arkansas.USA/13.17/[G]	2017-03-29	MuVs/Arkansas.USA/13.17/[G]	G	G	North America	G	USA	Alkam et al.	MK585571	https://www.ncbi.nlm.nih.gov/nuccore/MK585571	Homo sapiens
+MuVs/Arkansas.USA/48.16/[G]	2016-11-22	MuVs/Arkansas.USA/48.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585582	https://www.ncbi.nlm.nih.gov/nuccore/MK585582	Homo sapiens
+MuVs/Arkansas.USA/45.16/[G]	2016-11-05	MuVs/Arkansas.USA/45.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585602	https://www.ncbi.nlm.nih.gov/nuccore/MK585602	Homo sapiens
+MuVs/Arkansas.USA/45.16/[G]	2016-10-31	MuVs/Arkansas.USA/45.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585606	https://www.ncbi.nlm.nih.gov/nuccore/MK585606	Homo sapiens
+MuVs/Arkansas.USA/51.16/[G]	2016-12-16	MuVs/Arkansas.USA/51.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585613	https://www.ncbi.nlm.nih.gov/nuccore/MK585613	Homo sapiens
+MuVs/Arkansas.USA/50.16/[G]	2016-12-10	MuVs/Arkansas.USA/50.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585609	https://www.ncbi.nlm.nih.gov/nuccore/MK585609	Homo sapiens
+MuVs/Arkansas.USA/51.16/[G]	2016-12-17	MuVs/Arkansas.USA/51.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585589	https://www.ncbi.nlm.nih.gov/nuccore/MK585589	Homo sapiens
+MuVs/Arkansas.USA/43.16/[G]	2016-10-17	MuVs/Arkansas.USA/43.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585580	https://www.ncbi.nlm.nih.gov/nuccore/MK585580	Homo sapiens
+MuVs/Arkansas.USA/52.16/[G]	2016-12-19	MuVs/Arkansas.USA/52.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585593	https://www.ncbi.nlm.nih.gov/nuccore/MK585593	Homo sapiens
+MuVs/Arkansas.USA/45.16/[G]	2016-10-31	MuVs/Arkansas.USA/45.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585592	https://www.ncbi.nlm.nih.gov/nuccore/MK585592	Homo sapiens
+MuVs/Washington.USA/16.17/FH63[G]	2017-04-21	MuVs/Washington.USA/16.17/FH63[G]	G	G	North America	G	USA	Moncla et al.	MT859569	https://www.ncbi.nlm.nih.gov/nuccore/MT859569	Homo sapiens
+MuVs/Washington.USA/17.17/FH38[G]	2017-04-25	MuVs/Washington.USA/17.17/FH38[G]	G	G	North America	G	USA	Moncla et al.	MT859544	https://www.ncbi.nlm.nih.gov/nuccore/MT859544	Homo sapiens
+MuVs/Washington.USA/16.17/FH36[G]	2017-04-19	MuVs/Washington.USA/16.17/FH36[G]	G	G	North America	G	USA	Moncla et al.	MT859542	https://www.ncbi.nlm.nih.gov/nuccore/MT859542	Homo sapiens
+MuVs/Arkansas.USA/46.16/[G]	2016-11-10	MuVs/Arkansas.USA/46.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585616	https://www.ncbi.nlm.nih.gov/nuccore/MK585616	Homo sapiens
+MuVs/Arkansas.USA/47.16/[G]	2016-11-14	MuVs/Arkansas.USA/47.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585600	https://www.ncbi.nlm.nih.gov/nuccore/MK585600	Homo sapiens
+MuVs/Arkansas.USA/47.16/[G]	2016-11-17	MuVs/Arkansas.USA/47.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585584	https://www.ncbi.nlm.nih.gov/nuccore/MK585584	Homo sapiens
+MuVs/Washington.USA/12.17/FH76[G]	2017-03-22	MuVs/Washington.USA/12.17/FH76[G]	G	G	North America	G	USA	Moncla et al.	MT859582	https://www.ncbi.nlm.nih.gov/nuccore/MT859582	Homo sapiens
+MuVs/Arkansas.USA/43.16/[G]	2016-10-18	MuVs/Arkansas.USA/43.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585595	https://www.ncbi.nlm.nih.gov/nuccore/MK585595	Homo sapiens
+MuVs/Arkansas.USA/45.16/[G]	2016-11-04	MuVs/Arkansas.USA/45.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585588	https://www.ncbi.nlm.nih.gov/nuccore/MK585588	Homo sapiens
+MuVs/Arkansas.USA/45.16/[G]	2016-11-04	MuVs/Arkansas.USA/45.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585604	https://www.ncbi.nlm.nih.gov/nuccore/MK585604	Homo sapiens
+MuVs/Arkansas.USA/48.16/[G]	2016-11-23	MuVs/Arkansas.USA/48.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585575	https://www.ncbi.nlm.nih.gov/nuccore/MK585575	Homo sapiens
+MuVs/Arkansas.USA/51.16/[G]	2016-12-14	MuVs/Arkansas.USA/51.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585608	https://www.ncbi.nlm.nih.gov/nuccore/MK585608	Homo sapiens
+MuVs/Arkansas.USA/12.17/[G]	2017-03-21	MuVs/Arkansas.USA/12.17/[G]	G	G	North America	G	USA	Alkam et al.	MK585570	https://www.ncbi.nlm.nih.gov/nuccore/MK585570	Homo sapiens
+MuVs/Washington.USA/4.17/FH48[G]	2017-01-28	MuVs/Washington.USA/4.17/FH48[G]	G	G	North America	G	USA	Moncla et al.	MT859554	https://www.ncbi.nlm.nih.gov/nuccore/MT859554	Homo sapiens
+MuVs/Wisconsin.USA/50.16/FH126[G]	2016-12-01 (2016-12-01 - 2016-12-27)	MuVs/Wisconsin.USA/50.16/FH126[G]	G	G	North America	G	USA	Moncla et al.	MT859632	https://www.ncbi.nlm.nih.gov/nuccore/MT859632	Homo sapiens
+MuVs/Kansas.USA/8.17[G]	2017-02-21	MuVs/Kansas.USA/8.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986432	https://www.ncbi.nlm.nih.gov/nuccore/MG986432	Homo sapiens
+MuVs/Washington.USA/3.17/FH62[G]	2017-01-19	MuVs/Washington.USA/3.17/FH62[G]	G	G	North America	G	USA	Moncla et al.	MT859568	https://www.ncbi.nlm.nih.gov/nuccore/MT859568	Homo sapiens
+MuVs/Washington.USA/7.17/FH15[G]	2017-02-15	MuVs/Washington.USA/7.17/FH15[G]	G	G	North America	G	USA	Moncla et al.	MT859521	https://www.ncbi.nlm.nih.gov/nuccore/MT859521	Homo sapiens
+MuVs/Washington.USA/18.17/FH147[G]	2017-05-04	MuVs/Washington.USA/18.17/FH147[G]	G	G	North America	G	USA	Moncla et al.	MT859653	https://www.ncbi.nlm.nih.gov/nuccore/MT859653	Homo sapiens
+MuVs/Washington.USA/11.17/FH143[G]	2017-03-15	MuVs/Washington.USA/11.17/FH143[G]	G	G	North America	G	USA	Moncla et al.	MT859649	https://www.ncbi.nlm.nih.gov/nuccore/MT859649	Homo sapiens
+MuVs/Washington.USA/12.17/FH144[G]	2017-03-27	MuVs/Washington.USA/12.17/FH144[G]	G	G	North America	G	USA	Moncla et al.	MT859650	https://www.ncbi.nlm.nih.gov/nuccore/MT859650	Homo sapiens
+MuVs/Washington.USA/2.17/FH84[G]	2017-01-13	MuVs/Washington.USA/2.17/FH84[G]	G	G	North America	G	USA	Moncla et al.	MT859590	https://www.ncbi.nlm.nih.gov/nuccore/MT859590	Homo sapiens
+MuVs/Washington.USA/15.17/FH146[G]	2017-04-18	MuVs/Washington.USA/15.17/FH146[G]	G	G	North America	G	USA	Moncla et al.	MT859652	https://www.ncbi.nlm.nih.gov/nuccore/MT859652	Homo sapiens
+MuVs/Washington.USA/3.17/FH67[G]	2017-01-17	MuVs/Washington.USA/3.17/FH67[G]	G	G	North America	G	USA	Moncla et al.	MT859573	https://www.ncbi.nlm.nih.gov/nuccore/MT859573	Homo sapiens
+MuVs/Arkansas.USA/43.16/[G]	2016-10-19	MuVs/Arkansas.USA/43.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585579	https://www.ncbi.nlm.nih.gov/nuccore/MK585579	Homo sapiens
+MuVs/Arkansas.USA/40.16/[G]	2016-09-30	MuVs/Arkansas.USA/40.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585583	https://www.ncbi.nlm.nih.gov/nuccore/MK585583	Homo sapiens
+MuVs/Washington.USA/7.17/FH106[G]	2017-02-14	MuVs/Washington.USA/7.17/FH106[G]	G	G	North America	G	USA	Moncla et al.	MT859612	https://www.ncbi.nlm.nih.gov/nuccore/MT859612	Homo sapiens
+MuVs/Washington.USA/1.17/FH77[G]	2017-01-11	MuVs/Washington.USA/1.17/FH77[G]	G	G	North America	G	USA	Moncla et al.	MT859583	https://www.ncbi.nlm.nih.gov/nuccore/MT859583	Homo sapiens
+MuVs/Washington.USA/4.17/FH103[G]	2017-01-29	MuVs/Washington.USA/4.17/FH103[G]	G	G	North America		USA	Moncla et al.	MT859609	https://www.ncbi.nlm.nih.gov/nuccore/MT859609	Homo sapiens
+MuVs/Washington.USA/20.17/FH81[G]	2017-05-21	MuVs/Washington.USA/20.17/FH81[G]	G	G	North America	G	USA	Moncla et al.	MT859587	https://www.ncbi.nlm.nih.gov/nuccore/MT859587	Homo sapiens
+MuVs/Washington.USA/20.17/FH82[G]	2017-05-22	MuVs/Washington.USA/20.17/FH82[G]	G	G	North America	G	USA	Moncla et al.	MT859588	https://www.ncbi.nlm.nih.gov/nuccore/MT859588	Homo sapiens
+MuVs/Washington.USA/48.16/FH1[G]	2016-12-07	MuVs/Washington.USA/48.16/FH1[G]	G	G	North America	G	USA	Moncla et al.	MT859507	https://www.ncbi.nlm.nih.gov/nuccore/MT859507	Homo sapiens
+MuVs/Washington.USA/49.16/FH158[G]	2016-12-11	MuVs/Washington.USA/49.16/FH158[G]	G	G	North America	G	USA	Moncla et al.	MT859664	https://www.ncbi.nlm.nih.gov/nuccore/MT859664	Homo sapiens
+MuVs/Washington.USA/50.16/FH4[G]	2016-12-13	MuVs/Washington.USA/50.16/FH4[G]	G	G	North America	G	USA	Moncla et al.	MT859510	https://www.ncbi.nlm.nih.gov/nuccore/MT859510	Homo sapiens
+MuVs/Washington.USA/50.16/FH33[G]	2016-12-19	MuVs/Washington.USA/50.16/FH33[G]	G	G	North America	G	USA	Moncla et al.	MT859539	https://www.ncbi.nlm.nih.gov/nuccore/MT859539	Homo sapiens
+MuVs/Washington.USA/51.16/FH46[G]	2016-12-22	MuVs/Washington.USA/51.16/FH46[G]	G	G	North America	G	USA	Moncla et al.	MT859552	https://www.ncbi.nlm.nih.gov/nuccore/MT859552	Homo sapiens
+MuVs/Washington.USA/2.17/FH26[G]	2017-01-12	MuVs/Washington.USA/2.17/FH26[G]	G	G	North America	G	USA	Moncla et al.	MT859532	https://www.ncbi.nlm.nih.gov/nuccore/MT859532	Homo sapiens
+MuVs/Washington.USA/2.17/FH66[G]	2017-01-13	MuVs/Washington.USA/2.17/FH66[G]	G	G	North America	G	USA	Moncla et al.	MT859572	https://www.ncbi.nlm.nih.gov/nuccore/MT859572	Homo sapiens
+MuVs/Arkansas.USA/38.16/[G]	2016-09-15	MuVs/Arkansas.USA/38.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585612	https://www.ncbi.nlm.nih.gov/nuccore/MK585612	Homo sapiens
+MuVs/Washington.USA/4.17/FH60[G]	2017-02-03	MuVs/Washington.USA/4.17/FH60[G]	G	G	North America	G	USA	Moncla et al.	MT859566	https://www.ncbi.nlm.nih.gov/nuccore/MT859566	Homo sapiens
+MuVs/Washington.USA/5.17/FH10[G]	2017-02-04	MuVs/Washington.USA/5.17/FH10[G]	G	G	North America	G	USA	Moncla et al.	MT859516	https://www.ncbi.nlm.nih.gov/nuccore/MT859516	Homo sapiens
+MuVs/Washington.USA/5.17/FH11[G]	2017-02-08	MuVs/Washington.USA/5.17/FH11[G]	G	G	North America	G	USA	Moncla et al.	MT859517	https://www.ncbi.nlm.nih.gov/nuccore/MT859517	Homo sapiens
+MuVs/Washington.USA/9.17/FH42[G]	2017-03-06	MuVs/Washington.USA/9.17/FH42[G]	G	G	North America	G	USA	Moncla et al.	MT859548	https://www.ncbi.nlm.nih.gov/nuccore/MT859548	Homo sapiens
+MuVs/Washington.USA/10.17/FH43[G]	2017-03-07	MuVs/Washington.USA/10.17/FH43[G]	G	G	North America	G	USA	Moncla et al.	MT859549	https://www.ncbi.nlm.nih.gov/nuccore/MT859549	Homo sapiens
+MuVs/Washington.USA/52.16/FH75[G]	2016-12-30	MuVs/Washington.USA/52.16/FH75[G]	G	G	North America	G	USA	Moncla et al.	MT859581	https://www.ncbi.nlm.nih.gov/nuccore/MT859581	Homo sapiens
+MuVs/Washington.USA/1.17/FH5[G]	2017-01-03	MuVs/Washington.USA/1.17/FH5[G]	G	G	North America	G	USA	Moncla et al.	MT859511	https://www.ncbi.nlm.nih.gov/nuccore/MT859511	Homo sapiens
+MuVs/Washington.USA/1.17/FH160[G]	2017-01-03	MuVs/Washington.USA/1.17/FH160[G]	G	G	North America	G	USA	Moncla et al.	MT859666	https://www.ncbi.nlm.nih.gov/nuccore/MT859666	Homo sapiens
+MuVs/Arkansas.USA/51.16/[G]	2016-12-16	MuVs/Arkansas.USA/51.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585599	https://www.ncbi.nlm.nih.gov/nuccore/MK585599	Homo sapiens
+MuVs/Arkansas.USA/46.16/[G]	2016-11-11	MuVs/Arkansas.USA/46.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585610	https://www.ncbi.nlm.nih.gov/nuccore/MK585610	Homo sapiens
+MuVs/Arkansas.USA/46.16/[G]	2016-11-09	MuVs/Arkansas.USA/46.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585581	https://www.ncbi.nlm.nih.gov/nuccore/MK585581	Homo sapiens
+MuVs/Arkansas.USA/45.16/[G]	2016-11-02	MuVs/Arkansas.USA/45.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585576	https://www.ncbi.nlm.nih.gov/nuccore/MK585576	Homo sapiens
+MuVs/Washington.USA/50.16/FH3[G]	2016-12-12	MuVs/Washington.USA/50.16/FH3[G]	G	G	North America	G	USA	Moncla et al.	MT859509	https://www.ncbi.nlm.nih.gov/nuccore/MT859509	Homo sapiens
+MuVs/Washington.USA/51.16/FH41[G]	2016-12-21	MuVs/Washington.USA/51.16/FH41[G]	G	G	North America	G	USA	Moncla et al.	MT859547	https://www.ncbi.nlm.nih.gov/nuccore/MT859547	Homo sapiens
+MuVs/Washington.USA/5.17/FH27[G]	2017-01-30	MuVs/Washington.USA/5.17/FH27[G]	G	G	North America	G	USA	Moncla et al.	MT859533	https://www.ncbi.nlm.nih.gov/nuccore/MT859533	Homo sapiens
+MuVs/Arkansas.USA/51.16/[G]	2016-12-16	MuVs/Arkansas.USA/51.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585601	https://www.ncbi.nlm.nih.gov/nuccore/MK585601	Homo sapiens
+MuVs/Washington.USA/6.17/FH12[G]	2017-02-08	MuVs/Washington.USA/6.17/FH12[G]	G	G	North America	G	USA	Moncla et al.	MT859518	https://www.ncbi.nlm.nih.gov/nuccore/MT859518	Homo sapiens
+MuVs/Washington.USA/5.17/FH72[G]	2017-02-01	MuVs/Washington.USA/5.17/FH72[G]	G	G	North America	G	USA	Moncla et al.	MT859578	https://www.ncbi.nlm.nih.gov/nuccore/MT859578	Homo sapiens
+MuVs/Washington.USA/19.17/FH80[G]	2017-05-11	MuVs/Washington.USA/19.17/FH80[G]	G	G	North America	G	USA	Moncla et al.	MT859586	https://www.ncbi.nlm.nih.gov/nuccore/MT859586	Homo sapiens
+MuVs/Washington.USA/29.17/FH83[G]	2017-07-26	MuVs/Washington.USA/29.17/FH83[G]	G	G	North America	G	USA	Moncla et al.	MT859589	https://www.ncbi.nlm.nih.gov/nuccore/MT859589	Homo sapiens
+MuVs/Arkansas.USA/45.16/[G]	2016-10-30	MuVs/Arkansas.USA/45.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585611	https://www.ncbi.nlm.nih.gov/nuccore/MK585611	Homo sapiens
+MuVs/Arkansas.USA/48.16/[G]	2016-11-21	MuVs/Arkansas.USA/48.16/[G]	G	G	North America	G	USA	Alkam et al.	MK585614	https://www.ncbi.nlm.nih.gov/nuccore/MK585614	Homo sapiens
+MuVs/Washington.USA/1.17/FH7[G]	2017-01-06	MuVs/Washington.USA/1.17/FH7[G]	G	G	North America	G	USA	Moncla et al.	MT859513	https://www.ncbi.nlm.nih.gov/nuccore/MT859513	Homo sapiens
+MuVs/Washington.USA/2.17/FH47[G]	2017-01-11	MuVs/Washington.USA/2.17/FH47[G]	G	G	North America	G	USA	Moncla et al.	MT859553	https://www.ncbi.nlm.nih.gov/nuccore/MT859553	Homo sapiens
+MuVs/Washington.USA/4.17/FH68[G]	2017-01-26	MuVs/Washington.USA/4.17/FH68[G]	G	G	North America	G	USA	Moncla et al.	MT859574	https://www.ncbi.nlm.nih.gov/nuccore/MT859574	Homo sapiens
+MuVs/Washington.USA/49.16/FH55[G]	2016-12-07	MuVs/Washington.USA/49.16/FH55[G]	G	G	North America	G	USA	Moncla et al.	MT859561	https://www.ncbi.nlm.nih.gov/nuccore/MT859561	Homo sapiens
+MuVs/Washington.USA/1.17/FH29[G]	2017-01-10	MuVs/Washington.USA/1.17/FH29[G]	G	G	North America		USA	Moncla et al.	MT859535	https://www.ncbi.nlm.nih.gov/nuccore/MT859535	Homo sapiens
+MuVs/Washington.USA/11.17/FH56[G]	2017-03-15	MuVs/Washington.USA/11.17/FH56[G]	G	G	North America	G	USA	Moncla et al.	MT859562	https://www.ncbi.nlm.nih.gov/nuccore/MT859562	Homo sapiens
+MuVs/Washington.USA/3.17/FH24[G]	2017-01-19	MuVs/Washington.USA/3.17/FH24[G]	G	G	North America	G	USA	Moncla et al.	MT859530	https://www.ncbi.nlm.nih.gov/nuccore/MT859530	Homo sapiens
+MuVs/Washington.USA/4.17/FH49[G]	2017-01-31	MuVs/Washington.USA/4.17/FH49[G]	G	G	North America	G	USA	Moncla et al.	MT859555	https://www.ncbi.nlm.nih.gov/nuccore/MT859555	Homo sapiens
+MuVs/Washington.USA/6.17/FH13[G]	2017-02-13	MuVs/Washington.USA/6.17/FH13[G]	G	G	North America	G	USA	Moncla et al.	MT859519	https://www.ncbi.nlm.nih.gov/nuccore/MT859519	Homo sapiens
+MuVs/Washington.USA/12.17/FH97[G]	2017-03-23	MuVs/Washington.USA/12.17/FH97[G]	G	G	North America		USA	Moncla et al.	MT859603	https://www.ncbi.nlm.nih.gov/nuccore/MT859603	Homo sapiens
+MuVs/Washington.USA/49.16/FH45[G]	2016-12-10	MuVs/Washington.USA/49.16/FH45[G]	G	G	North America	G	USA	Moncla et al.	MT859551	https://www.ncbi.nlm.nih.gov/nuccore/MT859551	Homo sapiens
+MuVs/Washington.USA/50.16/FH2[G]	2016-12-13	MuVs/Washington.USA/50.16/FH2[G]	G	G	North America	G	USA	Moncla et al.	MT859508	https://www.ncbi.nlm.nih.gov/nuccore/MT859508	Homo sapiens
+MuVs/Washington.USA/30.17/FH32[G]	2017-07-25	MuVs/Washington.USA/30.17/FH32[G]	G	G	North America	G	USA	Moncla et al.	MT859538	https://www.ncbi.nlm.nih.gov/nuccore/MT859538	Homo sapiens
+MuVs/Washington.USA/17.17/FH39[G]	2017-04-27	MuVs/Washington.USA/17.17/FH39[G]	G	G	North America	G	USA	Moncla et al.	MT859545	https://www.ncbi.nlm.nih.gov/nuccore/MT859545	Homo sapiens
+MuVs/Washington.USA/20.17/FH148[G]	2017-05-24	MuVs/Washington.USA/20.17/FH148[G]	G	G	North America	G	USA	Moncla et al.	MT859654	https://www.ncbi.nlm.nih.gov/nuccore/MT859654	Homo sapiens
+MuVs/Washington.USA/23.17/FH149[G]	2017-06-11	MuVs/Washington.USA/23.17/FH149[G]	G	G	North America	G	USA	Moncla et al.	MT859655	https://www.ncbi.nlm.nih.gov/nuccore/MT859655	Homo sapiens
+MuVs/Washington.USA/15.17/FH20[G]	2017-04-13	MuVs/Washington.USA/15.17/FH20[G]	G	G	North America	G	USA	Moncla et al.	MT859526	https://www.ncbi.nlm.nih.gov/nuccore/MT859526	Homo sapiens
+MuVs/Washington.USA/23.17/FH150[G]	2017-06-12	MuVs/Washington.USA/23.17/FH150[G]	G	G	North America	G	USA	Moncla et al.	MT859656	https://www.ncbi.nlm.nih.gov/nuccore/MT859656	Homo sapiens
+MuVs/Washington.USA/20.17/FH73[G]	2017-05-21	MuVs/Washington.USA/20.17/FH73[G]	G	G	North America	G	USA	Moncla et al.	MT859579	https://www.ncbi.nlm.nih.gov/nuccore/MT859579	Homo sapiens
+MuVs/Washington.USA/21.17/FH69[G]	2017-05-22	MuVs/Washington.USA/21.17/FH69[G]	G	G	North America	G	USA	Moncla et al.	MT859575	https://www.ncbi.nlm.nih.gov/nuccore/MT859575	Homo sapiens
+MuVs/Washington.USA/1.17/FH65[G]	2017-01-08	MuVs/Washington.USA/1.17/FH65[G]	G	G	North America	G	USA	Moncla et al.	MT859571	https://www.ncbi.nlm.nih.gov/nuccore/MT859571	Homo sapiens
+MuVs/Washington.USA/8.17/FH17[G]	2017-02-23	MuVs/Washington.USA/8.17/FH17[G]	G	G	North America	G	USA	Moncla et al.	MT859523	https://www.ncbi.nlm.nih.gov/nuccore/MT859523	Homo sapiens
+MuVs/Washington.USA/12.17/FH34[G]	2017-03-22	MuVs/Washington.USA/12.17/FH34[G]	G	G	North America	G	USA	Moncla et al.	MT859540	https://www.ncbi.nlm.nih.gov/nuccore/MT859540	Homo sapiens
+MuVs/Washington.USA/50.16/FH64[G]	2016-12-12	MuVs/Washington.USA/50.16/FH64[G]	G	G	North America	G	USA	Moncla et al.	MT859570	https://www.ncbi.nlm.nih.gov/nuccore/MT859570	Homo sapiens
+MuVs/Washington.USA/3.17/FH25[G]	2017-01-20	MuVs/Washington.USA/3.17/FH25[G]	G	G	North America	G	USA	Moncla et al.	MT859531	https://www.ncbi.nlm.nih.gov/nuccore/MT859531	Homo sapiens
+MuVs/Washington.USA/2.17/FH54[G]	2017-01-12	MuVs/Washington.USA/2.17/FH54[G]	G	G	North America	G	USA	Moncla et al.	MT859560	https://www.ncbi.nlm.nih.gov/nuccore/MT859560	Homo sapiens
+MuVs/Washington.USA/9.17/FH18[G]	2017-03-01	MuVs/Washington.USA/9.17/FH18[G]	G	G	North America	G	USA	Moncla et al.	MT859524	https://www.ncbi.nlm.nih.gov/nuccore/MT859524	Homo sapiens
+MuVs/Washington.USA/9.17/FH31[G]	2017-03-01	MuVs/Washington.USA/9.17/FH31[G]	G	G	North America		USA	Moncla et al.	MT859537	https://www.ncbi.nlm.nih.gov/nuccore/MT859537	Homo sapiens
+MuVs/Washington.USA/2.17/FH22[G]	2017-01-17	MuVs/Washington.USA/2.17/FH22[G]	G	G	North America	G	USA	Moncla et al.	MT859528	https://www.ncbi.nlm.nih.gov/nuccore/MT859528	Homo sapiens
+MuVs/Washington.USA/5.17/FH162[G]	2017-02-02	MuVs/Washington.USA/5.17/FH162[G]	G	G	North America	G	USA	Moncla et al.	MT859668	https://www.ncbi.nlm.nih.gov/nuccore/MT859668	Homo sapiens
+MuVs/Washington.USA/22.17/FH74[G]	2017-05-30	MuVs/Washington.USA/22.17/FH74[G]	G	G	North America	G	USA	Moncla et al.	MT859580	https://www.ncbi.nlm.nih.gov/nuccore/MT859580	Homo sapiens
+MuVs/Washington.USA/16.17/FH152[G]	2017-04-17	MuVs/Washington.USA/16.17/FH152[G]	G	G	North America	G	USA	Moncla et al.	MT859658	https://www.ncbi.nlm.nih.gov/nuccore/MT859658	Homo sapiens
+MuVs/Washington.USA/2.17/FH21[G]	2017-01-13	MuVs/Washington.USA/2.17/FH21[G]	G	G	North America	G	USA	Moncla et al.	MT859527	https://www.ncbi.nlm.nih.gov/nuccore/MT859527	Homo sapiens
+MuVs/Washington.USA/7.17/FH166[G]	2017-02-19	MuVs/Washington.USA/7.17/FH166[G]	G	G	North America	G	USA	Moncla et al.	MT859672	https://www.ncbi.nlm.nih.gov/nuccore/MT859672	Homo sapiens
+MuVs/Washington.USA/5.17/FH161[G]	2017-01-31	MuVs/Washington.USA/5.17/FH161[G]	G	G	North America	G	USA	Moncla et al.	MT859667	https://www.ncbi.nlm.nih.gov/nuccore/MT859667	Homo sapiens
+MuVs/Washington.USA/6.17/FH14[G]	2017-02-08	MuVs/Washington.USA/6.17/FH14[G]	G	G	North America	G	USA	Moncla et al.	MT859520	https://www.ncbi.nlm.nih.gov/nuccore/MT859520	Homo sapiens
+MuVs/Washington.USA/6.17/FH105[G]	2017-02-10	MuVs/Washington.USA/6.17/FH105[G]	G	G	North America		USA	Moncla et al.	MT859611	https://www.ncbi.nlm.nih.gov/nuccore/MT859611	Homo sapiens
+MuVs/Washington.USA/8.17/FH19[G]	2017-02-28	MuVs/Washington.USA/8.17/FH19[G]	G	G	North America	G	USA	Moncla et al.	MT859525	https://www.ncbi.nlm.nih.gov/nuccore/MT859525	Homo sapiens
+MuVs/Washington.USA/12.17/FH35[G]	2017-03-24	MuVs/Washington.USA/12.17/FH35[G]	G	G	North America	G	USA	Moncla et al.	MT859541	https://www.ncbi.nlm.nih.gov/nuccore/MT859541	Homo sapiens
+MuVs/Washington.USA/4.17/FH70[G]	2017-01-30	MuVs/Washington.USA/4.17/FH70[G]	G	G	North America	G	USA	Moncla et al.	MT859576	https://www.ncbi.nlm.nih.gov/nuccore/MT859576	Homo sapiens
+MuVs/Washington.USA/4.17/FH71[G]	2017-01-30	MuVs/Washington.USA/4.17/FH71[G]	G	G	North America	G	USA	Moncla et al.	MT859577	https://www.ncbi.nlm.nih.gov/nuccore/MT859577	Homo sapiens
+MuVs/Washington.USA/52.16/FH28[G]	2016-12-31	MuVs/Washington.USA/52.16/FH28[G]	G	G	North America		USA	Moncla et al.	MT859534	https://www.ncbi.nlm.nih.gov/nuccore/MT859534	Homo sapiens
+MuVs/Washington.USA/1.17/FH6[G]	2017-01-04	MuVs/Washington.USA/1.17/FH6[G]	G	G	North America	G	USA	Moncla et al.	MT859512	https://www.ncbi.nlm.nih.gov/nuccore/MT859512	Homo sapiens
+MuVs/Washington.USA/1.17/FH8[G]	2017-01-05	MuVs/Washington.USA/1.17/FH8[G]	G	G	North America	G	USA	Moncla et al.	MT859514	https://www.ncbi.nlm.nih.gov/nuccore/MT859514	Homo sapiens
+MuVs/Washington.USA/2.17/FH23[G]	2017-01-13	MuVs/Washington.USA/2.17/FH23[G]	G	G	North America	G	USA	Moncla et al.	MT859529	https://www.ncbi.nlm.nih.gov/nuccore/MT859529	Homo sapiens
+MuVs/Washington.USA/2.17/FH58[G]	2017-01-13	MuVs/Washington.USA/2.17/FH58[G]	G	G	North America	G	USA	Moncla et al.	MT859564	https://www.ncbi.nlm.nih.gov/nuccore/MT859564	Homo sapiens
+MuVs/Washington.USA/3.17/FH59[G]	2017-01-18	MuVs/Washington.USA/3.17/FH59[G]	G	G	North America	G	USA	Moncla et al.	MT859565	https://www.ncbi.nlm.nih.gov/nuccore/MT859565	Homo sapiens
+MuVs/Washington.USA/5.17/FH30[G]	2017-02-02	MuVs/Washington.USA/5.17/FH30[G]	G	G	North America	G	USA	Moncla et al.	MT859536	https://www.ncbi.nlm.nih.gov/nuccore/MT859536	Homo sapiens
+MuVs/Washington.USA/5.17/FH9[G]	2017-01-31	MuVs/Washington.USA/5.17/FH9[G]	G	G	North America	G	USA	Moncla et al.	MT859515	https://www.ncbi.nlm.nih.gov/nuccore/MT859515	Homo sapiens
+MuVs/Washington.USA/7.17/FH61[G]	2017-02-22	MuVs/Washington.USA/7.17/FH61[G]	G	G	North America	G	USA	Moncla et al.	MT859567	https://www.ncbi.nlm.nih.gov/nuccore/MT859567	Homo sapiens
+MuVs/Washington.USA/12.17/FH57[G]	2017-03-22	MuVs/Washington.USA/12.17/FH57[G]	G	G	North America	G	USA	Moncla et al.	MT859563	https://www.ncbi.nlm.nih.gov/nuccore/MT859563	Homo sapiens
+MuVs/Washington.USA/10.17/FH52[G]	2017-03-12	MuVs/Washington.USA/10.17/FH52[G]	G	G	North America	G	USA	Moncla et al.	MT859558	https://www.ncbi.nlm.nih.gov/nuccore/MT859558	Homo sapiens
+MuVs/Massachusetts.USA/37.15/[G]	2015-09-15	MuVs/Massachusetts.USA/37.15/[G]	G	G	North America	G	USA	Byrne et al.	MF965262	https://www.ncbi.nlm.nih.gov/nuccore/MF965262	Homo sapiens
+MuVs/NovaScotia.CAN/47.17[G]	2017-11-23	MuVs/NovaScotia.CAN/47.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157222	https://www.ncbi.nlm.nih.gov/nuccore/PQ157222	Homo sapiens
+MuVs/Ohio.USA/2.18/FH102[G]	2018-01-01 (2018-01-01 - 2018-01-28)	MuVs/Ohio.USA/2.18/FH102[G]	G	G	North America	G	USA	Moncla et al.	MT859608	https://www.ncbi.nlm.nih.gov/nuccore/MT859608	Homo sapiens
+MuVs/Massachusetts.USA/46.16/5[G]	2016-11-17	MuVs/Massachusetts.USA/46.16/5[G]	G	G	North America	G	USA	Byrne et al.	MF965207	https://www.ncbi.nlm.nih.gov/nuccore/MF965207	Homo sapiens
+MuVs/Massachusetts.USA/52.16/[G]	2016-12-27	MuVs/Massachusetts.USA/52.16/[G]	G	G	North America	G	USA	Byrne et al.	MG986382	https://www.ncbi.nlm.nih.gov/nuccore/MG986382	Homo sapiens
+MuVs/Washington.USA/11.17/FH96[G]	2017-03-18	MuVs/Washington.USA/11.17/FH96[G]	G	G	North America	G	USA	Moncla et al.	MT859602	https://www.ncbi.nlm.nih.gov/nuccore/MT859602	Homo sapiens
+MuVi/Ontario.CAN/12.17/4[G]	2017-03-01 (2017-03-01 - 2017-03-28)	MuVi/Ontario.CAN/12.17/4[G]	G	G	North America	G	Canada	Stapleton et al.	MK033761	https://www.ncbi.nlm.nih.gov/nuccore/MK033761	Homo sapiens
+MuVi/Ontario.CAN/09.17/4[G]	2017-02-01 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/09.17/4[G]	G	G	North America	G	Canada	Stapleton et al.	MK033747	https://www.ncbi.nlm.nih.gov/nuccore/MK033747	Homo sapiens
+MuVi/Ontario.CAN/06.17/4[G]	2017-02-28 (2017-02-04 - 2017-02-28)	MuVi/Ontario.CAN/06.17/4[G]	G	G	North America	G	Canada	Stapleton et al.	MK033755	https://www.ncbi.nlm.nih.gov/nuccore/MK033755	Homo sapiens
+MuVi/Ontario.CAN/09.17/9[G]	2017-02-28 (2017-02-05 - 2017-02-28)	MuVi/Ontario.CAN/09.17/9[G]	G	G	North America	G	Canada	Stapleton et al.	MK033752	https://www.ncbi.nlm.nih.gov/nuccore/MK033752	Homo sapiens
+MuVi/Ontario.CAN/06.17/3[G]	2017-02-22 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/06.17/3[G]	G	G	North America	G	Canada	Stapleton et al.	MK033754	https://www.ncbi.nlm.nih.gov/nuccore/MK033754	Homo sapiens
+MuVs/Newfoundland.CAN/07.17[G]	2017-02-15	MuVs/Newfoundland.CAN/07.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157137	https://www.ncbi.nlm.nih.gov/nuccore/PQ157137	Homo sapiens
+MuVi/Ontario.CAN/06.17/1[G]	2017-02-15 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/06.17/1[G]	G	G	North America	G	Canada	Stapleton et al.	MK033767	https://www.ncbi.nlm.nih.gov/nuccore/MK033767	Homo sapiens
+MuVi/Ontario.CAN/13.17/2[G]	2017-03-31 (2017-03-05 - 2017-03-31)	MuVi/Ontario.CAN/13.17/2[G]	G	G	North America	G	Canada	Stapleton et al.	MK033764	https://www.ncbi.nlm.nih.gov/nuccore/MK033764	Homo sapiens
+MuVi/Ontario.CAN/09.17/2[G]	2017-02-18 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/09.17/2[G]	G	G	North America	G	Canada	Stapleton et al.	MK033771	https://www.ncbi.nlm.nih.gov/nuccore/MK033771	Homo sapiens
+MuVi/Ontario.CAN/08.17/2[G]	2017-02-02 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/08.17/2[G]	G	G	North America	G	Canada	Stapleton et al.	MK033770	https://www.ncbi.nlm.nih.gov/nuccore/MK033770	Homo sapiens
+MuVi/Ontario.CAN/08.17/3[G]	2017-02-28 (2017-02-06 - 2017-02-28)	MuVi/Ontario.CAN/08.17/3[G]	G	G	North America	G	Canada	Stapleton et al.	MK033757	https://www.ncbi.nlm.nih.gov/nuccore/MK033757	Homo sapiens
+MuVi/Ontario.CAN/07.17/1[G]	2017-02-18 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/07.17/1[G]	G	G	North America	G	Canada	Stapleton et al.	MK033769	https://www.ncbi.nlm.nih.gov/nuccore/MK033769	Homo sapiens
+MuVs/Montana.USA/11.16[G]	2016-03-15	MuVs/Montana.USA/11.16[G]	G	G	North America	G	USA	Bankamp et al.	MG986420	https://www.ncbi.nlm.nih.gov/nuccore/MG986420	Homo sapiens
+MuVs/Massachusetts.USA/30.16/[G]	2016-08-01	MuVs/Massachusetts.USA/30.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965299	https://www.ncbi.nlm.nih.gov/nuccore/MF965299	Homo sapiens
+MuVs/Massachusetts.USA/27.16/[G]	2016-07-09	MuVs/Massachusetts.USA/27.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965202	https://www.ncbi.nlm.nih.gov/nuccore/MF965202	Homo sapiens
+MuVs/Massachusetts.USA/45.16/2[G]	2016-11-09	MuVs/Massachusetts.USA/45.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965273	https://www.ncbi.nlm.nih.gov/nuccore/MF965273	Homo sapiens
+MuVs/Massachusetts.USA/46.16/7[G]	2016-11-17	MuVs/Massachusetts.USA/46.16/7[G]	G	G	North America	G	USA	Byrne et al.	MF965308	https://www.ncbi.nlm.nih.gov/nuccore/MF965308	Homo sapiens
+MuVs/Massachusetts.USA/45.16/4[G]	2016-11-11	MuVs/Massachusetts.USA/45.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965201	https://www.ncbi.nlm.nih.gov/nuccore/MF965201	Homo sapiens
+MuVs/Massachusetts.USA/39.16/[G]	2016-10-03	MuVs/Massachusetts.USA/39.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965306	https://www.ncbi.nlm.nih.gov/nuccore/MF965306	Homo sapiens
+MuVs/Massachusetts.USA/43.16/2[G]	2016-10-26	MuVs/Massachusetts.USA/43.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965283	https://www.ncbi.nlm.nih.gov/nuccore/MF965283	Homo sapiens
+MuVs/Massachusetts.USA/44.16/[G]	2016-10-31	MuVs/Massachusetts.USA/44.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965232	https://www.ncbi.nlm.nih.gov/nuccore/MF965232	Homo sapiens
+MuVs/Massachusetts.USA/46.16/[G]	2016-11-14	MuVs/Massachusetts.USA/46.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965282	https://www.ncbi.nlm.nih.gov/nuccore/MF965282	Homo sapiens
+MuVs/Massachusetts.USA/46.16/6[G]	2016-11-20	MuVs/Massachusetts.USA/46.16/6[G]	G	G	North America	G	USA	Byrne et al.	MF965204	https://www.ncbi.nlm.nih.gov/nuccore/MF965204	Homo sapiens
+MuVs/Massachusetts.USA/42.16/[G]	2016-10-21	MuVs/Massachusetts.USA/42.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965301	https://www.ncbi.nlm.nih.gov/nuccore/MF965301	Homo sapiens
+MuVs/Massachusetts.USA/43.16/[G]	2016-10-24	MuVs/Massachusetts.USA/43.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965236	https://www.ncbi.nlm.nih.gov/nuccore/MF965236	Homo sapiens
+MuVs/Massachusetts.USA/45.16/[G]	2016-11-09	MuVs/Massachusetts.USA/45.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965285	https://www.ncbi.nlm.nih.gov/nuccore/MF965285	Homo sapiens
+MuVs/Massachusetts.USA/45.16/3[G]	2016-11-11	MuVs/Massachusetts.USA/45.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965221	https://www.ncbi.nlm.nih.gov/nuccore/MF965221	Homo sapiens
+MuVs/Massachusetts.USA/50.16/1[G]	2016-12-14	MuVs/Massachusetts.USA/50.16/1[G]	G	G	North America	G	USA	Byrne et al.	MF965198	https://www.ncbi.nlm.nih.gov/nuccore/MF965198	Homo sapiens
+MuVs/Massachusetts.USA/10.16/13[G]	2016-03-14	MuVs/Massachusetts.USA/10.16/13[G]	G	G	North America	G	USA	Byrne et al.	MF965218	https://www.ncbi.nlm.nih.gov/nuccore/MF965218	Homo sapiens
+MuVs/Massachusetts.USA/8.16/[G]	2016-02-24	MuVs/Massachusetts.USA/8.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965240	https://www.ncbi.nlm.nih.gov/nuccore/MF965240	Homo sapiens
+MuVs/Massachusetts.USA/17.16/[G]	2016-04-25	MuVs/Massachusetts.USA/17.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965313	https://www.ncbi.nlm.nih.gov/nuccore/MF965313	Homo sapiens
+MuVs/Massachusetts.USA/17.16/10[G]	2016-05-01	MuVs/Massachusetts.USA/17.16/10[G]	G	G	North America	G	USA	Byrne et al.	MF965276	https://www.ncbi.nlm.nih.gov/nuccore/MF965276	Homo sapiens
+MuVs/Massachusetts.USA/17.16/11[G]	2016-04-30	MuVs/Massachusetts.USA/17.16/11[G]	G	G	North America	G	USA	Byrne et al.	MF965211	https://www.ncbi.nlm.nih.gov/nuccore/MF965211	Homo sapiens
+MuVs/Massachusetts.USA/10.16/8[G]	2016-03-12	MuVs/Massachusetts.USA/10.16/8[G]	G	G	North America	G	USA	Byrne et al.	MF965310	https://www.ncbi.nlm.nih.gov/nuccore/MF965310	Homo sapiens
+MuVs/Massachusetts.USA/10.16/7[G]	2016-03-10	MuVs/Massachusetts.USA/10.16/7[G]	G	G	North America	G	USA	Byrne et al.	MF965264	https://www.ncbi.nlm.nih.gov/nuccore/MF965264	Homo sapiens
+MuVs/Massachusetts.USA/10.16/3[G]	2016-03-09	MuVs/Massachusetts.USA/10.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965298	https://www.ncbi.nlm.nih.gov/nuccore/MF965298	Homo sapiens
+MuVs/Massachusetts.USA/14.16/[G]	2016-04-08	MuVs/Massachusetts.USA/14.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965305	https://www.ncbi.nlm.nih.gov/nuccore/MF965305	Homo sapiens
+MuVs/Massachusetts.USA/10.16/2[G]	2016-03-08	MuVs/Massachusetts.USA/10.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965225	https://www.ncbi.nlm.nih.gov/nuccore/MF965225	Homo sapiens
+MuVs/Massachusetts.USA/16.16/[G]	2016-04-19	MuVs/Massachusetts.USA/16.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965241	https://www.ncbi.nlm.nih.gov/nuccore/MF965241	Homo sapiens
+MuVs/Massachusetts.USA/12.16/4[G]	2016-03-27	MuVs/Massachusetts.USA/12.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965293	https://www.ncbi.nlm.nih.gov/nuccore/MF965293	Homo sapiens
+MuVs/Massachusetts.USA/16.16/13[G]	2016-04-22	MuVs/Massachusetts.USA/16.16/13[G]	G	G	North America	G	USA	Byrne et al.	MF965200	https://www.ncbi.nlm.nih.gov/nuccore/MF965200	Homo sapiens
+MuVs/Massachusetts.USA/17.16/8[G]	2016-04-26	MuVs/Massachusetts.USA/17.16/8[G]	G	G	North America	G	USA	Byrne et al.	MF965224	https://www.ncbi.nlm.nih.gov/nuccore/MF965224	Homo sapiens
+MuVs/Massachusetts.USA/11.16/4[G]	2016-03-18	MuVs/Massachusetts.USA/11.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965277	https://www.ncbi.nlm.nih.gov/nuccore/MF965277	Homo sapiens
+MuVs/Massachusetts.USA/8.16/3[G]	2016-02-25	MuVs/Massachusetts.USA/8.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965254	https://www.ncbi.nlm.nih.gov/nuccore/MF965254	Homo sapiens
+MuVs/Massachusetts.USA/15.16/2[G]	2016-04-14	MuVs/Massachusetts.USA/15.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965228	https://www.ncbi.nlm.nih.gov/nuccore/MF965228	Homo sapiens
+MuVs/Massachusetts.USA/17.16/12[G]	2016-05-02	MuVs/Massachusetts.USA/17.16/12[G]	G	G	North America	G	USA	Byrne et al.	MF965272	https://www.ncbi.nlm.nih.gov/nuccore/MF965272	Homo sapiens
+MuVs/Massachusetts.USA/16.16/4[G]	2016-04-19	MuVs/Massachusetts.USA/16.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965242	https://www.ncbi.nlm.nih.gov/nuccore/MF965242	Homo sapiens
+MuVs/Massachusetts.USA/13.16/1[G]	2016-03-31	MuVs/Massachusetts.USA/13.16/1[G]	G	G	North America	G	USA	Byrne et al.	MF965274	https://www.ncbi.nlm.nih.gov/nuccore/MF965274	Homo sapiens
+MuVs/Massachusetts.USA/15.16/[G]	2016-04-12	MuVs/Massachusetts.USA/15.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965214	https://www.ncbi.nlm.nih.gov/nuccore/MF965214	Homo sapiens
+MuVs/Massachusetts.USA/17.16/7[G]	2016-04-27	MuVs/Massachusetts.USA/17.16/7[G]	G	G	North America	G	USA	Byrne et al.	MF965280	https://www.ncbi.nlm.nih.gov/nuccore/MF965280	Homo sapiens
+MuVs/Massachusetts.USA/19.16/10[G]	2016-05-14	MuVs/Massachusetts.USA/19.16/10[G]	G	G	North America	G	USA	Byrne et al.	MF965261	https://www.ncbi.nlm.nih.gov/nuccore/MF965261	Homo sapiens
+MuVs/Massachusetts.USA/22.16/2[G]	2016-06-03	MuVs/Massachusetts.USA/22.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965237	https://www.ncbi.nlm.nih.gov/nuccore/MF965237	Homo sapiens
+MuVs/Massachusetts.USA/8.16/2[G]	2016-02-24	MuVs/Massachusetts.USA/8.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965234	https://www.ncbi.nlm.nih.gov/nuccore/MF965234	Homo sapiens
+MuVs/Massachusetts.USA/8.16/5[G]	2016-02-25	MuVs/Massachusetts.USA/8.16/5[G]	G	G	North America	G	USA	Byrne et al.	MF965268	https://www.ncbi.nlm.nih.gov/nuccore/MF965268	Homo sapiens
+MuVs/Massachusetts.USA/8.16/6[G]	2016-02-27	MuVs/Massachusetts.USA/8.16/6[G]	G	G	North America	G	USA	Byrne et al.	MF965235	https://www.ncbi.nlm.nih.gov/nuccore/MF965235	Homo sapiens
+MuVs/Massachusetts.USA/9.16/1[G]	2016-03-02	MuVs/Massachusetts.USA/9.16/1[G]	G	G	North America	G	USA	Byrne et al.	MF965227	https://www.ncbi.nlm.nih.gov/nuccore/MF965227	Homo sapiens
+MuVs/Massachusetts.USA/10.16/[G]	2016-03-07	MuVs/Massachusetts.USA/10.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965266	https://www.ncbi.nlm.nih.gov/nuccore/MF965266	Homo sapiens
+MuVs/Massachusetts.USA/9.16/4[G]	2016-03-08	MuVs/Massachusetts.USA/9.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965197	https://www.ncbi.nlm.nih.gov/nuccore/MF965197	Homo sapiens
+MuVs/Massachusetts.USA/10.16/9[G]	2016-03-10	MuVs/Massachusetts.USA/10.16/9[G]	G	G	North America	G	USA	Byrne et al.	MF965270	https://www.ncbi.nlm.nih.gov/nuccore/MF965270	Homo sapiens
+MuVs/Massachusetts.USA/10.16/4[G]	2016-03-10	MuVs/Massachusetts.USA/10.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965318	https://www.ncbi.nlm.nih.gov/nuccore/MF965318	Homo sapiens
+MuVs/Massachusetts.USA/10.16/12[G]	2016-03-12	MuVs/Massachusetts.USA/10.16/12[G]	G	G	North America	G	USA	Byrne et al.	MF965244	https://www.ncbi.nlm.nih.gov/nuccore/MF965244	Homo sapiens
+MuVs/Massachusetts.USA/11.16/3[G]	2016-03-16	MuVs/Massachusetts.USA/11.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965291	https://www.ncbi.nlm.nih.gov/nuccore/MF965291	Homo sapiens
+MuVs/Massachusetts.USA/11.16/5[G]	2016-03-20	MuVs/Massachusetts.USA/11.16/5[G]	G	G	North America	G	USA	Byrne et al.	MF965275	https://www.ncbi.nlm.nih.gov/nuccore/MF965275	Homo sapiens
+MuVs/Massachusetts.USA/12.16/2[G]	2016-03-24	MuVs/Massachusetts.USA/12.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965256	https://www.ncbi.nlm.nih.gov/nuccore/MF965256	Homo sapiens
+MuVs/Massachusetts.USA/12.16/3[G]	2016-03-25	MuVs/Massachusetts.USA/12.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965278	https://www.ncbi.nlm.nih.gov/nuccore/MF965278	Homo sapiens
+MuVs/Massachusetts.USA/14.16/2[G]	2016-04-08	MuVs/Massachusetts.USA/14.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965239	https://www.ncbi.nlm.nih.gov/nuccore/MF965239	Homo sapiens
+MuVs/Massachusetts.USA/16.16/9[G]	2016-04-21	MuVs/Massachusetts.USA/16.16/9[G]	G	G	North America	G	USA	Byrne et al.	MF965251	https://www.ncbi.nlm.nih.gov/nuccore/MF965251	Homo sapiens
+MuVs/Massachusetts.USA/18.16/[G]	2016-05-04	MuVs/Massachusetts.USA/18.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965265	https://www.ncbi.nlm.nih.gov/nuccore/MF965265	Homo sapiens
+MuVs/Massachusetts.USA/16.16/3[G]	2016-04-19	MuVs/Massachusetts.USA/16.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965250	https://www.ncbi.nlm.nih.gov/nuccore/MF965250	Homo sapiens
+MuVs/Massachusetts.USA/16.16/6[G]	2016-04-29	MuVs/Massachusetts.USA/16.16/6[G]	G	G	North America	G	USA	Byrne et al.	MF965289	https://www.ncbi.nlm.nih.gov/nuccore/MF965289	Homo sapiens
+MuVs/Massachusetts.USA/16.16/18[G]	2016-04-25	MuVs/Massachusetts.USA/16.16/18[G]	G	G	North America	G	USA	Byrne et al.	MF965288	https://www.ncbi.nlm.nih.gov/nuccore/MF965288	Homo sapiens
+MuVs/Massachusetts.USA/18.16/3[G]	2016-05-05	MuVs/Massachusetts.USA/18.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965249	https://www.ncbi.nlm.nih.gov/nuccore/MF965249	Homo sapiens
+MuVs/Massachusetts.USA/16.16/15[G]	2016-04-22	MuVs/Massachusetts.USA/16.16/15[G]	G	G	North America	G	USA	Byrne et al.	MF965233	https://www.ncbi.nlm.nih.gov/nuccore/MF965233	Homo sapiens
+MuVs/Massachusetts.USA/16.16/17[G]	2016-04-24	MuVs/Massachusetts.USA/16.16/17[G]	G	G	North America	G	USA	Byrne et al.	MF965263	https://www.ncbi.nlm.nih.gov/nuccore/MF965263	Homo sapiens
+MuVs/Massachusetts.USA/16.16/7[G]	2016-04-21	MuVs/Massachusetts.USA/16.16/7[G]	G	G	North America	G	USA	Byrne et al.	MF965259	https://www.ncbi.nlm.nih.gov/nuccore/MF965259	Homo sapiens
+MuVs/Massachusetts.USA/19.16/5[G]	2016-05-09	MuVs/Massachusetts.USA/19.16/5[G]	G	G	North America	G	USA	Byrne et al.	MF965199	https://www.ncbi.nlm.nih.gov/nuccore/MF965199	Homo sapiens
+MuVs/Massachusetts.USA/19.16/5[G]	2016-05-18	MuVs/Massachusetts.USA/19.16/5[G]	G	G	North America	G	USA	Byrne et al.	MF965311	https://www.ncbi.nlm.nih.gov/nuccore/MF965311	Homo sapiens
+MuVs/Massachusetts.USA/19.16/3[G]	2016-05-09	MuVs/Massachusetts.USA/19.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965303	https://www.ncbi.nlm.nih.gov/nuccore/MF965303	Homo sapiens
+MuVs/Massachusetts.USA/16.16/2[G]	2016-04-19	MuVs/Massachusetts.USA/16.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965257	https://www.ncbi.nlm.nih.gov/nuccore/MF965257	Homo sapiens
+MuVs/Massachusetts.USA/16.16/5[G]	2016-04-20	MuVs/Massachusetts.USA/16.16/5[G]	G	G	North America	G	USA	Byrne et al.	MF965209	https://www.ncbi.nlm.nih.gov/nuccore/MF965209	Homo sapiens
+MuVs/Massachusetts.USA/16.16/6[G]	2016-04-20	MuVs/Massachusetts.USA/16.16/6[G]	G	G	North America	G	USA	Byrne et al.	MF965279	https://www.ncbi.nlm.nih.gov/nuccore/MF965279	Homo sapiens
+MuVs/Massachusetts.USA/16.16/8[G]	2016-04-21	MuVs/Massachusetts.USA/16.16/8[G]	G	G	North America	G	USA	Byrne et al.	MF965245	https://www.ncbi.nlm.nih.gov/nuccore/MF965245	Homo sapiens
+MuVs/Massachusetts.USA/16.16/14[G]	2016-04-22	MuVs/Massachusetts.USA/16.16/14[G]	G	G	North America	G	USA	Byrne et al.	MF965243	https://www.ncbi.nlm.nih.gov/nuccore/MF965243	Homo sapiens
+MuVs/Massachusetts.USA/16.16/19[G]	2016-04-22	MuVs/Massachusetts.USA/16.16/19[G]	G	G	North America	G	USA	Byrne et al.	MF965269	https://www.ncbi.nlm.nih.gov/nuccore/MF965269	Homo sapiens
+MuVs/Massachusetts.USA/16.16/10[G]	2016-04-22	MuVs/Massachusetts.USA/16.16/10[G]	G	G	North America	G	USA	Byrne et al.	MF965255	https://www.ncbi.nlm.nih.gov/nuccore/MF965255	Homo sapiens
+MuVs/Massachusetts.USA/16.16/16[G]	2016-04-23	MuVs/Massachusetts.USA/16.16/16[G]	G	G	North America	G	USA	Byrne et al.	MF965206	https://www.ncbi.nlm.nih.gov/nuccore/MF965206	Homo sapiens
+MuVs/Massachusetts.USA/17.16/2[G]	2016-04-24	MuVs/Massachusetts.USA/17.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965316	https://www.ncbi.nlm.nih.gov/nuccore/MF965316	Homo sapiens
+MuVs/Massachusetts.USA/17.16/3[G]	2016-04-25	MuVs/Massachusetts.USA/17.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965296	https://www.ncbi.nlm.nih.gov/nuccore/MF965296	Homo sapiens
+MuVs/Massachusetts.USA/17.16/6[G]	2016-04-25	MuVs/Massachusetts.USA/17.16/6[G]	G	G	North America	G	USA	Byrne et al.	MF965196	https://www.ncbi.nlm.nih.gov/nuccore/MF965196	Homo sapiens
+MuVs/Massachusetts.USA/17.16/4[G]	2016-04-26	MuVs/Massachusetts.USA/17.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965247	https://www.ncbi.nlm.nih.gov/nuccore/MF965247	Homo sapiens
+MuVs/Massachusetts.USA/17.16/13[G]	2016-05-02	MuVs/Massachusetts.USA/17.16/13[G]	G	G	North America	G	USA	Byrne et al.	MF965246	https://www.ncbi.nlm.nih.gov/nuccore/MF965246	Homo sapiens
+MuVs/Massachusetts.USA/18.16/2[G]	2016-05-05	MuVs/Massachusetts.USA/18.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965238	https://www.ncbi.nlm.nih.gov/nuccore/MF965238	Homo sapiens
+MuVs/Massachusetts.USA/19.16/[G]	2016-05-08	MuVs/Massachusetts.USA/19.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965252	https://www.ncbi.nlm.nih.gov/nuccore/MF965252	Homo sapiens
+MuVs/Massachusetts.USA/19.16/7[G]	2016-05-10	MuVs/Massachusetts.USA/19.16/7[G]	G	G	North America	G	USA	Byrne et al.	MF965203	https://www.ncbi.nlm.nih.gov/nuccore/MF965203	Homo sapiens
+MuVs/Massachusetts.USA/19.16/8[G]	2016-05-11	MuVs/Massachusetts.USA/19.16/8[G]	G	G	North America	G	USA	Byrne et al.	MF965317	https://www.ncbi.nlm.nih.gov/nuccore/MF965317	Homo sapiens
+MuVs/Massachusetts.USA/19.16/9[G]	2016-05-13	MuVs/Massachusetts.USA/19.16/9[G]	G	G	North America	G	USA	Byrne et al.	MF965230	https://www.ncbi.nlm.nih.gov/nuccore/MF965230	Homo sapiens
+MuVs/Massachusetts.USA/22.16/[G]	2016-06-03	MuVs/Massachusetts.USA/22.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965226	https://www.ncbi.nlm.nih.gov/nuccore/MF965226	Homo sapiens
+MuVs/Massachusetts.USA/18.16/4[G]	2016-05-08	MuVs/Massachusetts.USA/18.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965210	https://www.ncbi.nlm.nih.gov/nuccore/MF965210	Homo sapiens
+MuVs/Massachusetts.USA/19.16/2[G]	2016-05-09	MuVs/Massachusetts.USA/19.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965309	https://www.ncbi.nlm.nih.gov/nuccore/MF965309	Homo sapiens
+MuVs/Massachusetts.USA/19.16/4[G]	2016-05-09	MuVs/Massachusetts.USA/19.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965304	https://www.ncbi.nlm.nih.gov/nuccore/MF965304	Homo sapiens
+MuVs/Massachusetts.USA/22.17/3[G]	2017-05-30	MuVs/Massachusetts.USA/22.17/3[G]	G	G	North America	G	USA	Byrne et al.	MG986402	https://www.ncbi.nlm.nih.gov/nuccore/MG986402	Homo sapiens
+MuVs/Massachusetts.USA/22.17/5[G]	2017-05-31	MuVs/Massachusetts.USA/22.17/5[G]	G	G	North America	G	USA	Byrne et al.	MG986427	https://www.ncbi.nlm.nih.gov/nuccore/MG986427	Homo sapiens
+MuVs/Georgia.USA/13.17[G]	2017-03-27	MuVs/Georgia.USA/13.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986413	https://www.ncbi.nlm.nih.gov/nuccore/MG986413	Homo sapiens
+MuVs/Massachusetts.USA/26.17/[G]	2017-06-29	MuVs/Massachusetts.USA/26.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986408	https://www.ncbi.nlm.nih.gov/nuccore/MG986408	Homo sapiens
+MuVs/Massachusetts.USA/22.17/6[G]	2017-05-31	MuVs/Massachusetts.USA/22.17/6[G]	G	G	North America	G	USA	Byrne et al.	MG986467	https://www.ncbi.nlm.nih.gov/nuccore/MG986467	Homo sapiens
+MuVs/Massachusetts.USA/22.17/[G]	2017-05-30	MuVs/Massachusetts.USA/22.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986400	https://www.ncbi.nlm.nih.gov/nuccore/MG986400	Homo sapiens
+MuVs/Massachusetts.USA/24.17/3[G]	2017-06-17	MuVs/Massachusetts.USA/24.17/3[G]	G	G	North America	G	USA	Byrne et al.	MG986464	https://www.ncbi.nlm.nih.gov/nuccore/MG986464	Homo sapiens
+MuVs/Massachusetts.USA/25.17/7[G]	2017-06-23	MuVs/Massachusetts.USA/25.17/7[G]	G	G	North America	G	USA	Byrne et al.	MG986447	https://www.ncbi.nlm.nih.gov/nuccore/MG986447	Homo sapiens
+MuVs/Massachusetts.USA/22.17/8[G]	2017-06-04	MuVs/Massachusetts.USA/22.17/8[G]	G	G	North America	G	USA	Byrne et al.	MG986392	https://www.ncbi.nlm.nih.gov/nuccore/MG986392	Homo sapiens
+MuVs/Massachusetts.USA/25.17/2[G]	2017-06-20	MuVs/Massachusetts.USA/25.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986431	https://www.ncbi.nlm.nih.gov/nuccore/MG986431	Homo sapiens
+MuVs/Massachusetts.USA/25.17/4[G]	2017-06-21	MuVs/Massachusetts.USA/25.17/4[G]	G	G	North America	G	USA	Byrne et al.	MG986462	https://www.ncbi.nlm.nih.gov/nuccore/MG986462	Homo sapiens
+MuVs/Massachusetts.USA/25.17/3[G]	2017-06-21	MuVs/Massachusetts.USA/25.17/3[G]	G	G	North America	G	USA	Byrne et al.	MG986421	https://www.ncbi.nlm.nih.gov/nuccore/MG986421	Homo sapiens
+MuVs/Massachusetts.USA/13.17/2[G]	2017-03-28	MuVs/Massachusetts.USA/13.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986393	https://www.ncbi.nlm.nih.gov/nuccore/MG986393	Homo sapiens
+MuVs/Massachusetts.USA/19.17/[G]	2017-05-11	MuVs/Massachusetts.USA/19.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986386	https://www.ncbi.nlm.nih.gov/nuccore/MG986386	Homo sapiens
+MuVs/Massachusetts.USA/19.17/4[G]	2017-05-14	MuVs/Massachusetts.USA/19.17/4[G]	G	G	North America	G	USA	Byrne et al.	MG986416	https://www.ncbi.nlm.nih.gov/nuccore/MG986416	Homo sapiens
+MuVs/Massachusetts.USA/19.17/3[G]	2017-05-14	MuVs/Massachusetts.USA/19.17/3[G]	G	G	North America	G	USA	Byrne et al.	MG986459	https://www.ncbi.nlm.nih.gov/nuccore/MG986459	Homo sapiens
+MuVs/Massachusetts.USA/21.17/[G]	2017-05-26	MuVs/Massachusetts.USA/21.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986445	https://www.ncbi.nlm.nih.gov/nuccore/MG986445	Homo sapiens
+MuVs/Massachusetts.USA/21.17/2[G]	2017-05-30	MuVs/Massachusetts.USA/21.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986437	https://www.ncbi.nlm.nih.gov/nuccore/MG986437	Homo sapiens
+MuVs/Massachusetts.USA/22.17/2[G]	2017-05-30	MuVs/Massachusetts.USA/22.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986461	https://www.ncbi.nlm.nih.gov/nuccore/MG986461	Homo sapiens
+MuVs/Massachusetts.USA/22.17/4[G]	2017-05-31	MuVs/Massachusetts.USA/22.17/4[G]	G	G	North America	G	USA	Byrne et al.	MG986399	https://www.ncbi.nlm.nih.gov/nuccore/MG986399	Homo sapiens
+MuVs/Massachusetts.USA/24.17/4[G]	2017-06-19	MuVs/Massachusetts.USA/24.17/4[G]	G	G	North America	G	USA	Byrne et al.	MG986428	https://www.ncbi.nlm.nih.gov/nuccore/MG986428	Homo sapiens
+MuVs/Massachusetts.USA/25.17/[G]	2017-06-19	MuVs/Massachusetts.USA/25.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986441	https://www.ncbi.nlm.nih.gov/nuccore/MG986441	Homo sapiens
+MuVs/Massachusetts.USA/24.17/[G]	2017-06-14	MuVs/Massachusetts.USA/24.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986443	https://www.ncbi.nlm.nih.gov/nuccore/MG986443	Homo sapiens
+MuVs/Massachusetts.USA/24.17/2[G]	2017-06-14	MuVs/Massachusetts.USA/24.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986448	https://www.ncbi.nlm.nih.gov/nuccore/MG986448	Homo sapiens
+MuVs/Massachusetts.USA/19.16/11[G]	2016-05-14	MuVs/Massachusetts.USA/19.16/11[G]	G	G	North America	G	USA	Byrne et al.	MF965223	https://www.ncbi.nlm.nih.gov/nuccore/MF965223	Homo sapiens
+MuVs/Massachusetts.USA/22.16/3[G]	2016-06-03	MuVs/Massachusetts.USA/22.16/3[G]	G	G	North America	G	USA	Byrne et al.	MF965294	https://www.ncbi.nlm.nih.gov/nuccore/MF965294	Homo sapiens
+MuVs/NewHampshire.USA/40.16[G]	2016-10-07	MuVs/NewHampshire.USA/40.16[G]	G	G	North America	G	USA	Bankamp et al.	MG986463	https://www.ncbi.nlm.nih.gov/nuccore/MG986463	Homo sapiens
+MuVs/Massachusetts.USA/27.16/2[G]	2016-07-12	MuVs/Massachusetts.USA/27.16/2[G]	G	G	North America	G	USA	Byrne et al.	MF965208	https://www.ncbi.nlm.nih.gov/nuccore/MF965208	Homo sapiens
+MuVs/Massachusetts.USA/33.16/[G]	2016-08-19	MuVs/Massachusetts.USA/33.16/[G]	G	G	North America	G	USA	Byrne et al.	MF965295	https://www.ncbi.nlm.nih.gov/nuccore/MF965295	Homo sapiens
+MuVs/Missouri.USA/32.16/FH88[G]	2016-08-17 (2016-08-01 - 2016-08-31)	MuVs/Missouri.USA/32.16/FH88[G]	G	G	North America	G	USA	Moncla et al.	MT859594	https://www.ncbi.nlm.nih.gov/nuccore/MT859594	Homo sapiens
+MuVs/Ohio.USA/11.17/FH132[G]	2017-03-31 (2017-03-07 - 2017-03-31)	MuVs/Ohio.USA/11.17/FH132[G]	G	G	North America	G	USA	Moncla et al.	MT859638	https://www.ncbi.nlm.nih.gov/nuccore/MT859638	Homo sapiens
+MuVs/Wisconsin.USA/15.17/FH137[G]	2017-04-30 (2017-04-05 - 2017-04-30)	MuVs/Wisconsin.USA/15.17/FH137[G]	G	G	North America	G	USA	Moncla et al.	MT859643	https://www.ncbi.nlm.nih.gov/nuccore/MT859643	Homo sapiens
+MuVs/Washington.USA/17.17/FH37[G]	2017-05-02	MuVs/Washington.USA/17.17/FH37[G]	G	G	North America	G	USA	Moncla et al.	MT859543	https://www.ncbi.nlm.nih.gov/nuccore/MT859543	Homo sapiens
+MuVs/Missouri.USA/46.16/FH124[G]	2016-11-30 (2016-11-07 - 2016-11-30)	MuVs/Missouri.USA/46.16/FH124[G]	G	G	North America	G	USA	Moncla et al.	MT859630	https://www.ncbi.nlm.nih.gov/nuccore/MT859630	Homo sapiens
+MuVs/Indiana.USA/48.16/[G]	2016-11-28	MuVs/Indiana.USA/48.16/[G]	G	G	North America	G	USA	Bankamp et al.	MG986406	https://www.ncbi.nlm.nih.gov/nuccore/MG986406	Homo sapiens
+MuVs/Missouri.USA/2.17/FH127[G]	2017-01-01 (2017-01-01 - 2017-01-28)	MuVs/Missouri.USA/2.17/FH127[G]	G	G	North America	G	USA	Moncla et al.	MT859633	https://www.ncbi.nlm.nih.gov/nuccore/MT859633	Homo sapiens
+MuVs/Alabama.USA/15.17/FH139[G]	2017-04-01 (2017-04-01 - 2017-04-27)	MuVs/Alabama.USA/15.17/FH139[G]	G	G	North America	G	USA	Moncla et al.	MT859645	https://www.ncbi.nlm.nih.gov/nuccore/MT859645	Homo sapiens
+MuVs/Missouri.USA/41.16/FH122[G]	2016-10-24 (2016-10-01 - 2016-10-31)	MuVs/Missouri.USA/41.16/FH122[G]	G	G	North America	G	USA	Moncla et al.	MT859628	https://www.ncbi.nlm.nih.gov/nuccore/MT859628	Homo sapiens
+MuVs/Missouri.USA/50.16/FH125[G]	2016-12-29 (2016-12-01 - 2016-12-31)	MuVs/Missouri.USA/50.16/FH125[G]	G	G	North America	G	USA	Moncla et al.	MT859631	https://www.ncbi.nlm.nih.gov/nuccore/MT859631	Homo sapiens
+MuVs/Missouri.USA/7.17/FH129[G]	2017-02-01 (2017-02-01 - 2017-02-28)	MuVs/Missouri.USA/7.17/FH129[G]	G	G	North America	G	USA	Moncla et al.	MT859635	https://www.ncbi.nlm.nih.gov/nuccore/MT859635	Homo sapiens
+MuVs/Massachusetts.USA/8.17/[G]	2017-02-19	MuVs/Massachusetts.USA/8.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986388	https://www.ncbi.nlm.nih.gov/nuccore/MG986388	Homo sapiens
+MuVs/Massachusetts.USA/14.17/[G]	2017-04-02	MuVs/Massachusetts.USA/14.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986439	https://www.ncbi.nlm.nih.gov/nuccore/MG986439	Homo sapiens
+MuVs/Missouri.USA/24.17/FH165[G]	2017-06-01 (2017-06-01 - 2017-06-27)	MuVs/Missouri.USA/24.17/FH165[G]	G	G	North America	G	USA	Moncla et al.	MT859671	https://www.ncbi.nlm.nih.gov/nuccore/MT859671	Homo sapiens
+MuVs/Missouri.USA/33.17/FH155[G]	2017-08-31 (2017-08-04 - 2017-08-31)	MuVs/Missouri.USA/33.17/FH155[G]	G	G	North America	G	USA	Moncla et al.	MT859661	https://www.ncbi.nlm.nih.gov/nuccore/MT859661	Homo sapiens
+MuVs/Indiana.USA/49.16/[G]	2016-12-12	MuVs/Indiana.USA/49.16/[G]	G	G	North America	G	USA	Bankamp et al.	MG986440	https://www.ncbi.nlm.nih.gov/nuccore/MG986440	Homo sapiens
+MuVs/Indiana.USA/1.17[G]	2017-01-06	MuVs/Indiana.USA/1.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986453	https://www.ncbi.nlm.nih.gov/nuccore/MG986453	Homo sapiens
+MuVs/Kansas.USA/10.17[G]	2017-03-10	MuVs/Kansas.USA/10.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986429	https://www.ncbi.nlm.nih.gov/nuccore/MG986429	Homo sapiens
+MuVs/Kansas.USA/8.17/4[G]	2017-02-23	MuVs/Kansas.USA/8.17/4[G]	G	G	North America	G	USA	Bankamp et al.	MG986456	https://www.ncbi.nlm.nih.gov/nuccore/MG986456	Homo sapiens
+MuVs/NorthDakota.USA/15.17[G]	2017-04-13	MuVs/NorthDakota.USA/15.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986381	https://www.ncbi.nlm.nih.gov/nuccore/MG986381	Homo sapiens
+MuVs/NorthDakota.USA/14.17[G]	2017-04-07	MuVs/NorthDakota.USA/14.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986417	https://www.ncbi.nlm.nih.gov/nuccore/MG986417	Homo sapiens
+MuVs/NorthDakota.USA/9.17[G]	2017-02-27	MuVs/NorthDakota.USA/9.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986411	https://www.ncbi.nlm.nih.gov/nuccore/MG986411	Homo sapiens
+MuVs/Illinois.USA/14.17[G]	2017-04-05	MuVs/Illinois.USA/14.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986423	https://www.ncbi.nlm.nih.gov/nuccore/MG986423	Homo sapiens
+MuVs/NovaScotia.CAN/14.17[G]	2017-04-06	MuVs/NovaScotia.CAN/14.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157275	https://www.ncbi.nlm.nih.gov/nuccore/PQ157275	Homo sapiens
+MuVs/Missouri.USA/19.17/FH140[G]	2017-05-31 (2017-05-04 - 2017-05-31)	MuVs/Missouri.USA/19.17/FH140[G]	G	G	North America	G	USA	Moncla et al.	MT859646	https://www.ncbi.nlm.nih.gov/nuccore/MT859646	Homo sapiens
+MuVs/Washington.USA/6.17/FH51[G]	2017-02-06	MuVs/Washington.USA/6.17/FH51[G]	G	G	North America	G	USA	Moncla et al.	MT859557	https://www.ncbi.nlm.nih.gov/nuccore/MT859557	Homo sapiens
+MuVs/Missouri.USA/46.16/FH123[G]	2016-11-25 (2016-11-01 - 2016-11-30)	MuVs/Missouri.USA/46.16/FH123[G]	G	G	North America	G	USA	Moncla et al.	MT859629	https://www.ncbi.nlm.nih.gov/nuccore/MT859629	Homo sapiens
+MuVs/Kansas.USA/15.17[G]	2017-04-10	MuVs/Kansas.USA/15.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986385	https://www.ncbi.nlm.nih.gov/nuccore/MG986385	Homo sapiens
+MuVs/Kansas.USA/9.17/2[G]	2017-02-28	MuVs/Kansas.USA/9.17/2[G]	G	G	North America	G	USA	Bankamp et al.	MG986403	https://www.ncbi.nlm.nih.gov/nuccore/MG986403	Homo sapiens
+MuVs/Alabama.USA/7.17/FH164[G]	2017-02-01 (2017-02-01 - 2017-02-25)	MuVs/Alabama.USA/7.17/FH164[G]	G	G	North America	G	USA	Moncla et al.	MT859670	https://www.ncbi.nlm.nih.gov/nuccore/MT859670	Homo sapiens
+MuVs/Washington.USA/5.17/FH50[G]	2017-02-06	MuVs/Washington.USA/5.17/FH50[G]	G	G	North America		USA	Moncla et al.	MT859556	https://www.ncbi.nlm.nih.gov/nuccore/MT859556	Homo sapiens
+MuVs/Alabama.USA/11.17/FH90[G]	2017-03-04 (2017-03-01 - 2017-03-31)	MuVs/Alabama.USA/11.17/FH90[G]	G	G	North America	G	USA	Moncla et al.	MT859596	https://www.ncbi.nlm.nih.gov/nuccore/MT859596	Homo sapiens
+MuVs/Alabama.USA/19.17/FH92[G]	2017-05-01 (2017-05-01 - 2017-05-27)	MuVs/Alabama.USA/19.17/FH92[G]	G	G	North America	G	USA	Moncla et al.	MT859598	https://www.ncbi.nlm.nih.gov/nuccore/MT859598	Homo sapiens
+MuVs/Massachusetts.USA/14.17/2[G]	2017-04-10	MuVs/Massachusetts.USA/14.17/2[G]	G	G	North America	G	USA	Byrne et al.	MG986397	https://www.ncbi.nlm.nih.gov/nuccore/MG986397	Homo sapiens
+MuVs/Kansas.USA/13.17/2[G]	2017-03-29	MuVs/Kansas.USA/13.17/2[G]	G	G	North America	G	USA	Bankamp et al.	MG986452	https://www.ncbi.nlm.nih.gov/nuccore/MG986452	Homo sapiens
+MuVs/Wisconsin.USA/19.17/FH141[G]	2017-05-29 (2017-05-01 - 2017-05-31)	MuVs/Wisconsin.USA/19.17/FH141[G]	G	G	North America	G	USA	Moncla et al.	MT859647	https://www.ncbi.nlm.nih.gov/nuccore/MT859647	Homo sapiens
+MuVs/Missouri.USA/11.17/FH133[G]	2017-03-31 (2017-03-05 - 2017-03-31)	MuVs/Missouri.USA/11.17/FH133[G]	G	G	North America	G	USA	Moncla et al.	MT859639	https://www.ncbi.nlm.nih.gov/nuccore/MT859639	Homo sapiens
+MuVs/Washington.USA/19.17/FH44[G]	2017-05-10	MuVs/Washington.USA/19.17/FH44[G]	G	G	North America	G	USA	Moncla et al.	MT859550	https://www.ncbi.nlm.nih.gov/nuccore/MT859550	Homo sapiens
+MuVs/Massachusetts.USA/23.17/[G]	2017-06-05	MuVs/Massachusetts.USA/23.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986407	https://www.ncbi.nlm.nih.gov/nuccore/MG986407	Homo sapiens
+MuVs/Missouri.USA/15.17/FH138[G]	2017-04-01 (2017-04-01 - 2017-04-27)	MuVs/Missouri.USA/15.17/FH138[G]	G	G	North America	G	USA	Moncla et al.	MT859644	https://www.ncbi.nlm.nih.gov/nuccore/MT859644	Homo sapiens
+MuVs/Missouri.USA/28.17/FH101[G]	2017-07-31 (2017-07-05 - 2017-07-31)	MuVs/Missouri.USA/28.17/FH101[G]	G	G	North America	G	USA	Moncla et al.	MT859607	https://www.ncbi.nlm.nih.gov/nuccore/MT859607	Homo sapiens
+MuVs/Wisconsin.USA/15.17/FH89[G]	2017-04-08 (2017-04-01 - 2017-04-30)	MuVs/Wisconsin.USA/15.17/FH89[G]	G	G	North America	G	USA	Moncla et al.	MT859595	https://www.ncbi.nlm.nih.gov/nuccore/MT859595	Homo sapiens
+MuVs/Illinois.USA/11.17[G]	2017-03-18	MuVs/Illinois.USA/11.17[G]	G	G	North America	G	USA	Bankamp et al.	MG986454	https://www.ncbi.nlm.nih.gov/nuccore/MG986454	Homo sapiens
+MuVs/Missouri.USA/15.17/FH134[G]	2017-04-01 (2017-04-01 - 2017-04-27)	MuVs/Missouri.USA/15.17/FH134[G]	G	G	North America	G	USA	Moncla et al.	MT859640	https://www.ncbi.nlm.nih.gov/nuccore/MT859640	Homo sapiens
+MuVs/Massachusetts.USA/17.17/[G]	2017-04-23	MuVs/Massachusetts.USA/17.17/[G]	G	G	North America	G	USA	Byrne et al.	MG986435	https://www.ncbi.nlm.nih.gov/nuccore/MG986435	Homo sapiens
+MuVs/Massachusetts.USA/22.17/9[G]	2017-06-05	MuVs/Massachusetts.USA/22.17/9[G]	G	G	North America	G	USA	Byrne et al.	MG986389	https://www.ncbi.nlm.nih.gov/nuccore/MG986389	Homo sapiens
+MuVs/Massachusetts.USA/25.17/5[G]	2017-06-21	MuVs/Massachusetts.USA/25.17/5[G]	G	G	North America	G	USA	Byrne et al.	MG986401	https://www.ncbi.nlm.nih.gov/nuccore/MG986401	Homo sapiens
+MuVs/Massachusetts.USA/25.17/6[G]	2017-06-21	MuVs/Massachusetts.USA/25.17/6[G]	G	G	North America	G	USA	Byrne et al.	MG986404	https://www.ncbi.nlm.nih.gov/nuccore/MG986404	Homo sapiens
+MuVs/Massachusetts.USA/13.16/4[G]	2016-04-01	MuVs/Massachusetts.USA/13.16/4[G]	G	G	North America	G	USA	Byrne et al.	MF965213	https://www.ncbi.nlm.nih.gov/nuccore/MF965213	Homo sapiens
+MuVs/Washington.USA/19.17/FH53[G]	2017-05-12	MuVs/Washington.USA/19.17/FH53[G]	G	G	North America	G	USA	Moncla et al.	MT859559	https://www.ncbi.nlm.nih.gov/nuccore/MT859559	Homo sapiens
+MuVi/Ontario.CAN/12.17/2[G]	2017-03-01 (2017-03-01 - 2017-03-28)	MuVi/Ontario.CAN/12.17/2[G]	G	G	North America	G	Canada	Stapleton et al.	MK033759	https://www.ncbi.nlm.nih.gov/nuccore/MK033759	Homo sapiens
+MuVi/Ontario.CAN/12.17/3[G]	2017-03-01 (2017-03-01 - 2017-03-28)	MuVi/Ontario.CAN/12.17/3[G]	G	G	North America	G	Canada	Stapleton et al.	MK033760	https://www.ncbi.nlm.nih.gov/nuccore/MK033760	Homo sapiens
+MuVi/Ontario.CAN/09.17/10[G]	2017-03-01 (2017-03-01 - 2017-03-28)	MuVi/Ontario.CAN/09.17/10[G]	G	G	North America	G	Canada	Stapleton et al.	MK033753	https://www.ncbi.nlm.nih.gov/nuccore/MK033753	Homo sapiens
+MuVs/Washington.USA/17.17/FH40[G]	2017-04-29	MuVs/Washington.USA/17.17/FH40[G]	G	G	North America	G	USA	Moncla et al.	MT859546	https://www.ncbi.nlm.nih.gov/nuccore/MT859546	Homo sapiens
+MuVi/Ontario.CAN/12.17/1[G]	2017-03-31 (2017-03-06 - 2017-03-31)	MuVi/Ontario.CAN/12.17/1[G]	G	G	North America	G	Canada	Stapleton et al.	MK033758	https://www.ncbi.nlm.nih.gov/nuccore/MK033758	Homo sapiens
+MuVi/Ontario.CAN/13.17/1[G]	2017-03-01 (2017-03-01 - 2017-03-27)	MuVi/Ontario.CAN/13.17/1[G]	G	G	North America	G	Canada	Stapleton et al.	MK033763	https://www.ncbi.nlm.nih.gov/nuccore/MK033763	Homo sapiens
+MuVi/Ontario.CAN/09.17/1[G]	2017-02-28 (2017-02-07 - 2017-02-28)	MuVi/Ontario.CAN/09.17/1[G]	G	G	North America	G	Canada	Stapleton et al.	MK033765	https://www.ncbi.nlm.nih.gov/nuccore/MK033765	Homo sapiens
+MuVi/Ontario.CAN/09.17/8[G]	2017-02-18 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/09.17/8[G]	G	G	North America	G	Canada	Stapleton et al.	MK033751	https://www.ncbi.nlm.nih.gov/nuccore/MK033751	Homo sapiens
+MuVi/Ontario.CAN/09.17/6[G]	2017-02-18 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/09.17/6[G]	G	G	North America	G	Canada	Stapleton et al.	MK033749	https://www.ncbi.nlm.nih.gov/nuccore/MK033749	Homo sapiens
+MuVi/Ontario.CAN/06.17/2[G]	2017-02-18 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/06.17/2[G]	G	G	North America	G	Canada	Stapleton et al.	MK033768	https://www.ncbi.nlm.nih.gov/nuccore/MK033768	Homo sapiens
+MuVi/Ontario.CAN/04.17/1[G]	2017-01-17 (2017-01-01 - 2017-01-31)	MuVi/Ontario.CAN/04.17/1[G]	G	G	North America	G	Canada	Stapleton et al.	MK033766	https://www.ncbi.nlm.nih.gov/nuccore/MK033766	Homo sapiens
+MuVi/Ontario.CAN/12.17/5[G]	2017-03-01 (2017-03-01 - 2017-03-27)	MuVi/Ontario.CAN/12.17/5[G]	G	G	North America	G	Canada	Stapleton et al.	MK033762	https://www.ncbi.nlm.nih.gov/nuccore/MK033762	Homo sapiens
+MuVi/Ontario.CAN/09.17/7[G]	2017-02-18 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/09.17/7[G]	G	G	North America	G	Canada	Stapleton et al.	MK033750	https://www.ncbi.nlm.nih.gov/nuccore/MK033750	Homo sapiens
+MuVi/Ontario.CAN/09.17/3[G]	2017-02-18 (2017-02-01 - 2017-02-28)	MuVi/Ontario.CAN/09.17/3[G]	G	G	North America	G	Canada	Stapleton et al.	MK033772	https://www.ncbi.nlm.nih.gov/nuccore/MK033772	Homo sapiens
+MuVs/Washington.USA/16.17/FH79[G]	2017-04-23	MuVs/Washington.USA/16.17/FH79[G]	G	G	North America	G	USA	Moncla et al.	MT859585	https://www.ncbi.nlm.nih.gov/nuccore/MT859585	Homo sapiens
+MuVs/Missouri.USA/15.17/FH135[G]	2017-04-01 (2017-04-01 - 2017-04-27)	MuVs/Missouri.USA/15.17/FH135[G]	G	G	North America	G	USA	Moncla et al.	MT859641	https://www.ncbi.nlm.nih.gov/nuccore/MT859641	Homo sapiens
+MuVs/Manitoba.CAN/02.17/2[G]	2017-01-07	MuVs/Manitoba.CAN/02.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157280	https://www.ncbi.nlm.nih.gov/nuccore/PQ157280	Homo sapiens
+MuVs/Manitoba.CAN/49.16/2[G]	2016-12-05	MuVs/Manitoba.CAN/49.16/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157286	https://www.ncbi.nlm.nih.gov/nuccore/PQ157286	Homo sapiens
+MuVs/Manitoba.CAN/50.16/2[G]	2016-12-11	MuVs/Manitoba.CAN/50.16/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157284	https://www.ncbi.nlm.nih.gov/nuccore/PQ157284	Homo sapiens
+MuVs/Manitoba.CAN/09.17/2[G]	2017-02-28	MuVs/Manitoba.CAN/09.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157134	https://www.ncbi.nlm.nih.gov/nuccore/PQ157134	Homo sapiens
+MuVs/Manitoba.CAN/02.17[G]	2017-01-10	MuVs/Manitoba.CAN/02.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157279	https://www.ncbi.nlm.nih.gov/nuccore/PQ157279	Homo sapiens
+MuVs/Manitoba.CAN/04.17[G]	2017-01-25	MuVs/Manitoba.CAN/04.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157241	https://www.ncbi.nlm.nih.gov/nuccore/PQ157241	Homo sapiens
+MuVs/Manitoba.CAN/49.16[G]	2016-12-08	MuVs/Manitoba.CAN/49.16[G]	G	G	North America	G	Canada	Frost et al.	PQ157285	https://www.ncbi.nlm.nih.gov/nuccore/PQ157285	Homo sapiens
+MuVs/Manitoba.CAN/05.17/5[G]	2017-01-30	MuVs/Manitoba.CAN/05.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157237	https://www.ncbi.nlm.nih.gov/nuccore/PQ157237	Homo sapiens
+MuVs/Manitoba.CAN/25.17/3[G]	2017-06-20	MuVs/Manitoba.CAN/25.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157246	https://www.ncbi.nlm.nih.gov/nuccore/PQ157246	Homo sapiens
+MuVs/Manitoba.CAN/01.17[G]	2017-01-02	MuVs/Manitoba.CAN/01.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157281	https://www.ncbi.nlm.nih.gov/nuccore/PQ157281	Homo sapiens
+MuVs/Manitoba.CAN/17.17/2[G]	2017-04-27	MuVs/Manitoba.CAN/17.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157268	https://www.ncbi.nlm.nih.gov/nuccore/PQ157268	Homo sapiens
+MuVs/Manitoba.CAN/19.17/3[G]	2017-05-08	MuVs/Manitoba.CAN/19.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157263	https://www.ncbi.nlm.nih.gov/nuccore/PQ157263	Homo sapiens
+MuVs/Manitoba.CAN/40.17/4[G]	2017-10-06	MuVs/Manitoba.CAN/40.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157227	https://www.ncbi.nlm.nih.gov/nuccore/PQ157227	Homo sapiens
+MuVs/Manitoba.CAN/19.17/4[G]	2017-05-10	MuVs/Manitoba.CAN/19.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157264	https://www.ncbi.nlm.nih.gov/nuccore/PQ157264	Homo sapiens
+MuVs/Manitoba.CAN/19.17/2[G]	2017-05-10	MuVs/Manitoba.CAN/19.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157262	https://www.ncbi.nlm.nih.gov/nuccore/PQ157262	Homo sapiens
+MuVs/Manitoba.CAN/22.17[G]	2017-06-01	MuVs/Manitoba.CAN/22.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157257	https://www.ncbi.nlm.nih.gov/nuccore/PQ157257	Homo sapiens
+MuVs/Manitoba.CAN/23.17/4[G]	2017-06-09	MuVs/Manitoba.CAN/23.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157256	https://www.ncbi.nlm.nih.gov/nuccore/PQ157256	Homo sapiens
+MuVs/Manitoba.CAN/18.17/4[G]	2017-05-02	MuVs/Manitoba.CAN/18.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157266	https://www.ncbi.nlm.nih.gov/nuccore/PQ157266	Homo sapiens
+MuVs/Manitoba.CAN/30.17[G]	2017-07-27	MuVs/Manitoba.CAN/30.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157196	https://www.ncbi.nlm.nih.gov/nuccore/PQ157196	Homo sapiens
+MuVs/Manitoba.CAN/28.17[G]	2017-07-14	MuVs/Manitoba.CAN/28.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157206	https://www.ncbi.nlm.nih.gov/nuccore/PQ157206	Homo sapiens
+MuVs/Manitoba.CAN/18.17[G]	2017-05-01	MuVs/Manitoba.CAN/18.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157022	https://www.ncbi.nlm.nih.gov/nuccore/PQ157022	Homo sapiens
+MuVs/Manitoba.CAN/17.17[G]	2017-04-25	MuVs/Manitoba.CAN/17.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157267	https://www.ncbi.nlm.nih.gov/nuccore/PQ157267	Homo sapiens
+MuVs/Manitoba.CAN/14.17/4[G]	2017-04-04	MuVs/Manitoba.CAN/14.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157277	https://www.ncbi.nlm.nih.gov/nuccore/PQ157277	Homo sapiens
+MuVs/Manitoba.CAN/05.17[G]	2017-01-30	MuVs/Manitoba.CAN/05.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157017	https://www.ncbi.nlm.nih.gov/nuccore/PQ157017	Homo sapiens
+MuVs/Manitoba.CAN/05.17/3[G]	2017-02-02	MuVs/Manitoba.CAN/05.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157234	https://www.ncbi.nlm.nih.gov/nuccore/PQ157234	Homo sapiens
+MuVs/Manitoba.CAN/06.17/2[G]	2017-02-08	MuVs/Manitoba.CAN/06.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157203	https://www.ncbi.nlm.nih.gov/nuccore/PQ157203	Homo sapiens
+MuVs/Manitoba.CAN/10.17/3[G]	2017-03-09	MuVs/Manitoba.CAN/10.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157131	https://www.ncbi.nlm.nih.gov/nuccore/PQ157131	Homo sapiens
+MuVs/Manitoba.CAN/06.17[G]	2017-02-10	MuVs/Manitoba.CAN/06.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157138	https://www.ncbi.nlm.nih.gov/nuccore/PQ157138	Homo sapiens
+MuVs/Manitoba.CAN/09.17[G]	2017-03-06	MuVs/Manitoba.CAN/09.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157133	https://www.ncbi.nlm.nih.gov/nuccore/PQ157133	Homo sapiens
+MuVs/Manitoba.CAN/14.17/5[G]	2017-04-03	MuVs/Manitoba.CAN/14.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157278	https://www.ncbi.nlm.nih.gov/nuccore/PQ157278	Homo sapiens
+MuVs/Manitoba.CAN/11.17[G]	2017-03-14	MuVs/Manitoba.CAN/11.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157019	https://www.ncbi.nlm.nih.gov/nuccore/PQ157019	Homo sapiens
+MuVs/Manitoba.CAN/10.17/2[G]	2017-03-10	MuVs/Manitoba.CAN/10.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157130	https://www.ncbi.nlm.nih.gov/nuccore/PQ157130	Homo sapiens
+MuVs/Manitoba.CAN/05.17/2[G]	2017-02-06	MuVs/Manitoba.CAN/05.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157226	https://www.ncbi.nlm.nih.gov/nuccore/PQ157226	Homo sapiens
+MuVs/Manitoba.CAN/07.17/3[G]	2017-02-14	MuVs/Manitoba.CAN/07.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157139	https://www.ncbi.nlm.nih.gov/nuccore/PQ157139	Homo sapiens
+MuVs/Manitoba.CAN/10.17/4[G]	2017-03-08	MuVs/Manitoba.CAN/10.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157132	https://www.ncbi.nlm.nih.gov/nuccore/PQ157132	Homo sapiens
+MuVs/Manitoba.CAN/11.17/2[G]	2017-03-13	MuVs/Manitoba.CAN/11.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157129	https://www.ncbi.nlm.nih.gov/nuccore/PQ157129	Homo sapiens
+MuVs/Manitoba.CAN/14.17[G]	2017-04-04	MuVs/Manitoba.CAN/14.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157021	https://www.ncbi.nlm.nih.gov/nuccore/PQ157021	Homo sapiens
+MuVs/Manitoba.CAN/16.17[G]	2017-04-21	MuVs/Manitoba.CAN/16.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157271	https://www.ncbi.nlm.nih.gov/nuccore/PQ157271	Homo sapiens
+MuVs/Manitoba.CAN/07.17[G]	2017-02-18	MuVs/Manitoba.CAN/07.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157135	https://www.ncbi.nlm.nih.gov/nuccore/PQ157135	Homo sapiens
+MuVs/Manitoba.CAN/05.17/4[G]	2017-01-30	MuVs/Manitoba.CAN/05.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157236	https://www.ncbi.nlm.nih.gov/nuccore/PQ157236	Homo sapiens
+MuVs/Manitoba.CAN/42.17/1[G]	2017-10-16	MuVs/Manitoba.CAN/42.17/1[G]	G	G	North America	G	Canada	Frost et al.	PQ157171	https://www.ncbi.nlm.nih.gov/nuccore/PQ157171	Homo sapiens
+MuVs/Manitoba.CAN/07.17/2[G]	2017-02-16	MuVs/Manitoba.CAN/07.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157136	https://www.ncbi.nlm.nih.gov/nuccore/PQ157136	Homo sapiens
+MuVs/Manitoba.CAN/20.17/2[G]	2017-05-16	MuVs/Manitoba.CAN/20.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157259	https://www.ncbi.nlm.nih.gov/nuccore/PQ157259	Homo sapiens
+MuVs/Manitoba.CAN/17.17/4[G]	2017-04-24	MuVs/Manitoba.CAN/17.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157270	https://www.ncbi.nlm.nih.gov/nuccore/PQ157270	Homo sapiens
+MuVs/Manitoba.CAN/36.17/3[G]	2017-09-06	MuVs/Manitoba.CAN/36.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157216	https://www.ncbi.nlm.nih.gov/nuccore/PQ157216	Homo sapiens
+MuVs/Manitoba.CAN/31.17[G]	2017-07-31	MuVs/Manitoba.CAN/31.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157011	https://www.ncbi.nlm.nih.gov/nuccore/PQ157011	Homo sapiens
+MuVs/Manitoba.CAN/23.17/3[G]	2017-06-05	MuVs/Manitoba.CAN/23.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157255	https://www.ncbi.nlm.nih.gov/nuccore/PQ157255	Homo sapiens
+MuVs/Manitoba.CAN/36.17/2[G]	2017-09-08	MuVs/Manitoba.CAN/36.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157210	https://www.ncbi.nlm.nih.gov/nuccore/PQ157210	Homo sapiens
+MuVs/Manitoba.CAN/36.17/6[G]	2017-09-05	MuVs/Manitoba.CAN/36.17/6[G]	G	G	North America	G	Canada	Frost et al.	PQ157232	https://www.ncbi.nlm.nih.gov/nuccore/PQ157232	Homo sapiens
+MuVs/Manitoba.CAN/23.17/2[G]	2017-06-07	MuVs/Manitoba.CAN/23.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157252	https://www.ncbi.nlm.nih.gov/nuccore/PQ157252	Homo sapiens
+MuVs/Manitoba.CAN/39.17/2[G]	2017-09-25	MuVs/Manitoba.CAN/39.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157175	https://www.ncbi.nlm.nih.gov/nuccore/PQ157175	Homo sapiens
+MuVs/Manitoba.CAN/42.17/2[G]	2017-10-18	MuVs/Manitoba.CAN/42.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157176	https://www.ncbi.nlm.nih.gov/nuccore/PQ157176	Homo sapiens
+MuVs/Manitoba.CAN/10.18[G]	2018-03-09	MuVs/Manitoba.CAN/10.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157086	https://www.ncbi.nlm.nih.gov/nuccore/PQ157086	Homo sapiens
+MuVs/Manitoba.CAN/29.17/3[G]	2017-06-18	MuVs/Manitoba.CAN/29.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157015	https://www.ncbi.nlm.nih.gov/nuccore/PQ157015	Homo sapiens
+MuVs/Manitoba.CAN/33.17/2[G]	2017-08-13	MuVs/Manitoba.CAN/33.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157209	https://www.ncbi.nlm.nih.gov/nuccore/PQ157209	Homo sapiens
+MuVs/Manitoba.CAN/35.17[G]	2017-08-27	MuVs/Manitoba.CAN/35.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157012	https://www.ncbi.nlm.nih.gov/nuccore/PQ157012	Homo sapiens
+MuVs/Manitoba.CAN/30.17/3[G]	2017-07-27	MuVs/Manitoba.CAN/30.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157240	https://www.ncbi.nlm.nih.gov/nuccore/PQ157240	Homo sapiens
+MuVs/Manitoba.CAN/10.17[G]	2017-03-08	MuVs/Manitoba.CAN/10.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157128	https://www.ncbi.nlm.nih.gov/nuccore/PQ157128	Homo sapiens
+MuVs/Manitoba.CAN/15.17/2[G]	2017-04-09	MuVs/Manitoba.CAN/15.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157273	https://www.ncbi.nlm.nih.gov/nuccore/PQ157273	Homo sapiens
+MuVs/Manitoba.CAN/18.17/2[G]	2017-04-25	MuVs/Manitoba.CAN/18.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157024	https://www.ncbi.nlm.nih.gov/nuccore/PQ157024	Homo sapiens
+MuVs/Manitoba.CAN/01.17/2[G]	2017-01-04	MuVs/Manitoba.CAN/01.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157282	https://www.ncbi.nlm.nih.gov/nuccore/PQ157282	Homo sapiens
+MuVs/Manitoba.CAN/50.16[G]	2016-12-15	MuVs/Manitoba.CAN/50.16[G]	G	G	North America	G	Canada	Frost et al.	PQ157283	https://www.ncbi.nlm.nih.gov/nuccore/PQ157283	Homo sapiens
+MuVs/Manitoba.CAN/35.17/5[G]	2017-08-26	MuVs/Manitoba.CAN/35.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157204	https://www.ncbi.nlm.nih.gov/nuccore/PQ157204	Homo sapiens
+MuVs/Manitoba.CAN/43.17[G]	2017-10-25	MuVs/Manitoba.CAN/43.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157008	https://www.ncbi.nlm.nih.gov/nuccore/PQ157008	Homo sapiens
+MuVs/Manitoba.CAN/40.17/3[G]	2017-10-06	MuVs/Manitoba.CAN/40.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157178	https://www.ncbi.nlm.nih.gov/nuccore/PQ157178	Homo sapiens
+MuVs/Manitoba.CAN/011.17[G]	2017-03-18	MuVs/Manitoba.CAN/011.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157127	https://www.ncbi.nlm.nih.gov/nuccore/PQ157127	Homo sapiens
+MuVs/Manitoba.CAN/19.17[G]	2017-05-11	MuVs/Manitoba.CAN/19.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157261	https://www.ncbi.nlm.nih.gov/nuccore/PQ157261	Homo sapiens
+MuVs/Manitoba.CAN/18.17/3[G]	2017-05-04	MuVs/Manitoba.CAN/18.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157265	https://www.ncbi.nlm.nih.gov/nuccore/PQ157265	Homo sapiens
+MuVs/Manitoba.CAN/17.17/3[G]	2017-04-24	MuVs/Manitoba.CAN/17.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157269	https://www.ncbi.nlm.nih.gov/nuccore/PQ157269	Homo sapiens
+MuVs/Manitoba.CAN/41.17/2[G]	2017-10-13	MuVs/Manitoba.CAN/41.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157170	https://www.ncbi.nlm.nih.gov/nuccore/PQ157170	Homo sapiens
+MuVs/Manitoba.CAN/21.17/2[G]	2017-08-10	MuVs/Manitoba.CAN/21.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157140	https://www.ncbi.nlm.nih.gov/nuccore/PQ157140	Homo sapiens
+MuVs/Manitoba.CAN/45.17/3[G]	2017-11-09	MuVs/Manitoba.CAN/45.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157168	https://www.ncbi.nlm.nih.gov/nuccore/PQ157168	Homo sapiens
+MuVs/Manitoba.CAN/44.17/4[G]	2017-10-31	MuVs/Manitoba.CAN/44.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157159	https://www.ncbi.nlm.nih.gov/nuccore/PQ157159	Homo sapiens
+MuVs/Manitoba.CAN/41.17/6[G]	2017-10-12	MuVs/Manitoba.CAN/41.17/6[G]	G	G	North America	G	Canada	Frost et al.	PQ157183	https://www.ncbi.nlm.nih.gov/nuccore/PQ157183	Homo sapiens
+MuVs/Manitoba.CAN/49.17[G]	2017-12-05	MuVs/Manitoba.CAN/49.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157147	https://www.ncbi.nlm.nih.gov/nuccore/PQ157147	Homo sapiens
+MuVs/Manitoba.CAN/32.17[G]	2017-08-07	MuVs/Manitoba.CAN/32.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157211	https://www.ncbi.nlm.nih.gov/nuccore/PQ157211	Homo sapiens
+MuVs/Manitoba.CAN/08.18/2[G]	2018-02-18	MuVs/Manitoba.CAN/08.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157094	https://www.ncbi.nlm.nih.gov/nuccore/PQ157094	Homo sapiens
+MuVs/Manitoba.CAN/17.17/5[G]	2017-04-22	MuVs/Manitoba.CAN/17.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157272	https://www.ncbi.nlm.nih.gov/nuccore/PQ157272	Homo sapiens
+MuVs/Manitoba.CAN/42.17/3[G]	2017-10-20	MuVs/Manitoba.CAN/42.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157185	https://www.ncbi.nlm.nih.gov/nuccore/PQ157185	Homo sapiens
+MuVs/Manitoba.CAN/13.18[G]	2018-03-26	MuVs/Manitoba.CAN/13.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157089	https://www.ncbi.nlm.nih.gov/nuccore/PQ157089	Homo sapiens
+MuVs/Manitoba.CAN/10.18/5[G]	2018-03-09	MuVs/Manitoba.CAN/10.18/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157100	https://www.ncbi.nlm.nih.gov/nuccore/PQ157100	Homo sapiens
+MuVs/Manitoba.CAN/12.18[G]	2018-03-23	MuVs/Manitoba.CAN/12.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157087	https://www.ncbi.nlm.nih.gov/nuccore/PQ157087	Homo sapiens
+MuVs/Manitoba.CAN/51.17/2[G]	2017-12-20	MuVs/Manitoba.CAN/51.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157144	https://www.ncbi.nlm.nih.gov/nuccore/PQ157144	Homo sapiens
+MuVs/Manitoba.CAN/05.18/3[G]	2018-01-31	MuVs/Manitoba.CAN/05.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157107	https://www.ncbi.nlm.nih.gov/nuccore/PQ157107	Homo sapiens
+MuVs/Manitoba.CAN/09.18/4[G]	2018-03-01	MuVs/Manitoba.CAN/09.18/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157103	https://www.ncbi.nlm.nih.gov/nuccore/PQ157103	Homo sapiens
+MuVs/Manitoba.CAN/14.18/3[G]	2018-04-04	MuVs/Manitoba.CAN/14.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157085	https://www.ncbi.nlm.nih.gov/nuccore/PQ157085	Homo sapiens
+MuVs/Manitoba.CAN/02.18/2[G]	2018-01-10	MuVs/Manitoba.CAN/02.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157114	https://www.ncbi.nlm.nih.gov/nuccore/PQ157114	Homo sapiens
+MuVs/Manitoba.CAN/05.18/2[G]	2018-02-01	MuVs/Manitoba.CAN/05.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157105	https://www.ncbi.nlm.nih.gov/nuccore/PQ157105	Homo sapiens
+MuVs/Manitoba.CAN/05.28[G]	2018-01-30	MuVs/Manitoba.CAN/05.28[G]	G	G	North America	G	Canada	Frost et al.	PQ157108	https://www.ncbi.nlm.nih.gov/nuccore/PQ157108	Homo sapiens
+MuVs/Manitoba.CAN/04.18/4[G]	2018-01-22	MuVs/Manitoba.CAN/04.18/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157115	https://www.ncbi.nlm.nih.gov/nuccore/PQ157115	Homo sapiens
+MuVs/Manitoba.CAN/15.17[G]	2017-04-10	MuVs/Manitoba.CAN/15.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157020	https://www.ncbi.nlm.nih.gov/nuccore/PQ157020	Homo sapiens
+MuVs/Manitoba.CAN/14.17/2[G]	2017-04-07	MuVs/Manitoba.CAN/14.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157274	https://www.ncbi.nlm.nih.gov/nuccore/PQ157274	Homo sapiens
+MuVs/Manitoba.CAN/44.17/2[G]	2017-11-04	MuVs/Manitoba.CAN/44.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157157	https://www.ncbi.nlm.nih.gov/nuccore/PQ157157	Homo sapiens
+MuVs/Manitoba.CAN/06.18/2[G]	2018-02-06	MuVs/Manitoba.CAN/06.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157104	https://www.ncbi.nlm.nih.gov/nuccore/PQ157104	Homo sapiens
+MuVs/Manitoba.CAN/42.17[G]	2017-10-16	MuVs/Manitoba.CAN/42.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157145	https://www.ncbi.nlm.nih.gov/nuccore/PQ157145	Homo sapiens
+MuVs/Manitoba.CAN/01.18[G]	2018-01-04	MuVs/Manitoba.CAN/01.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157116	https://www.ncbi.nlm.nih.gov/nuccore/PQ157116	Homo sapiens
+MuVs/Manitoba.CAN/08.18[G]	2018-02-21	MuVs/Manitoba.CAN/08.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157093	https://www.ncbi.nlm.nih.gov/nuccore/PQ157093	Homo sapiens
+MuVs/Manitoba.CAN/12.18/3[G]	2018-02-18	MuVs/Manitoba.CAN/12.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157098	https://www.ncbi.nlm.nih.gov/nuccore/PQ157098	Homo sapiens
+MuVs/Manitoba.CAN/28.17/4[G]	2017-07-09	MuVs/Manitoba.CAN/28.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157244	https://www.ncbi.nlm.nih.gov/nuccore/PQ157244	Homo sapiens
+MuVs/Manitoba.CAN/24.17[G]	2017-06-13	MuVs/Manitoba.CAN/24.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157248	https://www.ncbi.nlm.nih.gov/nuccore/PQ157248	Homo sapiens
+MuVs/Manitoba.CAN/24.17/3[G]	2017-06-12	MuVs/Manitoba.CAN/24.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157254	https://www.ncbi.nlm.nih.gov/nuccore/PQ157254	Homo sapiens
+MuVs/Manitoba.CAN/30.17/2[G]	2017-07-27	MuVs/Manitoba.CAN/30.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157198	https://www.ncbi.nlm.nih.gov/nuccore/PQ157198	Homo sapiens
+MuVs/Manitoba.CAN/34.17/2[G]	2017-08-24	MuVs/Manitoba.CAN/34.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157205	https://www.ncbi.nlm.nih.gov/nuccore/PQ157205	Homo sapiens
+MuVs/Manitoba.CAN/36.17/7[G]	2017-09-03	MuVs/Manitoba.CAN/36.17/7[G]	G	G	North America	G	Canada	Frost et al.	PQ157233	https://www.ncbi.nlm.nih.gov/nuccore/PQ157233	Homo sapiens
+MuVs/Manitoba.CAN/35.17/7[G]	2017-09-01	MuVs/Manitoba.CAN/35.17/7[G]	G	G	North America	G	Canada	Frost et al.	PQ157235	https://www.ncbi.nlm.nih.gov/nuccore/PQ157235	Homo sapiens
+MuVs/Manitoba.CAN/39.17/5[G]	2017-09-28	MuVs/Manitoba.CAN/39.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157181	https://www.ncbi.nlm.nih.gov/nuccore/PQ157181	Homo sapiens
+MuVs/Manitoba.CAN/21.17[G]	2017-05-02	MuVs/Manitoba.CAN/21.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157023	https://www.ncbi.nlm.nih.gov/nuccore/PQ157023	Homo sapiens
+MuVs/Manitoba.CAN/29.17/2[G]	2017-07-16	MuVs/Manitoba.CAN/29.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157014	https://www.ncbi.nlm.nih.gov/nuccore/PQ157014	Homo sapiens
+MuVs/Manitoba.CAN/34.17[G]	2017-08-21	MuVs/Manitoba.CAN/34.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157200	https://www.ncbi.nlm.nih.gov/nuccore/PQ157200	Homo sapiens
+MuVs/Manitoba.CAN/08.17[G]	2017-02-20	MuVs/Manitoba.CAN/08.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157018	https://www.ncbi.nlm.nih.gov/nuccore/PQ157018	Homo sapiens
+MuVs/Manitoba.CAN/47.17[G]	2017-11-23	MuVs/Manitoba.CAN/47.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157165	https://www.ncbi.nlm.nih.gov/nuccore/PQ157165	Homo sapiens
+MuVs/Manitoba.CAN/41.17/4[G]	2017-10-10	MuVs/Manitoba.CAN/41.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157180	https://www.ncbi.nlm.nih.gov/nuccore/PQ157180	Homo sapiens
+MuVs/Manitoba.CAN/35.17/3[G]	2017-08-29	MuVs/Manitoba.CAN/35.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157201	https://www.ncbi.nlm.nih.gov/nuccore/PQ157201	Homo sapiens
+MuVs/Manitoba.CAN/36.17/4[G]	2017-09-07	MuVs/Manitoba.CAN/36.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157229	https://www.ncbi.nlm.nih.gov/nuccore/PQ157229	Homo sapiens
+MuVs/Manitoba.CAN/41.17/5[G]	2017-10-12	MuVs/Manitoba.CAN/41.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157182	https://www.ncbi.nlm.nih.gov/nuccore/PQ157182	Homo sapiens
+MuVs/Manitoba.CAN/45.17[G]	2017-11-04	MuVs/Manitoba.CAN/45.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157162	https://www.ncbi.nlm.nih.gov/nuccore/PQ157162	Homo sapiens
+MuVs/Manitoba.CAN/44.17/7[G]	2017-11-02	MuVs/Manitoba.CAN/44.17/7[G]	G	G	North America	G	Canada	Frost et al.	PQ157164	https://www.ncbi.nlm.nih.gov/nuccore/PQ157164	Homo sapiens
+MuVs/Manitoba.CAN/14.18/2[G]	2018-04-03	MuVs/Manitoba.CAN/14.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157084	https://www.ncbi.nlm.nih.gov/nuccore/PQ157084	Homo sapiens
+MuVs/Manitoba.CAN/49.17/3[G]	2017-12-04	MuVs/Manitoba.CAN/49.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157150	https://www.ncbi.nlm.nih.gov/nuccore/PQ157150	Homo sapiens
+MuVs/Manitoba.CAN/05.18[G]	2018-02-03	MuVs/Manitoba.CAN/05.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157101	https://www.ncbi.nlm.nih.gov/nuccore/PQ157101	Homo sapiens
+MuVs/Manitoba.CAN/12.18/2[G]	2018-03-21	MuVs/Manitoba.CAN/12.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157088	https://www.ncbi.nlm.nih.gov/nuccore/PQ157088	Homo sapiens
+MuVs/Manitoba.CAN/09.18[G]	2018-02-28	MuVs/Manitoba.CAN/09.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157090	https://www.ncbi.nlm.nih.gov/nuccore/PQ157090	Homo sapiens
+MuVs/Manitoba.CAN/48.17/2[G]	2017-12-01	MuVs/Manitoba.CAN/48.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157153	https://www.ncbi.nlm.nih.gov/nuccore/PQ157153	Homo sapiens
+MuVs/Manitoba.CAN/04.18[G]	2018-01-24	MuVs/Manitoba.CAN/04.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157002	https://www.ncbi.nlm.nih.gov/nuccore/PQ157002	Homo sapiens
+MuVs/Manitoba.CAN/35.17/6[G]	2017-09-01	MuVs/Manitoba.CAN/35.17/6[G]	G	G	North America	G	Canada	Frost et al.	PQ157231	https://www.ncbi.nlm.nih.gov/nuccore/PQ157231	Homo sapiens
+MuVs/Manitoba.CAN/31.17/4[G]	2017-07-29	MuVs/Manitoba.CAN/31.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157195	https://www.ncbi.nlm.nih.gov/nuccore/PQ157195	Homo sapiens
+MuVs/Manitoba.CAN/52.17[G]	2017-12-26	MuVs/Manitoba.CAN/52.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157141	https://www.ncbi.nlm.nih.gov/nuccore/PQ157141	Homo sapiens
+MuVs/Manitoba.CAN/38.17[G]	2017-09-17	MuVs/Manitoba.CAN/38.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157189	https://www.ncbi.nlm.nih.gov/nuccore/PQ157189	Homo sapiens
+MuVs/Manitoba.CAN/39.17/7[G]	2017-09-25	MuVs/Manitoba.CAN/39.17/7[G]	G	G	North America	G	Canada	Frost et al.	PQ157191	https://www.ncbi.nlm.nih.gov/nuccore/PQ157191	Homo sapiens
+MuVs/Manitoba.CAN/41.17/3[G]	2017-10-10	MuVs/Manitoba.CAN/41.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157172	https://www.ncbi.nlm.nih.gov/nuccore/PQ157172	Homo sapiens
+MuVs/Manitoba.CAN/25.17/2[G]	2017-06-20	MuVs/Manitoba.CAN/25.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157215	https://www.ncbi.nlm.nih.gov/nuccore/PQ157215	Homo sapiens
+MuVs/Manitoba.CAN/48.17/3[G]	2017-11-29	MuVs/Manitoba.CAN/48.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157154	https://www.ncbi.nlm.nih.gov/nuccore/PQ157154	Homo sapiens
+MuVs/Manitoba.CAN/35.17/2[G]	2017-08-30	MuVs/Manitoba.CAN/35.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157199	https://www.ncbi.nlm.nih.gov/nuccore/PQ157199	Homo sapiens
+MuVs/Manitoba.CAN/38.17/3[G]	2017-09-16	MuVs/Manitoba.CAN/38.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157192	https://www.ncbi.nlm.nih.gov/nuccore/PQ157192	Homo sapiens
+MuVs/Manitoba.CAN/37.17[G]	2017-09-14	MuVs/Manitoba.CAN/37.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157187	https://www.ncbi.nlm.nih.gov/nuccore/PQ157187	Homo sapiens
+MuVs/Manitoba.CAN/14.17/3[G]	2017-04-05	MuVs/Manitoba.CAN/14.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157276	https://www.ncbi.nlm.nih.gov/nuccore/PQ157276	Homo sapiens
+MuVs/Manitoba.CAN/40.17/2[G]	2017-10-05	MuVs/Manitoba.CAN/40.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157173	https://www.ncbi.nlm.nih.gov/nuccore/PQ157173	Homo sapiens
+MuVs/Manitoba.CAN/38.17/2[G]	2017-09-17	MuVs/Manitoba.CAN/38.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157190	https://www.ncbi.nlm.nih.gov/nuccore/PQ157190	Homo sapiens
+MuVs/Manitoba.CAN/50.17/1[G]	2017-12-11	MuVs/Manitoba.CAN/50.17/1[G]	G	G	North America	G	Canada	Frost et al.	PQ157003	https://www.ncbi.nlm.nih.gov/nuccore/PQ157003	Homo sapiens
+MuVs/Manitoba.CAN/48.17[G]	2017-12-01	MuVs/Manitoba.CAN/48.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157148	https://www.ncbi.nlm.nih.gov/nuccore/PQ157148	Homo sapiens
+MuVs/Manitoba.CAN/52.17/2[G]	2017-12-31	MuVs/Manitoba.CAN/52.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157142	https://www.ncbi.nlm.nih.gov/nuccore/PQ157142	Homo sapiens
+MuVs/Manitoba.CAN/02.18[G]	2018-01-13	MuVs/Manitoba.CAN/02.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157111	https://www.ncbi.nlm.nih.gov/nuccore/PQ157111	Homo sapiens
+MuVs/Manitoba.CAN/48.17/4[G]	2017-12-02	MuVs/Manitoba.CAN/48.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157155	https://www.ncbi.nlm.nih.gov/nuccore/PQ157155	Homo sapiens
+MuVs/Manitoba.CAN/41.17[G]	2017-10-08	MuVs/Manitoba.CAN/41.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157009	https://www.ncbi.nlm.nih.gov/nuccore/PQ157009	Homo sapiens
+MuVs/Manitoba.CAN/49.17/5[G]	2017-12-08	MuVs/Manitoba.CAN/49.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157152	https://www.ncbi.nlm.nih.gov/nuccore/PQ157152	Homo sapiens
+MuVs/Manitoba.CAN/36.17[G]	2017-09-13	MuVs/Manitoba.CAN/36.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157010	https://www.ncbi.nlm.nih.gov/nuccore/PQ157010	Homo sapiens
+MuVs/Manitoba.CAN/49.17/2[G]	2017-12-05	MuVs/Manitoba.CAN/49.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157149	https://www.ncbi.nlm.nih.gov/nuccore/PQ157149	Homo sapiens
+MuVs/Manitoba.CAN/14.18[G]	2018-04-05	MuVs/Manitoba.CAN/14.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157082	https://www.ncbi.nlm.nih.gov/nuccore/PQ157082	Homo sapiens
+MuVs/Manitoba.CAN/01.18//3G	2018-01-04	MuVs/Manitoba.CAN/01.18//3G	G	G	North America	G	Canada	Frost et al.	PQ157113	https://www.ncbi.nlm.nih.gov/nuccore/PQ157113	Homo sapiens
+MuVs/Manitoba.CAN/46.17[G]	2017-11-12	MuVs/Manitoba.CAN/46.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157006	https://www.ncbi.nlm.nih.gov/nuccore/PQ157006	Homo sapiens
+MuVs/Manitoba.CAN/44.17[G]	2017-10-31	MuVs/Manitoba.CAN/44.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157007	https://www.ncbi.nlm.nih.gov/nuccore/PQ157007	Homo sapiens
+MuVs/Manitoba.CAN/1418[G]	2018-04-04	MuVs/Manitoba.CAN/1418[G]	G	G	North America	G	Canada	Frost et al.	PQ157083	https://www.ncbi.nlm.nih.gov/nuccore/PQ157083	Homo sapiens
+MuVs/Manitoba.CAN/09.18/2[G]	2018-03-02	MuVs/Manitoba.CAN/09.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157092	https://www.ncbi.nlm.nih.gov/nuccore/PQ157092	Homo sapiens
+MuVs/Manitoba.CAN/49.17/4[G]	2017-12-08	MuVs/Manitoba.CAN/49.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157151	https://www.ncbi.nlm.nih.gov/nuccore/PQ157151	Homo sapiens
+MuVs/Manitoba.CAN/47.17/3[G]	2017-11-18	MuVs/Manitoba.CAN/47.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157167	https://www.ncbi.nlm.nih.gov/nuccore/PQ157167	Homo sapiens
+MuVs/Manitoba.CAN/20.17[G]	2017-05-15	MuVs/Manitoba.CAN/20.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157004	https://www.ncbi.nlm.nih.gov/nuccore/PQ157004	Homo sapiens
+MuVs/Manitoba.CAN/24.17/2[G]	2017-06-10	MuVs/Manitoba.CAN/24.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157253	https://www.ncbi.nlm.nih.gov/nuccore/PQ157253	Homo sapiens
+MuVs/Manitoba.CAN/22.17/2[G]	2017-05-30	MuVs/Manitoba.CAN/22.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157258	https://www.ncbi.nlm.nih.gov/nuccore/PQ157258	Homo sapiens
+MuVs/Manitoba.CAN/47.17/2[G]	2017-11-22	MuVs/Manitoba.CAN/47.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157166	https://www.ncbi.nlm.nih.gov/nuccore/PQ157166	Homo sapiens
+MuVs/Manitoba.CAN/39.17/4[G]	2017-09-28	MuVs/Manitoba.CAN/39.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157179	https://www.ncbi.nlm.nih.gov/nuccore/PQ157179	Homo sapiens
+MuVs/Manitoba.CAN/48.17/5[G]	2017-11-29	MuVs/Manitoba.CAN/48.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157156	https://www.ncbi.nlm.nih.gov/nuccore/PQ157156	Homo sapiens
+MuVs/Manitoba.CAN/28.17/2[G]	2017-07-08	MuVs/Manitoba.CAN/28.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157213	https://www.ncbi.nlm.nih.gov/nuccore/PQ157213	Homo sapiens
+MuVs/Manitoba.CAN/51.17[G]	2017-12-24	MuVs/Manitoba.CAN/51.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157143	https://www.ncbi.nlm.nih.gov/nuccore/PQ157143	Homo sapiens
+MuVs/Manitoba.CAN/35.17/4[G]	2017-08-26	MuVs/Manitoba.CAN/35.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157202	https://www.ncbi.nlm.nih.gov/nuccore/PQ157202	Homo sapiens
+MuVs/Manitoba.CAN/44.17/3[G]	2017-10-31	MuVs/Manitoba.CAN/44.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157158	https://www.ncbi.nlm.nih.gov/nuccore/PQ157158	Homo sapiens
+MuVs/Manitoba.CAN/20.17/3[G]	2017-05-15	MuVs/Manitoba.CAN/20.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157260	https://www.ncbi.nlm.nih.gov/nuccore/PQ157260	Homo sapiens
+MuVs/Manitoba.CAN/33.17[G]	2017-08-17	MuVs/Manitoba.CAN/33.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157208	https://www.ncbi.nlm.nih.gov/nuccore/PQ157208	Homo sapiens
+MuVs/Manitoba.CAN/36.17/5[G]	2017-09-08	MuVs/Manitoba.CAN/36.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157230	https://www.ncbi.nlm.nih.gov/nuccore/PQ157230	Homo sapiens
+MuVs/Manitoba.CAN/06.18/3[G]	2018-02-09	MuVs/Manitoba.CAN/06.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157106	https://www.ncbi.nlm.nih.gov/nuccore/PQ157106	Homo sapiens
+MuVs/Manitoba.CAN/10.18/3[G]	2018-03-06	MuVs/Manitoba.CAN/10.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157095	https://www.ncbi.nlm.nih.gov/nuccore/PQ157095	Homo sapiens
+MuVs/Manitoba.CAN/10.18/2[G]	2018-03-07	MuVs/Manitoba.CAN/10.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157091	https://www.ncbi.nlm.nih.gov/nuccore/PQ157091	Homo sapiens
+MuVs/Manitoba.CAN/11.18[G]	2018-03-12	MuVs/Manitoba.CAN/11.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157097	https://www.ncbi.nlm.nih.gov/nuccore/PQ157097	Homo sapiens
+MuVs/Manitoba.CAN/10.18/4[G]	2018-03-05	MuVs/Manitoba.CAN/10.18/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157099	https://www.ncbi.nlm.nih.gov/nuccore/PQ157099	Homo sapiens
+MuVs/Manitoba.CAN/03.18[G]	2018-01-16	MuVs/Manitoba.CAN/03.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157112	https://www.ncbi.nlm.nih.gov/nuccore/PQ157112	Homo sapiens
+MuVs/Manitoba.CAN/34.17/4[G]	2017-08-21	MuVs/Manitoba.CAN/34.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157239	https://www.ncbi.nlm.nih.gov/nuccore/PQ157239	Homo sapiens
+MuVs/Manitoba.CAN/37.17/2[G]	2017-09-14	MuVs/Manitoba.CAN/37.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157188	https://www.ncbi.nlm.nih.gov/nuccore/PQ157188	Homo sapiens
+MuVs/Manitoba.CAN/34.17/3[G]	2017-08-25	MuVs/Manitoba.CAN/34.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157217	https://www.ncbi.nlm.nih.gov/nuccore/PQ157217	Homo sapiens
+MuVs/Manitoba.CAN/23.17[G]	2017-06-24	MuVs/Manitoba.CAN/23.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157214	https://www.ncbi.nlm.nih.gov/nuccore/PQ157214	Homo sapiens
+MuVs/Manitoba.CAN/31.17/3[G]	2017-07-31	MuVs/Manitoba.CAN/31.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157194	https://www.ncbi.nlm.nih.gov/nuccore/PQ157194	Homo sapiens
+MuVs/Manitoba.CAN/31.17/2[G]	2017-08-03	MuVs/Manitoba.CAN/31.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157193	https://www.ncbi.nlm.nih.gov/nuccore/PQ157193	Homo sapiens
+MuVs/Manitoba.CAN/31.17/5[G]	2017-08-02	MuVs/Manitoba.CAN/31.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157197	https://www.ncbi.nlm.nih.gov/nuccore/PQ157197	Homo sapiens
+MuVs/Manitoba.CAN/26.17[G]	2017-06-29	MuVs/Manitoba.CAN/26.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157212	https://www.ncbi.nlm.nih.gov/nuccore/PQ157212	Homo sapiens
+MuVs/Manitoba.CAN/25.17[G]	2017-06-22	MuVs/Manitoba.CAN/25.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157016	https://www.ncbi.nlm.nih.gov/nuccore/PQ157016	Homo sapiens
+MuVs/Manitoba.CAN/29.17[G]	2017-07-17	MuVs/Manitoba.CAN/29.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157207	https://www.ncbi.nlm.nih.gov/nuccore/PQ157207	Homo sapiens
+MuVs/Manitoba.CAN/04.18/3[G]	2018-01-22	MuVs/Manitoba.CAN/04.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157110	https://www.ncbi.nlm.nih.gov/nuccore/PQ157110	Homo sapiens
+MuVs/Manitoba.CAN/01.18/2[G]	2018-01-02	MuVs/Manitoba.CAN/01.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157117	https://www.ncbi.nlm.nih.gov/nuccore/PQ157117	Homo sapiens
+MuVs/Manitoba.CAN/50.17[G]	2017-12-14	MuVs/Manitoba.CAN/50.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157146	https://www.ncbi.nlm.nih.gov/nuccore/PQ157146	Homo sapiens
+MuVs/Manitoba.CAN/48.17[G]	2017-11-30	MuVs/Manitoba.CAN/48.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157219	https://www.ncbi.nlm.nih.gov/nuccore/PQ157219	Homo sapiens
+MuVs/Manitoba.CAN/40.17[G]	2017-10-06	MuVs/Manitoba.CAN/40.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157169	https://www.ncbi.nlm.nih.gov/nuccore/PQ157169	Homo sapiens
+MuVs/Manitoba.CAN/50.17/2[G]	2017-12-11	MuVs/Manitoba.CAN/50.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157005	https://www.ncbi.nlm.nih.gov/nuccore/PQ157005	Homo sapiens
+MuVs/Manitoba.CAN/45.17/2[G]	2017-11-04	MuVs/Manitoba.CAN/45.17/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157163	https://www.ncbi.nlm.nih.gov/nuccore/PQ157163	Homo sapiens
+MuVs/Manitoba.CAN/42.17/4[G]	2017-10-17	MuVs/Manitoba.CAN/42.17/4[G]	G	G	North America	G	Canada	Frost et al.	PQ157186	https://www.ncbi.nlm.nih.gov/nuccore/PQ157186	Homo sapiens
+MuVs/Manitoba.CAN/29.17/1[G]	2017-07-18	MuVs/Manitoba.CAN/29.17/1[G]	G	G	North America	G	Canada	Frost et al.	PQ157013	https://www.ncbi.nlm.nih.gov/nuccore/PQ157013	Homo sapiens
+MuVs/Manitoba.CAN/39.17/3[G]	2017-09-25	MuVs/Manitoba.CAN/39.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157177	https://www.ncbi.nlm.nih.gov/nuccore/PQ157177	Homo sapiens
+MuVs/Manitoba.CAN/33.17/3[G]	2017-08-18	MuVs/Manitoba.CAN/33.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157238	https://www.ncbi.nlm.nih.gov/nuccore/PQ157238	Homo sapiens
+MuVs/Manitoba.CAN/28.17/3[G]	2017-07-11	MuVs/Manitoba.CAN/28.17/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157243	https://www.ncbi.nlm.nih.gov/nuccore/PQ157243	Homo sapiens
+MuVs/Manitoba.CAN/39.17/6[G]	2017-09-29	MuVs/Manitoba.CAN/39.17/6[G]	G	G	North America	G	Canada	Frost et al.	PQ157184	https://www.ncbi.nlm.nih.gov/nuccore/PQ157184	Homo sapiens
+MuVs/Manitoba.CAN/06.18[G]	2018-02-04	MuVs/Manitoba.CAN/06.18[G]	G	G	North America	G	Canada	Frost et al.	PQ157102	https://www.ncbi.nlm.nih.gov/nuccore/PQ157102	Homo sapiens
+MuVs/Manitoba.CAN/44.17/6[G]	2017-11-02	MuVs/Manitoba.CAN/44.17/6[G]	G	G	North America	G	Canada	Frost et al.	PQ157161	https://www.ncbi.nlm.nih.gov/nuccore/PQ157161	Homo sapiens
+MuVs/Manitoba.CAN/09.18/3[G]	2018-02-28	MuVs/Manitoba.CAN/09.18/3[G]	G	G	North America	G	Canada	Frost et al.	PQ157096	https://www.ncbi.nlm.nih.gov/nuccore/PQ157096	Homo sapiens
+MuVs/Manitoba.CAN/44.17/5[G]	2017-10-28	MuVs/Manitoba.CAN/44.17/5[G]	G	G	North America	G	Canada	Frost et al.	PQ157160	https://www.ncbi.nlm.nih.gov/nuccore/PQ157160	Homo sapiens
+MuVs/Manitoba.CAN/04.18/2[G]	2018-01-24	MuVs/Manitoba.CAN/04.18/2[G]	G	G	North America	G	Canada	Frost et al.	PQ157109	https://www.ncbi.nlm.nih.gov/nuccore/PQ157109	Homo sapiens
+MuVs/Manitoba.CAN/39.17[G]	2017-09-23	MuVs/Manitoba.CAN/39.17[G]	G	G	North America	G	Canada	Frost et al.	PQ157174	https://www.ncbi.nlm.nih.gov/nuccore/PQ157174	Homo sapiens

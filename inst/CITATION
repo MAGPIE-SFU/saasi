@@ -1,0 +1,15 @@
+bibentry(
+	bibtype = "Article",
+	title = "Sampling Aware Ancestral State Inference",
+	author = c(
+		person("Yexuan","Song"),
+		person("Ivan", "Gill"),
+		person("Ailene", "MacPherson"),
+		person("Caroline", "Colijn")
+	),
+	year = 2025,
+	publisher = "Cold Spring Harbor Laboritory",
+	doi = "10.1101/2025.05.20.655151",
+	journal = "bioRxiv"
+
+)
