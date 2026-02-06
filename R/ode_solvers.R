@@ -37,7 +37,7 @@ backwards_likelihoods_helper <- function(child_likelihoods,
         # * q[i,][-i] is q[i, j]
         # * y[i + nstate] is Ei
         # * y[1:nstate][-i] is Dj
-        # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
+        # See derivation sxn in https://www.biorxiv.org/content/10.1101/2025.05.20.655151v1 for details
         return(
           -(lambda[i] + mu[i] + psi[i] + sum(q[i, ][-i])) * y[i]
           + 2 * lambda[i] * y[i + nstate] * y[i]
@@ -52,7 +52,7 @@ backwards_likelihoods_helper <- function(child_likelihoods,
         # * q[i,][-i] is q[i, j]
         # * y[i + nstate] is Ei
         # * y[nstate + 1:nstate][-i] is Ej
-        # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
+        # See derivation sxn in https://www.biorxiv.org/content/10.1101/2025.05.20.655151v1 for details
         return(
           mu[i] - (lambda[i] + mu[i] + psi[i] + sum(q[i, ][-i]))
           * y[i + nstate] + lambda[i] * y[i + nstate]^2
