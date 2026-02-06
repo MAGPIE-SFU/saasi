@@ -1,127 +1,179 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-\# saasi
+``` r
+library(saasi)
+library(diversitree)
+#> Loading required package: ape
+library(tidytree)
+#> If you use the ggtree package suite in published research, please cite the appropriate paper(s):
+#> 
+#> LG Wang, TTY Lam, S Xu, Z Dai, L Zhou, T Feng, P Guo, CW Dunn, BR Jones, T Bradley, H Zhu, Y
+#> Guan, Y Jiang, G Yu. treeio: an R package for phylogenetic tree input and output with richly
+#> annotated and associated data. Molecular Biology and Evolution. 2020, 37(2):599-603. doi:
+#> 10.1093/molbev/msz240
+#> 
+#> Shuangbin Xu, Lin Li, Xiao Luo, Meijun Chen, Wenli Tang, Li Zhan, Zehan Dai, Tommy T. Lam, Yi
+#> Guan, Guangchuang Yu. Ggtree: A serialized data object for visualization of a phylogenetic tree
+#> and annotation data. iMeta 2022, 1(4):e56. doi:10.1002/imt2.56
+#> 
+#> Attaching package: 'tidytree'
+#> The following objects are masked from 'package:ape':
+#> 
+#>     drop.tip, keep.tip
+#> The following object is masked from 'package:stats':
+#> 
+#>     filter
+library(ape)
+library(phytools)
+#> Loading required package: maps
+library(readr)
+```
 
-<!-- badges: start --> <!-- badges: end -->
+# Introduction
 
-Saasi is an ancestral state reconstruction method that accounts for
-variation in sampling rates among locations or traits.
+<!-- badges: start -->
+<!-- badges: end -->
 
-\## Installation
+This vignette demonstrates how to use the `saasi` package for ancestral
+state reconstruction.
+
+Saasi (Sampling-Aware Ancestral State Inference) is an ancestral state
+reconstruction method that accounts for variation in sampling rates
+among locations or traits. Unlike traditional methods that assume
+uniform sampling, saasi explicitly models heterogeneous sampling rates,
+leading to more accurate ancestral state estimates in unevenly sampled
+phylogenies.
+
+NOTE: THIS DOCUMENT IS SUBJECT TO CHANGE (FUNCTION NAMES, ARGUMENTS
+ETC).
+
+## Installation
 
 You can install the development version of saasi from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-
 remotes::install_github("MAGPIE-SFU/saasi")
 ```
 
-For this particular branch, use:
+# Overview
 
-``` r
-# install.packages("remotes")
+The `saasi` function requires three main inputs:
 
-remotes::install_github("MAGPIE-SFU/saasi", ref = "saasi-maintaining")
-```
+1.  **A phylogenetic tree** (class `phylo`) that is:
 
-Before running this demo, please make sure the following packages are
-installed: saasi, diversitree, tidytree, ape, phytools, readr
+    - Rooted and binary
+    - Has branch lengths in units of time (all positive)
+    - Contains tip states (`tree$tip.state`) with no missing values
 
-## saasi package
+    Use `check_tree_compatibility()` to verify compatibility and
+    `prepare_tree_for_saasi()` to prepare your tree.
 
-This is a demo showing how to use the saasi package.
+2.  **Birth-death-sampling parameters** (class `data.frame`):
 
-saasi requires the following argument: (1) a phylogenetic tree (class
-`phylo`). The tree should satisfy the following properties: rooted,
-binary, branch length in units of time and positive, has tree\$tip.state
-and has no missing states. Check `check_tree_compatibility` function for
-details. In addition, `prepare_tree_for_saasi` function helps the user
-to prepare a tree that is compatible with saasi. (2) speciation,
-extinction and sampling rates (class `data.frame`). These rates can be
-estimated using the function `estimate_bds_parameters`. (3) a transition
-rate matrix (class `matrix`). The output will be a data frame that
-contains the probabilities of each state for each internal node of the
-phylogenetic tree. The Q matrix can be estimated using the function
-`estimate_transition_rates`.
+    - Speciation rate
+    - Extinction/removal rate
+    - Sampling rate
+
+    Use `estimate_bds_parameters()` to estimate speciation and sampling
+    rates. Users should specify the extinction rate based on domain
+    knowledge.
+
+3.  **Transition rate matrix Q** (class `matrix`):
+
+    - Rates of transition between states
+
+    Use `estimate_transition_rates()` to estimate transition rates.
+
+The output is a data frame containing the probability of each state for
+each internal node of the phylogenetic tree.
 
 ## Example: Ebola 2013-2016 West African Ebola Epidemic
 
-For the next example, download the data from Nextstrain:
+### Read tree and load metadata
+
+For this example, we use data from Nextstrain:
 <https://nextstrain.org/ebola/ebov-2013?c=country>
 
 ``` r
-# Read the tree file and metadata (replace with your own directory)
-tree <- read.tree("data-raw/nextstrain_ebola_ebov-2013_timetree.nwk")
-metadata <- read_tsv("data-raw/nextstrain_ebola_ebov-2013_metadata.tsv")
+tree <- ape::read.tree(system.file("extdata", "nextstrain_ebola_ebov-2013_timetree.nwk", package = "saasi"))
+metadata <- readr::read_tsv(system.file("extdata", "nextstrain_ebola_ebov-2013_metadata.tsv", package = "saasi"))
 #> Rows: 1493 Columns: 8
-#> ── Column specification ────────────────────────────────────────────────────────
+#> ── Column specification ─────────────────────────────────────────────────────────────────────────────────────
 #> Delimiter: "\t"
-#> chr  (7): strain, country, division, author, author__url, accession, accessi...
+#> chr  (7): strain, country, division, author, author__url, accession, accession__url
 #> date (1): date
 #> 
 #> ℹ Use `spec()` to retrieve the full column specification for this data.
 #> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
 
-# Create a data.frame contains strains and states. 
-# The first column should match tree$tip.label, 
-# the second column is the region or country that you are interested in.
+First, create a data frame containing strains and states. The first
+column of the data frame should match `tree$tip.label`, and the second
+column should contain the state of interest. Users can skip this step if
+`tree$tip.state` already exists.
+
+``` r
 tip_data <- data.frame(
   tip_label = metadata$strain,
   state = metadata$country
 )
+```
 
-# Check compatibility
-check_tree_compatibility(tree)
-#> Tree is not compatible with SAASI
-#> Missing internal nodes
-#> Unary nodes present. Suppress with ape::collapse.branches() or re-run multi2di()
-#> Polytomies present. Resolve with multi2di(tree, tol = 1e-8)
-#> Zero-length branches present. Fix with: tree$edge.length[tree$edge.length <= 0] <- 1e-5
-#> Negative branches present. Fix with: tree$edge.length[tree$edge.length <= 0] <- 1e-5
-#> NA tip states present. Remove with drop_tips_by_state(tree, NA)
-#> No tip states. Attach with attach_tip_states() or prepare_tree_for_saasi()
-#> [1] FALSE
+### Modify the tree to be compatible with saasi
 
-# The tree is not compatible. Specifically, the tree is nonbinary, it does
-# not contains tip states, contains negative/zero branch length, and contains
-# polytomy.
-# To fix it, run the following command:
+Users can apply the function `prepare_tree_for_saasi()` to make the tree
+compatible with saasi. To check if the tree is compatible, use the
+function `check_tree_compatibility()`.
 
-ebola_tree <- prepare_tree_for_saasi(tree,tip_data)
+``` r
+ebola_tree <- prepare_tree_for_saasi(tree, tip_data)
+```
 
-# Check compatibility again
-check_tree_compatibility(ebola_tree)
-#> Tree is compatible with SAASI
-#> [1] TRUE
+### Estimating transition rates
 
-# The tree is compatible with saasi.
+Users can estimate the transition rate matrix Q using the function
+`estimate_transition_rates()`. Users can specify the model for the
+transition rate matrix: 1. Equal rate `ER`, 2. Symmetric rate `SYM`, 3.
+All rates different `ARD`, and Custom `custom_q`.
 
-# Estimate the transition rate matrix Q
-Q <- estimate_transition_rates(ebola_tree,method = 'simmap',model = 'SYM')
+``` r
+Q <- estimate_transition_rates(ebola_tree, method = 'simmap', matrix_structure = 'SYM')
 #> make.simmap is sampling character histories conditioned on
 #> the transition matrix
 #> 
 #> Q =
 #>                  Guinea    Liberia Sierra Leone
-#> Guinea       -0.4711388  0.2597255    0.2114133
-#> Liberia       0.2597255 -0.3690431    0.1093176
-#> Sierra Leone  0.2114133  0.1093176   -0.3207309
+#> Guinea       -0.4716929  0.2602826    0.2114103
+#> Liberia       0.2602826 -0.3695978    0.1093152
+#> Sierra Leone  0.2114103  0.1093152   -0.3207255
 #> (estimated using likelihood);
 #> and (mean) root node prior probabilities
 #> pi =
 #>       Guinea      Liberia Sierra Leone 
 #>    0.3333333    0.3333333    0.3333333
 #> Done.
+```
 
-# Estimate the rates
-# For ebola, we assume the total infectious period 1/(mu+psi) is between 
-# 20 - 40 days (20/365 - 40/365 years)
-# The bound for mu+psi is [9.125,18.25]
-# We further assume psi > mu (user can also assume mu > psi)
-# Set mu = 5
+### Estimating speciation and sampling rates
+
+Users can estimate speciation and sampling rates using the function
+`estimate_bds_parameters()`. Users should have some knowledge about the
+expected removal rate (1/mu) for the disease of interest, as saasi
+requires the extinction rate mu to be known. To obtain better estimates
+for the overall speciation and sampling rates, users should have
+knowledge about the maximum and minimum R0, as well as the upper and
+lower bounds for the total removal rate (1/(mu+psi)).
+
+For Ebola, we assume the total infectious period (1/(mu+psi)) is between
+20 and 40 days. Converting to years, the total removal rate (mu + psi)
+is between 9.125 (365/40) and 18.25 (365/20). If we assume mu = 5, this
+gives us bounds for the overall sampling rate psi between 4.125 and
+13.25. In this example, we assume R0 is between 1.5 and 3.
+
+``` r
 rates <- estimate_bds_parameters(
     ebola_tree,
     mu = 5, 
@@ -131,49 +183,75 @@ rates <- estimate_bds_parameters(
     infectious_period_min = 20/365, # convert days to years
     infectious_period_max = 40/365, # convert days to years
     n_starts = 100)
-
-# Setting up parameters
-pars1 <- create_params_template(colnames(Q),lambda = rates$lambda,mu = rates$mu,psi = rates$psi)
-
-# Run saasi analysis
-saasi_ebola <- saasi(ebola_tree,pars1,Q)
-
-# Plot and save the result, set save_file = NULL to not save file
-p1 <- plot_saasi(ebola_tree,saasi_ebola,save_file = "ebola_equal_psi.png")
-
-# Try a different set up, we assume Liberia samples less than other countries
-pars2 <- create_params_template(colnames(Q),lambda = rates$lambda,mu = rates$mu,psi = c(rates$psi,rates$psi/2,rates$psi))
-
-# Rerun analysis and save the result, set save_file = NULL to not save file
-saasi_ebola2 <- saasi(ebola_tree,pars2,Q)
-
-p2 <- plot_saasi(ebola_tree,saasi_ebola2,save_file = "ebola_unequal_psi.png")
 ```
+
+### Run saasi analysis
+
+Users can run the saasi analysis by specifying the following parameters:
+
+- **phy** - A `phylo` object containing the phylogenetic tree
+- **q_matrix** - An n × n transition rate matrix (class `matrix`), where
+  n is the number of states
+- **lambda** - Speciation rate(s) for each state. If
+  `length(lambda) = 1`, all states are assumed to have the same
+  speciation rate; otherwise, provide a vector of length n
+- **mu** - Extinction rate(s) for each state. If `length(mu) = 1`, all
+  states are assumed to have the same extinction rate; otherwise,
+  provide a vector of length n
+- **psi** - Sampling rate(s) for each state. If `length(psi) = 1`, all
+  states are assumed to have the same sampling rate; otherwise, provide
+  a vector of length n
+- **prior** - Prior probabilities for the root node. If `NULL`
+  (default), uses equal probabilities across all states
 
 ``` r
-# Notice that the transition rate matrix Q is relatively small compare to the other rates.
-# This is due to lack of transition events between states.
-# For sanity check, randomly shuffle the tip.state
-
-testing_ebola <- ebola_tree
-set.seed(123) 
-testing_ebola$tip.state <- sample(testing_ebola$tip.state)
-
-Q <- estimate_transition_rates(testing_ebola,method = 'simmap',model = 'SYM')
-#> make.simmap is sampling character histories conditioned on
-#> the transition matrix
-#> 
-#> Q =
-#>                 Guinea   Liberia Sierra Leone
-#> Guinea       -342.1927  171.0963     171.0963
-#> Liberia       171.0963 -342.1927     171.0963
-#> Sierra Leone  171.0963  171.0963    -342.1927
-#> (estimated using likelihood);
-#> and (mean) root node prior probabilities
-#> pi =
-#>       Guinea      Liberia Sierra Leone 
-#>    0.3333333    0.3333333    0.3333333
-#> Done.
-
-# Now Q gets extremely large
+saasi_ebola <- saasi(phy = ebola_tree,            # phylogenetic tree
+                     q_matrix = Q,                # transition rate matrix
+                     lambda = rates$lambda,       # speciation rate
+                     mu = rates$mu,               # extinction rate
+                     psi = rates$psi,             # sampling rate
+                     prior = NULL)                # root prior (equal probabilities)
+#> Tree is compatible with SAASI
 ```
+
+### Plot and save the result
+
+Users can use the built-in function `plot_saasi()` to visualize results.
+Set `save_file = NULL` to display without saving.
+
+``` r
+p1 <- plot_saasi(ebola_tree, saasi_ebola, save_file = NULL)
+```
+
+<img src="man/figures/README-Plot the result-1.png" width="100%" />
+
+### Run saasi with a different set of parameters
+
+Users can specify different parameters for different locations. For
+example, if we assume that Liberia samples at half the rate of other
+countries:
+
+``` r
+pars2 <- create_params_template(colnames(Q), lambda = rates$lambda, mu = rates$mu, psi = c(rates$psi, rates$psi/2, rates$psi))
+
+saasi_ebola2 <- saasi(phy = ebola_tree,                           # phylogenetic tree
+                     q_matrix = Q,                                # transition rate matrix
+                     lambda = rates$lambda,                       # speciation rate
+                     mu = rates$mu,                               # extinction rate
+                     psi = c(rates$psi, rates$psi/2, rates$psi),  # sampling rate
+                     prior = NULL)  
+#> Tree is compatible with SAASI
+
+p2 <- plot_saasi(ebola_tree, saasi_ebola2, save_file = NULL)
+```
+
+<img src="man/figures/README-Run saasi with a different set of parameters-1.png" width="100%" />
+
+### Interpreting results
+
+The `saasi()` function returns a data frame with probability
+distributions over states for each internal node. Higher probabilities
+indicate greater confidence in that ancestral state. When comparing
+equal versus unequal sampling rates, you may notice differences in
+ancestral state probabilities, particularly for nodes ancestral to
+under-sampled locations like Liberia.
