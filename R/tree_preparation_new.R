@@ -44,55 +44,9 @@ add_tip_states <- function(tree,tip_data) {
 }
 
 
-#' Drop tips by state value
-#'
-#' Removes tips that matches any of the specified values.
-#'
-#' @param tree A phylo object with tip.state
-#' @param drop_values Character vector of states to remove.
-#'   Include NA to drop tips with NA states.
-#'   Example: c("Not Collected", NA)
-#' @return A phylo object with the specified tips removed and
-#'   tip.state correctly updated.
-#' @export
-drop_tips_by_state <- function(tree, drop_values) {
-  
-  if(is.null(tree$tip.state)){
-    stop("Tree has no tip.state. Attach states first.")
-  }
-  
-  tips_to_drop <- integer(0)
-  
-  for(dv in drop_values){
-    if (length(dv) == 1 && is.na(dv)) {
-      # Drop NA
-      tips_to_drop <- c(tips_to_drop, which(is.na(tree$tip.state)))
-    } else {
-      # Drop tips matching this value
-      tips_to_drop <- c(tips_to_drop,
-                        which(!is.na(tree$tip.state) & tree$tip.state == dv))
-    }
-  }
-  tips_to_drop <- unique(tips_to_drop)
-  if(length(tips_to_drop) == 0){
-    return(tree)
-  }
-  tip_labels_to_drop <- tree$tip.label[tips_to_drop]
-  new_tree <- ape::drop.tip(tree, tip_labels_to_drop)
-  
-  tips_to_keep <- setdiff(1:length(tree$tip.label), tips_to_drop)
-  new_tree$tip.state <- tree$tip.state[tips_to_keep]
-  return(new_tree)
-}
 
-
-#' Check if tree is compatible with saasi
-#'
-#' Validates tree structure without modifying it. 
-#'
-#' @param tree A phylo object
-#' @return Logical. TRUE if tree is compatible with saasi
-#' @export
+#' @noRd
+#' @keywords internal
 check_tree_compatibility <- function(tree) {
   
   if(!inherits(tree, "phylo")){

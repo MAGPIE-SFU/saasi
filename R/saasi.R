@@ -10,21 +10,26 @@
 #' probabilities of the states (used at the root of the tree). 
 #' @param q_matrix A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column names should correspond to states.
 #' 
-#' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond to the node IDs. 
+#' @return A data frame of size (number of internal nodes by number of states) containing state probabilities of every node in `phy`. Each column represents a state. The row names correspond to the node IDs. 
 #'
 #' @examples
 #' data(ebola_tree) 
 #' # note: ebola_tree was already prepared using prepare_tree_for_saasi
 #' unique(ebola_tree$tip.state)
 #' # ebola_tree has 3 states
-#' ebola_q <- diag(c(0.1,0.3,0.2))
+#' ebola_q <- matrix(c(-3,   1,   2,
+#'                     0.5, -2,  1.5,
+#'                     1,   0.5, -1.5),
+#'  nrow = 3,
+#'  byrow = TRUE
+#' )
 #' rownames(ebola_q) = unique(ebola_tree$tip.state)
 #' colnames(ebola_q) = unique(ebola_tree$tip.state)
 #' 
-#' phi = 0.5
-#' lambda = 0.6
-#' mu = 0.2 
-#' psi = 0.2
+#' phi = rep(0.5,3)
+#' lambda = rep(0.6,3)
+#' mu = rep(0.2,3)
+#' psi = rep(0.2,3)
 #' 
 #' ebola_saasi <- saasi(ebola_tree, ebola_q, phi, lambda, mu, psi)
 #' head(ebola_saasi)
