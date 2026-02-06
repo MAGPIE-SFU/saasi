@@ -2,19 +2,23 @@
 % Please edit documentation in R/tree_preparation_new.R
 \name{add_tip_states}
 \alias{add_tip_states}
-\title{add tip states to phylogenetic tree}
+\title{Add tip states to a phylogenetic tree}
 \usage{
 add_tip_states(tree, tip_data)
 }
 \arguments{
-\item{tree}{A phylo object}
+\item{tree}{An object of class \code{phylo}.}
 
-\item{tip_data}{A named vector where names = tip labels, values = states, or
-a df with 2 columns: column 1 = tip labels, column 2 = states}
+\item{tip_data}{Either a named vector or a \code{data.frame}.
+If a named vector, the elements of the vector must be the state of each tip and the names must be the labels of those tips.
+If a \code{data.frame}, there must be 2 columns: the first with the tip labels and the second with the tip states.}
 }
 \value{
-A phylo object with tip.state added
+An object of class \code{phylo} that matches the \code{tree} input with an additional attribute \code{tip.state} that contains the tip states.
 }
 \description{
-add tip states to phylogenetic tree
+\code{add_tip_states()} adds tip states to a \code{phylo} object. This function is used within the \code{prepare_tree_for_saasi()} function.
+}
+\seealso{
+\code{\link[=drop_tips_by_state]{drop_tips_by_state()}} to remove specific traits or \code{\link[=prepare_tree_for_saasi]{prepare_tree_for_saasi()}} for reformatting \code{phylo} objects to be \code{saasi}-compatible.
 }

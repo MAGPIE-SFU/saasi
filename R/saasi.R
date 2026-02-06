@@ -1,26 +1,94 @@
-#' Sampling Aware Ancestral State Inference
+#' Sampling-Aware Ancestral State Inference
 #'
-#' Get the internal node state probabilities of a tree with defined leaf states.
+#' Reconstructs ancestral states for internal nodes of a phylogenetic tree while 
+#' accounting for heterogeneous sampling rates across states or locations.
 #'
-#' @param phy A `phylo` phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
-#' `tip.state`. `tip.state` can be names of the states, or numeric values (1:n).
-#' @param params_df Data frame containing non-q parameters used in ancestral
-#' state reconstruction algorithm. Must have the following column names:
-#' `state`, `prior`, `lambda`, `mu`, and `psi`. The `prior` values refer to the baseline
-#' probabilities of the states (used at the root of the tree). 
-#'
-#' Example:
-#' | **state** | **prior** | **lambda** | **mu** | **psi** |
-#' | :--- | :--- | :--- | :--- | :--- |
-#' | 1 | 1/3 | 3 | 0.02 | 1 |
-#' | 2 | 1/3 | 3 | 0.02 | 1 |
-#' | 3 | 1/3 | 3 | 0.02 | 1 |
-#' @param q_matrix Numeric q matrix used in ancestral state reconstruction
-#' algorithm. Row and column indices or names represent states.
-#' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond
-#' to the node IDs. 
+#' @param phy A `phylo` object containing the phylogenetic tree. The tree must be 
+#'   rooted, binary, and contain `tip.state`. 
+#' @param q_matrix A numeric transition rate matrix (n × n) where n is the number 
+#'   of states. Row and column names represent states. Off-diagonal 
+#'   elements are transition rates; diagonal elements are set such that rows sum to zero.
+#' @param lambda Speciation rate(s) for each state. Can be a single numeric value 
+#'   (same rate for all states) or a vector of length n (different rates per state).
+#' @param mu Extinction rate(s) for each state. Can be a single numeric value 
+#'   (same rate for all states) or a vector of length n (different rates per state).
+#' @param psi Sampling rate(s) for each state. Can be a single numeric value 
+#'   (same rate for all states) or a vector of length n (different rates per state).
+#' @param prior Prior probabilities for each state at the root node. If `NULL` 
+#'   (default), equal probabilities are assigned to all states. Otherwise, provide 
+#'   a vector of length n that sums to 1.
+#'   
+#' @return A data frame with state probabilities for each internal node in `phy`. 
+#'   
+#' @examples
+#' \dontrun{
+#' # Run saasi with equal sampling rates
+#' result <- saasi(phy = tree, 
+#'                 q_matrix = Q,
+#'                 lambda = rates$lambda,
+#'                 mu = rates$mu,
+#'                 psi = rates$psi,
+#'                 prior = NULL)
+#' 
+#' # Run saasi with different sampling rates per state
+#' result2 <- saasi(phy = tree,
+#'                  q_matrix = Q,
+#'                  lambda = rates$lambda,
+#'                  mu = rates$mu,
+#'                  psi = c(rates$psi, rates$psi/2, rates$psi),
+#'                  prior = NULL)
+#' }
+#' 
 #' @export
-saasi <- function(phy, params_df, q_matrix) {
+saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
+  ## INPUT CHECKS
+  
+  # Check compatibility of phy with SAASI
+  if( !check_tree_compatibility(phy) ) {
+    stop("`phy` is not compatible with `saasi`. Please use the `prepare_tree_for_saasi` function to reformat your `phylo` object.")
+  }
+  
+  # Check that q_matrix is compatible, it must:
+  # - be a square matrix
+  # - have rows summing to 0 (a threshold of 1e-10 is used to account small numerical issues)
+  # - both rows and columns must have names
+  if( nrow(q_matrix) != ncol(q_matrix) ) {
+    stop(paste0("The transition rate matrix must be square. Current input has ", nrow(q_matrix), " rows and ", ncol(q_matrix), " columns."))
+  }
+  if( any(abs(rowSums(q_matrix)) > 1e-10) ) {
+    stop("The rows of the transition rate matrix must sum to 0.")
+  }
+  if( is.null(rownames(q_matrix)) || is.null(colnames(q_matrix)) ) {
+    stop("Both rows and columns of the transition rate matrix should have names corresponding to the traits.")
+  }
+  
+  # Check birth-death-sampling rates
+  # - mu: all must be non-negative
+  # - lambda: all must be non-negative and at least one must be positive
+  # - psi: all must be non-negative and at least one must be positive
+  if( any(mu < 0) ) {
+    stop("All death rates (mu) must be non-negative.")
+  }
+  if( any(psi < 0) ) {
+    stop("All sampling rates (psi) must be non-negative.")
+  } else if( any(sort(colnames(q_matrix)[sum(psi > 0) > 0]) != sort(unique(phy$tip.state))) ) {
+    stop("Sampling rate (psi) must be positive for all observed traits.")
+  }
+  if( any(lambda < 0) ) {
+    stop("All birth rates (lambda) must be non-negative.")
+  } else if( sum(lambda > 0) == 0 ) {
+    stop("At least one birth rate (lambda) must be positive.")
+  }
+  
+  # Check if the tree is likely not a timed tree
+  # - If the median branch length is less than 1e-3, flag it as being potentially not a timed tree
+  if( quantile(phy$edge.length, probs=0.5) <= 1e-3 )
+    warning("The median branch length in your tree is less than 0.001. Please double-check that your tree is a timed tree.")
+  
+  
+  # Define params_df
+  params_df <- create_params_template(rownames(q_matrix), lambda, mu, psi, prior)
+  
   
   # Adding warning messages 
   
@@ -40,6 +108,7 @@ saasi <- function(phy, params_df, q_matrix) {
                            order(as.numeric(factor(colnames(q_matrix))))]
       }
   }
+  
   
   # Checking if the tree is binary 
   if(!ape::is.binary.phylo(phy)){
@@ -176,7 +245,7 @@ get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
 #' state reconstruction algorithm.
 #'
 #' @return List of state likelihoods used in backwards time equations.
-#' list[[x]][[y]] is the likelihood for state y in node x.
+#' `list[[x]][[y]]` is the likelihood for state y in node x.
 #' @noRd
 get_backwards_likelihoods_list <- function(phy,
                                            params_df,
@@ -222,7 +291,7 @@ get_backwards_likelihoods_list <- function(phy,
 #' reconstruction algorithm.
 #'
 #' @return List of ancestral state probabilities.
-#' list[[x]][[y]] is the probability of state y in node x.
+#' `list[[x]][[y]]` is the probability of state y in node x.
 #' @noRd
 get_state_probabilities_list <- function(phy,
                                          params_df,
