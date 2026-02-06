@@ -1,24 +1,51 @@
-#' Sampling Aware Ancestral State Inference
+#' Sampling-Aware Ancestral State Inference
 #'
-#' Get the internal node state probabilities of a tree with defined leaf states.
+#' Reconstructs ancestral states for internal nodes of a phylogenetic tree while 
+#' accounting for heterogeneous sampling rates across states or locations.
 #'
-#' @param phy A `phylo` phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
-#' `tip.state`. `tip.state` can be names of the states, or numeric values (1:n).
-#' @param params_df Data frame containing non-q parameters used in ancestral
-#' state reconstruction algorithm. Must have the following column names:
-#' `state`, `prior`, `lambda`, `mu`, and `psi`. The `prior` values refer to the baseline
-#' probabilities of the states (used at the root of the tree). 
-#'
-#' Example:
-#' | **state** | **prior** | **lambda** | **mu** | **psi** |
-#' | :--- | :--- | :--- | :--- | :--- |
-#' | 1 | 1/3 | 3 | 0.02 | 1 |
-#' | 2 | 1/3 | 3 | 0.02 | 1 |
-#' | 3 | 1/3 | 3 | 0.02 | 1 |
-#' @param q_matrix Numeric q matrix used in ancestral state reconstruction
-#' algorithm. Row and column indices or names represent states.
-#' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond
-#' to the node IDs. 
+#' @param phy A `phylo` object containing the phylogenetic tree. The tree must be 
+#'   rooted, binary, and contain `tip.state`. 
+#' @param q_matrix A numeric transition rate matrix (n × n) where n is the number 
+#'   of states. Row and column names represent states. Off-diagonal 
+#'   elements are transition rates; diagonal elements are set such that rows sum to zero.
+#' @param lambda Speciation rate(s) for each state. Can be a single numeric value 
+#'   (same rate for all states) or a vector of length n (different rates per state).
+#' @param mu Extinction rate(s) for each state. Can be a single numeric value 
+#'   (same rate for all states) or a vector of length n (different rates per state).
+#' @param psi Sampling rate(s) for each state. Can be a single numeric value 
+#'   (same rate for all states) or a vector of length n (different rates per state).
+#' @param prior Prior probabilities for each state at the root node. If `NULL` 
+#'   (default), equal probabilities are assigned to all states. Otherwise, provide 
+#'   a vector of length n that sums to 1.
+#'   
+#' @return A data frame with state probabilities for each internal node in `phy`. 
+#'   
+#' @examples
+#' \dontrun{
+#' # Load a timed phylogenetic tree for Ebola
+#' data(ebola_tree)
+#' 
+#' # Estimate parameters
+#' Q <- estimate_transition_rates(tree, method = "simmap", model = "SYM")
+#' rates <- estimate_bds_parameters(tree, mu = 5, r0_max = 3, r0_min = 1.5)
+#' 
+#' # Run saasi with equal sampling rates
+#' result <- saasi(phy = tree, 
+#'                 q_matrix = Q,
+#'                 lambda = rates$lambda,
+#'                 mu = rates$mu,
+#'                 psi = rates$psi,
+#'                 prior = NULL)
+#' 
+#' # Run saasi with different sampling rates per state
+#' result2 <- saasi(phy = tree,
+#'                  q_matrix = Q,
+#'                  lambda = rates$lambda,
+#'                  mu = rates$mu,
+#'                  psi = c(rates$psi, rates$psi/2, rates$psi),
+#'                  prior = NULL)
+#' }
+#' 
 #' @export
 saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
   ## INPUT CHECKS
