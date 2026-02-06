@@ -14,7 +14,7 @@ sim_bds_tree(
 )
 }
 \arguments{
-\item{q_matrix}{A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column column names in the same order as \code{states}.}
+\item{q_matrix}{A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column names should correspond to states.}
 
 \item{x0}{Natural number used as root state in the returned tree. Must be a
 state declared in \code{params_df}.}

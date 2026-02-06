@@ -1,20 +1,33 @@
 #' Sampling Aware Ancestral State Inference
 #'
-#' Compute internal node state probabilities of a tree with defined leaf states.
+#' Compute internal node state probabilities of a tree with defined tip states.
 #'
-#' @param phy The output of `prepare_tree_for_saasi`, i.e., a rooted, timed, phylogentic tree of class `phylo` with states assigned to each tip.
-#' @param states Vector of state names.
+#' @param phy The output of [prepare_tree_for_saasi], i.e., a rooted, timed, phylogentic tree of class `phylo` with states assigned to each tip.
 #' @param lambda Speciation rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
 #' @param mu Extinction rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
 #' @param psi Sampling rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
 #' @param prior A vector of length equal to the number of states containing prior probabilities for each state. The vector must sum to 1. The `prior` values refer to the baseline
 #' probabilities of the states (used at the root of the tree). 
-#' @param q_matrix A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column column names in the same order as `states`.
+#' @param q_matrix A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column names should correspond to states.
 #' 
 #' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond to the node IDs. 
 #'
-#' @example 
+#' @examples
+#' data(ebola_tree) 
+#' # note: ebola_tree was already prepared using prepare_tree_for_saasi
+#' unique(ebola_tree$tip.state)
+#' # ebola_tree has 3 states
+#' ebola_q <- diag(c(0.1,0.3,0.2))
+#' rownames(ebola_q) = unique(ebola_tree$tip.state)
+#' colnames(ebola_q) = unique(ebola_tree$tip.state)
 #' 
+#' phi = 0.5
+#' lambda = 0.6
+#' mu = 0.2 
+#' psi = 0.2
+#' 
+#' ebola_saasi <- saasi(ebola_tree, ebola_q, phi, lambda, mu, psi)
+#' head(ebola_saasi)
 saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
   ## INPUT CHECKS
   

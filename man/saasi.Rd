@@ -7,9 +7,9 @@
 saasi(phy, q_matrix, lambda, mu, psi, prior = NULL)
 }
 \arguments{
-\item{phy}{The output of \code{prepare_tree_for_saasi}, i.e., a rooted, timed, phylogentic tree of class \code{phylo} with states assigned to each tip.}
+\item{phy}{The output of \link{prepare_tree_for_saasi}, i.e., a rooted, timed, phylogentic tree of class \code{phylo} with states assigned to each tip.}
 
-\item{q_matrix}{A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column column names in the same order as \code{states}.}
+\item{q_matrix}{A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column names should correspond to states.}
 
 \item{lambda}{Speciation rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.}
 
@@ -19,12 +19,27 @@ saasi(phy, q_matrix, lambda, mu, psi, prior = NULL)
 
 \item{prior}{A vector of length equal to the number of states containing prior probabilities for each state. The vector must sum to 1. The \code{prior} values refer to the baseline
 probabilities of the states (used at the root of the tree).}
-
-\item{states}{Vector of state names.}
 }
 \value{
 A data frame listing the state probabilities of every node in \code{phy}. The row names correspond to the node IDs.
 }
 \description{
-Compute internal node state probabilities of a tree with defined leaf states.
+Compute internal node state probabilities of a tree with defined tip states.
+}
+\examples{
+data(ebola_tree) 
+# note: ebola_tree was already prepared using prepare_tree_for_saasi
+unique(ebola_tree$tip.state)
+# ebola_tree has 3 states
+ebola_q <- diag(c(0.1,0.3,0.2))
+rownames(ebola_q) = unique(ebola_tree$tip.state)
+colnames(ebola_q) = unique(ebola_tree$tip.state)
+
+phi = 0.5
+lambda = 0.6
+mu = 0.2 
+psi = 0.2
+
+ebola_saasi <- saasi(ebola_tree, ebola_q, phi, lambda, mu, psi)
+head(ebola_saasi)
 }
