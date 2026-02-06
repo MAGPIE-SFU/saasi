@@ -14,20 +14,7 @@ sim_bds_tree(
 )
 }
 \arguments{
-\item{params_df}{Data frame containing non-q parameters used in ancestral
-state reconstruction algorithm. Must have the following column names:
-\code{state}, \code{prior}, \code{lambda}, \code{mu}, and \code{psi}. The \code{prior} values refer to the baseline
-probabilities of the states (used at the root of the tree).
-
-Example:\tabular{lllll}{
-   \strong{state} \tab \strong{prior} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
-   1 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-   2 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-   3 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-}}
-
-\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
-algorithm. Row and column indices or names represent states.}
+\item{q_matrix}{A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column column names in the same order as \code{states}.}
 
 \item{x0}{Natural number used as root state in the returned tree. Must be a
 state declared in \code{params_df}.}
