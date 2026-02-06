@@ -85,7 +85,8 @@ backwards_likelihoods_helper <- function(child_likelihoods,
   
   # Suppress warnings about t0 not in times
   suppressWarnings(
-    sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df))
+    sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df),
+                        atol = 1e-15, rtol = 1e-12)
   )
   
   ret <- utils::tail(sol, n = 1)[1 + 1:nstate]
