@@ -4,11 +4,14 @@
 \alias{saasi}
 \title{Sampling Aware Ancestral State Inference}
 \usage{
-saasi(phy, params_df, q_matrix)
+saasi(phy, q_matrix, lambda, mu, psi, prior = NULL)
 }
 \arguments{
 \item{phy}{A \code{phylo} phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
 \code{tip.state}. \code{tip.state} can be names of the states, or numeric values (1:n).}
+
+\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
+algorithm. Row and column indices or names represent states.}
 
 \item{params_df}{Data frame containing non-q parameters used in ancestral
 state reconstruction algorithm. Must have the following column names:
@@ -21,9 +24,6 @@ Example:\tabular{lllll}{
    2 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
    3 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
 }}
-
-\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
-algorithm. Row and column indices or names represent states.}
 }
 \value{
 A data frame listing the state probabilities of every node in \code{phy}. The row names correspond
