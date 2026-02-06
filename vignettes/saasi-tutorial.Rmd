@@ -126,14 +126,23 @@ rates <- estimate_bds_parameters(
     n_starts = 100)
 ```
 
-### Setting up input parameters
-```{r Setting up input parameters}
-pars1 <- create_params_template(colnames(Q), lambda = rates$lambda, mu = rates$mu, psi = rates$psi)
-```
-
 ### Run saasi analysis
+Users can run the saasi analysis by specifying the following parameters:
+
+- **phy** - A `phylo` object containing the phylogenetic tree
+- **q_matrix** - An n × n transition rate matrix (class `matrix`), where n is the number of states
+- **lambda** - Speciation rate(s) for each state. If `length(lambda) = 1`, all states are assumed to have the same speciation rate; otherwise, provide a vector of length n
+- **mu** - Extinction rate(s) for each state. If `length(mu) = 1`, all states are assumed to have the same extinction rate; otherwise, provide a vector of length n
+- **psi** - Sampling rate(s) for each state. If `length(psi) = 1`, all states are assumed to have the same sampling rate; otherwise, provide a vector of length n
+- **prior** - Prior probabilities for the root node. If `NULL` (default), uses equal probabilities across all states
+
 ```{r Run saasi analysis}
-saasi_ebola <- saasi(ebola_tree, pars1, Q)
+saasi_ebola <- saasi(phy = ebola_tree,            # phylogenetic tree
+                     q_matrix = Q,                # transition rate matrix
+                     lambda = rates$lambda,       # speciation rate
+                     mu = rates$mu,               # extinction rate
+                     psi = rates$psi,             # sampling rate
+                     prior = NULL)                # root prior (equal probabilities)
 ```
 
 ### Plot and save the result
@@ -149,7 +158,12 @@ Users can specify different parameters for different locations. For example, if 
 ```{r Run saasi with a different set of parameters}
 pars2 <- create_params_template(colnames(Q), lambda = rates$lambda, mu = rates$mu, psi = c(rates$psi, rates$psi/2, rates$psi))
 
-saasi_ebola2 <- saasi(ebola_tree, pars2, Q)
+saasi_ebola2 <- saasi(phy = ebola_tree,                           # phylogenetic tree
+                     q_matrix = Q,                                # transition rate matrix
+                     lambda = rates$lambda,                       # speciation rate
+                     mu = rates$mu,                               # extinction rate
+                     psi = c(rates$psi, rates$psi/2, rates$psi),  # sampling rate
+                     prior = NULL)  
 
 p2 <- plot_saasi(ebola_tree, saasi_ebola2, save_file = "ebola_unequal_psi.png")
 ```
