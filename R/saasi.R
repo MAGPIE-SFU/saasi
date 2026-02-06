@@ -22,13 +22,6 @@
 #'   
 #' @examples
 #' \dontrun{
-#' # Load a timed phylogenetic tree for Ebola
-#' data(ebola_tree)
-#' 
-#' # Estimate parameters
-#' Q <- estimate_transition_rates(tree, method = "simmap", model = "SYM")
-#' rates <- estimate_bds_parameters(tree, mu = 5, r0_max = 3, r0_min = 1.5)
-#' 
 #' # Run saasi with equal sampling rates
 #' result <- saasi(phy = tree, 
 #'                 q_matrix = Q,
