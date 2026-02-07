@@ -1,0 +1,12 @@
+---
+title: "Example of how to use the bib"
+author: "Lars"
+output: rmarkdown::html_vignette
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{Bib example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Lets try: [@hadfield2018nextstrain]
