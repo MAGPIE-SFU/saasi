@@ -43,7 +43,7 @@
 #'
 #' @format A data frame with 3 rows (one per state) and 5 columns:
 #' \describe{
-#'   \item{state}{Character state identifier (1, 2, or 3)}
+#'   \item{state}{Character state names (1, 2, or 3)}
 #'   \item{rootprior}{Prior probability of root being in each state (1/3 each)}
 #'   \item{lambda}{Speciation rate (1.5 for all states)}
 #'   \item{mu}{Extinction rate (0.3 for all states)}
@@ -57,4 +57,20 @@
 "demo_pars"
 
 
+
+#' Metadata for demonstration tree
+#' 
+#' A data frame containing the node name and tip states
+#' 
+#' @format A data frame with 13 rows (one per tip) and 2 columns
+#' \describe{
+#'    \item{node}{node name for each tip}
+#'    \item{state}{Character state for each tip (1, 2, or 3)}
+#' }
+#' @examples
+#' data(demo_metadata)
+#' demo_metadata
+#' demo_metadata$states
+#' 
+"demo_metadata"
 
