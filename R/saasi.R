@@ -3,13 +3,12 @@
 #' Compute internal node state probabilities of a tree with defined tip states.
 #'
 #' @param phy The output of [prepare_tree_for_saasi], i.e., a rooted, timed, phylogentic tree of class `phylo` with states assigned to each tip.
-#' @param lambda Speciation rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
-#' @param mu Extinction rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
-#' @param psi Sampling rate per unit time. Numeric value (if equal for all states) or a vector of length equal to the number of states containing a value for each state.
-#' @param prior A vector of length equal to the number of states containing prior probabilities for each state. The vector must sum to 1. The `prior` values refer to the baseline
-#' probabilities of the states (used at the root of the tree). 
-#' @param q_matrix A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column names should correspond to states.
-#' 
+#' @param Q A named matrix. The \eqn{n\times n} stochastic rate matrix used in ancestral state reconstruction. Row and column names should correspond to states.
+#' @param pars A data frame with columns for `state`, `lambda`, `phi`, and `psi`. There should be a value of `lambda`, `phi`, and `psi` for each state. You may also provide a column called 'rootprior' which represents a probability at the root; if `rootprior` is not specified then a uniform distribution is used.
+#' `lambda` Speciation rate per unit time.
+#'  `mu` Extinction rate per unit time. 
+#'  `psi` Sampling rate per unit time. 
+#'
 #' @return A data frame of size (number of internal nodes by number of states) containing state probabilities of every node in `phy`. Each column represents a state. The row names correspond to the node IDs. 
 #'
 #' @examples
