@@ -18,6 +18,7 @@ Imports:
     grDevices,
     graphics,
     phytools,
+    tidytree,
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Depends: 
