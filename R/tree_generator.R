@@ -222,29 +222,34 @@ sim_bds_tree <- function(params_df, q_matrix, x0, max_taxa = 100, max_t = 100,
     
     # Post-processing: extract history and identify tips to drop
     if (!is.null(phy)) {
-      # Extract ancestral states from simulation history
+
       h <- diversitree::history.from.sim.discrete(phy, 1:k)
       
-      # Calculate node depths to identify tips at the root
+
+      original_node_labels <- phy$node.label
+      original_node_state <- h$node.state  # All original node states
+      
       node_depths <- ape::node.depth.edgelength(phy)
       tmrca <- max(node_depths)
       
       # Identify tips at the root (within 0.01 time units of TMRCA)
       tips_to_drop <- phy$tip.label[abs(node_depths[1:length(phy$tip.label)] - tmrca) <= 0.01]
       
-      # Drop tips at the root if any exist
+      # Drop tips if any exist
       if (length(tips_to_drop) > 0) {
         phy <- ape::drop.tip(phy, tips_to_drop)
+        
+        # tip.state: keep only tips that weren't dropped
         phy$tip.state <- phy$tip.state[setdiff(names(phy$tip.state), tips_to_drop)]
+        
+        phy$node.state <- original_node_state[match(phy$node.label, original_node_labels)]
+        
       }
-      
-      # Convert tip states to character format for output
+
       phy$tip.state <- as.character(phy$tip.state)
       
-      # Check if tree meets minimum tip requirement
       n_tips <- length(phy$tip.label)
       
-      # If tree doesn't meet requirement, reset to NULL to trigger re-simulation
       if (n_tips < min_tip) {
         phy <- NULL
       }
