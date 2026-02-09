@@ -17,7 +17,6 @@
 #' @format A `phylo` tree object with the following components
 #' @examples
 #' data(demo_tree_prepared)
-#' plot(demo_tree_prepared)
 #' demo_tree_prepared$tip.state
 "demo_tree_prepared"
 
