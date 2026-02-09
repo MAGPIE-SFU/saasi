@@ -2,33 +2,55 @@
 % Please edit documentation in R/saasi.R
 \name{saasi}
 \alias{saasi}
-\title{Sampling Aware Ancestral State Inference}
+\title{Sampling-Aware Ancestral State Inference}
 \usage{
 saasi(phy, q_matrix, lambda, mu, psi, prior = NULL)
 }
 \arguments{
-\item{phy}{A \code{phylo} phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
-\code{tip.state}. \code{tip.state} can be names of the states, or numeric values (1:n).}
+\item{phy}{A \code{phylo} object containing the phylogenetic tree. The tree must be
+rooted, binary, and contain \code{tip.state}.}
 
-\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
-algorithm. Row and column indices or names represent states.}
+\item{q_matrix}{A numeric transition rate matrix (n × n) where n is the number
+of states. Row and column names represent states. Off-diagonal
+elements are transition rates; diagonal elements are set such that rows sum to zero.}
 
-\item{params_df}{Data frame containing non-q parameters used in ancestral
-state reconstruction algorithm. Must have the following column names:
-\code{state}, \code{prior}, \code{lambda}, \code{mu}, and \code{psi}. The \code{prior} values refer to the baseline
-probabilities of the states (used at the root of the tree).
+\item{lambda}{Speciation rate(s) for each state. Can be a single numeric value
+(same rate for all states) or a vector of length n (different rates per state).}
 
-Example:\tabular{lllll}{
-   \strong{state} \tab \strong{prior} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
-   1 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-   2 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-   3 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-}}
+\item{mu}{Extinction rate(s) for each state. Can be a single numeric value
+(same rate for all states) or a vector of length n (different rates per state).}
+
+\item{psi}{Sampling rate(s) for each state. Can be a single numeric value
+(same rate for all states) or a vector of length n (different rates per state).}
+
+\item{prior}{Prior probabilities for each state at the root node. If \code{NULL}
+(default), equal probabilities are assigned to all states. Otherwise, provide
+a vector of length n that sums to 1.}
 }
 \value{
-A data frame listing the state probabilities of every node in \code{phy}. The row names correspond
-to the node IDs.
+A data frame with state probabilities for each internal node in \code{phy}.
 }
 \description{
-Get the internal node state probabilities of a tree with defined leaf states.
+Reconstructs ancestral states for internal nodes of a phylogenetic tree while
+accounting for heterogeneous sampling rates across states or locations.
+}
+\examples{
+\dontrun{
+# Run saasi with equal sampling rates
+result <- saasi(phy = tree, 
+                q_matrix = Q,
+                lambda = rates$lambda,
+                mu = rates$mu,
+                psi = rates$psi,
+                prior = NULL)
+
+# Run saasi with different sampling rates per state
+result2 <- saasi(phy = tree,
+                 q_matrix = Q,
+                 lambda = rates$lambda,
+                 mu = rates$mu,
+                 psi = c(rates$psi, rates$psi/2, rates$psi),
+                 prior = NULL)
+}
+
 }
