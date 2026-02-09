@@ -2,7 +2,7 @@
 % Please edit documentation in R/tree_preparation_new.R
 \name{drop_tips_by_state}
 \alias{drop_tips_by_state}
-\title{Drop tips by state value}
+\title{Drop tips by state}
 \usage{
 drop_tips_by_state(tree, drop_values)
 }
