@@ -183,7 +183,9 @@ me.to.ape.bisse <- function(x, root.state) {
 #' This tree can be passed to [saasi::saasi], and will include speciation,
 #' extinction, sampling, and mutation events. The tree is post-processed to
 #' remove tips at the present and ensure a minimum number of tips.
-#'
+#' @param params_df Parameters that are used in the simulation. Should contain
+#' state names, speciation, extinction, and sampling rates,
+#' @param q_martix Transition rate matrix.
 #' @param x0 Natural number used as root state in the returned tree. Must be a
 #' state declared in `params_df`.
 #' @param max_taxa Maximum number of nodes allowed in the initial simulated tree.
