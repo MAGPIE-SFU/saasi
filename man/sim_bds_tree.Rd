@@ -15,6 +15,9 @@ sim_bds_tree(
 )
 }
 \arguments{
+\item{params_df}{Parameters that are used in the simulation. Should contain
+state names, speciation, extinction, and sampling rates,}
+
 \item{q_matrix}{A numeric transition rate matrix (n × n) where n is the number
 of states. Row and column names represent states. Off-diagonal
 elements are transition rates; diagonal elements are set such that rows sum to zero.}
@@ -32,6 +35,8 @@ the returned tree.}
 \item{min_tip}{Minimum number of tips required in the post-processed tree.
 If the processed tree has fewer tips, the simulation is repeated until this
 condition is satisfied. Default is 1.}
+
+\item{q_martix}{Transition rate matrix.}
 }
 \value{
 A \code{phylo} phylogenetic tree (\code{ape} format) with post-processing applied.
