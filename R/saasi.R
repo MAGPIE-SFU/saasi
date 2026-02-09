@@ -20,45 +20,77 @@
 #' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond
 #' to the node IDs. 
 #' @export
-saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
+saasi <- function(phy, Q, pars) {
   ## INPUT CHECKS
   
   # Check compatibility of phy with SAASI
   if( !check_tree_compatibility(phy) ) {
-    stop("`phy` is not compatible with `saasi`. Please use the `prepare_tree_for_saasi` function to reformat your `phylo` object.")
+    stop("phy is not compatible with saasi. Please use the prepare_tree_for_saasi() function to reformat your phy.")
   }
   
-  # Check that q_matrix is compatible, it must:
+  # Check that Q is compatible, it must:
   # - be a square matrix
   # - have rows summing to 0 (a threshold of 1e-10 is used to account small numerical issues)
   # - both rows and columns must have names
-  if( nrow(q_matrix) != ncol(q_matrix) ) {
-    stop(paste0("The transition rate matrix must be square. Current input has ", nrow(q_matrix), " rows and ", ncol(q_matrix), " columns."))
+  if( any(is.na(Q)) ) {
+    stop("Q contains NAs.")
   }
-  if( any(abs(rowSums(q_matrix)) > 1e-10) ) {
+  if( !is.matrix(Q))
+    stop("Q must be a matrix. Please consult the documentation for details.")
+  if( nrow(Q) != ncol(Q) ) {
+    stop(paste0("The transition rate matrix must be square. Current input has ", nrow(Q), " rows and ", ncol(Q), " columns."))
+  }
+  if( any(abs(rowSums(Q)) > 1e-10) ) {
     stop("The rows of the transition rate matrix must sum to 0.")
   }
-  if( is.null(rownames(q_matrix)) || is.null(colnames(q_matrix)) ) {
+  if( is.null(rownames(Q)) || is.null(colnames(Q)) ) {
     stop("Both rows and columns of the transition rate matrix should have names corresponding to the traits.")
+  }
+  
+  if( any(is.na(pars)) )
+    stop("pars contains NAs.")
+  if( !is.data.frame(pars))
+    stop("pars must be a data.frame. Please consult the documentation for details.")
+  
+  # Check that pars has all of the right column names
+  par_names <- c("status", "lambda", "mu", "psi")
+  missing_pars <- par_names[!(par_names %in% names(pars))] # vector of expected parameters that are missing in the input dataframe
+  if( length(missing_pars) > 0 ){
+    stop("The following columns are missing from pars: ", paste(missing_pars, sep=","))
+  }
+  
+  
+  # If no prior is provided, add a uniform prior
+  if( !("root_prior" %in% names(pars)) ) {
+    pars$root_prior <- rep(1, nrow(pars)) / nrow(pars)
+  } else if( (abs(sum(pars$root_prior) - 1) > 1e-5) || min(pars$root_prior) < 0 ) { # check that root_prior is a valid probability
+    stop("Please ensure that root_prior is a valid probability: all entries must be non-negative and sum to 1.")
   }
   
   # Check birth-death-sampling rates
   # - mu: all must be non-negative
   # - lambda: all must be non-negative and at least one must be positive
-  # - psi: all must be non-negative and at least one must be positive
-  if( any(mu < 0) ) {
-    stop("All death rates (mu) must be non-negative.")
-  }
-  if( any(psi < 0) ) {
-    stop("All sampling rates (psi) must be non-negative.")
-  } else if( any(sort(colnames(q_matrix)[sum(psi > 0) > 0]) != sort(unique(phy$tip.state))) ) {
-    stop("Sampling rate (psi) must be positive for all observed traits.")
-  }
-  if( any(lambda < 0) ) {
-    stop("All birth rates (lambda) must be non-negative.")
-  } else if( sum(lambda > 0) == 0 ) {
-    stop("At least one birth rate (lambda) must be positive.")
-  }
+  # - psi: all must be non-negative and all observed states must be positive
+  with(pars, {
+    if( any(mu < 0) ) {
+      stop("All death rates (mu) must be non-negative.")
+    }
+    if( all(!is.null(psi)) ) {
+      if( any(psi < 0) ) {
+        stop("All sampling rates (psi) must be non-negative.")
+      } else if( any(sort(colnames(Q)[sum(psi > 0) > 0]) != sort(unique(phy$tip.state))) ) {
+        stop("Sampling rate (psi) must be positive for all observed traits.")
+      }
+    }
+    if( all(!is.null(lambda)) ) {
+      if( any(lambda < 0) ) {
+        stop("All birth rates (lambda) must be non-negative.")
+      } else if( sum(lambda > 0) == 0 ) {
+        stop("At least one birth rate (lambda) must be positive.")
+      }
+    }
+  })
+  
   
   # Check if the tree is likely not a timed tree
   # - If the median branch length is less than 1e-3, flag it as being potentially not a timed tree
@@ -66,16 +98,20 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
     warning("The median branch length in your tree is less than 0.001. Please double-check that your tree is a timed tree.")
   
   
-  # Define params_df
-  params_df <- create_params_template(rownames(q_matrix), lambda, mu, psi, prior)
   
+  ## PARAMETER ESTIMATION
+  #  If Q, lambda, or mu are entered as NULL, estimate them using the default values for the relevant estimation function
+  #  - At this point if any of the lambdas or mus are NULL then all get re-estimated
+  if( is.null(Q) || is.missing(Q) ){
+    warning("No transition rate matrix provided, estimating with ace using an equal rates matrix structure. If the user desires an alternative matrix structure refer to the estimate_transition_rates function.")
+    Q <- estimate_transition_rates(phy)
+  }
   
-  # Adding warning messages 
-  
+
   # Checking if the tip states are presented as numeric values
   if(!is.numeric(phy$tip.state)){
     # stop("Convert tip state to numeric values.")
-      if( !all(sort(rownames(q_matrix))==sort(params_df$state))) {
+      if( !all(sort(rownames(Q))==sort(params_df$state))) {
           stop("State names and q names need to agree and be present only once") 
       } else {
           phy$tip.statename = phy$tip.state
@@ -84,8 +120,8 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
       params_df$state = as.numeric(factor(params_df$statename)) # numeric state
       params_df = params_df[order(params_df$state), ]
       # reorder q if necessary, so its order corresponds to the numeric state 
-      q_matrix = q_matrix[ order(as.numeric(factor(rownames(q_matrix)))),
-                           order(as.numeric(factor(colnames(q_matrix))))]
+      Q = Q[ order(as.numeric(factor(rownames(Q)))),
+                           order(as.numeric(factor(colnames(Q))))]
       }
   }
   
@@ -143,7 +179,7 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
   
   backwards_likelihoods_list <- get_backwards_likelihoods_list(phy,
                                                                params_df,
-                                                               q_matrix,
+                                                               Q,
                                                                nstate,
                                                                nnode,
                                                                post_order_edges,
@@ -152,7 +188,7 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
   state_probabilities_list <- get_state_probabilities_list(
     phy,
     params_df,
-    q_matrix,
+    Q,
     nstate,
     nnode,
     root_node,
@@ -229,7 +265,7 @@ get_topology_df <- function(nnode, node_depths, max_depth, post_order_edges) {
 #' @noRd
 get_backwards_likelihoods_list <- function(phy,
                                            params_df,
-                                           q_matrix,
+                                           Q,
                                            nstate,
                                            nnode,
                                            post_order_edges,
@@ -258,7 +294,7 @@ get_backwards_likelihoods_list <- function(phy,
     likelihoods <- get_backwards_likelihoods(abs(left_likelihoods),
                                              abs(right_likelihoods),
                                              left_t0, right_t0, tf,
-                                             params_df, q_matrix)
+                                             params_df, Q)
     #abs_likelihoods <- abs(likelihoods)
     #norm_likelihoods <- abs_likelihoods / sum(abs_likelihoods)
     backwards_likelihoods_list[[node]] <<- likelihoods # note changed by CC 
@@ -275,7 +311,7 @@ get_backwards_likelihoods_list <- function(phy,
 #' @noRd
 get_state_probabilities_list <- function(phy,
                                          params_df,
-                                         q_matrix,
+                                         Q,
                                          nstate,
                                          nnode,
                                          root_node,
@@ -316,7 +352,7 @@ get_state_probabilities_list <- function(phy,
     
     likelihoods <- get_forwards_likelihoods(norm_probabilities,
                                             t0, tf,
-                                            params_df, q_matrix)
+                                            params_df, Q)
     #abs_likelihoods <- abs(likelihoods)
     state_probabilities_list[[node]] <<- (
       backwards_likelihoods_list[[node]] * likelihoods
