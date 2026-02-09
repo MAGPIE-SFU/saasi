@@ -1,6 +1,6 @@
 Package: saasi
 Title: Sampling Aware Ancestral State Inference
-Version: 1.0.0
+Version: 1.0.0.1000
 Authors@R: c(
     person("Ivan", "Gill", email = "ivan_gill@sfu.ca", role = c("aut", "cre")),
     person("Yexuan", "Song", email = "yexuan_song@sfu.ca", role = "aut"))
