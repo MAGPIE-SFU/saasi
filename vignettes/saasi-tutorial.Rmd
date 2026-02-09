@@ -1,6 +1,6 @@
 ---
 title: "Sampling Aware Ancestral State Inference"
-author: "Yexuan Song"
+author: "Yexuan Song, Caroline Colijn"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
@@ -20,6 +20,7 @@ vignette: >
    fig.height = 5
  )
 ```
+
 ```{r setup}
 library(saasi)
 library(diversitree)
@@ -36,9 +37,13 @@ library(readr)
 
 This vignette demonstrates how to use the `saasi` package for ancestral state reconstruction.
 
-Saasi (Sampling-Aware Ancestral State Inference) is an ancestral state reconstruction method that accounts for variation in sampling rates among locations or traits. Unlike traditional methods that assume uniform sampling, saasi explicitly models heterogeneous sampling rates, leading to more accurate ancestral state estimates in unevenly sampled phylogenies.
+SAASI (Sampling-Aware Ancestral State Inference) is an ancestral state reconstruction method that accounts for variation in sampling rates among locations or traits.
 
-NOTE: THIS DOCUMENT IS SUBJECT TO CHANGE (FUNCTION NAMES, ARGUMENTS ETC).
+Unlike traditional methods that assume uniform sampling, saasi explicitly models heterogeneous sampling, leading to ancestral state estimates that take sampling into account.
+
+SAASI is described in Song et al. https://www.biorxiv.org/content/10.1101/2025.05.20.655151v2. 
+
+
 
 ## Installation
 
@@ -57,20 +62,20 @@ The `saasi` function requires three main inputs:
    - Has branch lengths in units of time (all positive)
    - Contains tip states (`tree$tip.state`) with no missing values
    
-   Use `check_tree_compatibility()` to verify compatibility and `prepare_tree_for_saasi()` to prepare your tree.
+   SAASI has the function `prepare_tree_for_saasi()` which can ensure that these conditions are met. 
 
 2. **Birth-death-sampling parameters** (class `data.frame`):
    - Speciation rate 
    - Extinction/removal rate 
    - Sampling rate 
    
-   Use `estimate_bds_parameters()` to estimate speciation and sampling rates. Users should specify the extinction rate based on domain knowledge.
+   Use `estimate_bds_parameters()` to estimate the speciation rate and a single, overall sampling rate. The "extinction rate" (in the language of birth-death models) in infectious disease applications is the inverse of the duration of infectiousness, i.e. the rate of leaving the infectious class. 
 
 
 3. **Transition rate matrix Q** (class `matrix`):
    - Rates of transition between states
    
-   Use `estimate_transition_rates()` to estimate transition rates.
+   Use `estimate_transition_rates()` to estimate this matrix.
 
 The output is a data frame containing the probability of each state for each internal node of the phylogenetic tree.
 
@@ -80,12 +85,14 @@ The output is a data frame containing the probability of each state for each int
 
 For this example, we use data from Nextstrain:
 https://nextstrain.org/ebola/ebov-2013?c=country
+
 ```{r Nextstrain Ebola}
 tree <- ape::read.tree(system.file("extdata", "nextstrain_ebola_ebov-2013_timetree.nwk", package = "saasi"))
 metadata <- readr::read_tsv(system.file("extdata", "nextstrain_ebola_ebov-2013_metadata.tsv", package = "saasi"))
 ```
 
 First, create a data frame containing strains and states. The first column of the data frame should match `tree$tip.label`, and the second column should contain the state of interest. Users can skip this step if `tree$tip.state` already exists.
+
 ```{r Tip.state}
 tip_data <- data.frame(
   tip_label = metadata$strain,
@@ -96,6 +103,7 @@ tip_data <- data.frame(
 ### Modify the tree to be compatible with saasi
 
 Users can apply the function `prepare_tree_for_saasi()` to make the tree compatible with saasi. To check if the tree is compatible, use the function `check_tree_compatibility()`.
+
 ```{r Prepare tree}
 ebola_tree <- prepare_tree_for_saasi(tree, tip_data)
 ```
@@ -105,15 +113,18 @@ ebola_tree <- prepare_tree_for_saasi(tree, tip_data)
 Users can estimate the transition rate matrix Q using the function `estimate_transition_rates()`.
 Users can specify the model for the transition rate matrix: 1. Equal rate `ER`,
 2. Symmetric rate `SYM`, 3. All rates different `ARD`, and Custom `custom_q`.
+
 ```{r Estimate transition rates}
-Q <- estimate_transition_rates(ebola_tree, method = 'simmap', model = 'SYM')
+Q <- estimate_transition_rates(ebola_tree, method = 'simmap', matrix_structure = 'SYM')
 ```
 
 ### Estimating speciation and sampling rates
 
-Users can estimate speciation and sampling rates using the function `estimate_bds_parameters()`. Users should have some knowledge about the expected removal rate (1/mu) for the disease of interest, as saasi requires the extinction rate mu to be known. To obtain better estimates for the overall speciation and sampling rates, users should have knowledge about the maximum and minimum R0, as well as the upper and lower bounds for the total removal rate (1/(mu+psi)).
+Users can estimate speciation and sampling rates using the function `estimate_bds_parameters()`. In infectious disease applications, users should have some knowledge about the expected removal rate ($1/\mu$) for the disease of interest, as saasi requires the extinction rate as an input (to overcome identifiability limitations). To obtain estimates for the overall speciation and sampling rates, users should have knowledge about the maximum and minimum R0, as well as the upper and lower bounds for the total removal rate $(1/(\mu+\psi))$.
 
-For Ebola, we assume the total infectious period (1/(mu+psi)) is between 20 and 40 days. Converting to years, the total removal rate (mu + psi) is between 9.125 (365/40) and 18.25 (365/20). If we assume mu = 5, this gives us bounds for the overall sampling rate psi between 4.125 and 13.25. In this example, we assume R0 is between 1.5 and 3.
+For Ebola, we assume the total infectious period $(1/(\mu+\psi))$ is between 20 and 40 days. Converting to years, the total removal rate ($\mu + \psi$) is between 9.125 (365/40) and 18.25 (365/20). If we assume $\mu = 5$, this gives us bounds for the overall sampling rate 
+$\psi$ between 4.125 and 13.25. In this example, we assume R0 is between 1.5 and 3.
+
 ```{r Estimate speciation and sampling rates}
 rates <- estimate_bds_parameters(
     ebola_tree,
@@ -126,34 +137,44 @@ rates <- estimate_bds_parameters(
     n_starts = 100)
 ```
 
+Now we set the state-specific sampling and pass the parameters to SAASI. Our overall sampling rate has been estimated (so as to be comparable with $\lambda$ and $\mu$); SAASI allows us to account for state-specific relative sampling. 
+
+Suppose, for example, that Liberia was known to have sequenced a smaller fraction of the cases than the other states, by a factor of 2. 
+
 ### Setting up input parameters
-```{r Setting up input parameters}
-pars1 <- create_params_template(colnames(Q), lambda = rates$lambda, mu = rates$mu, psi = rates$psi)
+
+```{r Create parameter data frame}
+pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi)
+pars[(pars$state=="Liberia"),"psi"] = pars[(pars$state=="Liberia"), "psi"]/2 # set sampling rate to be 1/2 the baseline
 ```
 
 ### Run saasi analysis
 ```{r Run saasi analysis}
-saasi_ebola <- saasi(ebola_tree, pars1, Q)
+saasi_ebola <- saasi(ebola_tree, Q, pars)
 ```
 
 ### Plot and save the result
 
-Users can use the built-in function `plot_saasi()` to visualize results. Set `save_file = NULL` to display without saving.
+Users can use the built-in function `plot_saasi()` to visualize results. 
+
 ```{r Plot the result}
-p1 <- plot_saasi(ebola_tree, saasi_ebola, save_file = "ebola_equal_psi.png")
+p1 <- plot_saasi(ebola_tree, saasi_ebola)
 ```
 
-### Run saasi with a different set of parameters
+### Compare to equal sampling
 
-Users can specify different parameters for different locations. For example, if we assume that Liberia samples at half the rate of other countries:
+If all states had comparable sampling we would obtain a different ancestral state reconstruction: 
+
 ```{r Run saasi with a different set of parameters}
-pars2 <- create_params_template(colnames(Q), lambda = rates$lambda, mu = rates$mu, psi = c(rates$psi, rates$psi/2, rates$psi))
+pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi)
+saasi_ebola2 <- saasi(ebola_tree, Q, pars)
 
-saasi_ebola2 <- saasi(ebola_tree, pars2, Q)
-
-p2 <- plot_saasi(ebola_tree, saasi_ebola2, save_file = "ebola_unequal_psi.png")
+p2 <- plot_saasi(ebola_tree, saasi_ebola2)
 ```
 
 ### Interpreting results
 
-The `saasi()` function returns a data frame with probability distributions over states for each internal node. Higher probabilities indicate greater confidence in that ancestral state. When comparing equal versus unequal sampling rates, you may notice differences in ancestral state probabilities, particularly for nodes ancestral to under-sampled locations like Liberia.
+The `saasi()` function returns a data frame with probability distributions over states for each internal node. Higher probabilities indicate greater confidence in that ancestral state. 
+In this example, if we assume that Liberia has sampled at a lower rate than the other two countries, we see more internal nodes inferred to be in Liberia than if its sampling is the same as the other locations. This is because SAASI accounts for undetected cases in Liberia. 
+
+Note that Liberia and the factor of 2 are chosen entirely at random for the purposes of this vignette and do not represent any knowledge or opinion of the authors about the relative sampling during this outbreak. 

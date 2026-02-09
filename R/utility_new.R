@@ -165,12 +165,12 @@ create_params_template <- function(states,
 #' 
 #' # Use the simmap function to estimate the rate transition matrix
 #' # - Impose a symmetric form on the matrix
-#' Q <- estimate_transition_rates(tree, matrix_structure = "SYM")
+#' Q <- estimate_transition_rates(ebola_tree, matrix_structure = "SYM")
 #' 
 #' # Use ace to estimate the rate transition matrix
 #' # - Impose a structure such that transitions to or from Guinea happen at a different rate than Liberia or Sierra Leone
 #' struct <- matrix(c(0, 1, 1, 1, 0, 2, 1, 2, 0), nrow=3, ncol=3)
-#' Q <- estimate_transition_rates(tree, matrix_structure = struct)
+#' Q <- estimate_transition_rates(ebola_tree, matrix_structure = struct)
 estimate_transition_rates <- function(tree, 
                                       matrix_structure = "ER",
                                       method = "ace") {

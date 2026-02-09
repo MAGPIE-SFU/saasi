@@ -71,6 +71,9 @@ backwards_likelihoods_helper <- function(child_likelihoods,
   names(y) <- seq_len(nstate * 2)
   
   times <- seq(0, tf, by = tf / 100)
+  # brj: resolve warnings about t0 not in times
+  times <- sort(unique(c(times, t0)))
+
   parms <- list(lambda = params_df$lambda,
                 mu = params_df$mu,
                 psi = params_df$psi,
@@ -82,13 +85,9 @@ backwards_likelihoods_helper <- function(child_likelihoods,
                           time = rep(t0),
                           value = child_likelihoods,
                           method = rep("replace", nstate))
-  
-  # Suppress warnings about t0 not in times
-  suppressWarnings(
-    sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df),
-                        atol = 1e-15, rtol = 1e-12)
-  )
-  
+
+  sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df))
+
   ret <- utils::tail(sol, n = 1)[1 + 1:nstate]
   if (any(is.nan(ret))) {
     # if the value is nan, assign the likelihood to the previous likelihood,
@@ -152,14 +151,10 @@ get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
                 psi = params_df$psi,
                 q = q_matrix,
                 nstate = nstate)
-  
-  # Suppress warnings about initial conditions guessed as 0
-  suppressWarnings(
-    # Run opposite directions because of positively increasing x. Should not
-    # affect result.
+
+  # brj: can't reproduce warning
     sol <- deSolve::ode(y, times, func, parms, method = "ode45", rtol = 1e20)
-  )
-  
+
   # Closest index to tf
   closest_index <- which.min(abs(sol[, 1] - tf))
   likelihoods <- unname(sol[closest_index, 1 + 1:nstate])
