@@ -217,6 +217,10 @@ estimate_transition_rates <- function(tree,
   if(is.null(q_matrix)){
     stop("Both ace and simmap failed to estimate transition rates. Check your tip.states, it may contains NA.")
   }
+
+  # Replace NAs on diagonal of the matrix
+  diag(q_matrix) <- NA
+  diag(q_matrix) <- -rowSums(q_matrix, na.rm=T)
   return(q_matrix)
 }
 
