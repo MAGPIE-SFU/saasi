@@ -70,3 +70,6 @@ rsconnect/
 doc/
 vignettes/*.html
 vignettes/*.R
+doc/
+vignettes/*.html
+vignettes/*.R
