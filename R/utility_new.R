@@ -77,68 +77,6 @@ plot_saasi <- function(tree,
 }
 
 
-
-#' Creates a data frame for saasi 
-#'
-#' @param states Vector of state names or number of states
-#' @param lambda Speciation rate per unit time (single value or vector per state)
-#' @param mu Extinction rate per unit time (single value or vector per state)
-#' @param psi Sampling rate per unit time (single value or vector per state)
-#' @param prior Prior probabilities (default: uniform; or vector per state), should sum up to 1.
-#'
-#' @return A data frame for saasi
-#'
-#' @export
-#' @examples
-#' params <- create_params_template(
-#'   states = c("A", "B"),
-#'   lambda = 0.5,
-#'   mu = 0.01,
-#'   psi = c(0.1, 0.9)  
-#' )
-create_params_template <- function(states,
-                                   lambda = 0.5,
-                                   mu = 0.01,
-                                   psi = 0.5,
-                                   prior = NULL) {
-  
-  if(is.numeric(states) && length(states) == 1){
-    n_states <- states
-    state_names <- seq_len(n_states)
-  } 
-  else{
-    state_names <- states
-    n_states <- length(states)
-  }
-  
-  if(length(lambda) == 1){
-    lambda <- rep(lambda, n_states)
-  } 
-  if(length(mu) == 1){
-    mu <- rep(mu, n_states)
-  } 
-  if(length(psi) == 1){
-    psi <- rep(psi, n_states)
-  } 
-  if(is.null(prior)){
-    prior <- rep(1/n_states, n_states)
-  } 
-  
-  if(length(lambda) != n_states || length(mu) != n_states || 
-      length(psi) != n_states || length(prior) != n_states){
-    stop("All parameter vectors must have the same length as number of states")}
-  
-  params_df <- data.frame(
-    state = state_names,
-    prior = prior,
-    lambda = lambda,
-    mu = mu,
-    psi = psi
-  )
-  return(params_df)
-}
-
-
 #' Estimate the transition rate matrix of the discrete trait process
 #' 
 #' `estimate_transition_rates()` computes a maximum likelihood estimate of the transition rate matrix \eqn{Q} governing the discrete trait process.
