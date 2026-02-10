@@ -150,13 +150,13 @@ create_params_template <- function(states,
 #' `"ARD"` places no structural constraints and allows all traits to be different, \eqn{q_{ij}\ne q_{kl}} for all traits \eqn{i,j,k,l}.
 #' If another grouping of transition rates is desired this can be input as a numeric matrix such that each entry has a matrix with a positive integer and all entries with the same value will share a rate.
 #' 
-#' The `method` parameter allows the user to select a preferred method between `ace` and `simmap`, however if the preferred method fails the other will be used instead.
+#' The `method` parameter allows the user to select a preferred method between `ace` and `fitMk`, however if the preferred method fails the other will be used instead.
 #' If `ace` is selected, the maximum likelihood estimator is computed using the [ape::ace()] function.
-#' If `simmap` is selected, the [phytools::make.simmap()] function is used to fit \eqn{Q} to the provided phylogenetic tree.
+#' If `fitMk` is selected, the [phytools::fitMk()] function is used to fit \eqn{Q} to the provided phylogenetic tree.
 #' 
 #' @param tree A phylo object with a tip.state attribute assigning traits to all tips.
 #' @param matrix_structure The form of the transition rate matrix. Can either be a numeric matrix or one of the following strings: `"ER"`, `"SYM"`, and `"ARD"` (see details). The default value is `"ER"`.
-#' @param method The method used to perform the estimation. Possible values are `"ace"` or `"simmap"`.
+#' @param method The method used to perform the estimation. Possible values are `"ace"` or `"fitMk"`.
 #' @return A transition rate matrix that has been fit to the observed phylogeny. This matrix will be compatible with other `saasi` functions.
 #' @export
 #' @examples
@@ -175,6 +175,7 @@ estimate_transition_rates <- function(tree,
                                       matrix_structure = "ER",
                                       method = "ace") {
 
+  # check that matrix_structure is a valid input
   if(is.character(matrix_structure)) {
     if( !(matrix_structure %in% c("ER", "SYM", "ARD")) )
       stop("matrix_structure must be either a numeric matrix or one of the following strings: 'ER', 'SYM', or 'ARD'")
@@ -182,40 +183,49 @@ estimate_transition_rates <- function(tree,
     stop("matrix_structure must be either a numeric matrix or one of the following strings: 'ER', 'SYM', or 'ARD'")
   }
   
+  # check that tree has class phylo and has valid tip states
+  if( class(tree) != "phylo" )
+    stop("tree must be of class \"phylo\".")
+  if( !("tip.state" %in% names(tree)) )
+    stop("tree must contain a tip.state attribute containing the tip states.")
+  if( sum(is.na(tree$tip.state)) > 0 )
+    stop("Tip states contain at least 1 NA value, please remove NA states using the drop_tips_by_state() function.")
   # Convert tip.state to factor if needed
   tip_states <- as.factor(tree$tip.state)
   
   q_matrix <- NULL
   primary_method <- method
   if(method == "ace"){
-    fallback_method = "simmap"
+    fallback_method = "fitMk"
   }
-  else{
+  else if(method == "fitMk"){
     fallback_method = "ace"
+  } else{
+    stop("User must select either \"ace\" or \"fitMk\" as the primary estimation method.")
   }
 
   if(primary_method == "ace"){
     q_matrix <- try_ace(tree, tip_states, matrix_structure)
   } 
   else{
-    q_matrix <- try_simmap(tree, tip_states, matrix_structure)
+    q_matrix <- try_fitMk(tree, tip_states, matrix_structure)
   }
   
   # If primary failed, try the other method
   
   if(is.null(q_matrix)){
-    warning("Primary method failed")
+    warning(paste0(primary_method, " failed, using ", fallback_method, " instead."))
     if(fallback_method == "ace"){
       q_matrix <- try_ace(tree, tip_states, matrix_structure)
     } 
     else{
-      q_matrix <- try_simmap(tree, tip_states, matrix_structure)
+      q_matrix <- try_fitMk(tree, tip_states, matrix_structure)
     }
   }
   
   # If both failed
   if(is.null(q_matrix)){
-    stop("Both ace and simmap failed to estimate transition rates. Check your tip.states, it may contains NA.")
+    stop("Both ace and fitMk failed to estimate transition rates. Check your tip.states, it may contains NA.")
   }
 
   # Replace NAs on diagonal of the matrix
@@ -262,20 +272,20 @@ try_ace <- function(tree, tip_states, model){
 
 #' Estimate Q using simmap
 #' @noRd
-try_simmap <- function(tree, tip_states, model) {
+try_fitMk <- function(tree, tip_states, model) {
   result <- tryCatch(
     withCallingHandlers(
       {states_named <- tree$tip.state
       names(states_named) <- tree$tip.label
-      simmap_result <- phytools::make.simmap(tree, states_named, model = model, Q = "empirical")
-      simmap_result$Q
+      est <- phytools::fitMk(tree, states_named, model=model)
+      matrix(est$rates[est$index.matrix], nrow=nrow(est$index.matrix))
       },
       warning = function(w) {
-        message("simmap warning: ", conditionMessage(w))
+        message("fitMk warning: ", conditionMessage(w))
       }
     ),
     error = function(e) {
-      message("simmap failed: ", e$message)
+      message("fitMk failed: ", e$message)
       NULL
     }
   )
