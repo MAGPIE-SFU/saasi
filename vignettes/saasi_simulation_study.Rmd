@@ -86,11 +86,8 @@ Run SAASI to infer ancestral states:
 # Run SAASI
 
 saasi_result <- saasi(phy = phy,              # phylogenetic tree
-                     q_matrix = demo_Q,       # transition rate matrix
-                     lambda = c(3, 1.5, 1.5), # speciation rate
-                     mu = 0.1,                # extinction rate
-                     psi = c(0.1,1.0,1.0),    # sampling rate
-                     prior = NULL)  
+                     Q = demo_Q,       # transition rate matrix
+                     pars = demo_pars)  
 ```
 
 Calculate accuracy:
@@ -147,11 +144,8 @@ for (i in 1:n_sims) {
   
   tryCatch({
   saasi_result <- saasi(phy = phy,           
-                     q_matrix = demo_Q,                
-                     lambda = c(3, 1.5, 1.5),       
-                     mu = 0.1,               
-                     psi = c(0.1,1.0,1.0),            
-                     prior = NULL)    
+                     Q = demo_Q,                
+                     pars = demo_pars)    
     predicted_states <- apply(saasi_result, 1, which.max)
     accuracy <- mean(predicted_states == true_states)
   }, error = function(e) {
