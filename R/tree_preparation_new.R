@@ -1,15 +1,12 @@
-#' Add tip states to a phylogenetic tree
+#' add tip states to phylogenetic tree
 #'
-#'`add_tip_states()` adds tip states to a `phylo` object. This function is used within the `prepare_tree_for_saasi()` function.
-#'
-#' @param tree An object of class `phylo`.
-#' @param tip_data Either a named vector or a `data.frame`. 
-#' If a named vector, the elements of the vector must be the state of each tip and the names must be the labels of those tips.
-#' If a `data.frame`, there must be 2 columns: the first with the tip labels and the second with the tip states.
-#' @return An object of class `phylo` that matches the `tree` input with an additional attribute `tip.state` that contains the tip states.
-#' @seealso [drop_tips_by_state()] to remove specific traits or [prepare_tree_for_saasi()] for reformatting `phylo` objects to be `saasi`-compatible.
+#' @param tree A phylo object
+#' @param tip_data 
+#'   A named vector where names = tip labels, values = states, or
+#'   a df with 2 columns: column 1 = tip labels, column 2 = states
+#' @return A phylo object with tip.state added
 #' @export
-add_tip_states <- function(tree, tip_data) {
+add_tip_states <- function(tree,tip_data) {
   
   if(is.atomic(tip_data) && !is.null(names(tip_data))){
     tip_labels <- names(tip_data)
@@ -110,7 +107,7 @@ prepare_tree_for_saasi <- function(tree,
   return(tree)
 }
 
-#' Drop tips by state
+#' Drop tips by state value
 #'
 #' Removes tips that matches any of the specified values.
 #'
