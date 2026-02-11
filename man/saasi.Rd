@@ -4,7 +4,7 @@
 \alias{saasi}
 \title{Sampling-Aware Ancestral State Inference}
 \usage{
-saasi(phy, q_matrix, lambda, mu, psi, prior = NULL)
+saasi(phy, Q, pars)
 }
 \arguments{
 \item{phy}{A \code{phylo} object containing the phylogenetic tree. The tree must be
