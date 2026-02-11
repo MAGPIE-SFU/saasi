@@ -216,7 +216,10 @@ try_fitMk <- function(tree, tip_states, model) {
       {states_named <- tree$tip.state
       names(states_named) <- tree$tip.label
       est <- phytools::fitMk(tree, states_named, model=model)
-      matrix(est$rates[est$index.matrix], nrow=nrow(est$index.matrix))
+      q_matrix <- matrix(est$rates[est$index.matrix], nrow=nrow(est$index.matrix))
+      rownames(q_matrix) <- est$states
+      colnames(q_matrix) <- rownames(q_matrix)
+      q_matrix 
       },
       warning = function(w) {
         message("fitMk warning: ", conditionMessage(w))
