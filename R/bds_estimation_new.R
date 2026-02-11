@@ -5,7 +5,6 @@
 #' @param psi Sampling rate
 #' @return Value of c1
 #' @keywords internal
-#' @noRd
 c1 <- function(lambda, mu, psi){
   abs(sqrt((lambda - mu - psi)^2 + 4 * lambda * psi))
 }
@@ -17,7 +16,6 @@ c1 <- function(lambda, mu, psi){
 #' @param psi Sampling rate
 #' @return Value of c2
 #' @keywords internal
-#' @noRd
 c2 <- function(lambda, mu, psi){
   (-lambda + mu + psi) / c1(lambda, mu, psi)
 }
@@ -29,7 +27,6 @@ c2 <- function(lambda, mu, psi){
 #' @param c Third log value
 #' @return log(exp(a) + exp(b) + exp(c))
 #' @keywords internal
-#' @noRd
 logsumexp <- function(a, b, c){
   m <- pmax(a, pmax(b, c))
   m + log(exp(a - m) + exp(b - m) + exp(c - m))
@@ -38,12 +35,11 @@ logsumexp <- function(a, b, c){
 #' Calculate log of q function for birth-death-sampling model
 #'
 #' @param t Time values
-#' @param lambda Speciation rate
+#' @param lambda Speication rate
 #' @param mu Extinction rate
 #' @param psi Sampling rate
 #' @return Log of q function values
 #' @keywords internal
-#' @noRd
 log_q <- function(t, lambda, mu, psi){
   c1v <- c1(lambda, mu, psi)
   c2v <- c2(lambda, mu, psi)
@@ -61,12 +57,11 @@ log_q <- function(t, lambda, mu, psi){
 #' Calculate log-likelihood under the general birth-death-sampling model
 #'
 #' @param phy A phylo object
-#' @param lambda Speciation rate
+#' @param lambda Speication rate
 #' @param mu Extinction rate
 #' @param psi Sampling rate
 #' @return Log-likelihood value
 #' @keywords internal
-#' @noRd
 log_ge <- function(phy, lambda, mu, psi){
   node_depths <- ape::node.depth.edgelength(phy)
   node_times <- max(node_depths) - node_depths
@@ -84,16 +79,15 @@ log_ge <- function(phy, lambda, mu, psi){
 
 #' Estimate net diversification rate from lineage-through-time data
 #'
-#' Estimates the net diversification rate (lambda - mu - psi) by fitting a linear
-#' model with the branch lengths, computed using a trimmed portion of the internal node times,
-#' as the independent variable and the log-transformed lineage-through-time counts as the dependent variable.
+#' Estimates the parameter 'a' (lambda - mu - psi) by fitting a linear model
+#' to the log-transformed lineage counts over time (LTT), using a trimmed portion
+#' of the internal node times.
 #'
 #' @param phy A phylo object with branch lengths
 #' @param trim Numeric vector of length 2 specifying quantiles for trimming.
 #'   Default is c(0.10, 0.50), using the middle 40% of node times.
 #' @return Estimated net diversification rate (a = lambda - mu - psi)
 #' @keywords internal
-#' @noRd
 estimate_a <- function(phy, trim = c(0.10, 0.50)){
   
   if(length(trim) != 2 || !is.numeric(trim) || any(trim < 0) || any(trim > 1) || trim[1] >= trim[2]){
@@ -119,10 +113,6 @@ estimate_a <- function(phy, trim = c(0.10, 0.50)){
 #'
 #' Creates valid starting points for lambda and psi that satisfy all constraints
 #' including R0 bounds, removal rate bounds, and growth requirements.
-#' 
-#' Attempts to generate n_starts values for lambda and psi.
-#' However if more than 100*n_starts attempts are made, then fewer than n_starts values are returned
-#' and a warning message is displayed to the user.
 #'
 #' @param n_starts Number of starting points to generate
 #' @param mu Extinction rate (fixed)
@@ -134,7 +124,6 @@ estimate_a <- function(phy, trim = c(0.10, 0.50)){
 #' @param removal_rate_max Maximum removal rate (1/(mu+psi))
 #' @return List of starting point vectors, each with a valid lambda and psi
 #' @keywords internal
-#' @noRd
 generate_starting_points <- function(
     n_starts,
     mu,
@@ -198,7 +187,7 @@ generate_starting_points <- function(
   }
   
   if(length(starts) < n_starts){
-    warning("Fewer than n_starts starting points could be generated. Consider relaxing parameter constraints.")
+    warning("Could not generate all requested starting points. Consider relaxing constraints.")
   }
   return(starts)
 }
@@ -218,7 +207,6 @@ generate_starting_points <- function(
 #' @param infectious_period_max Maximum infectious period (1/(mu+psi))
 #' @return List containing estimated parameters and diagnostics
 #' @keywords internal
-#' @noRd
 fit_bd_fixed_mu <- function(
     phy,
     mu,
@@ -287,7 +275,7 @@ fit_bd_fixed_mu <- function(
   )
   
   if(length(starts) == 0){
-    stop("Failed to generate any valid starting points. Relax the parameter constraints.")
+    stop("Could not generate any valid starting points. Try relaxing the constraints.")
   }
   
   # Likelihood function with quadratic penalty
@@ -376,75 +364,51 @@ fit_bd_fixed_mu <- function(
   )
 }
 
-#' Estimate rate parameters of a birth-death-sampling process
+#' Estimate birth-death-sampling parameters
 #'
-#' `estimate_bds_parameters()` estimates the speciation rate \eqn{\lambda} and sampling rate \eqn{\psi} of a birth-death-sampling process given a phylogenetic tree and death rate \eqn{\mu}.
-#' The function uses user-specified epidemiological constraints on the sampling rate, basic reproduction number, and the duration of the infectious period to improve estimability.
+#' Estimates lambda (speciation rate) and psi (sampling rate) for
+#' a phylogenetic tree. The function enforces
+#' epidemiological constraints including R0 bounds and infectious period limits.
 #'
-#' Estimation is carried out by first estimating the reproduction number \eqn{\frac{\lambda}{\mu+\psi}} and the net diversification rate \eqn{\lambda-\mu-\psi},
-#' then solving for the unknown \eqn{\lambda} and \eqn{\psi}. The net diversification rate is estimated by
-#' performing a lineages-through-time (LTT) regression and the reproduction number is estimated by first computing maximum likelihood 
-#' estimates (MLEs) of \eqn{\lambda} and \eqn{\psi} by numerically optimizing a likelihood and then compute the reproduction number.
-#' The stability of the MLEs is assessed by checking if the estimate of \eqn{R_0} is within 0.02 of 1.
-#' 
-#' If the estimates of \eqn{\lambda} and \eqn{\psi} do not satisfy all of the constraints specified by the `psi_max`, `r0_min`, `r0_max`, `infectious_period_min`,
-#' and `infectious_period_max` parameters, then the MLEs of \eqn{\lambda} and \eqn{\psi} are returned, unless `force_two_step=TRUE`
-#' in which case the original estimates of \eqn{\lambda} and \eqn{\psi} are returned regardless of 
-#' whether or not the constraints are satisfied.
-#' If LTT regression fails then the MLEs of \eqn{\lambda} and \eqn{\psi} will be returned. 
-#' 
-#' The MLEs are obtained by running numerical optimization (see \link[stats::optim()]{optim}) `n_starts` times from randomly chosen starting points
-#' and selecting the best maximizer of all attempts. Due to the user-imposed constraints, not all randomly generated starting
-#' points are valid, so `100*n_starts` attempts are made to generate valid starting points. This may result in fewer than `n_starts` optimizations
-#' being performed.
+#' The estimation proceeds in two steps:
+#' \enumerate{
+#'   \item Maximum likelihood estimation with fixed mu to get estimates for (lambda/(mu+psi))
+#'   \item Using lineage-through-time plot to estimate net diversification rate (lambda - mu - psi)
+#' }
+#'
+#' With mu known, we can estimate lambda and psi using the above estimates.
 #'
 #' If the two-step method produces estimates that violate constraints or is
 #' numerically unstable, the function falls back to the MLE estimates from step 1.
 #'
-#' @param phy An object of class `phylo` with branch lengths. Must be rooted and binary.
-#' @param mu The extinction rate. This must be non-negative.
-#' @param trim A numeric vector of length 2 specifying the quantiles for trimming
-#'   node times in the lineages-through-time regression (see Details). Default value is `c(0.10, 0.50)`.
-#' @param n_starts The number of starting points for multi-start optimization. Default value is `100`.
-#' @param force_two_step Logical. If `TRUE`, uses two-step estimates even if they
-#'   violate constraints (see Details). Default value is `FALSE`.
-#' @param psi_max Maximum sampling rate per unit time. Must be strictly positive. Default value is `7`.
-#' @param r0_min Minimum basic reproductive number (R0 = lambda/(mu+psi)). Must be strictly positive. Default 1.
-#' @param r0_max Maximum basic reproductive number. Must be strictly positive. Default 5.
-#' @param infectious_period_min Minimum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.
-#' @param infectious_period_max Maximum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.
+#' @param phy A phylo object with branch lengths. Must be rooted and binary.
+#' @param mu Fixed extinction rate (required)
+#' @param trim Numeric vector of length 2 specifying quantiles for trimming
+#'   node times in LTT. Default c(0.10, 0.50).
+#' @param n_starts Number of starting points for multi-start optimization. Default 100.
+#' @param force_two_step Logical. If TRUE, uses two-step estimates even if they
+#'   violate constraints. Default FALSE.
+#' @param psi_max Maximum sampling rate per unit time. Default 7.
+#' @param r0_min Minimum basic reproductive number (R0 = lambda/(mu+psi)). Default 1.
+#' @param r0_max Maximum basic reproductive number. Default 5.
+#' @param infectious_period_min Minimum infectious period (1/(mu+psi)). Default NULL.
+#' @param infectious_period_max Maximum infectious period (1/(mu+psi)). Default NULL.
 #'
-#' @return An object of class `bds_estimate` with the following attributes:
+#' @return An object of class "bds_estimate" containing:
 #' \itemize{
-#'   \item `lambda`: Estimated speciation rate
-#'   \item `psi`: Estimated sampling rate
-#'   \item `mu`: Fixed death rate (input)
-#'   \item `r0`: Estimated basic reproductive number (lambda/(mu+psi))
-#'   \item `infectious_period`: Estimated infectious period
-#'   \item `method`: Estimation method used (`"two_step_constrained"`, `"mle_constrained"`, or `"two_step_forced"`)
-#'   \item `a`: Net diversification rate (lambda - mu - psi) from LTT
-#'   \item `b`: Ratio lambda/(mu + psi) from MLE
-#'   \item `n_tips`: Number of tips in the tree
-#'   \item `n_nodes`: Number of internal nodes
-#'   \item `mle_fit`: Full MLE fit object from step 1
-#'   \item `constraints`: List of constraint parameters used
+#'   \item lambda: Estimated speciation rate
+#'   \item psi: Estimated sampling rate
+#'   \item mu: Fixed death rate (input)
+#'   \item r0: Estimated basic reproductive number (lambda/(mu+psi))
+#'   \item infectious_period: Estimated infectious period
+#'   \item method: Estimation method used ("two_step_constrained", "mle_constrained", or "two_step_forced")
+#'   \item a: Net diversification rate (lambda - mu - psi) from LTT
+#'   \item b: Ratio lambda/(mu + psi) from MLE
+#'   \item n_tips: Number of tips in the tree
+#'   \item n_nodes: Number of internal nodes
+#'   \item mle_fit: Full MLE fit object from step 1
+#'   \item constraints: List of constraint parameters used
 #' }
-#' @seealso [estimate_transition_rates()]
-#' @examples
-#' data(ebola_tree)
-#' 
-#' # Use the following information about the 2013 Ebola outbreak to obtain estimates
-#' # - Average removal rate of 5
-#' # - Infectious periods range from 20 to 40 days
-#' # - An upper bound on the sampling rate of 15
-#' # - Plausible values for the basic reproduction number are between 1.5 and 3
-#' mu <- 5
-#' BDS_fit <- estimate(ebola_tree, mu = 5,
-#'                                 psi_max = 15,
-#'                                 infectious_period_min = 20/365,
-#'                                 infectious_period_max = 40/365,
-#'                                 r0_min = 1.5,
-#'                                 r0_max = 3)
 #'
 #' @export
 estimate_bds_parameters <- function(
@@ -461,11 +425,11 @@ estimate_bds_parameters <- function(
 ){
   # Input validation
   if(missing(mu) || is.null(mu)){
-    stop("Extinction rate mu must have a numeric value.")
+    stop("Extinction rate 'mu' is required.")
   }
   
   if(!inherits(phy, "phylo")){
-    stop("Input phy must be an object with class phylo.")
+    stop("Input 'phy' must be a phylo object.")
   }
   
   # Early constraint compatibility validation
@@ -533,10 +497,10 @@ estimate_bds_parameters <- function(
     
     # Step 4: Check numerical stability
     if(is.na(a)){
-      warning("Failed to estimate the net rate from lineage-through-time data. Using maximum likelihood estimates only.")
+      warning("Failed to estimate net rate 'a' from lineage-through-time data. Using MLE estimates only.")
     }else if(abs(b - 1) < 0.02){
       warning(sprintf(
-        "Ratio lambda/(mu + psi) = %.4f is too close to 1 (difference: %.4f). This suggests that the two-step method is numerically unstable, so maximum likelihood estimates will be used.",
+        "Ratio b = %.4f is too close to 1 (difference: %.4f). Two-step method numerically unstable. Using MLE estimates only.",
         b, abs(b - 1)
       ))
     }else{

@@ -2,6 +2,7 @@
 
 export(add_tip_states)
 export(check_tree_compatibility)
+export(create_params_template)
 export(drop_tips_by_state)
 export(estimate_bds_parameters)
 export(estimate_transition_rates)

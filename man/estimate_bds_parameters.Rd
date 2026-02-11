@@ -2,7 +2,7 @@
 % Please edit documentation in R/bds_estimation_new.R
 \name{estimate_bds_parameters}
 \alias{estimate_bds_parameters}
-\title{Estimate rate parameters of a birth-death-sampling process}
+\title{Estimate birth-death-sampling parameters}
 \usage{
 estimate_bds_parameters(
   phy,
@@ -18,87 +18,59 @@ estimate_bds_parameters(
 )
 }
 \arguments{
-\item{phy}{An object of class \code{phylo} with branch lengths. Must be rooted and binary.}
+\item{phy}{A phylo object with branch lengths. Must be rooted and binary.}
 
-\item{mu}{The extinction rate. This must be non-negative.}
+\item{mu}{Fixed extinction rate (required)}
 
-\item{trim}{A numeric vector of length 2 specifying the quantiles for trimming
-node times in the lineages-through-time regression (see Details). Default value is \code{c(0.10, 0.50)}.}
+\item{trim}{Numeric vector of length 2 specifying quantiles for trimming
+node times in LTT. Default c(0.10, 0.50).}
 
-\item{n_starts}{The number of starting points for multi-start optimization. Default value is \code{100}.}
+\item{n_starts}{Number of starting points for multi-start optimization. Default 100.}
 
-\item{force_two_step}{Logical. If \code{TRUE}, uses two-step estimates even if they
-violate constraints (see Details). Default value is \code{FALSE}.}
+\item{force_two_step}{Logical. If TRUE, uses two-step estimates even if they
+violate constraints. Default FALSE.}
 
-\item{psi_max}{Maximum sampling rate per unit time. Must be strictly positive. Default value is \code{7}.}
+\item{psi_max}{Maximum sampling rate per unit time. Default 7.}
 
-\item{r0_min}{Minimum basic reproductive number (R0 = lambda/(mu+psi)). Must be strictly positive. Default 1.}
+\item{r0_min}{Minimum basic reproductive number (R0 = lambda/(mu+psi)). Default 1.}
 
-\item{r0_max}{Maximum basic reproductive number. Must be strictly positive. Default 5.}
+\item{r0_max}{Maximum basic reproductive number. Default 5.}
 
-\item{infectious_period_min}{Minimum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.}
+\item{infectious_period_min}{Minimum infectious period (1/(mu+psi)). Default NULL.}
 
-\item{infectious_period_max}{Maximum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.}
+\item{infectious_period_max}{Maximum infectious period (1/(mu+psi)). Default NULL.}
 }
 \value{
-An object of class \code{bds_estimate} with the following attributes:
+An object of class "bds_estimate" containing:
 \itemize{
-\item \code{lambda}: Estimated speciation rate
-\item \code{psi}: Estimated sampling rate
-\item \code{mu}: Fixed death rate (input)
-\item \code{r0}: Estimated basic reproductive number (lambda/(mu+psi))
-\item \code{infectious_period}: Estimated infectious period
-\item \code{method}: Estimation method used (\code{"two_step_constrained"}, \code{"mle_constrained"}, or \code{"two_step_forced"})
-\item \code{a}: Net diversification rate (lambda - mu - psi) from LTT
-\item \code{b}: Ratio lambda/(mu + psi) from MLE
-\item \code{n_tips}: Number of tips in the tree
-\item \code{n_nodes}: Number of internal nodes
-\item \code{mle_fit}: Full MLE fit object from step 1
-\item \code{constraints}: List of constraint parameters used
+\item lambda: Estimated speciation rate
+\item psi: Estimated sampling rate
+\item mu: Fixed death rate (input)
+\item r0: Estimated basic reproductive number (lambda/(mu+psi))
+\item infectious_period: Estimated infectious period
+\item method: Estimation method used ("two_step_constrained", "mle_constrained", or "two_step_forced")
+\item a: Net diversification rate (lambda - mu - psi) from LTT
+\item b: Ratio lambda/(mu + psi) from MLE
+\item n_tips: Number of tips in the tree
+\item n_nodes: Number of internal nodes
+\item mle_fit: Full MLE fit object from step 1
+\item constraints: List of constraint parameters used
 }
 }
 \description{
-\code{estimate_bds_parameters()} estimates the speciation rate \eqn{\lambda} and sampling rate \eqn{\psi} of a birth-death-sampling process given a phylogenetic tree and death rate \eqn{\mu}.
-The function uses user-specified epidemiological constraints on the sampling rate, basic reproduction number, and the duration of the infectious period to improve estimability.
+Estimates lambda (speciation rate) and psi (sampling rate) for
+a phylogenetic tree. The function enforces
+epidemiological constraints including R0 bounds and infectious period limits.
 }
 \details{
-Estimation is carried out by first estimating the reproduction number \eqn{\frac{\lambda}{\mu+\psi}} and the net diversification rate \eqn{\lambda-\mu-\psi},
-then solving for the unknown \eqn{\lambda} and \eqn{\psi}. The net diversification rate is estimated by
-performing a lineages-through-time (LTT) regression and the reproduction number is estimated by first computing maximum likelihood
-estimates (MLEs) of \eqn{\lambda} and \eqn{\psi} by numerically optimizing a likelihood and then compute the reproduction number.
-The stability of the MLEs is assessed by checking if the estimate of \eqn{R_0} is within 0.02 of 1.
+The estimation proceeds in two steps:
+\enumerate{
+\item Maximum likelihood estimation with fixed mu to get estimates for (lambda/(mu+psi))
+\item Using lineage-through-time plot to estimate net diversification rate (lambda - mu - psi)
+}
 
-If the estimates of \eqn{\lambda} and \eqn{\psi} do not satisfy all of the constraints specified by the \code{psi_max}, \code{r0_min}, \code{r0_max}, \code{infectious_period_min},
-and \code{infectious_period_max} parameters, then the MLEs of \eqn{\lambda} and \eqn{\psi} are returned, unless \code{force_two_step=TRUE}
-in which case the original estimates of \eqn{\lambda} and \eqn{\psi} are returned regardless of
-whether or not the constraints are satisfied.
-If LTT regression fails then the MLEs of \eqn{\lambda} and \eqn{\psi} will be returned.
-
-The MLEs are obtained by running numerical optimization (see \link[stats::optim()]{optim}) \code{n_starts} times from randomly chosen starting points
-and selecting the best maximizer of all attempts. Due to the user-imposed constraints, not all randomly generated starting
-points are valid, so \code{100*n_starts} attempts are made to generate valid starting points. This may result in fewer than \code{n_starts} optimizations
-being performed.
+With mu known, we can estimate lambda and psi using the above estimates.
 
 If the two-step method produces estimates that violate constraints or is
 numerically unstable, the function falls back to the MLE estimates from step 1.
-}
-\examples{
-data(ebola_tree)
-
-# Use the following information about the 2013 Ebola outbreak to obtain estimates
-# - Average removal rate of 5
-# - Infectious periods range from 20 to 40 days
-# - An upper bound on the sampling rate of 15
-# - Plausible values for the basic reproduction number are between 1.5 and 3
-mu <- 5
-BDS_fit <- estimate(ebola_tree, mu = 5,
-                                psi_max = 15,
-                                infectious_period_min = 20/365,
-                                infectious_period_max = 40/365,
-                                r0_min = 1.5,
-                                r0_max = 3)
-
-}
-\seealso{
-\code{\link[=estimate_transition_rates]{estimate_transition_rates()}}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tree_generator.R
 \name{sim_bds_tree}
 \alias{sim_bds_tree}
-\title{Simulate a birth/death/sampling tree with post-processing}
+\title{Simulate a birth/death/sampling tree}
 \usage{
 sim_bds_tree(
   params_df,
@@ -10,40 +10,39 @@ sim_bds_tree(
   x0,
   max_taxa = 100,
   max_t = 100,
-  include_extinct = FALSE,
-  min_tip = 1
+  include_extinct = FALSE
 )
 }
 \arguments{
-\item{params_df}{Parameters that are used in the simulation. Should contain
-state names, speciation, extinction, and sampling rates,}
+\item{params_df}{Data frame containing non-q parameters used in ancestral
+state reconstruction algorithm. Must have the following column names:
+\code{state}, \code{prior}, \code{lambda}, \code{mu}, and \code{psi}. The \code{prior} values refer to the baseline
+probabilities of the states (used at the root of the tree).
 
-\item{q_matrix}{A numeric transition rate matrix (n × n) where n is the number
-of states. Row and column names represent states. Off-diagonal
-elements are transition rates; diagonal elements are set such that rows sum to zero.}
+Example:\tabular{lllll}{
+   \strong{state} \tab \strong{prior} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
+   1 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
+   2 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
+   3 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
+}}
+
+\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
+algorithm. Row and column indices or names represent states.}
 
 \item{x0}{Natural number used as root state in the returned tree. Must be a
 state declared in \code{params_df}.}
 
-\item{max_taxa}{Maximum number of nodes allowed in the initial simulated tree.}
+\item{max_taxa}{Maximum number of nodes allowed in the returned tree.}
 
 \item{max_t}{Maximum depth allowed in the returned tree.}
 
 \item{include_extinct}{Boolean declaring whether extinct taxa are included in
 the returned tree.}
-
-\item{min_tip}{Minimum number of tips required in the post-processed tree.
-If the processed tree has fewer tips, the simulation is repeated until this
-condition is satisfied. Default is 1.}
-
-\item{q_martix}{Transition rate matrix.}
 }
 \value{
-A \code{phylo} phylogenetic tree (\code{ape} format) with post-processing applied.
-The tree includes \code{tip.state} attribute with character state labels.
+A \code{phylo} phylogenetic tree (\code{ape} format).
 }
 \description{
 This tree can be passed to \link{saasi}, and will include speciation,
-extinction, sampling, and mutation events. The tree is post-processed to
-remove tips at the present and ensure a minimum number of tips.
+extinction, sampling, and mutation events.
 }
