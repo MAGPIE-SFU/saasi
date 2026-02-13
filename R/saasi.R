@@ -40,7 +40,7 @@
 #' }
 #' 
 #' @export
-saasi <- function(phy, Q, pars) {
+saasi <- function(phy, Q, pars, sensitivity_test=FALSE) {
   ## INPUT CHECKS --------------------------------------------------------------
   
   ## phy
@@ -153,35 +153,6 @@ saasi <- function(phy, Q, pars) {
     Q <- Q[order(as.numeric(factor(rownames(Q)))), order(as.numeric(factor(colnames(Q))))]
   }
   
-  # if(!is.numeric(phy$tip.state)){
-  #   # stop("Convert tip state to numeric values.")
-  #     if( !all(sort(rownames(Q))==sort(params_df$state))) {
-  #         stop("State names and q names need to agree and be present only once") 
-  #     } else {
-  #         phy$tip.statename = phy$tip.state
-  #         phy$tip.state = as.numeric(factor(phy$tip.state)) # makes it numeric 
-  #     params_df$statename = params_df$state
-  #     params_df$state = as.numeric(factor(params_df$statename)) # numeric state
-  #     params_df = params_df[order(params_df$state), ]
-  #     # reorder q if necessary, so its order corresponds to the numeric state 
-  #     Q = Q[ order(as.numeric(factor(rownames(Q)))),
-  #                          order(as.numeric(factor(colnames(Q))))]
-  #     }
-  # }
-  
-
-  # Check that 'state' is a sequence of 1-based natural numbers
-  # if (!is.numeric(params_df$state)) {
-  #   stop("'state' column must be a sequence of numerical values (1, 2, ..., n).")
-  # }
-  
-  # Checking the number of unique states in tip.state matches the number of states
-  # in params_df$state
-  
-  # if(!length(unique(phy$tip.state)) == length(params_df$state)){
-  #   stop("The number of states does not match.")
-  # }
-  
   nstate <- nrow(pars)
   # Total number of nodes == number of non-leaf nodes * 2 + 1
   nnode <- phy[["Nnode"]] * 2 + 1
@@ -218,34 +189,57 @@ saasi <- function(phy, Q, pars) {
     topology_df,
     backwards_likelihoods_list
   )
+
   
-  # if (plot) {
-  #   # https://stackoverflow.com/a/17735894
-  #   highest_likelihoods <-
-  #     apply(state_probabilities_df, 1, function(e) which(e == max(e)))
-  #   
-  #   # https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
-  #   # Will serve up to n states == len of vector; afterwards recycles colors
-  #   state_colors <- c("#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3",
-  #                     "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd",
-  #                     "#ccebc5", "#ffed6f")
-  #   # Map likelihoods to colors
-  #   highest_likelihood_colors <-
-  #     sapply(highest_likelihoods,
-  #            function(e) state_colors[[e %% (length(state_colors) + 1)]])
-  #   
-  #   ape::plot.phylo(phy, label.offset = 0.05)
-  #   ape::tiplabels(highest_likelihoods[1:(phy[["Nnode"]] + 1)],
-  #                  frame = "circle",
-  #                  cex = cex,
-  #                  bg = highest_likelihood_colors)
-  #   ape::nodelabels(highest_likelihoods[-(1:(phy[["Nnode"]] + 1))],
-  #                   frame = "circle",
-  #                   cex = cex,
-  #                   bg = highest_likelihood_colors)
-  # }
-  # 
-  return(state_probabilities_list)
+  # Perform sensitivity testing, if requested
+  if( !sensitivity_test ){
+    return(state_probabilities_list)
+  } else{
+    cat("Initial run complete. Running sensitivity analysis.\n")
+    # number of times to perturb the BDS rates and run saasi again
+    n_tests <- 10
+    
+    # re-run saasi for n_tests perturbed parameter dataframes
+    sens_res <- lapply(1:n_tests, function(x) {
+      # generate perturbations by randomly generating a uniform number between 10% below and 10% above the provided value
+      temp <- pars
+      temp$lambda <- runif(nrow(pars), temp$lambda*0.9, temp$lambda*1.1)
+      temp$mu <- runif(nrow(pars), temp$mu*0.9, temp$mu*1.1)
+      temp$psi <- runif(nrow(pars), temp$psi*0.9, temp$psi*1.1)
+      
+      # re-compute the backwards likelihoods
+      bw_likelihood <- get_backwards_likelihoods_list(phy,
+                                                      temp,
+                                                      Q,
+                                                      nstate,
+                                                      nnode,
+                                                      post_order_edges,
+                                                      topology_df)
+      # re-compute and return the state probabilities for the internal nodes
+      get_state_probabilities_list(phy,
+                                   temp,
+                                   Q,
+                                   nstate,
+                                   nnode,
+                                   root_node,
+                                   post_order_edges,
+                                   topology_df,
+                                   bw_likelihood)
+    })
+    
+    # summarise sensitivity by computing the modal states for 
+    #  the input parameter values (base) and for the perturbed results
+    #  then count the total number of nodes that differ
+    base_modes <- modal_states(state_probabilities_list)
+    sens_modes <- lapply(sens_res, modal_states)
+    sens_total_diff <- sapply(sens_modes, function(x) sum(x != base_modes))
+    
+    cat("Sensitivity analysis: Input parameters were perturbed", n_tests, "times and an average of",
+        mean(sens_total_diff), "of all", nnode, "nodes had a different modal state.")
+    
+    # compute the sensitivity summaries
+    return(state_probabilities_list)
+  }
 }
 
 #' Get data frame representation of tree topology.
@@ -404,3 +398,20 @@ get_state_probabilities_list <- function(phy,
 #   names(state_probabilities_df) <- seq_len(nstate)
 #   return(state_probabilities_df)
 # }
+
+#' Compute modal state for all nodes
+#' 
+#' `modal_states()` is a post-processing function that extracts the
+#' node with the greatest probability at each node.
+#' 
+#' @param node_probs A list of the same format as output by `saasi()`.
+#' @return A vector corresponding to the nodes where the elements of the vector
+#' are the states with the highest probability at each node.
+#' @noRd
+modal_states <- function(node_probs) {
+  n_nodes <- length(node_probs[[1]])
+  temp <- sapply(1:n_nodes, function(i) {
+    which.max(sapply(node_probs, function(x) x[i]))
+  })
+  return(temp)
+}
