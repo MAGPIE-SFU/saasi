@@ -195,7 +195,7 @@ saasi <- function(phy, Q, pars, sensitivity_test=FALSE) {
   if( !sensitivity_test ){
     return(state_probabilities_list)
   } else{
-    cat("Initial run complete. Running sensitivity analysis.\n")
+    cat("Initial run complete. Running sensitivity analysis.","\n")
     # number of times to perturb the BDS rates and run saasi again
     n_tests <- 10
     
