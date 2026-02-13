@@ -5,18 +5,12 @@
 #'
 #' @param phy A `phylo` object containing the phylogenetic tree. The tree must be 
 #'   rooted, binary, and contain `tip.state`. 
-#' @param q_matrix A numeric transition rate matrix (n × n) where n is the number 
+#' @param Q A numeric transition rate matrix (n × n) where n is the number 
 #'   of states. Row and column names represent states. Off-diagonal 
 #'   elements are transition rates; diagonal elements are set such that rows sum to zero.
-#' @param lambda Speciation rate(s) for each state. Can be a single numeric value 
-#'   (same rate for all states) or a vector of length n (different rates per state).
-#' @param mu Extinction rate(s) for each state. Can be a single numeric value 
-#'   (same rate for all states) or a vector of length n (different rates per state).
-#' @param psi Sampling rate(s) for each state. Can be a single numeric value 
-#'   (same rate for all states) or a vector of length n (different rates per state).
-#' @param prior Prior probabilities for each state at the root node. If `NULL` 
-#'   (default), equal probabilities are assigned to all states. Otherwise, provide 
-#'   a vector of length n that sums to 1.
+#' @param pars A data frame with the other parameters used in the ancestral state reconstruction algorithm. 
+#' Must have the following column names: state, prior, lambda, mu, and psi. 
+#' The prior values refer to the baseline probabilities of the states (used at the root of the tree).
 #'   
 #' @return A data frame with state probabilities for each internal node in `phy`. 
 #'   

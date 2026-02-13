@@ -58,9 +58,11 @@ plot_saasi <- function(tree,
   
   ape::tiplabels(bg = tip_colors, cex = tip_cex, adj = 0.5, pch = pch_value)
   
+  if(!is.null(saasi_result)){
   ape::nodelabels(pie = saasi_result,
                   piecol = colors[1:ncol(saasi_result)],
                   cex = node_cex)
+  }
   
   graphics::legend("topleft",
                    legend = levels(state_factor),

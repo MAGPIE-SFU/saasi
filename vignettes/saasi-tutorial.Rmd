@@ -64,18 +64,18 @@ The `saasi` function requires three main inputs:
    
    SAASI has the function `prepare_tree_for_saasi()` which can ensure that these conditions are met. 
 
-2. **Birth-death-sampling parameters** (class `data.frame`):
+2. **Transition rate matrix Q** (class `matrix`):
+   - Rates of transition between states
+   
+   Use `estimate_transition_rates()` to estimate this matrix.
+
+3. **Birth-death-sampling parameters** (class `data.frame`):
    - Speciation rate 
    - Extinction/removal rate 
    - Sampling rate 
    
    Use `estimate_bds_parameters()` to estimate the speciation rate and a single, overall sampling rate. The "extinction rate" (in the language of birth-death models) in infectious disease applications is the inverse of the duration of infectiousness, i.e. the rate of leaving the infectious class. 
 
-
-3. **Transition rate matrix Q** (class `matrix`):
-   - Rates of transition between states
-   
-   Use `estimate_transition_rates()` to estimate this matrix.
 
 The output is a data frame containing the probability of each state for each internal node of the phylogenetic tree.
 
@@ -87,7 +87,7 @@ For this example, we use data from Nextstrain:
 https://nextstrain.org/ebola/ebov-2013?c=country
 
 ```{r Nextstrain Ebola}
-tree <- ape::read.tree(system.file("extdata", "nextstrain_ebola_ebov-2013_timetree.nwk", package = "saasi"))
+tree <- ape::read.tree(system.file("extdata", "nextstrain_ebola_ebov-2013_smaller.nwk", package = "saasi"))
 metadata <- readr::read_tsv(system.file("extdata", "nextstrain_ebola_ebov-2013_metadata.tsv", package = "saasi"))
 ```
 
@@ -100,13 +100,23 @@ tip_data <- data.frame(
 )
 ```
 
+
+
+
 ### Modify the tree to be compatible with saasi
 
-Users can apply the function `prepare_tree_for_saasi()` to make the tree compatible with saasi. To check if the tree is compatible, use the function `check_tree_compatibility()`.
+Users can apply the function `prepare_tree_for_saasi()` to make the tree compatible with saasi. To check if the tree is compatible, use the function `check_tree_compatibility()`. Here, the function will include the tip states (i.e. their location) in the tree as `r tree$tip.state`
 
 ```{r Prepare tree}
 ebola_tree <- prepare_tree_for_saasi(tree, tip_data)
 ```
+
+This tree is a downsampled version of the 2013 Ebola virus tree from nextstrain. There are 193 tips from three countries. 
+
+```{r plottree}
+plot_saasi(ebola_smalltree, saasi_result = NULL,tip_cex = 1) 
+```
+
 
 ### Estimating transition rates
 
@@ -144,7 +154,7 @@ Suppose, for example, that Liberia was known to have sequenced a smaller fractio
 ### Setting up input parameters
 
 ```{r Create parameter data frame}
-pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi)
+pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi, row.names = NULL)
 pars[(pars$state=="Liberia"),"psi"] = pars[(pars$state=="Liberia"), "psi"]/2 # set sampling rate to be 1/2 the baseline
 ```
 
@@ -158,7 +168,7 @@ saasi_ebola <- saasi(ebola_tree, Q, pars)
 Users can use the built-in function `plot_saasi()` to visualize results. 
 
 ```{r Plot the result}
-p1 <- plot_saasi(ebola_tree, saasi_ebola)
+p1 <- plot_saasi(ebola_tree, saasi_ebola, tip_cex = 1, node_cex=0.3)
 ```
 
 ### Compare to equal sampling
@@ -166,10 +176,10 @@ p1 <- plot_saasi(ebola_tree, saasi_ebola)
 If all states had comparable sampling we would obtain a different ancestral state reconstruction: 
 
 ```{r Run saasi with a different set of parameters}
-pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi)
+pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi, row.names = NULL)
 saasi_ebola2 <- saasi(ebola_tree, Q, pars)
 
-p2 <- plot_saasi(ebola_tree, saasi_ebola2)
+p2 <- plot_saasi(ebola_tree, saasi_ebola2, tip_cex = 1, node_cex=0.3)
 ```
 
 ### Interpreting results
