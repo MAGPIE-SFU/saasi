@@ -21,7 +21,7 @@ vignette: >
  )
 ```
 
-```{r setup}
+```{r setup, message=FALSE}
 library(saasi)
 library(diversitree)
 library(tidytree)
@@ -30,7 +30,7 @@ library(phytools)
 library(readr)
 ```
 
-# Introduction
+## Introduction
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -48,12 +48,13 @@ SAASI is described in Song et al. https://www.biorxiv.org/content/10.1101/2025.0
 ## Installation
 
 You can install the development version of saasi from [GitHub](https://github.com/) with:
-```r
+
+```{r, eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("MAGPIE-SFU/saasi")
 ```
 
-# Overview
+## Overview
 
 The `saasi` function requires three main inputs:
 
@@ -84,10 +85,10 @@ The output is a data frame containing the probability of each state for each int
 ### Read tree and load metadata
 
 For this example, we use data from Nextstrain:
-https://nextstrain.org/ebola/ebov-2013?c=country
+https://nextstrain.org/ebola/ebov-2013?c=country. 
 
 ```{r Nextstrain Ebola}
-tree <- ape::read.tree(system.file("extdata", "nextstrain_ebola_ebov-2013_smaller.nwk", package = "saasi"))
+tree <- ape::read.tree(system.file("extdata", "nexstrain_ebola_ebov-2013_smaller.nwk", package = "saasi"))
 metadata <- readr::read_tsv(system.file("extdata", "nextstrain_ebola_ebov-2013_metadata.tsv", package = "saasi"))
 ```
 
@@ -114,7 +115,7 @@ ebola_tree <- prepare_tree_for_saasi(tree, tip_data)
 This tree is a downsampled version of the 2013 Ebola virus tree from nextstrain. There are 193 tips from three countries. 
 
 ```{r plottree}
-plot_saasi(ebola_smalltree, saasi_result = NULL,tip_cex = 1) 
+plot_saasi(ebola_tree, saasi_result = NULL,tip_cex = 1) 
 ```
 
 
