@@ -1,11 +1,11 @@
-#' Sampling-Aware Ancestral State Inference
+#' Sampling Aware Ancestral State Inference
 #'
 #' Reconstructs ancestral states for internal nodes of a phylogenetic tree while 
 #' accounting for heterogeneous sampling rates across states or locations.
 #'
 #' @param phy A `phylo` object containing the phylogenetic tree. The tree must be 
 #'   rooted, binary, and contain `tip.state`. 
-#' @param Q A numeric transition rate matrix (n × n) where n is the number 
+#' @param Q A numeric transition rate matrix \exp{(n \times n)} where n is the number 
 #'   of states. Row and column names represent states. Off-diagonal 
 #'   elements are transition rates; diagonal elements are set such that rows sum to zero.
 #' @param pars A data frame with the other parameters used in the ancestral state reconstruction algorithm. 
@@ -15,24 +15,11 @@
 #' @return A data frame with state probabilities for each internal node in `phy`. 
 #'   
 #' @examples
-#' \dontrun{
-#' # Run saasi with equal sampling rates
-#' result <- saasi(phy = tree, 
-#'                 q_matrix = Q,
-#'                 lambda = rates$lambda,
-#'                 mu = rates$mu,
-#'                 psi = rates$psi,
-#'                 prior = NULL)
-#' 
-#' # Run saasi with different sampling rates per state
-#' result2 <- saasi(phy = tree,
-#'                  q_matrix = Q,
-#'                  lambda = rates$lambda,
-#'                  mu = rates$mu,
-#'                  psi = c(rates$psi, rates$psi/2, rates$psi),
-#'                  prior = NULL)
-#' }
-#' 
+#' head(demo_pars) #contains state, lambda, mu, psi for each state
+#' result <- saasi(phy = demo_tree_prepared, 
+#'                 Q = demo_Q,
+#'                 pars = demo_pars) 
+#' head(result) 
 #' @export
 saasi <- function(phy, Q, pars) {
   ## INPUT CHECKS --------------------------------------------------------------
