@@ -2,7 +2,7 @@
 % Please edit documentation in R/saasi.R
 \name{saasi}
 \alias{saasi}
-\title{Sampling-Aware Ancestral State Inference}
+\title{Sampling Aware Ancestral State Inference}
 \usage{
 saasi(phy, Q, pars)
 }
@@ -10,22 +10,13 @@ saasi(phy, Q, pars)
 \item{phy}{A \code{phylo} object containing the phylogenetic tree. The tree must be
 rooted, binary, and contain \code{tip.state}.}
 
-\item{q_matrix}{A numeric transition rate matrix (n × n) where n is the number
+\item{Q}{A numeric transition rate matrix \exp{(n \times n)} where n is the number
 of states. Row and column names represent states. Off-diagonal
 elements are transition rates; diagonal elements are set such that rows sum to zero.}
 
-\item{lambda}{Speciation rate(s) for each state. Can be a single numeric value
-(same rate for all states) or a vector of length n (different rates per state).}
-
-\item{mu}{Extinction rate(s) for each state. Can be a single numeric value
-(same rate for all states) or a vector of length n (different rates per state).}
-
-\item{psi}{Sampling rate(s) for each state. Can be a single numeric value
-(same rate for all states) or a vector of length n (different rates per state).}
-
-\item{prior}{Prior probabilities for each state at the root node. If \code{NULL}
-(default), equal probabilities are assigned to all states. Otherwise, provide
-a vector of length n that sums to 1.}
+\item{pars}{A data frame with the other parameters used in the ancestral state reconstruction algorithm.
+Must have the following column names: state, prior, lambda, mu, and psi.
+The prior values refer to the baseline probabilities of the states (used at the root of the tree).}
 }
 \value{
 A data frame with state probabilities for each internal node in \code{phy}.
@@ -35,22 +26,9 @@ Reconstructs ancestral states for internal nodes of a phylogenetic tree while
 accounting for heterogeneous sampling rates across states or locations.
 }
 \examples{
-\dontrun{
-# Run saasi with equal sampling rates
-result <- saasi(phy = tree, 
-                q_matrix = Q,
-                lambda = rates$lambda,
-                mu = rates$mu,
-                psi = rates$psi,
-                prior = NULL)
-
-# Run saasi with different sampling rates per state
-result2 <- saasi(phy = tree,
-                 q_matrix = Q,
-                 lambda = rates$lambda,
-                 mu = rates$mu,
-                 psi = c(rates$psi, rates$psi/2, rates$psi),
-                 prior = NULL)
-}
-
+head(demo_pars) #contains state, lambda, mu, psi for each state
+result <- saasi(phy = demo_tree_prepared, 
+                Q = demo_Q,
+                pars = demo_pars) 
+head(result) 
 }
