@@ -49,7 +49,7 @@ plot_saasi <- function(tree,
   
   # Open file device if saving
   if(!is.null(save_file)){
-	  grDevices::png(save_file, width = width, height = height, res = res)
+    grDevices::png(save_file, width = width, height = height, res = res)
   }
   
   # Plotting 
@@ -58,20 +58,22 @@ plot_saasi <- function(tree,
   
   ape::tiplabels(bg = tip_colors, cex = tip_cex, adj = 0.5, pch = pch_value)
   
+  if(!is.null(saasi_result)){
   ape::nodelabels(pie = saasi_result,
                   piecol = colors[1:ncol(saasi_result)],
                   cex = node_cex)
+  }
   
   graphics::legend("topleft",
-         legend = levels(state_factor),
-         col = colors[1:n_states],
-         pch = 19,
-         pt.cex = 2,
-         bty = "n",
-         cex = 0.8)
+                   legend = levels(state_factor),
+                   col = colors[1:n_states],
+                   pch = 19,
+                   pt.cex = 2,
+                   bty = "n",
+                   cex = 0.8)
   
   if(!is.null(save_file)){
-	  grDevices::dev.off()
+    grDevices::dev.off()
   }
   invisible(colors)
 }
@@ -112,7 +114,7 @@ plot_saasi <- function(tree,
 estimate_transition_rates <- function(tree, 
                                       matrix_structure = "ER",
                                       method = "ace") {
-
+  
   # check that matrix_structure is a valid input
   if(is.character(matrix_structure)) {
     if( !(matrix_structure %in% c("ER", "SYM", "ARD")) )
@@ -141,7 +143,7 @@ estimate_transition_rates <- function(tree,
   } else{
     stop("User must select either \"ace\" or \"fitMk\" as the primary estimation method.")
   }
-
+  
   if(primary_method == "ace"){
     q_matrix <- try_ace(tree, tip_states, matrix_structure)
   } 
@@ -165,7 +167,7 @@ estimate_transition_rates <- function(tree,
   if(is.null(q_matrix)){
     stop("Both ace and fitMk failed to estimate transition rates. Check your tip.states, it may contains NA.")
   }
-
+  
   # Replace NAs on diagonal of the matrix
   diag(q_matrix) <- NA
   diag(q_matrix) <- -rowSums(q_matrix, na.rm=T)
@@ -179,22 +181,22 @@ try_ace <- function(tree, tip_states, model){
   result <- tryCatch(
     withCallingHandlers(
       {ace_result <- ape::ace(tip_states, tree, type = "discrete", model = model)
-        if(is.null(ace_result$index.matrix) || is.null(ace_result$rates)){
-          stop("ace failed")
+      if(is.null(ace_result$index.matrix) || is.null(ace_result$rates)){
+        stop("ace failed")
+      }
+      ind <- ace_result$index.matrix
+      ace_rates <- ace_result$rates
+      q <- ind
+      if(!is.null(ace_result$lik.anc)){
+        rownames(q) <- colnames(ace_result$lik.anc)
+        colnames(q) <- rownames(q)
+      }
+      for (i in 1:nrow(ind)) {
+        for (j in 1:ncol(ind)) {
+          q[i, j] <- ace_rates[ind[i, j]]
         }
-        ind <- ace_result$index.matrix
-        ace_rates <- ace_result$rates
-        q <- ind
-        if(!is.null(ace_result$lik.anc)){
-          rownames(q) <- colnames(ace_result$lik.anc)
-          colnames(q) <- rownames(q)
-        }
-        for (i in 1:nrow(ind)) {
-          for (j in 1:ncol(ind)) {
-            q[i, j] <- ace_rates[ind[i, j]]
-          }
-        }
-        q
+      }
+      q
       },
       warning = function(w) {
         message("ace warning: ", conditionMessage(w))
@@ -216,7 +218,10 @@ try_fitMk <- function(tree, tip_states, model) {
       {states_named <- tree$tip.state
       names(states_named) <- tree$tip.label
       est <- phytools::fitMk(tree, states_named, model=model)
-      matrix(est$rates[est$index.matrix], nrow=nrow(est$index.matrix))
+      q_matrix <- matrix(est$rates[est$index.matrix], nrow=nrow(est$index.matrix))
+      rownames(q_matrix) <- est$states
+      colnames(q_matrix) <- rownames(q_matrix)
+      q_matrix 
       },
       warning = function(w) {
         message("fitMk warning: ", conditionMessage(w))
