@@ -383,7 +383,8 @@ fit_bd_fixed_mu <- function(
 #'
 #' Estimation is carried out by first estimating the reproduction number \eqn{\frac{\lambda}{\mu+\psi}} and the net diversification rate \eqn{\lambda-\mu-\psi},
 #' then solving for the unknown \eqn{\lambda} and \eqn{\psi}. The net diversification rate is estimated by
-#' performing a lineages-through-time (LTT) regression and the reproduction number is estimated by first computing maximum likelihood 
+#' performing a lineages-through-time (LTT) regression on node times that are within the quantiles specified in the `trim` input
+#' and the reproduction number is estimated by first computing maximum likelihood 
 #' estimates (MLEs) of \eqn{\lambda} and \eqn{\psi} by numerically optimizing a likelihood and then compute the reproduction number.
 #' The stability of the MLEs is assessed by checking if the estimate of \eqn{R_0} is within 0.02 of 1.
 #' 
@@ -393,17 +394,17 @@ fit_bd_fixed_mu <- function(
 #' whether or not the constraints are satisfied.
 #' If LTT regression fails then the MLEs of \eqn{\lambda} and \eqn{\psi} will be returned. 
 #' 
-#' The MLEs are obtained by running numerical optimization (see \link[stats::optim()]{optim}) `n_starts` times from randomly chosen starting points
+#' The MLEs are obtained numerically using the `L-BFGS-S` algorithm (see \link[stats::optim()]{optim} for implementation details) `n_starts` times from randomly chosen starting points
 #' and selecting the best maximizer of all attempts. Due to the user-imposed constraints, not all randomly generated starting
 #' points are valid, so `100*n_starts` attempts are made to generate valid starting points. This may result in fewer than `n_starts` optimizations
-#' being performed.
+#' actually being performed.
 #'
 #' If the two-step method produces estimates that violate constraints or is
 #' numerically unstable, the function falls back to the MLE estimates from step 1.
 #'
 #' @param phy An object of class `phylo` with branch lengths. Must be rooted and binary.
 #' @param mu The extinction rate. This must be non-negative.
-#' @param trim A numeric vector of length 2 specifying the quantiles for trimming
+#' @param trim A numeric vector of length 2 specifying the quantiles for removing
 #'   node times in the lineages-through-time regression (see Details). Default value is `c(0.10, 0.50)`.
 #' @param n_starts The number of starting points for multi-start optimization. Default value is `100`.
 #' @param force_two_step Logical. If `TRUE`, uses two-step estimates even if they
@@ -414,20 +415,13 @@ fit_bd_fixed_mu <- function(
 #' @param infectious_period_min Minimum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.
 #' @param infectious_period_max Maximum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.
 #'
-#' @return An object of class `bds_estimate` with the following attributes:
+#' @return A list with the following attributes:
 #' \itemize{
 #'   \item `lambda`: Estimated speciation rate
 #'   \item `psi`: Estimated sampling rate
-#'   \item `mu`: Fixed death rate (input)
-#'   \item `r0`: Estimated basic reproductive number (lambda/(mu+psi))
-#'   \item `infectious_period`: Estimated infectious period
-#'   \item `method`: Estimation method used (`"two_step_constrained"`, `"mle_constrained"`, or `"two_step_forced"`)
-#'   \item `a`: Net diversification rate (lambda - mu - psi) from LTT
-#'   \item `b`: Ratio lambda/(mu + psi) from MLE
-#'   \item `n_tips`: Number of tips in the tree
-#'   \item `n_nodes`: Number of internal nodes
-#'   \item `mle_fit`: Full MLE fit object from step 1
-#'   \item `constraints`: List of constraint parameters used
+#'   \item `r0`: Estimated basic reproductive number (\eqn{\lambda/(\mu+\psi)})
+#'   \item `infectious_period`: Estimated infectious period (\eqn{1/(\mu+\psi)})
+#'   \item `net_diversification`: Estimated net diversification rate (\eqn{\lambda-\mu-\psi})
 #' }
 #' @seealso [estimate_transition_rates()]
 #' @examples
@@ -438,13 +432,12 @@ fit_bd_fixed_mu <- function(
 #' # - Infectious periods range from 20 to 40 days
 #' # - An upper bound on the sampling rate of 15
 #' # - Plausible values for the basic reproduction number are between 1.5 and 3
-#' mu <- 5
-#' BDS_fit <- estimate(ebola_tree, mu = 5,
-#'                                 psi_max = 15,
-#'                                 infectious_period_min = 20/365,
-#'                                 infectious_period_max = 40/365,
-#'                                 r0_min = 1.5,
-#'                                 r0_max = 3)
+#' BDS_fit <- estimate_bds_parameters(ebola_tree, mu = 5,
+#'                                                psi_max = 15,
+#'                                                infectious_period_min = 20/365,
+#'                                                infectious_period_max = 40/365,
+#'                                                r0_min = 1.5,
+#'                                                r0_max = 3)
 #'
 #' @export
 estimate_bds_parameters <- function(
@@ -631,26 +624,11 @@ estimate_bds_parameters <- function(
   
   # Return results
   result <- list(
-    lambda = final_lambda,
-    psi = final_psi,
-    mu = final_mu,
-    r0 = final_lambda / (final_mu + final_psi),
-    infectious_period = final_inf_period,
-    method = estimation_method,
-    a = a,
-    b = b,
-    n_tips = length(phy$tip.label),
-    n_nodes = phy$Nnode,
-    mle_fit = fixed_mu_fit,
-    constraints = list(
-      psi_max = psi_max,
-      r0_min = r0_min,
-      r0_max = r0_max,
-      infectious_period_min = infectious_period_min,
-      infectious_period_max = infectious_period_max,
-      mu_fixed = TRUE
-    )
-  )
+    lambda = unname(final_lambda),
+    psi = unname(final_psi),
+    r0 = unname(final_lambda / (mu + final_psi)),
+    infectious_period = unname(final_inf_period),
+    net_diversification = a)
   return(result)
 }
 
