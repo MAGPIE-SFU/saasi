@@ -419,6 +419,7 @@ fit_bd_fixed_mu <- function(
 #' \itemize{
 #'   \item `lambda`: Estimated speciation rate
 #'   \item `psi`: Estimated sampling rate
+#'   \item `mu`: Input death rate
 #'   \item `r0`: Estimated basic reproductive number (\eqn{\lambda/(\mu+\psi)})
 #'   \item `infectious_period`: Estimated infectious period (\eqn{1/(\mu+\psi)})
 #'   \item `net_diversification`: Estimated net diversification rate (\eqn{\lambda-\mu-\psi})
@@ -626,6 +627,7 @@ estimate_bds_parameters <- function(
   result <- list(
     lambda = unname(final_lambda),
     psi = unname(final_psi),
+    mu = mu,
     r0 = unname(final_lambda / (mu + final_psi)),
     infectious_period = unname(final_inf_period),
     net_diversification = a)

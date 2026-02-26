@@ -45,6 +45,7 @@ A list with the following attributes:
 \itemize{
 \item \code{lambda}: Estimated speciation rate
 \item \code{psi}: Estimated sampling rate
+\item \code{mu}: Input death rate
 \item \code{r0}: Estimated basic reproductive number (\eqn{\lambda/(\mu+\psi)})
 \item \code{infectious_period}: Estimated infectious period (\eqn{1/(\mu+\psi)})
 \item \code{net_diversification}: Estimated net diversification rate (\eqn{\lambda-\mu-\psi})
