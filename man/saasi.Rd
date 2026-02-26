@@ -10,13 +10,15 @@ saasi(phy, Q, pars, sensitivity_test = FALSE)
 \item{phy}{A \code{phylo} object containing the phylogenetic tree. The tree must be
 rooted, binary, and contain \code{tip.state}.}
 
-\item{Q}{A numeric transition rate matrix \exp{(n \times n)} where n is the number
+\item{Q}{A numeric transition rate matrix \eqn{\exp{(n \times n)}} where n is the number
 of states. Row and column names represent states. Off-diagonal
 elements are transition rates; diagonal elements are set such that rows sum to zero.}
 
 \item{pars}{A data frame with the other parameters used in the ancestral state reconstruction algorithm.
 Must have the following column names: state, prior, lambda, mu, and psi.
 The prior values refer to the baseline probabilities of the states (used at the root of the tree).}
+
+\item{sensitivity_test}{A boolean indicating if a sensitivity test should be conducted. The default value is \code{FALSE}.}
 }
 \value{
 A data frame with state probabilities for each internal node in \code{phy}.
