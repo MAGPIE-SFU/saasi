@@ -30,6 +30,18 @@ remotes::install_github("MAGPIE-SFU/saasi", ref = "saasi-maintaining")
 Before running this demo, please make sure the following packages are
 installed: saasi, diversitree, tidytree, ape, phytools, readr
 
+```r
+
+library(ape)
+library(phytools)
+library(tidytree)
+library(tidytree)
+library(diversitree)
+library(readr)
+library(saasi)
+
+```
+
 ## saasi package
 
 This is a demo showing how to use the saasi package.
