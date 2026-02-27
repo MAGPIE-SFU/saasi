@@ -44,6 +44,7 @@ Invisibly returns the color vector used
 Plot phylogenetic tree with saasi results
 }
 \examples{
+\dontrun{
 # Basic plot
 plot_saasi(tree, saasi_result)
 
@@ -52,5 +53,6 @@ plot_saasi(tree, saasi_result,
            colors = c("red", "blue", "green"),
            node_cex = 0.3,
            save_file = "tree.png")
+}
 
 }

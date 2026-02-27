@@ -73,3 +73,4 @@ vignettes/*.R
 doc/
 vignettes/*.html
 vignettes/*.R
+docs
