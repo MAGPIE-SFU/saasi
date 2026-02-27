@@ -2,7 +2,7 @@
 % Please edit documentation in R/tree_preparation_new.R
 \name{prepare_tree_for_saasi}
 \alias{prepare_tree_for_saasi}
-\title{Prepare phylogenetic tree for saasi}
+\title{Reformat a phylogenetic tree to be compatible with \code{saasi}}
 \usage{
 prepare_tree_for_saasi(
   tree,
@@ -14,24 +14,58 @@ prepare_tree_for_saasi(
 )
 }
 \arguments{
-\item{tree}{A phylo object}
+\item{tree}{An object of class \code{phylo}.}
 
-\item{tip_data}{A named vector where names = tip labels, values = states, or
-a df with 2 columns: column 1 = tip labels, column 2 = states.
-Optional if tree already has tip states}
+\item{tip_data}{Either a named vector or a \code{data.frame}.
+If a named vector, the elements of the vector must be the state of each tip and the names must be the labels of those tips.
+If a \code{data.frame}, there must be 2 columns: the first with the tip labels and the second with the tip states.
+This can be omitted if \code{tree} already has a \code{tip.states} attribute.}
 
-\item{resolve_polytomies}{Resolve polytomies with multi2di}
+\item{resolve_polytomies}{Boolean. Indicates whether polytomies should be resolved. Default value is \code{TRUE}.
+Setting to \code{FALSE} will produce a tree that is incompatible with \code{saasi}.}
 
-\item{fix_branches}{Fix zero/negative branch lengths}
+\item{fix_branches}{Boolean. Indicates whether zero and negative branch lengths should be fixed. Default value is \code{TRUE}.
+Setting to \code{FALSE} will produce a tree that is incompatible with \code{saasi}.}
 
-\item{min_branch_length}{Replace value for zero or negative branch lengths (default: 1e-5)}
+\item{min_branch_length}{Numeric. The minimum branch length for the resultant tree. Any short branch lengths will be increased accordingly. Default value is \code{1e-5}.}
 
-\item{drop_states}{States to be removed from the tree. NA is always included.
-Add additional values to drop states. Example:c("Not Collected").}
+\item{drop_states}{An optional character vector of states to remove from the tree.}
 }
 \value{
-A prepared phylo object compatible to SAASI.
+An object of class \code{phylo} that is compatible with the \code{saasi()} function.
 }
 \description{
-Prepare phylogenetic tree for saasi
+\code{prepare_tree_for_saasi()} will take in a \code{phylo} object and reformat it so that the output is compabtible
+with the \code{saasi} function. This reformatting includes:
+\itemize{
+\item Adding tip annotations
+\item Resolving polytomies
+\item Imposing a minimum branch length
+\item Removing undesired states
+}
+}
+\details{
+The reformatting is conducted as follows:
+\itemize{
+\item Polytomies are resolved using \code{\link[ape:multi2di]{ape::multi2di()}}.
+\item The length of any branches with zero or negative length is set to \code{min_branch_length}.
+\item All tips with an \code{NA} value for their state annotation are removed in addition to any states specified in \code{drop_states}.
+}
+}
+\examples{
+# Check if the demo tree is compatible
+check_tree_compatibility(demo_tree)
+
+# Since tip annotations are missing, we need state data for the tips
+head(demo_metadata)
+
+# Reformat the demo tree with the tip states
+tree_prepared <- prepare_tree_for_saasi(demo_tree, demo_metadata)
+
+# Check the compability of the reformatted tree
+check_tree_compatibility(tree_prepared)
+}
+\seealso{
+\code{\link[=add_tip_states]{add_tip_states()}} to manually add state annotations to tip states or
+\code{\link[=drop_tips_by_state]{drop_tips_by_state()}} to manually remove tips from the tree based on their state.
 }

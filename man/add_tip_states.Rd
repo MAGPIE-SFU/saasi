@@ -14,10 +14,21 @@ If a named vector, the elements of the vector must be the state of each tip and 
 If a \code{data.frame}, there must be 2 columns: the first with the tip labels and the second with the tip states.}
 }
 \value{
-An object of class \code{phylo} that matches the \code{tree} input with an additional attribute \code{tip.state} that contains the tip states.
+An object of class \code{phylo} with annotated tip states.
 }
 \description{
-\code{add_tip_states()} adds tip states to a \code{phylo} object. This function is used within the \code{prepare_tree_for_saasi()} function.
+\code{add_tip_states()} annotates the tips of a \code{phylo} object with state values.
+}
+\details{
+A \code{tip.states} attribute is added to \code{tree} based on the \code{tip_data} provided by the user.
+This function is used within the \code{prepare_tree_for_saasi()} function.
+}
+\examples{
+demo_tree
+head(demo_metadata)
+
+add_tip_states(demo_tree, demo_metadata)
+
 }
 \seealso{
 \code{\link[=drop_tips_by_state]{drop_tips_by_state()}} to remove specific traits or \code{\link[=prepare_tree_for_saasi]{prepare_tree_for_saasi()}} for reformatting \code{phylo} objects to be \code{saasi}-compatible.

@@ -2,16 +2,33 @@
 % Please edit documentation in R/tree_preparation_new.R
 \name{check_tree_compatibility}
 \alias{check_tree_compatibility}
-\title{Check if tree is compatible with saasi}
+\title{Check if phylogenetic tree is compatible with \code{saasi}}
 \usage{
 check_tree_compatibility(tree)
 }
 \arguments{
-\item{tree}{A phylo object}
+\item{tree}{An object of class \code{phylo}.}
 }
 \value{
-Logical. TRUE if tree is compatible with saasi
+Logical. Returns \code{TRUE} if the tree is compatible with \code{saasi} and \code{FALSE} otherwise.
 }
 \description{
-Validates tree structure without modifying it.
+Verifies the compatibility of a \code{phylo} object with the \code{\link[=saasi]{saasi()}} function without modifying the object.
+For \code{tree} to be compatible with \code{saasi()}, it must:
+\itemize{
+\item be rooted,
+\item have the correct number of internal nodes (the number of tips - 1),
+\item have no unary nodes or polytomies,
+\item have positive branch lengths, and
+\item have valid tip state annotations for all tips.
+}
+
+If the tree is not compatible with \code{saasi()}, the user can run \code{\link[=prepare_tree_for_saasi]{prepare_tree_for_saasi()}} to resolve the issues.
+}
+\examples{
+# Check if this demo tree is compatible with saasi:
+check_tree_compatibility(demo_tree)
+
+# Now check another tree which has been properly prepared:
+check_tree_compatibility(demo_tree_prepared)
 }

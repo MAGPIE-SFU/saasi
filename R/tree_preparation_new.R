@@ -1,13 +1,23 @@
 #' Add tip states to a phylogenetic tree
 #'
-#'`add_tip_states()` adds tip states to a `phylo` object. This function is used within the `prepare_tree_for_saasi()` function.
+#'`add_tip_states()` annotates the tips of a `phylo` object with state values.
 #'
+#' A `tip.states` attribute is added to `tree` based on the `tip_data` provided by the user. 
+#' This function is used within the `prepare_tree_for_saasi()` function.
 #' @param tree An object of class `phylo`.
 #' @param tip_data Either a named vector or a `data.frame`. 
 #' If a named vector, the elements of the vector must be the state of each tip and the names must be the labels of those tips.
 #' If a `data.frame`, there must be 2 columns: the first with the tip labels and the second with the tip states.
-#' @return An object of class `phylo` that matches the `tree` input with an additional attribute `tip.state` that contains the tip states.
+#'
+#' @return An object of class `phylo` with annotated tip states.
 #' @seealso [drop_tips_by_state()] to remove specific traits or [prepare_tree_for_saasi()] for reformatting `phylo` objects to be `saasi`-compatible.
+#' 
+#' @examples
+#' demo_tree
+#' head(demo_metadata)
+#' 
+#' add_tip_states(demo_tree, demo_metadata)
+#' 
 #' @export
 add_tip_states <- function(tree, tip_data) {
   
@@ -46,19 +56,47 @@ add_tip_states <- function(tree, tip_data) {
   return(tree)
 }
 
-#' Prepare phylogenetic tree for saasi
+#' Reformat a phylogenetic tree to be compatible with `saasi`
+#' 
+#' `prepare_tree_for_saasi()` will take in a `phylo` object and reformat it so that the output is compabtible
+#' with the `saasi` function. This reformatting includes:
+#' - Adding tip annotations
+#' - Resolving polytomies
+#' - Imposing a minimum branch length
+#' - Removing undesired states
+#' 
+#' The reformatting is conducted as follows:
+#' - Polytomies are resolved using [ape::multi2di()].
+#' - The length of any branches with zero or negative length is set to `min_branch_length`.
+#' - All tips with an `NA` value for their state annotation are removed in addition to any states specified in `drop_states`.
 #'
-#' @param tree A phylo object 
-#' @param tip_data 
-#'   A named vector where names = tip labels, values = states, or
-#'   a df with 2 columns: column 1 = tip labels, column 2 = states.
-#'   Optional if tree already has tip states
-#' @param resolve_polytomies  Resolve polytomies with multi2di 
-#' @param fix_branches Fix zero/negative branch lengths
-#' @param min_branch_length Replace value for zero or negative branch lengths (default: 1e-5)
-#' @param drop_states States to be removed from the tree. NA is always included.
-#'   Add additional values to drop states. Example:c("Not Collected").
-#' @return A prepared phylo object compatible to SAASI.
+#' @param tree An object of class `phylo`.
+#' @param tip_data Either a named vector or a `data.frame`. 
+#' If a named vector, the elements of the vector must be the state of each tip and the names must be the labels of those tips.
+#' If a `data.frame`, there must be 2 columns: the first with the tip labels and the second with the tip states.
+#' This can be omitted if `tree` already has a `tip.states` attribute.
+#' @param resolve_polytomies Boolean. Indicates whether polytomies should be resolved. Default value is `TRUE`. 
+#' Setting to `FALSE` will produce a tree that is incompatible with `saasi`.
+#' @param fix_branches Boolean. Indicates whether zero and negative branch lengths should be fixed. Default value is `TRUE`.
+#' Setting to `FALSE` will produce a tree that is incompatible with `saasi`.
+#' @param min_branch_length Numeric. The minimum branch length for the resultant tree. Any short branch lengths will be increased accordingly. Default value is `1e-5`.
+#' @param drop_states An optional character vector of states to remove from the tree.
+#' @return An object of class `phylo` that is compatible with the `saasi()` function.
+#' @seealso [add_tip_states()] to manually add state annotations to tip states or 
+#' [drop_tips_by_state()] to manually remove tips from the tree based on their state.
+#' 
+#' @examples
+#' # Check if the demo tree is compatible
+#' check_tree_compatibility(demo_tree)
+#' 
+#' # Since tip annotations are missing, we need state data for the tips
+#' head(demo_metadata)
+#' 
+#' # Reformat the demo tree with the tip states
+#' tree_prepared <- prepare_tree_for_saasi(demo_tree, demo_metadata)
+#' 
+#' # Check the compability of the reformatted tree
+#' check_tree_compatibility(tree_prepared)
 #' @export
 prepare_tree_for_saasi <- function(tree,
                                    tip_data = NULL,
@@ -110,16 +148,26 @@ prepare_tree_for_saasi <- function(tree,
   return(tree)
 }
 
-#' Drop tips by state
+#' Drop tips from a phylogenetic tree by their state values
 #'
-#' Removes tips that matches any of the specified values.
+#' `drop_tips_by_state()` will remove from a `phylo` object all tips in a specified state(s).
 #'
-#' @param tree A phylo object with tip.state
+#' @param tree An object of class `phylo` with a `tip.state` attribute. 
+#' See [add_tip_states()] for adding tip annotations to a `phylo` object.
 #' @param drop_values Character vector of states to remove.
-#'   Include NA to drop tips with NA states.
-#'   Example: c("Not Collected", NA)
-#' @return A phylo object with the specified tips removed and
-#'   tip.state correctly updated.
+#' @return An object of class `phylo` with the specified states removed.
+#' @seealso [add_tip_states()] to add tip annotations
+#' @examples
+#' # This demo tree has 13 tips in 3 possible states
+#' demo_tree_prepared
+#' table(demo_tree_prepared$tip.state)
+#' 
+#' # Remove all tips in state 3
+#' new_tree <- drop_tips_by_state(demo_tree_prepared, "3")
+#' 
+#' # The resulting tree has 8 tips, having removed all tips in state 3
+#' new_tree
+#' table(new_tree$tip.state)
 #' @export
 drop_tips_by_state <- function(tree, drop_values) {
   
@@ -152,12 +200,27 @@ drop_tips_by_state <- function(tree, drop_values) {
 }
 
 
-#' Check if tree is compatible with saasi
+#' Check if phylogenetic tree is compatible with `saasi`
 #'
-#' Validates tree structure without modifying it. 
+#'@description
+#' Verifies the compatibility of a `phylo` object with the [saasi()] function without modifying the object.
+#' For `tree` to be compatible with `saasi()`, it must:
+#' - be rooted,
+#' - have the correct number of internal nodes (the number of tips - 1),
+#' - have no unary nodes or polytomies,
+#' - have positive branch lengths, and
+#' - have valid tip state annotations for all tips.
+#' 
+#' If the tree is not compatible with `saasi()`, the user can run [prepare_tree_for_saasi()] to resolve the issues.
 #'
-#' @param tree A phylo object
-#' @return Logical. TRUE if tree is compatible with saasi
+#' @param tree An object of class `phylo`.
+#' @return Logical. Returns `TRUE` if the tree is compatible with `saasi` and `FALSE` otherwise.
+#' @examples
+#' # Check if this demo tree is compatible with saasi:
+#' check_tree_compatibility(demo_tree)
+#' 
+#' # Now check another tree which has been properly prepared:
+#' check_tree_compatibility(demo_tree_prepared)
 #' @export
 check_tree_compatibility <- function(tree) {
   

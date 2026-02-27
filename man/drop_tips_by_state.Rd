@@ -2,21 +2,34 @@
 % Please edit documentation in R/tree_preparation_new.R
 \name{drop_tips_by_state}
 \alias{drop_tips_by_state}
-\title{Drop tips by state}
+\title{Drop tips from a phylogenetic tree by their state values}
 \usage{
 drop_tips_by_state(tree, drop_values)
 }
 \arguments{
-\item{tree}{A phylo object with tip.state}
+\item{tree}{An object of class \code{phylo} with a \code{tip.state} attribute.
+See \code{\link[=add_tip_states]{add_tip_states()}} for adding tip annotations to a \code{phylo} object.}
 
-\item{drop_values}{Character vector of states to remove.
-Include NA to drop tips with NA states.
-Example: c("Not Collected", NA)}
+\item{drop_values}{Character vector of states to remove.}
 }
 \value{
-A phylo object with the specified tips removed and
-tip.state correctly updated.
+An object of class \code{phylo} with the specified states removed.
 }
 \description{
-Removes tips that matches any of the specified values.
+\code{drop_tips_by_state()} will remove from a \code{phylo} object all tips in a specified state(s).
+}
+\examples{
+# This demo tree has 13 tips in 3 possible states
+demo_tree_prepared
+table(demo_tree_prepared$tip.state)
+
+# Remove all tips in state 3
+new_tree <- drop_tips_by_state(demo_tree_prepared, "3")
+
+# The resulting tree has 8 tips, having removed all tips in state 3
+new_tree
+table(new_tree$tip.state)
+}
+\seealso{
+\code{\link[=add_tip_states]{add_tip_states()}} to add tip annotations
 }
