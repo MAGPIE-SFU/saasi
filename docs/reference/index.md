@@ -1,0 +1,32 @@
+# Package index
+
+## All functions
+
+- [`add_tip_states()`](https://magpie-sfu.github.io/saasi/reference/add_tip_states.md)
+  : Add tip states to a phylogenetic tree
+- [`check_tree_compatibility()`](https://magpie-sfu.github.io/saasi/reference/check_tree_compatibility.md)
+  : Check if tree is compatible with saasi
+- [`demo_Q`](https://magpie-sfu.github.io/saasi/reference/demo_Q.md) :
+  Transition rate matrix for demonstration tree
+- [`demo_metadata`](https://magpie-sfu.github.io/saasi/reference/demo_metadata.md)
+  : Metadata for demonstration tree
+- [`demo_pars`](https://magpie-sfu.github.io/saasi/reference/demo_pars.md)
+  : Birth-death-sampling parameters for demonstration tree
+- [`demo_tree_prepared`](https://magpie-sfu.github.io/saasi/reference/demo_tree_prepared.md)
+  : Simulated demonstration tree example
+- [`drop_tips_by_state()`](https://magpie-sfu.github.io/saasi/reference/drop_tips_by_state.md)
+  : Drop tips by state
+- [`ebola_tree`](https://magpie-sfu.github.io/saasi/reference/ebola_tree.md)
+  : Ebola tree example
+- [`estimate_bds_parameters()`](https://magpie-sfu.github.io/saasi/reference/estimate_bds_parameters.md)
+  : Estimate rate parameters of a birth-death-sampling process
+- [`estimate_transition_rates()`](https://magpie-sfu.github.io/saasi/reference/estimate_transition_rates.md)
+  : Estimate the transition rate matrix of the discrete trait process
+- [`plot_saasi()`](https://magpie-sfu.github.io/saasi/reference/plot_saasi.md)
+  : Plot phylogenetic tree with saasi results
+- [`prepare_tree_for_saasi()`](https://magpie-sfu.github.io/saasi/reference/prepare_tree_for_saasi.md)
+  : Prepare phylogenetic tree for saasi
+- [`saasi()`](https://magpie-sfu.github.io/saasi/reference/saasi.md) :
+  Sampling Aware Ancestral State Inference
+- [`sim_bds_tree()`](https://magpie-sfu.github.io/saasi/reference/sim_bds_tree.md)
+  : Simulate a birth/death/sampling tree with post-processing
