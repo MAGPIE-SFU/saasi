@@ -1,10 +1,10 @@
 ---
-title: "Example of how to use the bib"
+title: "How to use bib"
 author: "Lars"
 output: rmarkdown::html_vignette
 bibliography: references.bib
 vignette: >
-  %\VignetteIndexEntry{Bib example}
+  %\VignetteIndexEntry{How to use bib}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
