@@ -3,17 +3,30 @@
 #' Reconstructs ancestral states for internal nodes of a phylogenetic tree while 
 #' accounting for heterogeneous sampling rates across states or locations.
 #'
-#' @param phy A `phylo` object containing the phylogenetic tree. The tree must be 
-#'   rooted, binary, and contain `tip.state`. 
-#' @param Q A numeric transition rate matrix \eqn{\exp{(n \times n)}} where n is the number 
-#'   of states. Row and column names represent states. Off-diagonal 
-#'   elements are transition rates; diagonal elements are set such that rows sum to zero.
-#' @param pars A data frame with the other parameters used in the ancestral state reconstruction algorithm. 
-#' Must have the following column names: state, prior, lambda, mu, and psi. 
-#' The prior values refer to the baseline probabilities of the states (used at the root of the tree).
-#' @param sensitivity_test A boolean indicating if a sensitivity test should be conducted. The default value is `FALSE`.
+#' If `sensitivity_test=TRUE`, then a test of the sensitivity of `saasi` to the birth-death-sampling rate parameters is conducted.
+#' The values of \eqn{\lambda}, \eqn{\mu}, and \eqn{\psi} are perturbed by sampling values at random from +/- 10% of the input value.
+#' The ancestral state reconstruction is then run on the perturbed parameters; this is repeated 10 times.
+#' To summarise sensitivity, the modal state for each internal node is first computed for each perturbed reconstruction.
+#' Then the total number of differences in modal states are computed between the perturbed reconstructions and the original reconstruction.
+#' The average number of these total differences across all 10 perturbed reconstructions is reported.
+#'
+#' @param phy An object of class `phylo` specifying the phylogenetic tree. 
+#' The tree must be rooted, binary, and contain the `tip.state` attribute. 
+#' Use the [check_tree_compatibility()] function to verify that `phy` is satisfies these conditions.
+#' @param Q An \eqn{n\times n} transition rate matrix, where \eqn{n} is the number of states. 
+#' Row and column names must correspond to the states.
+#' Off-diagonal elements are the transition rates between states; diagonal elements are set such that rows sum to zero.
+#' @param pars A `data.frame` with the other parameters used in the ancestral state reconstruction algorithm. 
+#' Must have the following columns:
+#' - `state`: a vector of state names. These should match the column and row names of `Q`.
+#' - `lambda`: a vector of birth rates for the birth-death-sampling process.
+#' - `mu`: a vector of death rates for the birth-death-sampling process.
+#' - `psi`: a vector of sampling rates for the birth-death-sampling process.
+#' 
+#' It can also have `root_prior` that specifies the *a priori* distribution of the state of the root; if one is not provided a uniform distribution over the root state will be used.
+#' @param sensitivity_test A boolean indicating if a sensitivity test should be conducted (see Details). The default value is `FALSE`.
 #'   
-#' @return A data frame with state probabilities for each internal node in `phy`. 
+#' @return A `data.frame` with a state probabilities for each internal node in `phy`. 
 #'   
 #' @examples
 #' head(demo_pars) #contains state, lambda, mu, psi for each state

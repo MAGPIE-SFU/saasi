@@ -7,25 +7,41 @@
 saasi(phy, Q, pars, sensitivity_test = FALSE)
 }
 \arguments{
-\item{phy}{A \code{phylo} object containing the phylogenetic tree. The tree must be
-rooted, binary, and contain \code{tip.state}.}
+\item{phy}{An object of class \code{phylo} specifying the phylogenetic tree.
+The tree must be rooted, binary, and contain the \code{tip.state} attribute.
+Use the \code{\link[=check_tree_compatibility]{check_tree_compatibility()}} function to verify that \code{phy} is satisfies these conditions.}
 
-\item{Q}{A numeric transition rate matrix \eqn{\exp{(n \times n)}} where n is the number
-of states. Row and column names represent states. Off-diagonal
-elements are transition rates; diagonal elements are set such that rows sum to zero.}
+\item{Q}{An \eqn{n\times n} transition rate matrix, where \eqn{n} is the number of states.
+Row and column names must correspond to the states.
+Off-diagonal elements are the transition rates between states; diagonal elements are set such that rows sum to zero.}
 
-\item{pars}{A data frame with the other parameters used in the ancestral state reconstruction algorithm.
-Must have the following column names: state, prior, lambda, mu, and psi.
-The prior values refer to the baseline probabilities of the states (used at the root of the tree).}
+\item{pars}{A \code{data.frame} with the other parameters used in the ancestral state reconstruction algorithm.
+Must have the following columns:
+\itemize{
+\item \code{state}: a vector of state names. These should match the column and row names of \code{Q}.
+\item \code{lambda}: a vector of birth rates for the birth-death-sampling process.
+\item \code{mu}: a vector of death rates for the birth-death-sampling process.
+\item \code{psi}: a vector of sampling rates for the birth-death-sampling process.
+}
 
-\item{sensitivity_test}{A boolean indicating if a sensitivity test should be conducted. The default value is \code{FALSE}.}
+It can also have \code{root_prior} that specifies the \emph{a priori} distribution of the state of the root; if one is not provided a uniform distribution over the root state will be used.}
+
+\item{sensitivity_test}{A boolean indicating if a sensitivity test should be conducted (see Details). The default value is \code{FALSE}.}
 }
 \value{
-A data frame with state probabilities for each internal node in \code{phy}.
+A \code{data.frame} with a state probabilities for each internal node in \code{phy}.
 }
 \description{
 Reconstructs ancestral states for internal nodes of a phylogenetic tree while
 accounting for heterogeneous sampling rates across states or locations.
+}
+\details{
+If \code{sensitivity_test=TRUE}, then a test of the sensitivity of \code{saasi} to the birth-death-sampling rate parameters is conducted.
+The values of \eqn{\lambda}, \eqn{\mu}, and \eqn{\psi} are perturbed by sampling values at random from +/- 10\% of the input value.
+The ancestral state reconstruction is then run on the perturbed parameters; this is repeated 10 times.
+To summarise sensitivity, the modal state for each internal node is first computed for each perturbed reconstruction.
+Then the total number of differences in modal states are computed between the perturbed reconstructions and the original reconstruction.
+The average number of these total differences across all 10 perturbed reconstructions is reported.
 }
 \examples{
 head(demo_pars) #contains state, lambda, mu, psi for each state

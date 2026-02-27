@@ -1,33 +1,42 @@
-#' Plot phylogenetic tree with saasi results
+#' Plot a phylogenetic tree with SAASI tip annotations
 #'
-#' @param tree A phylo object containing tip.state 
-#' @param saasi_result Output from saasi()
-#' @param colors Character vector of colors. If NULL, colors are automatically
-#'   generated based on the number of states (default: NULL)
-#' @param tip_cex Size of tip circles (default: 0.5)
-#' @param node_cex Size of node pie charts (default: 0.2)
-#' @param save_file Character. File path to save the plot (e.g. "tree.png").
-#'   If NULL, plot is drawn to current device (default: NULL)
-#' @param width Plot width in pixels when saving (default: 3000)
-#' @param height Plot height in pixels when saving (default: 3000)
-#' @param res Plot resolution in dpi when saving (default: 300)
-#' @return Invisibly returns the color vector used
+#' `plot_saasi()` plots a phylogenetic tree annoted with [saasi()] output. Tips are annotated with their states.
+#' Internal nodes are annotated with a pie chart showing the marginal distribution over states for each node.
+#' The [ape::plot.phylo()] function is used for plotting.
+#'
+#' @param tree An object of class `phylo` with `tip.state` attribute. 
+#' @param saasi_result Output of `saasi()` containing internal node annotations.
+#' @param colours Optional character vector specifying the node colour for each state. By default, colours are automatically
+#'   generated based on the number of states.
+#' @param tip_cex Size of the tips. Default value is 0.5.
+#' @param node_cex Size of node pie charts. Default value is 0.2.
+#' @param save_file Optional string specifying the file path where the plot will be saved.
+#'   By default the plot is displayed on the current device.
+#' @param width Width of the plot in pixels. Only relevant if saving to file. Default value is 3000 pixels.
+#' @param height Height of the plot in pixels. Only relevant if saving to file. Default value is 3000 pixels.
+#' @param res Plot resolution in dpi. Only relevant if saving to file. Default value is 300 dpi.
+#' @return If a save file is specified, the plot will be saved as directed. 
+#' If not, then the plot will be displayed on the users device.
+#' The function returns the output of `plot.phylo()`, a list containing plot specifications.
 #' @export
 #' @examples
-#' \dontrun{
-#' # Basic plot
-#' plot_saasi(tree, saasi_result)
+#' # Run SAASI
+#' saasi_res <- saasi(demo_tree_prepared, demo_Q, demo_pars)
+#' 
+#' # Plot the results using the default settings
+#' plot_saasi(demo_tree_prepared, saasi_res)
 #'
-#' # Custom colors and save to file
+#' \dontrun{
+#' # Use custom colours and save the result to tree.png
 #' plot_saasi(tree, saasi_result,
-#'            colors = c("red", "blue", "green"),
+#'            colours = c("orange", "darkblue", "pink"),
 #'            node_cex = 0.3,
 #'            save_file = "tree.png")
 #' }
 #' 
 plot_saasi <- function(tree,
                        saasi_result,
-                       colors = NULL,
+                       colours = NULL,
                        tip_cex = 0.5,
                        node_cex = 0.2,
                        save_file = NULL,
@@ -36,17 +45,17 @@ plot_saasi <- function(tree,
                        res = 300) {
   n_states <- length(unique(tree$tip.state))
   
-  if(is.null(colors)){
-    colors <- grDevices::rainbow(n_states)
+  if(is.null(colours)){
+    colours <- grDevices::rainbow(n_states)
   }
   
-  if(length(colors) < n_states){
-    stop("Number of colors must be >= number of states")
+  if(length(colours) < n_states){
+    stop("You must specify at least as many colours as there are states.")
   }
   
-  # Map tip states to colors
+  # Map tip states to colours
   state_factor <- factor(tree$tip.state)
-  tip_colors <- colors[as.numeric(state_factor)]
+  tip_colours <- colours[as.numeric(state_factor)]
   pch_value <- 21
   
   # Open file device if saving
@@ -56,19 +65,19 @@ plot_saasi <- function(tree,
   
   # Plotting 
   plot_phy <- ape::ladderize(tree, right = FALSE)
-  plot(plot_phy, show.tip.label = FALSE)
+  res <- plot(plot_phy, show.tip.label = FALSE)
   
-  ape::tiplabels(bg = tip_colors, cex = tip_cex, adj = 0.5, pch = pch_value)
+  ape::tiplabels(bg = tip_colours, cex = tip_cex, adj = 0.5, pch = pch_value)
   
   if(!is.null(saasi_result)){
   ape::nodelabels(pie = saasi_result,
-                  piecol = colors[1:ncol(saasi_result)],
+                  piecol = colours[1:ncol(saasi_result)],
                   cex = node_cex)
   }
   
   graphics::legend("topleft",
                    legend = levels(state_factor),
-                   col = colors[1:n_states],
+                   col = colours[1:n_states],
                    pch = 19,
                    pt.cex = 2,
                    bty = "n",
@@ -77,7 +86,7 @@ plot_saasi <- function(tree,
   if(!is.null(save_file)){
     grDevices::dev.off()
   }
-  invisible(colors)
+  return(invisible(res))
 }
 
 

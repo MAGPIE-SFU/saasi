@@ -2,7 +2,7 @@
 % Please edit documentation in R/tree_generator.R
 \name{sim_bds_tree}
 \alias{sim_bds_tree}
-\title{Simulate a birth/death/sampling tree with post-processing}
+\title{Simulate a phylogenetic tree from a birth-death-sampling process}
 \usage{
 sim_bds_tree(
   params_df,
@@ -15,31 +15,43 @@ sim_bds_tree(
 )
 }
 \arguments{
-\item{params_df}{Parameters that are used in the simulation. Should contain
-state names, speciation, extinction, and sampling rates,}
+\item{params_df}{A \code{data.frame} specifying the parameters from which the tree will be simulated. Must contain
+\itemize{
+\item \code{lambda}: vector of speciation rates
+\item \code{mu}: vector of extinction rates
+\item \code{psi}: vector of sampling rates
+}
 
-\item{x0}{Natural number used as root state in the returned tree. Must be a
-state declared in \code{params_df}.}
+The number of rows should be equal to the number of states.}
 
-\item{max_taxa}{Maximum number of nodes allowed in the initial simulated tree.}
+\item{q_matrix}{State transition rate matrix.}
 
-\item{max_t}{Maximum depth allowed in the returned tree.}
+\item{x0}{The root state.}
 
-\item{include_extinct}{Boolean declaring whether extinct taxa are included in
-the returned tree.}
+\item{max_taxa}{Maximum number of nodes allowed in the initial simulated tree. Default value is 100.}
+
+\item{max_t}{Maximum depth allowed in the returned tree. Default value is 100.}
+
+\item{include_extinct}{Boolean. If \code{TRUE}, extinct taxa are included in the returned tree. Default value is \code{FALSE}.}
 
 \item{min_tip}{Minimum number of tips required in the post-processed tree.
 If the processed tree has fewer tips, the simulation is repeated until this
-condition is satisfied. Default is 1.}
-
-\item{q_martix}{Transition rate matrix.}
+condition is satisfied. Default value is 1.}
 }
 \value{
-A \code{phylo} phylogenetic tree (\code{ape} format) with post-processing applied.
-The tree includes \code{tip.state} attribute with character state labels.
+An object of class \code{phylo} that is compatible with \code{saasi()}.
 }
 \description{
-This tree can be passed to \link{saasi}, and will include speciation,
-extinction, sampling, and mutation events. The tree is post-processed to
-remove tips at the present and ensure a minimum number of tips.
+\code{sim_bds_tree()} simulates a phylogenetic tree with state annotations for all internal nodes and tips.
+A birth-death-sampling process is used to generate the tree topology and branch lengths;
+this will include speciation, sampling, and mutation events.
+A continuous-time Markov process is used to assign states to all nodes.
+The resulting tree will be compatible with \code{\link[=saasi]{saasi()}}.
+The tree is post-processed to remove tips at the present and ensure a minimum number of tips.
+}
+\examples{
+# Simulate a tree from the demo model with root state set to 1
+demo_pars
+demo_Q
+sim_bds_tree(demo_pars, demo_Q, 1)
 }

@@ -178,26 +178,35 @@ me.to.ape.bisse <- function(x, root.state) {
   phy
 }
 
-#' Simulate a birth/death/sampling tree with post-processing
+#' Simulate a phylogenetic tree from a birth-death-sampling process
 #'
-#' This tree can be passed to [saasi::saasi], and will include speciation,
-#' extinction, sampling, and mutation events. The tree is post-processed to
-#' remove tips at the present and ensure a minimum number of tips.
-#' @param params_df Parameters that are used in the simulation. Should contain
-#' state names, speciation, extinction, and sampling rates,
-#' @param q_martix Transition rate matrix.
-#' @param x0 Natural number used as root state in the returned tree. Must be a
-#' state declared in `params_df`.
-#' @param max_taxa Maximum number of nodes allowed in the initial simulated tree.
-#' @param max_t Maximum depth allowed in the returned tree.
-#' @param include_extinct Boolean declaring whether extinct taxa are included in
-#' the returned tree.
+#' `sim_bds_tree()` simulates a phylogenetic tree with state annotations for all internal nodes and tips.
+#' A birth-death-sampling process is used to generate the tree topology and branch lengths; 
+#' this will include speciation, sampling, and mutation events.
+#' A continuous-time Markov process is used to assign states to all nodes.
+#' The resulting tree will be compatible with [saasi()].
+#' The tree is post-processed to remove tips at the present and ensure a minimum number of tips.
+#' 
+#' @param params_df A `data.frame` specifying the parameters from which the tree will be simulated. Must contain
+#' - `lambda`: vector of speciation rates
+#' - `mu`: vector of extinction rates
+#' - `psi`: vector of sampling rates
+#' 
+#' The number of rows should be equal to the number of states.
+#' @param q_matrix State transition rate matrix.
+#' @param x0 The root state.
+#' @param max_taxa Maximum number of nodes allowed in the initial simulated tree. Default value is 100.
+#' @param max_t Maximum depth allowed in the returned tree. Default value is 100.
+#' @param include_extinct Boolean. If `TRUE`, extinct taxa are included in the returned tree. Default value is `FALSE`.
 #' @param min_tip Minimum number of tips required in the post-processed tree.
 #' If the processed tree has fewer tips, the simulation is repeated until this
-#' condition is satisfied. Default is 1.
-#' @return A `phylo` phylogenetic tree (`ape` format) with post-processing applied.
-#' The tree includes `tip.state` attribute with character state labels.
-#' @inheritParams saasi
+#' condition is satisfied. Default value is 1.
+#' @return An object of class `phylo` that is compatible with `saasi()`.
+#' @examples
+#' # Simulate a tree from the demo model with root state set to 1
+#' demo_pars
+#' demo_Q
+#' sim_bds_tree(demo_pars, demo_Q, 1)
 #' @export
 sim_bds_tree <- function(params_df, q_matrix, x0, max_taxa = 100, max_t = 100,
                          include_extinct = FALSE, min_tip = 1) {
