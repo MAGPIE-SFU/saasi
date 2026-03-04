@@ -1,4 +1,4 @@
-#' Sampling Aware Ancestral State Inference
+#' Sampling-Aware Ancestral State Inference
 #'
 #' Reconstructs ancestral states for internal nodes of a phylogenetic tree while 
 #' accounting for heterogeneous sampling rates across states or locations.
