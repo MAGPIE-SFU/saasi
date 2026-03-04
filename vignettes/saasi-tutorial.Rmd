@@ -39,7 +39,7 @@ This vignette demonstrates how to use the `saasi` package for ancestral state re
 
 SAASI (Sampling-Aware Ancestral State Inference) is an ancestral state reconstruction method that accounts for variation in sampling rates among locations or traits.
 
-Unlike traditional methods that assume uniform sampling, saasi explicitly models heterogeneous sampling, leading to ancestral state estimates that take sampling into account.
+Unlike traditional methods that assume uniform sampling, SAASI explicitly models heterogeneous sampling, leading to ancestral state estimates that take sampling into account.
 
 SAASI is described in Song et al. https://www.biorxiv.org/content/10.1101/2025.05.20.655151v2. 
 
@@ -123,7 +123,7 @@ plot_saasi(ebola_tree, saasi_result = NULL,tip_cex = 1)
 
 Users can estimate the transition rate matrix Q using the function `estimate_transition_rates()`.
 Users can specify the model for the transition rate matrix: 1. Equal rate `ER`,
-2. Symmetric rate `SYM`, 3. All rates different `ARD`, and Custom `custom_q`.
+2. Symmetric rate `SYM`, 3. All rates different `ARD`, and or a custom structure for the matrix.
 
 ```{r Estimate transition rates}
 Q <- estimate_transition_rates(ebola_tree, method = 'fitMk', matrix_structure = 'SYM')
