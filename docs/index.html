@@ -35,8 +35,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/bib_example.html">How to use bib</a></li>
-    <li><a class="dropdown-item" href="articles/saasi_simulation_study.html">SAASI Simulation Study</a></li>
+<li><a class="dropdown-item" href="articles/saasi_simulation_study.html">SAASI Simulation Study</a></li>
     <li><a class="dropdown-item" href="articles/saasi-tutorial.html">Sampling-Aware Ancestral State Inference</a></li>
   </ul>
 </li>
@@ -58,31 +57,16 @@
 </h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>This vignette demonstrates how to use the <code>saasi</code> package for ancestral state reconstruction.</p>
+<p>Saasi is an ancestral state reconstruction method that accounts for variation in sampling rates among locations or traits.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of saasi from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"MAGPIE-SFU/saasi"</span><span class="op">)</span></span></code></pre></div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
-</h1>
-<p>The <code>saasi</code> function requires three main inputs:</p>
-<ol style="list-style-type: decimal">
-<li>
-<p><strong>A phylogenetic tree</strong> (class <code>phylo</code>) that is:</p>
-<ul>
-<li>Rooted and binary</li>
-<li>Has branch lengths in units of time (all positive)</li>
-<li>Contains tip states (<code>tree$tip.state</code>) with no missing values</li>
-</ul>
-<p>Use <code><a href="reference/check_tree_compatibility.html">check_tree_compatibility()</a></code> to verify compatibility and <code><a href="reference/prepare_tree_for_saasi.html">prepare_tree_for_saasi()</a></code> to prepare your tree.</p>
-</li>
-</ol>
 <div class="section level2">
 <h2 id="building-documentation">Building documentation<a class="anchor" aria-label="anchor" href="#building-documentation"></a>
 </h2>
@@ -99,7 +83,6 @@
 <p>Do <strong>not edit</strong> the <code>README.md</code> file, instead work on the <code>README.rmd</code> and generate a new <code>README.md</code>.</p>
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
