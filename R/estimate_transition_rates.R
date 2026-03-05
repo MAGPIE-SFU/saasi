@@ -19,17 +19,21 @@
 #' @return A transition rate matrix that has been fit to the observed phylogeny. This matrix will be compatible with other `saasi` functions.
 #' @export
 #' @examples
-#' # Load a timed phylogenetic tree for Ebola
-#' data(ebola_tree)
+#' # Use the demo tree
+#' demo_tree
 #' 
 #' # Use the simmap function to estimate the rate transition matrix
-#' # - Impose a symmetric form on the matrix
-#' Q <- estimate_transition_rates(ebola_tree, matrix_structure = "SYM")
+#' # - Impose equal rates for the matrix structure
+#' estimate_transition_rates(demo_tree_prepared, matrix_structure = "ER")
 #' 
+#' \dontrun{
 #' # Use ace to estimate the rate transition matrix
-#' # - Impose a structure such that transitions to or from Guinea happen at a different rate than Liberia or Sierra Leone
-#' struct <- matrix(c(0, 1, 1, 1, 0, 2, 1, 2, 0), nrow=3, ncol=3)
-#' Q <- estimate_transition_rates(ebola_tree, matrix_structure = struct)
+#' # - Impose a structure such that transitions to or from the first state happen at a different rate than second and third states
+#' struct <- matrix(c(0, 1, 2, 
+#'                    1, 0, 2, 
+#'                    2, 2, 0), nrow=3, ncol=3)
+#' estimate_transition_rates(demo_tree_prepared, matrix_structure = struct)
+#' }
 estimate_transition_rates <- function(tree, 
                                       matrix_structure = "ER",
                                       method = "ace") {

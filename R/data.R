@@ -1,30 +1,28 @@
-#' Ebola tree example
-#'
-#' An ebola tree with 1493 tips and 3 states used as example. 
-#'
-#' @format A `phylo` tree object 
-#' @source Downloaded from Nextstrain 
+#' SAASI demonstration: timed phylogenetic tree
+#' 
+#' A simulated birth-death-sampling tree with 13 tips.
+#' The tip states are located separately in the [demo_metadata] file.
+#' 
+#' @format An object of class `phylo`
 #' @examples
-#' data(ebola_tree)
-#' ebola_tree$root.edge
-"ebola_tree"
+#' demo_tree
+"demo_tree"
 
-
-#' Simulated demonstration tree example
+#' SAASI demonstration: pre-prepared tree
 #'
 #' A simulated birth-death-sampling tree with 13 tips and 3 states.
+#' The tree has pre-prepared to be compatible with `saasi`.
 #'
-#' @format A `phylo` tree object with the following components
+#' @format An object of class `phylo` with `tip.state` attribute
 #' @examples
 #' data(demo_tree_prepared)
 #' demo_tree_prepared$tip.state
 "demo_tree_prepared"
 
-#' Transition rate matrix for demonstration tree
+#' SAASI demonstration: transition rate matrix
 #'
-#' A 3x3 transition rate matrix (Q matrix) used to simulate the demonstration
-#' tree. This matrix defines the instantaneous rates of transition between
-#' character states.
+#' A 3x3 transition rate matrix used to simulate discrete states in the demonstration
+#' tree. This matrix defines the instantaneous rates of transition between states.
 #'
 #' @format A 3x3 numeric matrix
 #' @examples
@@ -34,42 +32,39 @@
 #' rowSums(demo_Q)
 "demo_Q"
 
-#' Birth-death-sampling parameters for demonstration tree
+#' SAASI demonstration: birth-death-sampling process parameters
 #'
-#' A data frame containing the birth-death-sampling parameters used to
+#' A `data.frame` specifying the parameters of the birth-death-sampling process that is used to
 #' simulate the demonstration tree. These parameters control diversification
-#' and sampling rates for each character state.
+#' and sampling rates for each state.
 #'
 #' @format A data frame with 3 rows (one per state) and 5 columns:
 #' \describe{
-#'   \item{state}{Character state names (1, 2, or 3)}
-#'   \item{rootprior}{Prior probability of root being in each state (1/3 each)}
-#'   \item{lambda}{Speciation rate (1.5 for all states)}
-#'   \item{mu}{Extinction rate (0.3 for all states)}
-#'   \item{psi}{Sampling rate (0.1 for state 1, 0.5 for states 2 and 3)}
+#'   \item{`state`}{The character label for each state}
+#'   \item{`root_prior`}{Prior probability distribution over states for the root node}
+#'   \item{`lambda`}{Numeric speciation rate for each state}
+#'   \item{`mu`}{Numeric extinction rate for each state}
+#'   \item{`psi`}{Numeric Sampling rate for each state}
 #' }
 #' @examples
 #' data(demo_pars)
 #' demo_pars
-#' # Compare sampling rates across states
-#' demo_pars$psi
 "demo_pars"
 
 
 
-#' Metadata for demonstration tree
+#' SAASI demonstration: tree metadata
 #' 
-#' A data frame containing the node name and tip states
+#' A `data.frame` linking the tip nodes to their state
 #' 
-#' @format A data frame with 13 rows (one per tip) and 2 columns
+#' @format A `data.frame` with 13 rows (one per tip) and 2 columns
 #' \describe{
-#'    \item{node}{node name for each tip}
-#'    \item{state}{Character state for each tip (1, 2, or 3)}
+#'    \item{`node`}{Node labels for each tip}
+#'    \item{`state`}{Character state for each tip}
 #' }
 #' @examples
 #' data(demo_metadata)
 #' demo_metadata
-#' demo_metadata$states
 #' 
 "demo_metadata"
 

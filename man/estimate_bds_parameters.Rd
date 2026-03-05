@@ -25,20 +25,20 @@ estimate_bds_parameters(
 \item{trim}{A numeric vector of length 2 specifying the quantiles for removing
 node times in the lineages-through-time regression (see Details). Default value is \code{c(0.10, 0.50)}.}
 
-\item{n_starts}{The number of starting points for multi-start optimization. Default value is \code{100}.}
+\item{n_starts}{The number of starting points for multi-start optimization. Default value is 100.}
 
 \item{force_two_step}{Logical. If \code{TRUE}, uses two-step estimates even if they
 violate constraints (see Details). Default value is \code{FALSE}.}
 
-\item{psi_max}{Maximum sampling rate per unit time. Must be strictly positive. Default value is \code{7}.}
+\item{psi_max}{Maximum sampling rate per unit time. Must be strictly positive. Default value is 7.}
 
-\item{r0_min}{Minimum basic reproductive number (R0 = lambda/(mu+psi)). Must be strictly positive. Default 1.}
+\item{r0_min}{Minimum basic reproductive number (\eqn{R_0 = \lambda/(\mu+\psi)}). Must be strictly positive. Default value is 1.}
 
-\item{r0_max}{Maximum basic reproductive number. Must be strictly positive. Default 5.}
+\item{r0_max}{Maximum basic reproductive number. Must be strictly positive. Default value is 5.}
 
-\item{infectious_period_min}{Minimum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.}
+\item{infectious_period_min}{Minimum infectious period (\eqn{1/(\mu+\psi)}). Must be strictly positive. Default value is \code{NULL}.}
 
-\item{infectious_period_max}{Maximum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.}
+\item{infectious_period_max}{Maximum infectious period (\eqn{1/(\mu+\psi)}). Must be strictly positive. Default value is \code{NULL}.}
 }
 \value{
 A list with the following attributes:
@@ -78,19 +78,17 @@ If the two-step method produces estimates that violate constraints or is
 numerically unstable, the function falls back to the MLE estimates from step 1.
 }
 \examples{
-data(ebola_tree)
-
-# Use the following information about the 2013 Ebola outbreak to obtain estimates
-# - Average removal rate of 5
-# - Infectious periods range from 20 to 40 days
-# - An upper bound on the sampling rate of 15
-# - Plausible values for the basic reproduction number are between 1.5 and 3
-BDS_fit <- estimate_bds_parameters(ebola_tree, mu = 5,
-                                               psi_max = 15,
-                                               infectious_period_min = 20/365,
-                                               infectious_period_max = 40/365,
-                                               r0_min = 1.5,
-                                               r0_max = 3)
+# Use the demo tree with bounds based on the demo parameters
+# - Removal rate of 0.3
+# - Infectious periods range from 0.75 to 1.5 years
+# - An upper bound on the sampling rate of 1
+# - Plausible values for the basic reproduction number are between 1.5 and 2
+estimate_bds_parameters(demo_tree, mu = 0.3,
+                                   psi_max = 1,
+                                   infectious_period_min = 0.75,
+                                   infectious_period_max = 1.5,
+                                   r0_min = 1.5,
+                                   r0_max = 2)
 
 }
 \seealso{

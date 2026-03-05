@@ -1,3 +1,260 @@
+#' Estimate rate parameters of a birth-death-sampling process
+#'
+#' `estimate_bds_parameters()` estimates the speciation rate \eqn{\lambda} and sampling rate \eqn{\psi} of a birth-death-sampling process given a phylogenetic tree and death rate \eqn{\mu}.
+#' The function uses user-specified epidemiological constraints on the sampling rate, basic reproduction number, and the duration of the infectious period to improve estimability.
+#'
+#' Estimation is carried out by first estimating the reproduction number \eqn{\frac{\lambda}{\mu+\psi}} and the net diversification rate \eqn{\lambda-\mu-\psi},
+#' then solving for the unknown \eqn{\lambda} and \eqn{\psi}. The net diversification rate is estimated by
+#' performing a lineages-through-time (LTT) regression on node times that are within the quantiles specified in the `trim` input
+#' and the reproduction number is estimated by first computing maximum likelihood 
+#' estimates (MLEs) of \eqn{\lambda} and \eqn{\psi} by numerically optimizing a likelihood and then compute the reproduction number.
+#' The stability of the MLEs is assessed by checking if the estimate of \eqn{R_0} is within 0.02 of 1.
+#' 
+#' If the estimates of \eqn{\lambda} and \eqn{\psi} do not satisfy all of the constraints specified by the `psi_max`, `r0_min`, `r0_max`, `infectious_period_min`,
+#' and `infectious_period_max` parameters, then the MLEs of \eqn{\lambda} and \eqn{\psi} are returned, unless `force_two_step=TRUE`
+#' in which case the original estimates of \eqn{\lambda} and \eqn{\psi} are returned regardless of 
+#' whether or not the constraints are satisfied.
+#' If LTT regression fails then the MLEs of \eqn{\lambda} and \eqn{\psi} will be returned. 
+#' 
+#' The MLEs are obtained numerically using the `L-BFGS-S` algorithm (see \link[stats::optim()]{optim} for implementation details) `n_starts` times from randomly chosen starting points
+#' and selecting the best maximizer of all attempts. Due to the user-imposed constraints, not all randomly generated starting
+#' points are valid, so `100*n_starts` attempts are made to generate valid starting points. This may result in fewer than `n_starts` optimizations
+#' actually being performed.
+#'
+#' If the two-step method produces estimates that violate constraints or is
+#' numerically unstable, the function falls back to the MLE estimates from step 1.
+#'
+#' @param phy An object of class `phylo` with branch lengths. Must be rooted and binary.
+#' @param mu The extinction rate. This must be non-negative.
+#' @param trim A numeric vector of length 2 specifying the quantiles for removing
+#'   node times in the lineages-through-time regression (see Details). Default value is `c(0.10, 0.50)`.
+#' @param n_starts The number of starting points for multi-start optimization. Default value is 100.
+#' @param force_two_step Logical. If `TRUE`, uses two-step estimates even if they
+#'   violate constraints (see Details). Default value is `FALSE`.
+#' @param psi_max Maximum sampling rate per unit time. Must be strictly positive. Default value is 7.
+#' @param r0_min Minimum basic reproductive number (\eqn{R_0 = \lambda/(\mu+\psi)}). Must be strictly positive. Default value is 1.
+#' @param r0_max Maximum basic reproductive number. Must be strictly positive. Default value is 5.
+#' @param infectious_period_min Minimum infectious period (\eqn{1/(\mu+\psi)}). Must be strictly positive. Default value is `NULL`.
+#' @param infectious_period_max Maximum infectious period (\eqn{1/(\mu+\psi)}). Must be strictly positive. Default value is `NULL`.
+#'
+#' @return A list with the following attributes:
+#' \itemize{
+#'   \item `lambda`: Estimated speciation rate
+#'   \item `psi`: Estimated sampling rate
+#'   \item `mu`: Input death rate
+#'   \item `r0`: Estimated basic reproductive number (\eqn{\lambda/(\mu+\psi)})
+#'   \item `infectious_period`: Estimated infectious period (\eqn{1/(\mu+\psi)})
+#'   \item `net_diversification`: Estimated net diversification rate (\eqn{\lambda-\mu-\psi})
+#' }
+#' @seealso [estimate_transition_rates()]
+#' @examples
+#' # Use the demo tree with bounds based on the demo parameters
+#' # - Removal rate of 0.3
+#' # - Infectious periods range from 0.75 to 1.5 years
+#' # - An upper bound on the sampling rate of 1
+#' # - Plausible values for the basic reproduction number are between 1.5 and 2
+#' estimate_bds_parameters(demo_tree, mu = 0.3,
+#'                                    psi_max = 1,
+#'                                    infectious_period_min = 0.75,
+#'                                    infectious_period_max = 1.5,
+#'                                    r0_min = 1.5,
+#'                                    r0_max = 2)
+#'
+#' @export
+estimate_bds_parameters <- function(
+    phy,
+    mu,
+    trim = c(0.10, 0.50),
+    n_starts = 100,
+    force_two_step = FALSE,
+    psi_max = 7,
+    r0_min = 1,
+    r0_max = 5,
+    infectious_period_min = NULL,
+    infectious_period_max = NULL
+){
+  # Input validation
+  if(missing(mu) || is.null(mu)){
+    stop("Extinction rate mu must have a numeric value.")
+  }
+  
+  if(!inherits(phy, "phylo")){
+    stop("Input phy must be an object with class phylo.")
+  }
+  
+  # Early constraint compatibility validation
+  if(!is.null(infectious_period_min) && !is.null(infectious_period_max)){
+    removal_rate_min <- 1/infectious_period_max
+    removal_rate_max <- 1/infectious_period_min
+    
+    # Check mu compatibility
+    if(mu >= removal_rate_max){
+      stop(sprintf(
+        "mu (%.4f) >= 1/infectious_period_min (%.4f). Impossible to satisfy infectious period constraints. Either decrease mu or increase infectious_period_min.",
+        mu, removal_rate_max
+      ))
+    }
+    
+    # Check lambda compatibility
+    min_required_lambda <- r0_min * removal_rate_min
+    max_allowed_lambda <- r0_max * removal_rate_max
+    
+    if(min_required_lambda > max_allowed_lambda){
+      stop(sprintf(
+        "Conflicting R0 constraints: r0_min requires lambda >= %.4f, but r0_max allows lambda <= %.4f. Either decrease r0_min or increase r0_max.",
+        min_required_lambda, max_allowed_lambda
+      ))
+    }
+    
+    # Check psi range
+    psi_min <- max(0, removal_rate_min - mu)
+    psi_max_eff <- min(psi_max, removal_rate_max - mu)
+    
+    if(psi_min > psi_max_eff){
+      stop(sprintf(
+        "Infeasible psi range: [%.4f, %.4f]. mu=%.4f is incompatible with infectious period constraints. Either decrease mu or adjust infectious_period bounds.",
+        psi_min, psi_max_eff, mu
+      ))
+    }
+  }
+  
+  # Initialize variables
+  two_step_successful <- FALSE
+  estimated_psi <- NA
+  estimated_lambda <- NA
+  a <- NA
+  b <- NA
+  fixed_mu_fit <- NULL
+  
+  tryCatch({
+    # Step 1: Fit birth and sampling rates given fixed mu (MLE)
+    fixed_mu_fit <- fit_bd_fixed_mu(
+      phy,
+      mu = mu,
+      n_starts = n_starts,
+      psi_max = psi_max,
+      r0_min = r0_min,
+      r0_max = r0_max,
+      infectious_period_min = infectious_period_min,
+      infectious_period_max = infectious_period_max
+    )
+    
+    # Step 2: Estimate net rate from lineage-through-time data
+    a <- estimate_a(phy, trim = trim)
+    
+    # Step 3: Calculate ratio b = lambda/(mu+psi)
+    b <- fixed_mu_fit$lambda / (fixed_mu_fit$psi + fixed_mu_fit$mu)
+    
+    # Step 4: Check numerical stability
+    if(is.na(a)){
+      warning("Failed to estimate the net rate from lineage-through-time data. Using maximum likelihood estimates only.")
+    }else if(abs(b - 1) < 0.02){
+      warning(sprintf(
+        "Ratio lambda/(mu + psi) = %.4f is too close to 1 (difference: %.4f). This suggests that the two-step method is numerically unstable, so maximum likelihood estimates will be used.",
+        b, abs(b - 1)
+      ))
+    }else{
+      # Step 5: Solve for lambda and psi using two-step method
+      estimated_psi <- (a + mu - b * mu) / (b - 1)
+      estimated_lambda <- a + mu + estimated_psi
+      
+      # Step 6: Validate two-step estimates
+      constraints_satisfied <- TRUE
+      constraint_violations <- c()
+      
+      # Check positivity
+      if(estimated_psi < 0){
+        constraints_satisfied <- FALSE
+        constraint_violations <- c(constraint_violations, sprintf("psi < 0 (%.4f)", estimated_psi))
+      }
+      
+      if(estimated_lambda < 0){
+        constraints_satisfied <- FALSE
+        constraint_violations <- c(constraint_violations, sprintf("lambda < 0 (%.4f)", estimated_lambda))
+      }
+      
+      # Check R0 bounds
+      if(estimated_psi >= 0 && estimated_lambda >= 0){
+        removal_rate <- mu + estimated_psi
+        estimated_r0 <- estimated_lambda / removal_rate
+        
+        # Check growth (R0 > 1)
+        if(estimated_lambda <= removal_rate){
+          constraints_satisfied <- FALSE
+          constraint_violations <- c(constraint_violations, sprintf("R0 <= 1 (%.4f)", estimated_r0))
+        }
+        
+        # Check R0 bounds
+        if(estimated_r0 < r0_min){
+          constraints_satisfied <- FALSE
+          constraint_violations <- c(constraint_violations, sprintf("R0 < r0_min (%.4f < %.4f)", estimated_r0, r0_min))
+        }
+        
+        if(estimated_r0 > r0_max){
+          constraints_satisfied <- FALSE
+          constraint_violations <- c(constraint_violations, sprintf("R0 > r0_max (%.4f > %.4f)", estimated_r0, r0_max))
+        }
+        
+        # Check psi bounds
+        if(estimated_psi > psi_max){
+          constraints_satisfied <- FALSE
+          constraint_violations <- c(constraint_violations, sprintf("psi > psi_max (%.4f > %.4f)", estimated_psi, psi_max))
+        }
+        
+        # Check infectious period bounds
+        inf_period <- 1 / removal_rate
+        if(!is.null(infectious_period_min) && inf_period < infectious_period_min){
+          constraints_satisfied <- FALSE
+          constraint_violations <- c(constraint_violations, sprintf("inf.period < min (%.4f < %.4f)", inf_period, infectious_period_min))
+        }
+        
+        if(!is.null(infectious_period_max) && inf_period > infectious_period_max){
+          constraints_satisfied <- FALSE
+          constraint_violations <- c(constraint_violations, sprintf("inf.period > max (%.4f > %.4f)", inf_period, infectious_period_max))
+        }
+      }
+      if(constraints_satisfied){
+        two_step_successful <- TRUE
+      }
+    }
+    
+  }, error = function(e){
+    warning(sprintf("Estimation failed: %s", e$message))
+    stop("Cannot proceed. Try relaxing constraints or checking tree structure.")
+  })
+  
+  # Determine final estimates
+  if(two_step_successful && !force_two_step){
+    final_lambda <- estimated_lambda
+    final_psi <- estimated_psi
+    estimation_method <- "two_step_constrained"
+  }else if(force_two_step && !is.na(estimated_lambda) && !is.na(estimated_psi)){
+    # User forced two-step even if constraints violated
+    final_lambda <- estimated_lambda
+    final_psi <- estimated_psi
+    estimation_method <- "two_step_forced"
+    warning("Using two-step estimates despite constraint violations because force_two_step=TRUE.")
+  }else{
+    final_lambda <- fixed_mu_fit$lambda
+    final_psi <- fixed_mu_fit$psi
+    estimation_method <- "mle_constrained"
+  }
+  
+  final_mu <- mu
+  final_inf_period <- 1 / (final_mu + final_psi)
+  
+  # Return results
+  result <- list(
+    lambda = unname(final_lambda),
+    psi = unname(final_psi),
+    mu = mu,
+    r0 = unname(final_lambda / (mu + final_psi)),
+    infectious_period = unname(final_inf_period),
+    net_diversification = a)
+  return(result)
+}
+
+
 #' Calculate c1 parameter for birth-death-sampling model
 #'
 #' @param lambda Speciation rate
@@ -375,262 +632,3 @@ fit_bd_fixed_mu <- function(
     )
   )
 }
-
-#' Estimate rate parameters of a birth-death-sampling process
-#'
-#' `estimate_bds_parameters()` estimates the speciation rate \eqn{\lambda} and sampling rate \eqn{\psi} of a birth-death-sampling process given a phylogenetic tree and death rate \eqn{\mu}.
-#' The function uses user-specified epidemiological constraints on the sampling rate, basic reproduction number, and the duration of the infectious period to improve estimability.
-#'
-#' Estimation is carried out by first estimating the reproduction number \eqn{\frac{\lambda}{\mu+\psi}} and the net diversification rate \eqn{\lambda-\mu-\psi},
-#' then solving for the unknown \eqn{\lambda} and \eqn{\psi}. The net diversification rate is estimated by
-#' performing a lineages-through-time (LTT) regression on node times that are within the quantiles specified in the `trim` input
-#' and the reproduction number is estimated by first computing maximum likelihood 
-#' estimates (MLEs) of \eqn{\lambda} and \eqn{\psi} by numerically optimizing a likelihood and then compute the reproduction number.
-#' The stability of the MLEs is assessed by checking if the estimate of \eqn{R_0} is within 0.02 of 1.
-#' 
-#' If the estimates of \eqn{\lambda} and \eqn{\psi} do not satisfy all of the constraints specified by the `psi_max`, `r0_min`, `r0_max`, `infectious_period_min`,
-#' and `infectious_period_max` parameters, then the MLEs of \eqn{\lambda} and \eqn{\psi} are returned, unless `force_two_step=TRUE`
-#' in which case the original estimates of \eqn{\lambda} and \eqn{\psi} are returned regardless of 
-#' whether or not the constraints are satisfied.
-#' If LTT regression fails then the MLEs of \eqn{\lambda} and \eqn{\psi} will be returned. 
-#' 
-#' The MLEs are obtained numerically using the `L-BFGS-S` algorithm (see \link[stats::optim()]{optim} for implementation details) `n_starts` times from randomly chosen starting points
-#' and selecting the best maximizer of all attempts. Due to the user-imposed constraints, not all randomly generated starting
-#' points are valid, so `100*n_starts` attempts are made to generate valid starting points. This may result in fewer than `n_starts` optimizations
-#' actually being performed.
-#'
-#' If the two-step method produces estimates that violate constraints or is
-#' numerically unstable, the function falls back to the MLE estimates from step 1.
-#'
-#' @param phy An object of class `phylo` with branch lengths. Must be rooted and binary.
-#' @param mu The extinction rate. This must be non-negative.
-#' @param trim A numeric vector of length 2 specifying the quantiles for removing
-#'   node times in the lineages-through-time regression (see Details). Default value is `c(0.10, 0.50)`.
-#' @param n_starts The number of starting points for multi-start optimization. Default value is `100`.
-#' @param force_two_step Logical. If `TRUE`, uses two-step estimates even if they
-#'   violate constraints (see Details). Default value is `FALSE`.
-#' @param psi_max Maximum sampling rate per unit time. Must be strictly positive. Default value is `7`.
-#' @param r0_min Minimum basic reproductive number (R0 = lambda/(mu+psi)). Must be strictly positive. Default 1.
-#' @param r0_max Maximum basic reproductive number. Must be strictly positive. Default 5.
-#' @param infectious_period_min Minimum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.
-#' @param infectious_period_max Maximum infectious period (1/(mu+psi)). Must be strictly positive. Default NULL.
-#'
-#' @return A list with the following attributes:
-#' \itemize{
-#'   \item `lambda`: Estimated speciation rate
-#'   \item `psi`: Estimated sampling rate
-#'   \item `mu`: Input death rate
-#'   \item `r0`: Estimated basic reproductive number (\eqn{\lambda/(\mu+\psi)})
-#'   \item `infectious_period`: Estimated infectious period (\eqn{1/(\mu+\psi)})
-#'   \item `net_diversification`: Estimated net diversification rate (\eqn{\lambda-\mu-\psi})
-#' }
-#' @seealso [estimate_transition_rates()]
-#' @examples
-#' data(ebola_tree)
-#' 
-#' # Use the following information about the 2013 Ebola outbreak to obtain estimates
-#' # - Average removal rate of 5
-#' # - Infectious periods range from 20 to 40 days
-#' # - An upper bound on the sampling rate of 15
-#' # - Plausible values for the basic reproduction number are between 1.5 and 3
-#' BDS_fit <- estimate_bds_parameters(ebola_tree, mu = 5,
-#'                                                psi_max = 15,
-#'                                                infectious_period_min = 20/365,
-#'                                                infectious_period_max = 40/365,
-#'                                                r0_min = 1.5,
-#'                                                r0_max = 3)
-#'
-#' @export
-estimate_bds_parameters <- function(
-    phy,
-    mu,
-    trim = c(0.10, 0.50),
-    n_starts = 100,
-    force_two_step = FALSE,
-    psi_max = 7,
-    r0_min = 1,
-    r0_max = 5,
-    infectious_period_min = NULL,
-    infectious_period_max = NULL
-){
-  # Input validation
-  if(missing(mu) || is.null(mu)){
-    stop("Extinction rate mu must have a numeric value.")
-  }
-  
-  if(!inherits(phy, "phylo")){
-    stop("Input phy must be an object with class phylo.")
-  }
-  
-  # Early constraint compatibility validation
-  if(!is.null(infectious_period_min) && !is.null(infectious_period_max)){
-    removal_rate_min <- 1/infectious_period_max
-    removal_rate_max <- 1/infectious_period_min
-    
-    # Check mu compatibility
-    if(mu >= removal_rate_max){
-      stop(sprintf(
-        "mu (%.4f) >= 1/infectious_period_min (%.4f). Impossible to satisfy infectious period constraints. Either decrease mu or increase infectious_period_min.",
-        mu, removal_rate_max
-      ))
-    }
-    
-    # Check lambda compatibility
-    min_required_lambda <- r0_min * removal_rate_min
-    max_allowed_lambda <- r0_max * removal_rate_max
-    
-    if(min_required_lambda > max_allowed_lambda){
-      stop(sprintf(
-        "Conflicting R0 constraints: r0_min requires lambda >= %.4f, but r0_max allows lambda <= %.4f. Either decrease r0_min or increase r0_max.",
-        min_required_lambda, max_allowed_lambda
-      ))
-    }
-    
-    # Check psi range
-    psi_min <- max(0, removal_rate_min - mu)
-    psi_max_eff <- min(psi_max, removal_rate_max - mu)
-    
-    if(psi_min > psi_max_eff){
-      stop(sprintf(
-        "Infeasible psi range: [%.4f, %.4f]. mu=%.4f is incompatible with infectious period constraints. Either decrease mu or adjust infectious_period bounds.",
-        psi_min, psi_max_eff, mu
-      ))
-    }
-  }
-  
-  # Initialize variables
-  two_step_successful <- FALSE
-  estimated_psi <- NA
-  estimated_lambda <- NA
-  a <- NA
-  b <- NA
-  fixed_mu_fit <- NULL
-  
-  tryCatch({
-    # Step 1: Fit birth and sampling rates given fixed mu (MLE)
-    fixed_mu_fit <- fit_bd_fixed_mu(
-      phy,
-      mu = mu,
-      n_starts = n_starts,
-      psi_max = psi_max,
-      r0_min = r0_min,
-      r0_max = r0_max,
-      infectious_period_min = infectious_period_min,
-      infectious_period_max = infectious_period_max
-    )
-    
-    # Step 2: Estimate net rate from lineage-through-time data
-    a <- estimate_a(phy, trim = trim)
-    
-    # Step 3: Calculate ratio b = lambda/(mu+psi)
-    b <- fixed_mu_fit$lambda / (fixed_mu_fit$psi + fixed_mu_fit$mu)
-    
-    # Step 4: Check numerical stability
-    if(is.na(a)){
-      warning("Failed to estimate the net rate from lineage-through-time data. Using maximum likelihood estimates only.")
-    }else if(abs(b - 1) < 0.02){
-      warning(sprintf(
-        "Ratio lambda/(mu + psi) = %.4f is too close to 1 (difference: %.4f). This suggests that the two-step method is numerically unstable, so maximum likelihood estimates will be used.",
-        b, abs(b - 1)
-      ))
-    }else{
-      # Step 5: Solve for lambda and psi using two-step method
-      estimated_psi <- (a + mu - b * mu) / (b - 1)
-      estimated_lambda <- a + mu + estimated_psi
-      
-      # Step 6: Validate two-step estimates
-      constraints_satisfied <- TRUE
-      constraint_violations <- c()
-      
-      # Check positivity
-      if(estimated_psi < 0){
-        constraints_satisfied <- FALSE
-        constraint_violations <- c(constraint_violations, sprintf("psi < 0 (%.4f)", estimated_psi))
-      }
-      
-      if(estimated_lambda < 0){
-        constraints_satisfied <- FALSE
-        constraint_violations <- c(constraint_violations, sprintf("lambda < 0 (%.4f)", estimated_lambda))
-      }
-      
-      # Check R0 bounds
-      if(estimated_psi >= 0 && estimated_lambda >= 0){
-        removal_rate <- mu + estimated_psi
-        estimated_r0 <- estimated_lambda / removal_rate
-        
-        # Check growth (R0 > 1)
-        if(estimated_lambda <= removal_rate){
-          constraints_satisfied <- FALSE
-          constraint_violations <- c(constraint_violations, sprintf("R0 <= 1 (%.4f)", estimated_r0))
-        }
-        
-        # Check R0 bounds
-        if(estimated_r0 < r0_min){
-          constraints_satisfied <- FALSE
-          constraint_violations <- c(constraint_violations, sprintf("R0 < r0_min (%.4f < %.4f)", estimated_r0, r0_min))
-        }
-        
-        if(estimated_r0 > r0_max){
-          constraints_satisfied <- FALSE
-          constraint_violations <- c(constraint_violations, sprintf("R0 > r0_max (%.4f > %.4f)", estimated_r0, r0_max))
-        }
-        
-        # Check psi bounds
-        if(estimated_psi > psi_max){
-          constraints_satisfied <- FALSE
-          constraint_violations <- c(constraint_violations, sprintf("psi > psi_max (%.4f > %.4f)", estimated_psi, psi_max))
-        }
-        
-        # Check infectious period bounds
-        inf_period <- 1 / removal_rate
-        if(!is.null(infectious_period_min) && inf_period < infectious_period_min){
-          constraints_satisfied <- FALSE
-          constraint_violations <- c(constraint_violations, sprintf("inf.period < min (%.4f < %.4f)", inf_period, infectious_period_min))
-        }
-        
-        if(!is.null(infectious_period_max) && inf_period > infectious_period_max){
-          constraints_satisfied <- FALSE
-          constraint_violations <- c(constraint_violations, sprintf("inf.period > max (%.4f > %.4f)", inf_period, infectious_period_max))
-        }
-      }
-      if(constraints_satisfied){
-        two_step_successful <- TRUE
-      }
-    }
-    
-  }, error = function(e){
-    warning(sprintf("Estimation failed: %s", e$message))
-    stop("Cannot proceed. Try relaxing constraints or checking tree structure.")
-  })
-  
-  # Determine final estimates
-  if(two_step_successful && !force_two_step){
-    final_lambda <- estimated_lambda
-    final_psi <- estimated_psi
-    estimation_method <- "two_step_constrained"
-  }else if(force_two_step && !is.na(estimated_lambda) && !is.na(estimated_psi)){
-    # User forced two-step even if constraints violated
-    final_lambda <- estimated_lambda
-    final_psi <- estimated_psi
-    estimation_method <- "two_step_forced"
-    warning("Using two-step estimates despite constraint violations because force_two_step=TRUE.")
-  }else{
-    final_lambda <- fixed_mu_fit$lambda
-    final_psi <- fixed_mu_fit$psi
-    estimation_method <- "mle_constrained"
-  }
-  
-  final_mu <- mu
-  final_inf_period <- 1 / (final_mu + final_psi)
-  
-  # Return results
-  result <- list(
-    lambda = unname(final_lambda),
-    psi = unname(final_psi),
-    mu = mu,
-    r0 = unname(final_lambda / (mu + final_psi)),
-    infectious_period = unname(final_inf_period),
-    net_diversification = a)
-  return(result)
-}
-
