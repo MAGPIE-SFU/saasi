@@ -60,7 +60,7 @@
                         <h4 data-toc-skip class="author">Yexuan Song,
 Caroline Colijn</h4>
             
-            <h4 data-toc-skip class="date">2026-03-04</h4>
+            <h4 data-toc-skip class="date">2026-03-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/MAGPIE-SFU/saasi/blob/HEAD/vignettes/saasi-tutorial.Rmd" class="external-link"><code>vignettes/saasi-tutorial.Rmd</code></a></small>
       <div class="d-none name"><code>saasi-tutorial.Rmd</code></div>
@@ -148,7 +148,7 @@ for each internal node of the phylogenetic tree.</p>
 <div class="section level3">
 <h3 id="read-tree-and-load-metadata">Read tree and load metadata<a class="anchor" aria-label="anchor" href="#read-tree-and-load-metadata"></a>
 </h3>
-<p>For this example, we use data from Nextstrain <span class="citation">[@hadfield2018nextstrain,sagulenko2018treetime]</span>:
+<p>For this example, we use data from Nextstrain <span class="citation">(Hadfield et al. 2018; Sagulenko et al. 2018)</span>:
 <a href="https://nextstrain.org/ebola/ebov-2013?c=country" class="external-link uri">https://nextstrain.org/ebola/ebov-2013?c=country</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html" class="external-link">read.tree</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"nexstrain_ebola_ebov-2013_smaller.nwk"</span>, package <span class="op">=</span> <span class="st">"saasi"</span><span class="op">)</span><span class="op">)</span></span>
@@ -293,6 +293,18 @@ because SAASI accounts for undetected cases in Liberia.</p>
 for the purposes of this vignette and do not represent any knowledge or
 opinion of the authors about the relative sampling during this
 outbreak.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hadfield2018nextstrain" class="csl-entry">
+Hadfield, James, Colin Megill, Sidney M Bell, et al. 2018.
+<span>“Nextstrain: Real-Time Tracking of Pathogen Evolution.”</span>
+<em>Bioinformatics</em> 34 (23): 4121–23.
+</div>
+<div id="ref-sagulenko2018treetime" class="csl-entry">
+Sagulenko, Pavel, Vadim Puller, and Richard A Neher. 2018.
+<span>“TreeTime: Maximum-Likelihood Phylodynamic Analysis.”</span>
+<em>Virus Evol.</em> 4 (1).
+</div>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

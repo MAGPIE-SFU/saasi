@@ -79,8 +79,8 @@ each internal node of the phylogenetic tree.
 
 ### Read tree and load metadata
 
-For this example, we use data from Nextstrain
-\[@hadfield2018nextstrain,sagulenko2018treetime\]:
+For this example, we use data from Nextstrain (Hadfield et al. 2018;
+Sagulenko et al. 2018):
 <https://nextstrain.org/ebola/ebov-2013?c=country>.
 
 ``` r
@@ -247,3 +247,10 @@ undetected cases in Liberia.
 Note that Liberia and the factor of 2 are chosen entirely at random for
 the purposes of this vignette and do not represent any knowledge or
 opinion of the authors about the relative sampling during this outbreak.
+
+Hadfield, James, Colin Megill, Sidney M Bell, et al. 2018. “Nextstrain:
+Real-Time Tracking of Pathogen Evolution.” *Bioinformatics* 34 (23):
+4121–23.
+
+Sagulenko, Pavel, Vadim Puller, and Richard A Neher. 2018. “TreeTime:
+Maximum-Likelihood Phylodynamic Analysis.” *Virus Evol.* 4 (1).

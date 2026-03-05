@@ -7,6 +7,7 @@ output:
     toc: true
   pdf_document:
     toc: true
+bibliography: references.bib
 vignette: >
   %\VignetteIndexEntry{Sampling Aware Ancestral State Inference}
   %\VignetteEngine{knitr::rmarkdown}
@@ -84,7 +85,7 @@ The output is a data frame containing the probability of each state for each int
 
 ### Read tree and load metadata
 
-For this example, we use data from Nextstrain [@hadfield2018nextstrain,sagulenko2018treetime]:
+For this example, we use data from Nextstrain [@hadfield2018nextstrain; @sagulenko2018treetime]:
 https://nextstrain.org/ebola/ebov-2013?c=country. 
 
 ```{r Nextstrain Ebola}
