@@ -1,0 +1,229 @@
+#' Copy/pasted from private `diversitree::make.tree.bisse` function, with some
+#' edits to incorporate sampling events and allow three or more states.
+#'
+#' Adding sampling events throws a cyclomatic complexity error, but I will
+#' ignore that because I do not want to touch the original `diversitree` code.
+#' Similar thing for lack of snake_case variable names.
+#'
+#' I did introduce less startling changes to the original code re: other linting
+#' errors.
+#'
+#' @noRd
+make.tree.bisse_modified <- function(pars, k, max.taxa = Inf, max.t = Inf, x0) {
+  # Matrix representation of state changes to consider
+  to <- matrix(unlist(lapply(1 : k, function(i) (1 : k)[-i])), k, k - 1, TRUE)
+
+  extinct <- FALSE
+  split   <- FALSE
+  # Adding Sampling
+  sam <- FALSE
+
+  parent <- 0
+  n.i <- rep(0, k)
+  r.i <- rowSums(pars)
+  len <- 0
+  t <- 0
+  hist <- list()
+
+  # Always single lineage in our code
+  states <- x0
+  # We use 1-based states
+  n.taxa <- lineages <- n.i[x0] <- 1
+  start <- 0
+
+  while (n.taxa <= max.taxa && n.taxa > 0) {
+    ## When does an event happen?
+    r.n <- r.i * n.i
+    r.tot <- sum(r.n)
+    dt <- stats::rexp(1, r.tot)
+    t <- t + dt
+
+    if (t > max.t) {
+      dt <- dt - (t - max.t)
+      len[lineages] <- len[lineages] + dt
+      t <- max.t
+      break
+    }
+
+    len[lineages] <- len[lineages] + dt
+
+    # ADDING A NEW EVENT TYPE: SAMPLING
+    # type: 1: speciation, 2: extinction, 3: sampling, >3: char change
+    # sampling assumes the sample is tested and hence becomes a taxa
+    # in the phylogeny, this allows the phylogeny be non-ultrametric
+    state <- sample(k, 1, FALSE, r.n / r.tot)
+
+    ## Pick a lineage for that state:
+    j <- sample(n.i[state], 1)
+    lineage <- lineages[states[lineages] == state][j]
+    type <- sample(3 + (k - 1), 1, FALSE, pars[state, ])
+
+    if (type == 1) {
+      ## Speciating:
+      if (n.taxa == max.taxa)
+        ## Don't add this one.
+        break
+      new.i <- length(extinct) + 1:2
+      split[lineage] <- TRUE
+      extinct[new.i] <- split[new.i] <- FALSE
+      sam[new.i] <- FALSE
+      states[new.i] <- state
+      parent[new.i] <- lineage
+      start[new.i] <- t
+      len[new.i] <- 0
+
+      n.i[state] <- n.i[state] + 1
+      n.taxa <- n.taxa + 1
+
+      lineages <- which(!split & !extinct & !sam)
+    } else if (type == 2) {
+      ## Extinct
+      extinct[lineage] <- TRUE
+
+      lineages <- which(!split & !extinct & !sam)
+
+      n.i[state] <- n.i[state] - 1
+      n.taxa <- n.taxa - 1
+    } else if (type == 3) {
+      ## Sampling; this is new
+      sam[lineage] <- TRUE
+      n.taxa <- n.taxa - 1
+      n.i[state] <- n.i[state] - 1
+      lineages <- which(!split & !extinct & !sam)
+    } else {
+      ## Character switch:
+      # Must account for having more than one possible state
+      states[lineage] <- state.new <- to[state, type - 3]
+      n.i[c(state.new, state)] <- n.i[c(state.new, state)] + c(1, -1)
+      hist[[length(hist) + 1]] <- c(lineage, t, state, state.new)
+    }
+  }
+
+  info <- data.frame(idx = seq_along(extinct), len = len, parent = parent,
+                     start = start, state = states, extinct = extinct,
+                     split = split, sam = sam)
+
+  hist <- as.data.frame(do.call(rbind, hist))
+  if (nrow(hist) == 0)
+    hist <- as.data.frame(matrix(NA, 0, 4))
+  names(hist) <- c("idx", "t", "from", "to")
+  hist$x0 <- info$start[match(hist$idx, info$idx)]
+  hist$tc <- hist$t - hist$x0
+
+  attr(info, "t") <- t
+  attr(info, "hist") <- hist
+  info
+}
+
+#' Copy/pasted from private `diversitree::me.to.ape.bisse` function.
+#'
+#' I did introduce minor changes to the original code to fix linting issues.
+#' However, I did not change variable names to snake_case.
+#'
+#' @noRd
+me.to.ape.bisse <- function(x, root.state) {
+  if (nrow(x) == 0)
+    return(NULL)
+  Nnode <- sum(!x$split) - 1
+  n.tips <- sum(!x$split)
+
+  x$idx2 <- NA
+  x$idx2[!x$split] <- 1:n.tips
+  x$idx2[x$split] <- order(x$idx[x$split]) + n.tips + 1
+
+  i <- match(x$parent, x$idx)
+  x$parent2 <- x$idx2[i]
+  x$parent2[is.na(x$parent2)] <- n.tips + 1
+
+  tip.label <- ifelse(subset(x, !split)$extinct,
+                      sprintf("ex%d", 1:n.tips),
+                      sprintf("sp%d", 1:n.tips))
+  node.label <- sprintf("nd%d", 1:Nnode)
+
+  x$name <- NA
+  x$name[!x$split] <- tip.label
+  ## More useful, but I don't want to clobber anything...
+  x$name2 <- c(tip.label, node.label)[x$idx2]
+
+  tip.state <- x$state[match(1:n.tips, x$idx2)]
+  names(tip.state) <- tip.label
+
+  node.state <- x$state[match(1:Nnode + n.tips, x$idx2)]
+  names(node.state) <- node.label
+  node.state["nd1"] <- root.state
+
+  hist <- attr(x, "hist")
+  if (!is.null(hist)) {
+    hist$idx2 <- x$idx2[match(hist$idx, x$idx)]
+    hist$name2 <- x$name2[match(hist$idx, x$idx)]
+    if (nrow(hist) > 0)
+      hist <- hist[order(hist$idx2), ]
+  }
+
+  phy <- ape::reorder.phylo(structure(
+    list(
+      edge = cbind(x$parent2, x$idx2),
+      Nnode = Nnode,
+      tip.label = tip.label,
+      tip.state = tip.state,
+      node.label = node.label,
+      node.state = node.state,
+      edge.length = x$len,
+      orig = x,
+      hist = hist
+    ),
+    class = "phylo"
+  ))
+  phy$edge.state <- x$state[match(phy$edge[, 2], x$idx2)]
+  phy
+}
+
+#' Simulate a phylogenetic tree from a birth-death-sampling process
+#'
+#' `sim_bds_tree()` simulates a phylogenetic tree with state annotations for all internal nodes and tips.
+#' A birth-death-sampling process is used to generate the tree topology and branch lengths; 
+#' this will include speciation, sampling, and mutation events.
+#' A continuous-time Markov process is used to assign states to all nodes.
+#' The resulting tree will be compatible with [saasi()].
+#' The tree is post-processed to remove tips at the present and ensure a minimum number of tips.
+#' 
+#' @param params_df A `data.frame` specifying the parameters from which the tree will be simulated. Must contain
+#' - `lambda`: vector of speciation rates
+#' - `mu`: vector of extinction rates
+#' - `psi`: vector of sampling rates
+#' 
+#' The number of rows should be equal to the number of states.
+#' @param q_matrix State transition rate matrix.
+#' @param x0 The root state.
+#' @param max_taxa Maximum number of nodes allowed in the initial simulated tree. Default value is 100.
+#' @param max_t Maximum depth allowed in the returned tree. Default value is 100.
+#' @param include_extinct Boolean. If `TRUE`, extinct taxa are included in the returned tree. Default value is `FALSE`.
+#' @param min_tip Minimum number of tips required in the post-processed tree.
+#' If the processed tree has fewer tips, the simulation is repeated until this
+#' condition is satisfied. Default value is 1.
+#' @return An object of class `phylo` that is compatible with `saasi()`.
+#' @examples
+#' # Simulate a tree from the demo model with root state set to 1
+#' demo_pars
+#' demo_Q
+#' sim_bds_tree(demo_pars, demo_Q, 1)
+#' @export
+sim_bds_tree <- function(params_df, q_matrix, x0, max_taxa = 100, max_t = 100,
+                         include_extinct = FALSE) {
+  # Format similar to matrix generated in original diversitree fn
+  k <- nrow(params_df)
+  pars <- cbind(
+    data.matrix(params_df[3:5]),
+    matrix(t(q_matrix)[col(q_matrix) != row(q_matrix)], k, byrow = TRUE)
+  )
+
+  phy <- NULL
+  while (is.null(phy)) {
+    info <- make.tree.bisse_modified(pars, k, max_taxa, max_t, x0)
+    phy <- me.to.ape.bisse(info[-1, ], info$state[1])
+    if (!is.null(phy) && !include_extinct) {
+      phy <- diversitree::prune(phy)
+    }
+  }
+  return(phy)
+}

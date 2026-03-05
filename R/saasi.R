@@ -2,26 +2,40 @@
 #'
 #' Get the internal node state probabilities of a tree with defined leaf states.
 #'
-#' @param phy A `phylo` phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
-#' `tip.state`. `tip.state` can be names of the states, or numeric values (1:n).
-#' @param params_df Data frame containing non-q parameters used in ancestral
-#' state reconstruction algorithm. Must have the following column names:
-#' `state`, `prior`, `lambda`, `mu`, and `psi`. The `prior` values refer to the baseline
-#' probabilities of the states (used at the root of the tree). 
+#' If `sensitivity_test=TRUE`, then a test of the sensitivity of `saasi` to the birth-death-sampling rate parameters is conducted.
+#' The values of \eqn{\lambda}, \eqn{\mu}, and \eqn{\psi} are perturbed by sampling values at random from +/- 10% of the input value.
+#' The ancestral state reconstruction is then run on the perturbed parameters; this is repeated 10 times.
+#' To summarise sensitivity, the modal state for each internal node is first computed for each perturbed reconstruction.
+#' Then the total number of differences in modal states are computed between the perturbed reconstructions and the original reconstruction.
+#' The average number of these total differences across all 10 perturbed reconstructions is reported.
 #'
-#' Example:
-#' | **state** | **prior** | **lambda** | **mu** | **psi** |
-#' | :--- | :--- | :--- | :--- | :--- |
-#' | 1 | 1/3 | 3 | 0.02 | 1 |
-#' | 2 | 1/3 | 3 | 0.02 | 1 |
-#' | 3 | 1/3 | 3 | 0.02 | 1 |
-#' @param q_matrix Numeric q matrix used in ancestral state reconstruction
-#' algorithm. Row and column indices or names represent states.
-#' @return A data frame listing the state probabilities of every node in `phy`. The row names correspond
-#' to the node IDs. 
+#' @param phy An object of class `phylo` specifying the phylogenetic tree. 
+#' The tree must be rooted, binary, and contain the `tip.state` attribute. 
+#' Use the [check_tree_compatibility()] function to verify that `phy` is satisfies these conditions.
+#' @param Q An \eqn{n\times n} transition rate matrix, where \eqn{n} is the number of states. 
+#' Row and column names must correspond to the states.
+#' Off-diagonal elements are the transition rates between states; diagonal elements are set such that rows sum to zero.
+#' @param pars A `data.frame` with the other parameters used in the ancestral state reconstruction algorithm. 
+#' Must have the following columns:
+#' - `state`: a vector of state names. These should match the column and row names of `Q`.
+#' - `lambda`: a vector of birth rates for the birth-death-sampling process.
+#' - `mu`: a vector of death rates for the birth-death-sampling process.
+#' - `psi`: a vector of sampling rates for the birth-death-sampling process.
+#' 
+#' It can also have `root_prior` that specifies the *a priori* distribution of the state of the root; if one is not provided a uniform distribution over the root state will be used.
+#' @param sensitivity_test A boolean indicating if a sensitivity test should be conducted (see Details). The default value is `FALSE`.
+#'   
+#' @return A `data.frame` with a state probabilities for each internal node in `phy`. 
+#'   
+#' @examples
+#' head(demo_pars) #contains state, lambda, mu, psi for each state
+#' result <- saasi(phy = demo_tree_prepared, 
+#'                 Q = demo_Q,
+#'                 pars = demo_pars) 
+#' head(result) 
 #' @export
-saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
-  ## INPUT CHECKS
+saasi <- function(phy, Q, pars, sensitivity_test=FALSE) {
+  ## INPUT CHECKS --------------------------------------------------------------
   
   # Check compatibility of phy with SAASI
   if( !check_tree_compatibility(phy) ) {
@@ -95,38 +109,7 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
     stop("The phylogenetic tree needs to be a binary tree.")
   }
   
-  # Checking if the tree is a rooted tree
-  if(!ape::is.rooted.phylo(phy)){
-    stop("The phylogenetic tree needs to be a rooted tree.")
-  }
-  
-  
-  required_cols <- c("state", "prior", "lambda", "mu", "psi")
-  
-  # Check if input is a data frame
-  if (!is.data.frame(params_df)) {
-    stop("Input must be a data frame.")
-  }
-  
-  # Check for required column names
-  if (!all(required_cols %in% colnames(params_df))) {
-    stop(sprintf("Missing required columns: %s", 
-                 paste(setdiff(required_cols, colnames(params_df)), collapse = ", ")))
-  }
-  
-  # Check that 'state' is a sequence of 1-based natural numbers
-  if (!is.numeric(params_df$state)) {
-    stop("'state' column must be a sequence of numerical values (1, 2, ..., n).")
-  }
-  
-  # Checking the number of unique states in tip.state matches the number of states
-  # in params_df$state
-  
-  if(!length(unique(phy$tip.state)) == length(params_df$state)){
-    stop("The number of states does not match.")
-  }
-  
-  nstate <- nrow(params_df)
+  nstate <- nrow(pars)
   # Total number of nodes == number of non-leaf nodes * 2 + 1
   nnode <- phy[["Nnode"]] * 2 + 1
   # Root node ID == number of leaf nodes + 1 == number of internal nodes + 2.
@@ -160,34 +143,57 @@ saasi <- function(phy, q_matrix, lambda, mu, psi, prior=NULL) {
     topology_df,
     backwards_likelihoods_list
   )
+
   
-  # if (plot) {
-  #   # https://stackoverflow.com/a/17735894
-  #   highest_likelihoods <-
-  #     apply(state_probabilities_df, 1, function(e) which(e == max(e)))
-  #   
-  #   # https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
-  #   # Will serve up to n states == len of vector; afterwards recycles colors
-  #   state_colors <- c("#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3",
-  #                     "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd",
-  #                     "#ccebc5", "#ffed6f")
-  #   # Map likelihoods to colors
-  #   highest_likelihood_colors <-
-  #     sapply(highest_likelihoods,
-  #            function(e) state_colors[[e %% (length(state_colors) + 1)]])
-  #   
-  #   ape::plot.phylo(phy, label.offset = 0.05)
-  #   ape::tiplabels(highest_likelihoods[1:(phy[["Nnode"]] + 1)],
-  #                  frame = "circle",
-  #                  cex = cex,
-  #                  bg = highest_likelihood_colors)
-  #   ape::nodelabels(highest_likelihoods[-(1:(phy[["Nnode"]] + 1))],
-  #                   frame = "circle",
-  #                   cex = cex,
-  #                   bg = highest_likelihood_colors)
-  # }
-  # 
-  return(state_probabilities_list)
+  # Perform sensitivity testing, if requested
+  if( !sensitivity_test ){
+    return(state_probabilities_list)
+  } else{
+    cat("Initial run complete. Running sensitivity analysis.","\n")
+    # number of times to perturb the BDS rates and run saasi again
+    n_tests <- 10
+    
+    # re-run saasi for n_tests perturbed parameter dataframes
+    sens_res <- lapply(1:n_tests, function(x) {
+      # generate perturbations by randomly generating a uniform number between 10% below and 10% above the provided value
+      temp <- pars
+      temp$lambda <- runif(nrow(pars), temp$lambda*0.9, temp$lambda*1.1)
+      temp$mu <- runif(nrow(pars), temp$mu*0.9, temp$mu*1.1)
+      temp$psi <- runif(nrow(pars), temp$psi*0.9, temp$psi*1.1)
+      
+      # re-compute the backwards likelihoods
+      bw_likelihood <- get_backwards_likelihoods_list(phy,
+                                                      temp,
+                                                      Q,
+                                                      nstate,
+                                                      nnode,
+                                                      post_order_edges,
+                                                      topology_df)
+      # re-compute and return the state probabilities for the internal nodes
+      get_state_probabilities_list(phy,
+                                   temp,
+                                   Q,
+                                   nstate,
+                                   nnode,
+                                   root_node,
+                                   post_order_edges,
+                                   topology_df,
+                                   bw_likelihood)
+    })
+    
+    # summarise sensitivity by computing the modal states for 
+    #  the input parameter values (base) and for the perturbed results
+    #  then count the total number of nodes that differ
+    base_modes <- modal_states(state_probabilities_list)
+    sens_modes <- lapply(sens_res, modal_states)
+    sens_total_diff <- sapply(sens_modes, function(x) sum(x != base_modes))
+    
+    cat("Sensitivity analysis: Input parameters were perturbed", n_tests, "times and an average of",
+        mean(sens_total_diff), "of all", nnode, "nodes had a different modal state.")
+    
+    # compute the sensitivity summaries
+    return(state_probabilities_list)
+  }
 }
 
 #' Get data frame representation of tree topology.
@@ -334,15 +340,184 @@ get_state_probabilities_list <- function(phy,
   return(node_lik)
 }
 
-#' Convert state probabilities list to data frame.
-#'  List of state probabilities.
-#' Data frame of state probabilities in each node in phy.
+#' Generates state likelihoods for a node from the state likelihoods of the node
+#' children.
+#'
+#' @return Vector of state likelihoods.
+#' @noRd
+get_backwards_likelihoods <- function(left_likelihoods, right_likelihoods,
+                                      left_t0, right_t0, tf,
+                                      params_df, q_matrix) {
+  left_sol <- backwards_likelihoods_helper(left_likelihoods,
+                                           left_t0, tf,
+                                           params_df, q_matrix)
+  right_sol <- backwards_likelihoods_helper(right_likelihoods,
+                                            right_t0, tf,
+                                            params_df, q_matrix)
+  likelihoods <- 2*params_df$lambda * left_sol * right_sol
+  return(likelihoods / sum(likelihoods))
+}
+
+#' State likelihoods from one child node only.
+#'
+#' @return Vector of state likelihoods.
+#' @noRd
+backwards_likelihoods_helper <- function(child_likelihoods,
+                                         t0,
+                                         tf,
+                                         params_df,
+                                         q_matrix) {
+  # Number of states == n
+  nstate <- nrow(params_df)
+  
+  func <- function(t, y, parms) {
+    with(as.list(c(y, parms)), {
+      # States 1...n
+      dD_equations_list <- lapply(seq_len(nstate), function(i) {
+        # With i =/= j:
+        # * psi[-i] is psi[j]
+        # * q[i,][-i] is q[i, j]
+        # * y[i + nstate] is Ei
+        # * y[1:nstate][-i] is Dj
+        # See derivation sxn in https://www.biorxiv.org/content/10.1101/2025.05.20.655151v1 for details
+        return(
+          -(lambda[i] + mu[i] + psi[i] + sum(q[i, ][-i])) * y[i]
+          + 2 * lambda[i] * y[i + nstate] * y[i]
+          + sum(q[i, ][-i] * y[1:nstate][-i])
+        )
+      })
+      
+      # States 1...n
+      dE_equations_list <- lapply(seq_len(nstate), function(i) {
+        # With i =/= j:
+        # * psi[-i] is psi[j]
+        # * q[i,][-i] is q[i, j]
+        # * y[i + nstate] is Ei
+        # * y[nstate + 1:nstate][-i] is Ej
+        # See derivation sxn in https://www.biorxiv.org/content/10.1101/2025.05.20.655151v1 for details
+        return(
+          mu[i] - (lambda[i] + mu[i] + psi[i] + sum(q[i, ][-i]))
+          * y[i + nstate] + lambda[i] * y[i + nstate]^2
+          + sum(q[i, ][-i] * y[nstate + 1:nstate][-i])
+        )
+      })
+      
+      return(list(c(dD_equations_list, dE_equations_list)))
+    })
+  }
+  
+  
+  # D1...Dn are child likelihoods, and E1...En are 1
+  y <- c(child_likelihoods, rep(1, nstate))
+  # Need to explicitly name index or events_df does not work
+  names(y) <- seq_len(nstate * 2)
+  
+  times <- seq(0, tf, by = tf / 100)
+  # brj: resolve warnings about t0 not in times
+  times <- sort(unique(c(times, t0)))
+  
+  parms <- list(lambda = params_df$lambda,
+                mu = params_df$mu,
+                psi = params_df$psi,
+                q = q_matrix,
+                nstate = nstate)
+  
+  # Force D1...Dn at t0 to be same as children
+  events_df <- data.frame(var = seq_len(nstate),
+                          time = rep(t0),
+                          value = child_likelihoods,
+                          method = rep("replace", nstate))
+  
+  sol <- deSolve::ode(y, times, func, parms, events = list(data = events_df))
+  
+  ret <- utils::tail(sol, n = 1)[1 + 1:nstate]
+  if (any(is.nan(ret))) {
+    # if the value is nan, assign the likelihood to the previous likelihood,
+    # because the value is too close so that the ode cannot tell the difference.
+    return(child_likelihoods)
+  }
+  return(ret)
+}
+
+
+#' Generates state likelihoods for a node from the state likelihoods of the node
+#' parent.
+#'
+#' @return Vector of state likelihoods.
+#' @noRd
+get_forwards_likelihoods <- function(parent_state_probabilities, t0, tf,
+                                     params_df, q_matrix) {
+  # Number of states == n
+  nstate <- nrow(params_df)
+  
+  func <- function(x, y, parms) {
+    with(as.list(c(y, parms)), {
+      # States 1...n
+      dD_equations_list <- lapply(seq_len(nstate), function(i) {
+        # NOTE: for the anagenetic speciation, the only way that a
+        # state could change is due to transistion events
+        # see saasi.clad for cladogenetic change equation
+        return(
+          -(sum(q[i, ][-i]) * y[i])
+          + sum(t(q)[i, ][-i] * y[1:nstate][-i])
+        )
+      })
+      
+      # States 1...n
+      dE_equations_list <- lapply(seq_len(nstate), function(i) {
+        # With i =/= j:
+        # * psi[-i] is psi[j]
+        # * q[i,][-i] is q[i, j]
+        # * y[i + nstate] is Ei
+        # * y[nstate + 1:nstate][-i] is Ej
+        # See derivation sxn in doi:10.1111/j.2041-210X.2012.00234.x for details
+        return(
+          mu[i] - (lambda[i] + mu[i] + psi[i] + sum(q[i, ][-i]))
+          * y[i + nstate] + lambda[i] * y[i + nstate]^2
+          + sum(q[i][-i] * y[nstate + 1:nstate][-i])
+        )
+      })
+      
+      return(list(c(dD_equations_list, dE_equations_list)))
+    })
+  }
+  
+  # D1...Dn are parent state probabilities, and E1...En are 1
+  y <- c(parent_state_probabilities, rep(1, nstate))
+  
+  # Increment time in the positive direction because otherwise the ode solver
+  # can run into errors with negative numbers being smaller than machine min.
+  times <- seq(0, t0, by = t0 / 100)
+  parms <- list(lambda = params_df$lambda,
+                mu = params_df$mu,
+                psi = params_df$psi,
+                q = q_matrix,
+                nstate = nstate)
+  
+  # brj: can't reproduce warning
+  sol <- deSolve::ode(y, times, func, parms, method = "ode45", rtol = 1e20)
+  
+  # Closest index to tf
+  closest_index <- which.min(abs(sol[, 1] - tf))
+  likelihoods <- unname(sol[closest_index, 1 + 1:nstate])
+  
+  return(likelihoods)
+}
+
+
+#' Compute modal state for all nodes
 #' 
-# get_state_probabilities_df <- function(phy, nstate, state_probabilities_list) {
-#   state_probabilities_df <-
-#     as.data.frame(do.call(rbind, state_probabilities_list))
-#   row.names(state_probabilities_df) <-
-#     c(phy[["tip.label"]], phy[["node.label"]])
-#   names(state_probabilities_df) <- seq_len(nstate)
-#   return(state_probabilities_df)
-# }
+#' `modal_states()` is a post-processing function that extracts the
+#' node with the greatest probability at each node.
+#' 
+#' @param node_probs A list of the same format as output by `saasi()`.
+#' @return A vector corresponding to the nodes where the elements of the vector
+#' are the states with the highest probability at each node.
+#' @noRd
+modal_states <- function(node_probs) {
+  n_nodes <- length(node_probs[[1]])
+  temp <- sapply(1:n_nodes, function(i) {
+    which.max(sapply(node_probs, function(x) x[i]))
+  })
+  return(temp)
+}

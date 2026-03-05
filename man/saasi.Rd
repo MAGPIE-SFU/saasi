@@ -4,31 +4,49 @@
 \alias{saasi}
 \title{Sampling Aware Ancestral State Inference}
 \usage{
-saasi(phy, q_matrix, lambda, mu, psi, prior = NULL)
+saasi(phy, Q, pars, sensitivity_test = FALSE)
 }
 \arguments{
-\item{phy}{A \code{phylo} phylogenetic tree. The tree needs to be a rooted binary tree. Must contain
-\code{tip.state}. \code{tip.state} can be names of the states, or numeric values (1:n).}
+\item{phy}{An object of class \code{phylo} specifying the phylogenetic tree.
+The tree must be rooted, binary, and contain the \code{tip.state} attribute.
+Use the \code{\link[=check_tree_compatibility]{check_tree_compatibility()}} function to verify that \code{phy} is satisfies these conditions.}
 
-\item{q_matrix}{Numeric q matrix used in ancestral state reconstruction
-algorithm. Row and column indices or names represent states.}
+\item{Q}{An \eqn{n\times n} transition rate matrix, where \eqn{n} is the number of states.
+Row and column names must correspond to the states.
+Off-diagonal elements are the transition rates between states; diagonal elements are set such that rows sum to zero.}
 
-\item{params_df}{Data frame containing non-q parameters used in ancestral
-state reconstruction algorithm. Must have the following column names:
-\code{state}, \code{prior}, \code{lambda}, \code{mu}, and \code{psi}. The \code{prior} values refer to the baseline
-probabilities of the states (used at the root of the tree).
+\item{pars}{A \code{data.frame} with the other parameters used in the ancestral state reconstruction algorithm.
+Must have the following columns:
+\itemize{
+\item \code{state}: a vector of state names. These should match the column and row names of \code{Q}.
+\item \code{lambda}: a vector of birth rates for the birth-death-sampling process.
+\item \code{mu}: a vector of death rates for the birth-death-sampling process.
+\item \code{psi}: a vector of sampling rates for the birth-death-sampling process.
+}
 
-Example:\tabular{lllll}{
-   \strong{state} \tab \strong{prior} \tab \strong{lambda} \tab \strong{mu} \tab \strong{psi} \cr
-   1 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-   2 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-   3 \tab 1/3 \tab 3 \tab 0.02 \tab 1 \cr
-}}
+It can also have \code{root_prior} that specifies the \emph{a priori} distribution of the state of the root; if one is not provided a uniform distribution over the root state will be used.}
+
+\item{sensitivity_test}{A boolean indicating if a sensitivity test should be conducted (see Details). The default value is \code{FALSE}.}
 }
 \value{
-A data frame listing the state probabilities of every node in \code{phy}. The row names correspond
-to the node IDs.
+A \code{data.frame} with a state probabilities for each internal node in \code{phy}.
 }
 \description{
-Get the internal node state probabilities of a tree with defined leaf states.
+Reconstructs ancestral states for internal nodes of a phylogenetic tree while
+accounting for heterogeneous sampling rates across states or locations.
+}
+\details{
+If \code{sensitivity_test=TRUE}, then a test of the sensitivity of \code{saasi} to the birth-death-sampling rate parameters is conducted.
+The values of \eqn{\lambda}, \eqn{\mu}, and \eqn{\psi} are perturbed by sampling values at random from +/- 10\% of the input value.
+The ancestral state reconstruction is then run on the perturbed parameters; this is repeated 10 times.
+To summarise sensitivity, the modal state for each internal node is first computed for each perturbed reconstruction.
+Then the total number of differences in modal states are computed between the perturbed reconstructions and the original reconstruction.
+The average number of these total differences across all 10 perturbed reconstructions is reported.
+}
+\examples{
+head(demo_pars) #contains state, lambda, mu, psi for each state
+result <- saasi(phy = demo_tree_prepared, 
+                Q = demo_Q,
+                pars = demo_pars) 
+head(result) 
 }
