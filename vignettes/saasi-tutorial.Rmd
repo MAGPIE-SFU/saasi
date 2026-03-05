@@ -1,5 +1,5 @@
 ---
-title: "Sampling Aware Ancestral State Inference"
+title: "Sampling-Aware Ancestral State Inference"
 author: "Yexuan Song, Caroline Colijn"
 date: "`r Sys.Date()`"
 output:
@@ -84,7 +84,7 @@ The output is a data frame containing the probability of each state for each int
 
 ### Read tree and load metadata
 
-For this example, we use data from Nextstrain:
+For this example, we use data from Nextstrain [@hadfield2018nextstrain,sagulenko2018treetime]:
 https://nextstrain.org/ebola/ebov-2013?c=country. 
 
 ```{r Nextstrain Ebola}
