@@ -3,15 +3,16 @@
 \docType{data}
 \name{demo_tree_prepared}
 \alias{demo_tree_prepared}
-\title{Simulated demonstration tree example}
+\title{SAASI demonstration: pre-prepared tree}
 \format{
-A \code{phylo} tree object with the following components
+An object of class \code{phylo} with \code{tip.state} attribute
 }
 \usage{
 demo_tree_prepared
 }
 \description{
 A simulated birth-death-sampling tree with 13 tips and 3 states.
+The tree has pre-prepared to be compatible with \code{saasi}.
 }
 \examples{
 data(demo_tree_prepared)

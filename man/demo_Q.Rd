@@ -3,7 +3,7 @@
 \docType{data}
 \name{demo_Q}
 \alias{demo_Q}
-\title{Transition rate matrix for demonstration tree}
+\title{SAASI demonstration: transition rate matrix}
 \format{
 A 3x3 numeric matrix
 }
@@ -11,9 +11,8 @@ A 3x3 numeric matrix
 demo_Q
 }
 \description{
-A 3x3 transition rate matrix (Q matrix) used to simulate the demonstration
-tree. This matrix defines the instantaneous rates of transition between
-character states.
+A 3x3 transition rate matrix used to simulate discrete states in the demonstration
+tree. This matrix defines the instantaneous rates of transition between states.
 }
 \examples{
 data(demo_Q)

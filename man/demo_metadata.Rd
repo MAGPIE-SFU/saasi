@@ -3,24 +3,23 @@
 \docType{data}
 \name{demo_metadata}
 \alias{demo_metadata}
-\title{Metadata for demonstration tree}
+\title{SAASI demonstration: tree metadata}
 \format{
-A data frame with 13 rows (one per tip) and 2 columns
+A \code{data.frame} with 13 rows (one per tip) and 2 columns
 \describe{
-\item{node}{node name for each tip}
-\item{state}{Character state for each tip (1, 2, or 3)}
+\item{\code{node}}{Node labels for each tip}
+\item{\code{state}}{Character state for each tip}
 }
 }
 \usage{
 demo_metadata
 }
 \description{
-A data frame containing the node name and tip states
+A \code{data.frame} linking the tip nodes to their state
 }
 \examples{
 data(demo_metadata)
 demo_metadata
-demo_metadata$states
 
 }
 \keyword{datasets}

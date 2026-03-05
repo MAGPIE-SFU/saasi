@@ -3,29 +3,27 @@
 \docType{data}
 \name{demo_pars}
 \alias{demo_pars}
-\title{Birth-death-sampling parameters for demonstration tree}
+\title{SAASI demonstration: birth-death-sampling process parameters}
 \format{
 A data frame with 3 rows (one per state) and 5 columns:
 \describe{
-\item{state}{Character state names (1, 2, or 3)}
-\item{rootprior}{Prior probability of root being in each state (1/3 each)}
-\item{lambda}{Speciation rate (1.5 for all states)}
-\item{mu}{Extinction rate (0.3 for all states)}
-\item{psi}{Sampling rate (0.1 for state 1, 0.5 for states 2 and 3)}
+\item{\code{state}}{The character label for each state}
+\item{\code{root_prior}}{Prior probability distribution over states for the root node}
+\item{\code{lambda}}{Numeric speciation rate for each state}
+\item{\code{mu}}{Numeric extinction rate for each state}
+\item{\code{psi}}{Numeric Sampling rate for each state}
 }
 }
 \usage{
 demo_pars
 }
 \description{
-A data frame containing the birth-death-sampling parameters used to
+A \code{data.frame} specifying the parameters of the birth-death-sampling process that is used to
 simulate the demonstration tree. These parameters control diversification
-and sampling rates for each character state.
+and sampling rates for each state.
 }
 \examples{
 data(demo_pars)
 demo_pars
-# Compare sampling rates across states
-demo_pars$psi
 }
 \keyword{datasets}
