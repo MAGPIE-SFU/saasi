@@ -1,4 +1,4 @@
-# Sampling Aware Ancestral State Inference
+# Sampling-Aware Ancestral State Inference
 
 ``` r
 
@@ -19,7 +19,7 @@ SAASI (Sampling-Aware Ancestral State Inference) is an ancestral state
 reconstruction method that accounts for variation in sampling rates
 among locations or traits.
 
-Unlike traditional methods that assume uniform sampling, saasi
+Unlike traditional methods that assume uniform sampling, SAASI
 explicitly models heterogeneous sampling, leading to ancestral state
 estimates that take sampling into account.
 
@@ -79,7 +79,8 @@ each internal node of the phylogenetic tree.
 
 ### Read tree and load metadata
 
-For this example, we use data from Nextstrain:
+For this example, we use data from Nextstrain
+\[@hadfield2018nextstrain,sagulenko2018treetime\]:
 <https://nextstrain.org/ebola/ebov-2013?c=country>.
 
 ``` r
@@ -139,8 +140,8 @@ plot_saasi(ebola_tree, saasi_result = NULL,tip_cex = 1)
 Users can estimate the transition rate matrix Q using the function
 [`estimate_transition_rates()`](https://magpie-sfu.github.io/saasi/reference/estimate_transition_rates.md).
 Users can specify the model for the transition rate matrix: 1. Equal
-rate `ER`, 2. Symmetric rate `SYM`, 3. All rates different `ARD`, and
-Custom `custom_q`.
+rate `ER`, 2. Symmetric rate `SYM`, 3. All rates different `ARD`, and or
+a custom structure for the matrix.
 
 ``` r
 

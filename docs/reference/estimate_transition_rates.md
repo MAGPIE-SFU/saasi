@@ -59,15 +59,32 @@ function is used to fit \\Q\\ to the provided phylogenetic tree.
 ## Examples
 
 ``` r
-# Load a timed phylogenetic tree for Ebola
-data(ebola_tree)
+# Use the demo tree
+demo_tree
+#> 
+#> Phylogenetic tree with 13 tips and 12 internal nodes.
+#> 
+#> Tip labels:
+#>   sp2, sp4, sp8, sp9, sp10, sp26, ...
+#> Node labels:
+#>   nd1, nd2, nd6, nd22, nd27, nd74, ...
+#> 
+#> Rooted; includes branch length(s).
 
 # Use the simmap function to estimate the rate transition matrix
-# - Impose a symmetric form on the matrix
-Q <- estimate_transition_rates(ebola_tree, matrix_structure = "SYM")
+# - Impose equal rates for the matrix structure
+estimate_transition_rates(demo_tree_prepared, matrix_structure = "ER")
+#>            1          2          3
+#> 1 -1.7548671  0.8774336  0.8774336
+#> 2  0.8774336 -1.7548671  0.8774336
+#> 3  0.8774336  0.8774336 -1.7548671
 
+if (FALSE) { # \dontrun{
 # Use ace to estimate the rate transition matrix
-# - Impose a structure such that transitions to or from Guinea happen at a different rate than Liberia or Sierra Leone
-struct <- matrix(c(0, 1, 1, 1, 0, 2, 1, 2, 0), nrow=3, ncol=3)
-Q <- estimate_transition_rates(ebola_tree, matrix_structure = struct)
+# - Impose a structure such that transitions to or from the first state happen at a different rate than second and third states
+struct <- matrix(c(0, 1, 2, 
+                   1, 0, 2, 
+                   2, 2, 0), nrow=3, ncol=3)
+estimate_transition_rates(demo_tree_prepared, matrix_structure = struct)
+} # }
 ```

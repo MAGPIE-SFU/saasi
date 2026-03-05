@@ -27,8 +27,8 @@ ability to handle sampling bias:
 # Define birth-death-sampling parameters
 demo_pars <- data.frame(
   state = c("1", "2", "3"), 
-  rootprior = c(1/3, 1/3, 1/3), 
-  lambda = c(3, 1.5, 1.5),      # Birth rate, also varies across states
+  root_prior = c(1/3, 1/3, 1/3), 
+  lambda = c(3, 1.5, 1.5),        # Birth rate, also varies across states
   mu = c(0.1, 0.1, 0.1),          # Death rate
   psi = c(0.1, 1.0, 1.0)          # Sampling rate (heterogeneous!)
 )
@@ -57,9 +57,9 @@ phy <- sim_bds_tree(
   params_df = demo_pars, 
   q_matrix = demo_Q, 
   x0 = 1,                    # Start at state 1
-  max_taxa = 500,             # Initial tree size
+  max_taxa = 500,            # Initial tree size
   max_t = 50,                # Maximum time depth
-  min_tip = 100               # Minimum tips after post-processing
+  min_tip = 100              # Minimum tips after post-processing
 )
 ```
 
@@ -77,9 +77,9 @@ Run SAASI to infer ancestral states:
 
 # Run SAASI
 
-saasi_result <- saasi(phy = phy,              # phylogenetic tree
-                     Q = demo_Q,       # transition rate matrix
-                     pars = demo_pars)  
+saasi_result <- saasi(phy = phy,        # phylogenetic tree
+                      Q = demo_Q,       # transition rate matrix
+                      pars = demo_pars)  
 ```
 
 Calculate accuracy:

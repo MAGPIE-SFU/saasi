@@ -1,6 +1,12 @@
-# Plot phylogenetic tree with saasi results
+# Plot a phylogenetic tree with SAASI tip annotations
 
-Plot phylogenetic tree with saasi results
+`plot_saasi()` plots a phylogenetic tree annoted with
+[`saasi()`](https://magpie-sfu.github.io/saasi/reference/saasi.md)
+output. Tips are annotated with their states. Internal nodes are
+annotated with a pie chart showing the marginal distribution over states
+for each node. The
+[`ape::plot.phylo()`](https://rdrr.io/pkg/ape/man/plot.phylo.html)
+function is used for plotting.
 
 ## Usage
 
@@ -8,7 +14,7 @@ Plot phylogenetic tree with saasi results
 plot_saasi(
   tree,
   saasi_result,
-  colors = NULL,
+  colours = NULL,
   tip_cex = 0.5,
   node_cex = 0.2,
   save_file = NULL,
@@ -22,56 +28,70 @@ plot_saasi(
 
 - tree:
 
-  A phylo object containing tip.state
+  An object of class `phylo` with `tip.state` attribute.
 
 - saasi_result:
 
-  Output from saasi()
+  Output of
+  [`saasi()`](https://magpie-sfu.github.io/saasi/reference/saasi.md)
+  containing internal node annotations.
 
-- colors:
+- colours:
 
-  Character vector of colors. If NULL, colors are automatically
-  generated based on the number of states (default: NULL)
+  Optional character vector specifying the node colour for each state.
+  By default, colours are automatically generated based on the number of
+  states.
 
 - tip_cex:
 
-  Size of tip circles (default: 0.5)
+  Size of the tips. Default value is 0.5.
 
 - node_cex:
 
-  Size of node pie charts (default: 0.2)
+  Size of node pie charts. Default value is 0.2.
 
 - save_file:
 
-  Character. File path to save the plot (e.g. "tree.png"). If NULL, plot
-  is drawn to current device (default: NULL)
+  Optional string specifying the file path where the plot will be saved.
+  By default the plot is displayed on the current device.
 
 - width:
 
-  Plot width in pixels when saving (default: 3000)
+  Width of the plot in pixels. Only relevant if saving to file. Default
+  value is 3000 pixels.
 
 - height:
 
-  Plot height in pixels when saving (default: 3000)
+  Height of the plot in pixels. Only relevant if saving to file. Default
+  value is 3000 pixels.
 
 - res:
 
-  Plot resolution in dpi when saving (default: 300)
+  Plot resolution in dpi. Only relevant if saving to file. Default value
+  is 300 dpi.
 
 ## Value
 
-Invisibly returns the color vector used
+If a save file is specified, the plot will be saved as directed. If not,
+then the plot will be displayed on the users device. The function
+returns the output of `plot.phylo()`, a list containing plot
+specifications.
 
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-# Basic plot
-plot_saasi(tree, saasi_result)
+# Run SAASI
+saasi_res <- saasi(demo_tree_prepared, demo_Q, demo_pars)
+#> Tree is compatible with SAASI
 
-# Custom colors and save to file
+# Plot the results using the default settings
+plot_saasi(demo_tree_prepared, saasi_res)
+
+
+if (FALSE) { # \dontrun{
+# Use custom colours and save the result to tree.png
 plot_saasi(tree, saasi_result,
-           colors = c("red", "blue", "green"),
+           colours = c("orange", "darkblue", "pink"),
            node_cex = 0.3,
            save_file = "tree.png")
 } # }

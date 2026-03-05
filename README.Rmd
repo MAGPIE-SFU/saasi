@@ -31,18 +31,6 @@ Saasi is an ancestral state reconstruction method that accounts for variation in
  remotes::install_github("MAGPIE-SFU/saasi")
  
  ```
- For this particular branch, use:
- 
- ``` r
- # install.packages("remotes")
- 
- remotes::install_github("MAGPIE-SFU/saasi", ref = "saasi-maintaining")
-
- ```
- 
- Before running this demo, please make sure the following packages are installed:
- saasi, diversitree, tidytree, ape, phytools, readr
-
 ## Building documentation
 
 This package uses roxygen2 and pkgdown.

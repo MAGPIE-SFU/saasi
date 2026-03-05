@@ -3,11 +3,10 @@
 
 # saasi
 
-<!-- badges: start -->
-<!-- badges: end -->
+<!-- badges: start --> <!-- badges: end -->
 
-This vignette demonstrates how to use the `saasi` package for ancestral
-state reconstruction.
+Saasi is an ancestral state reconstruction method that accounts for
+variation in sampling rates among locations or traits.
 
 ## Installation
 
@@ -16,21 +15,9 @@ You can install the development version of saasi from
 
 ``` r
 # install.packages("remotes")
+
 remotes::install_github("MAGPIE-SFU/saasi")
 ```
-
-# Overview
-
-The `saasi` function requires three main inputs:
-
-1.  **A phylogenetic tree** (class `phylo`) that is:
-
-    - Rooted and binary
-    - Has branch lengths in units of time (all positive)
-    - Contains tip states (`tree$tip.state`) with no missing values
-
-    Use `check_tree_compatibility()` to verify compatibility and
-    `prepare_tree_for_saasi()` to prepare your tree.
 
 ## Building documentation
 

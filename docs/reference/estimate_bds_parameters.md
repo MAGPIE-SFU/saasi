@@ -44,7 +44,7 @@ estimate_bds_parameters(
 - n_starts:
 
   The number of starting points for multi-start optimization. Default
-  value is `100`.
+  value is 100.
 
 - force_two_step:
 
@@ -54,27 +54,27 @@ estimate_bds_parameters(
 - psi_max:
 
   Maximum sampling rate per unit time. Must be strictly positive.
-  Default value is `7`.
+  Default value is 7.
 
 - r0_min:
 
-  Minimum basic reproductive number (R0 = lambda/(mu+psi)). Must be
-  strictly positive. Default 1.
+  Minimum basic reproductive number (\\R_0 = \lambda/(\mu+\psi)\\). Must
+  be strictly positive. Default value is 1.
 
 - r0_max:
 
   Maximum basic reproductive number. Must be strictly positive. Default
-  5.
+  value is 5.
 
 - infectious_period_min:
 
-  Minimum infectious period (1/(mu+psi)). Must be strictly positive.
-  Default NULL.
+  Minimum infectious period (\\1/(\mu+\psi)\\). Must be strictly
+  positive. Default value is `NULL`.
 
 - infectious_period_max:
 
-  Maximum infectious period (1/(mu+psi)). Must be strictly positive.
-  Default NULL.
+  Maximum infectious period (\\1/(\mu+\psi)\\). Must be strictly
+  positive. Default value is `NULL`.
 
 ## Value
 
@@ -134,17 +134,33 @@ step 1.
 ## Examples
 
 ``` r
-data(ebola_tree)
-
-# Use the following information about the 2013 Ebola outbreak to obtain estimates
-# - Average removal rate of 5
-# - Infectious periods range from 20 to 40 days
-# - An upper bound on the sampling rate of 15
-# - Plausible values for the basic reproduction number are between 1.5 and 3
-BDS_fit <- estimate_bds_parameters(ebola_tree, mu = 5,
-                                               psi_max = 15,
-                                               infectious_period_min = 20/365,
-                                               infectious_period_max = 40/365,
-                                               r0_min = 1.5,
-                                               r0_max = 3)
+# Use the demo tree with bounds based on the demo parameters
+# - Removal rate of 0.3
+# - Infectious periods range from 0.75 to 1.5 years
+# - An upper bound on the sampling rate of 1
+# - Plausible values for the basic reproduction number are between 1.5 and 2
+estimate_bds_parameters(demo_tree, mu = 0.3,
+                                   psi_max = 1,
+                                   infectious_period_min = 0.75,
+                                   infectious_period_max = 1.5,
+                                   r0_min = 1.5,
+                                   r0_max = 2)
+#> $lambda
+#> [1] 2.510424
+#> 
+#> $psi
+#> [1] 0.9546599
+#> 
+#> $mu
+#> [1] 0.3
+#> 
+#> $r0
+#> [1] 2.00088
+#> 
+#> $infectious_period
+#> [1] 0.7970287
+#> 
+#> $net_diversification
+#> [1] 1.844612
+#> 
 ```

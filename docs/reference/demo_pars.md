@@ -1,8 +1,8 @@
-# Birth-death-sampling parameters for demonstration tree
+# SAASI demonstration: birth-death-sampling process parameters
 
-A data frame containing the birth-death-sampling parameters used to
-simulate the demonstration tree. These parameters control
-diversification and sampling rates for each character state.
+A `data.frame` specifying the parameters of the birth-death-sampling
+process that is used to simulate the demonstration tree. These
+parameters control diversification and sampling rates for each state.
 
 ## Usage
 
@@ -14,25 +14,25 @@ demo_pars
 
 A data frame with 3 rows (one per state) and 5 columns:
 
-- state:
+- `state`:
 
-  Character state names (1, 2, or 3)
+  The character label for each state
 
-- rootprior:
+- `root_prior`:
 
-  Prior probability of root being in each state (1/3 each)
+  Prior probability distribution over states for the root node
 
-- lambda:
+- `lambda`:
 
-  Speciation rate (1.5 for all states)
+  Numeric speciation rate for each state
 
-- mu:
+- `mu`:
 
-  Extinction rate (0.3 for all states)
+  Numeric extinction rate for each state
 
-- psi:
+- `psi`:
 
-  Sampling rate (0.1 for state 1, 0.5 for states 2 and 3)
+  Numeric Sampling rate for each state
 
 ## Examples
 
@@ -43,7 +43,4 @@ demo_pars
 #> 1     1 0.3333333    1.5 0.3 0.1
 #> 2     2 0.3333333    1.5 0.3 0.5
 #> 3     3 0.3333333    1.5 0.3 0.5
-# Compare sampling rates across states
-demo_pars$psi
-#> [1] 0.1 0.5 0.5
 ```

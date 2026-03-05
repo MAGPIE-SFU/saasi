@@ -1,6 +1,7 @@
-# Simulated demonstration tree example
+# SAASI demonstration: pre-prepared tree
 
-A simulated birth-death-sampling tree with 13 tips and 3 states.
+A simulated birth-death-sampling tree with 13 tips and 3 states. The
+tree has pre-prepared to be compatible with `saasi`.
 
 ## Usage
 
@@ -10,7 +11,7 @@ demo_tree_prepared
 
 ## Format
 
-A `phylo` tree object with the following components
+An object of class `phylo` with `tip.state` attribute
 
 ## Examples
 

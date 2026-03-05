@@ -1,6 +1,6 @@
-# Metadata for demonstration tree
+# SAASI demonstration: tree metadata
 
-A data frame containing the node name and tip states
+A `data.frame` linking the tip nodes to their state
 
 ## Usage
 
@@ -10,15 +10,15 @@ demo_metadata
 
 ## Format
 
-A data frame with 13 rows (one per tip) and 2 columns
+A `data.frame` with 13 rows (one per tip) and 2 columns
 
-- node:
+- `node`:
 
-  node name for each tip
+  Node labels for each tip
 
-- state:
+- `state`:
 
-  Character state for each tip (1, 2, or 3)
+  Character state for each tip
 
 ## Examples
 
@@ -39,6 +39,4 @@ demo_metadata
 #> 11 sp64     3
 #> 12 sp72     2
 #> 13 sp75     3
-demo_metadata$states
-#> NULL
 ```

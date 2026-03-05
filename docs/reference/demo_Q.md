@@ -1,8 +1,8 @@
-# Transition rate matrix for demonstration tree
+# SAASI demonstration: transition rate matrix
 
-A 3x3 transition rate matrix (Q matrix) used to simulate the
+A 3x3 transition rate matrix used to simulate discrete states in the
 demonstration tree. This matrix defines the instantaneous rates of
-transition between character states.
+transition between states.
 
 ## Usage
 
