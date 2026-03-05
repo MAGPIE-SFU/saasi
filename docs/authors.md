@@ -4,17 +4,19 @@
 
 - **Ivan Gill**. Author.
 
-- **Yexuan Song**. Maintainer.
+- **Yexuan Song**. Maintainer. [](https://orcid.org/0009-0004-8316-4293)
 
-- **Renny Doig**. Contributor.
+- **Renny Doig**. Author. [](https://orcid.org/0000-0002-5691-0519)
 
 - **Caroline Colijn**. Contributor.
+  [](https://orcid.org/0000-0001-6097-6708)
 
 - **Jennifer McNichol**. Contributor.
+  [](https://orcid.org/0000-0002-7100-0855)
 
-- **Alex Beams**. Contributor.
+- **Alex Beams**. Contributor. [](https://orcid.org/0000-0002-6656-0217)
 
-- **Brad Jones**. Contributor.
+- **Brad Jones**. Contributor. [](https://orcid.org/0000-0003-4498-1069)
 
 - **Lars Berling**. Contributor.
   [](https://orcid.org/0000-0002-1303-0669)

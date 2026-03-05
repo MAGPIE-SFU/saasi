@@ -128,7 +128,7 @@ and <code>infectious_period_max</code> parameters, then the MLEs of \(\lambda\) 
 in which case the original estimates of \(\lambda\) and \(\psi\) are returned regardless of
 whether or not the constraints are satisfied.
 If LTT regression fails then the MLEs of \(\lambda\) and \(\psi\) will be returned.</p>
-<p>The MLEs are obtained numerically using the <code>L-BFGS-S</code> algorithm (see optim for implementation details) <code>n_starts</code> times from randomly chosen starting points
+<p>The MLEs are obtained numerically using the <code>L-BFGS-S</code> algorithm (see <a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim</a> for implementation details) <code>n_starts</code> times from randomly chosen starting points
 and selecting the best maximizer of all attempts. Due to the user-imposed constraints, not all randomly generated starting
 points are valid, so <code>100*n_starts</code> attempts are made to generate valid starting points. This may result in fewer than <code>n_starts</code> optimizations
 actually being performed.</p>
@@ -179,7 +179,7 @@ numerically unstable, the function falls back to the MLE estimates from step 1.<
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Ivan Gill, Yexuan Song.</p>
+  <p>Developed by Ivan Gill, Yexuan Song, Renny Doig.</p>
 </div>
 
 <div class="pkgdown-footer-right">

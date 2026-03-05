@@ -6,17 +6,17 @@
 #' Estimation is carried out by first estimating the reproduction number \eqn{\frac{\lambda}{\mu+\psi}} and the net diversification rate \eqn{\lambda-\mu-\psi},
 #' then solving for the unknown \eqn{\lambda} and \eqn{\psi}. The net diversification rate is estimated by
 #' performing a lineages-through-time (LTT) regression on node times that are within the quantiles specified in the `trim` input
-#' and the reproduction number is estimated by first computing maximum likelihood 
+#' and the reproduction number is estimated by first computing maximum likelihood
 #' estimates (MLEs) of \eqn{\lambda} and \eqn{\psi} by numerically optimizing a likelihood and then compute the reproduction number.
 #' The stability of the MLEs is assessed by checking if the estimate of \eqn{R_0} is within 0.02 of 1.
-#' 
+#'
 #' If the estimates of \eqn{\lambda} and \eqn{\psi} do not satisfy all of the constraints specified by the `psi_max`, `r0_min`, `r0_max`, `infectious_period_min`,
 #' and `infectious_period_max` parameters, then the MLEs of \eqn{\lambda} and \eqn{\psi} are returned, unless `force_two_step=TRUE`
-#' in which case the original estimates of \eqn{\lambda} and \eqn{\psi} are returned regardless of 
+#' in which case the original estimates of \eqn{\lambda} and \eqn{\psi} are returned regardless of
 #' whether or not the constraints are satisfied.
-#' If LTT regression fails then the MLEs of \eqn{\lambda} and \eqn{\psi} will be returned. 
-#' 
-#' The MLEs are obtained numerically using the `L-BFGS-S` algorithm (see \link[stats::optim()]{optim} for implementation details) `n_starts` times from randomly chosen starting points
+#' If LTT regression fails then the MLEs of \eqn{\lambda} and \eqn{\psi} will be returned.
+#'
+#' The MLEs are obtained numerically using the `L-BFGS-S` algorithm (see \link[stats]{optim} for implementation details) `n_starts` times from randomly chosen starting points
 #' and selecting the best maximizer of all attempts. Due to the user-imposed constraints, not all randomly generated starting
 #' points are valid, so `100*n_starts` attempts are made to generate valid starting points. This may result in fewer than `n_starts` optimizations
 #' actually being performed.
@@ -77,16 +77,16 @@ estimate_bds_parameters <- function(
   if(missing(mu) || is.null(mu)){
     stop("Extinction rate mu must have a numeric value.")
   }
-  
+
   if(!inherits(phy, "phylo")){
     stop("Input phy must be an object with class phylo.")
   }
-  
+
   # Early constraint compatibility validation
   if(!is.null(infectious_period_min) && !is.null(infectious_period_max)){
     removal_rate_min <- 1/infectious_period_max
     removal_rate_max <- 1/infectious_period_min
-    
+
     # Check mu compatibility
     if(mu >= removal_rate_max){
       stop(sprintf(
@@ -94,22 +94,22 @@ estimate_bds_parameters <- function(
         mu, removal_rate_max
       ))
     }
-    
+
     # Check lambda compatibility
     min_required_lambda <- r0_min * removal_rate_min
     max_allowed_lambda <- r0_max * removal_rate_max
-    
+
     if(min_required_lambda > max_allowed_lambda){
       stop(sprintf(
         "Conflicting R0 constraints: r0_min requires lambda >= %.4f, but r0_max allows lambda <= %.4f. Either decrease r0_min or increase r0_max.",
         min_required_lambda, max_allowed_lambda
       ))
     }
-    
+
     # Check psi range
     psi_min <- max(0, removal_rate_min - mu)
     psi_max_eff <- min(psi_max, removal_rate_max - mu)
-    
+
     if(psi_min > psi_max_eff){
       stop(sprintf(
         "Infeasible psi range: [%.4f, %.4f]. mu=%.4f is incompatible with infectious period constraints. Either decrease mu or adjust infectious_period bounds.",
@@ -117,7 +117,7 @@ estimate_bds_parameters <- function(
       ))
     }
   }
-  
+
   # Initialize variables
   two_step_successful <- FALSE
   estimated_psi <- NA
@@ -125,7 +125,7 @@ estimate_bds_parameters <- function(
   a <- NA
   b <- NA
   fixed_mu_fit <- NULL
-  
+
   tryCatch({
     # Step 1: Fit birth and sampling rates given fixed mu (MLE)
     fixed_mu_fit <- fit_bd_fixed_mu(
@@ -138,13 +138,13 @@ estimate_bds_parameters <- function(
       infectious_period_min = infectious_period_min,
       infectious_period_max = infectious_period_max
     )
-    
+
     # Step 2: Estimate net rate from lineage-through-time data
     a <- estimate_a(phy, trim = trim)
-    
+
     # Step 3: Calculate ratio b = lambda/(mu+psi)
     b <- fixed_mu_fit$lambda / (fixed_mu_fit$psi + fixed_mu_fit$mu)
-    
+
     # Step 4: Check numerical stability
     if(is.na(a)){
       warning("Failed to estimate the net rate from lineage-through-time data. Using maximum likelihood estimates only.")
@@ -157,57 +157,57 @@ estimate_bds_parameters <- function(
       # Step 5: Solve for lambda and psi using two-step method
       estimated_psi <- (a + mu - b * mu) / (b - 1)
       estimated_lambda <- a + mu + estimated_psi
-      
+
       # Step 6: Validate two-step estimates
       constraints_satisfied <- TRUE
       constraint_violations <- c()
-      
+
       # Check positivity
       if(estimated_psi < 0){
         constraints_satisfied <- FALSE
         constraint_violations <- c(constraint_violations, sprintf("psi < 0 (%.4f)", estimated_psi))
       }
-      
+
       if(estimated_lambda < 0){
         constraints_satisfied <- FALSE
         constraint_violations <- c(constraint_violations, sprintf("lambda < 0 (%.4f)", estimated_lambda))
       }
-      
+
       # Check R0 bounds
       if(estimated_psi >= 0 && estimated_lambda >= 0){
         removal_rate <- mu + estimated_psi
         estimated_r0 <- estimated_lambda / removal_rate
-        
+
         # Check growth (R0 > 1)
         if(estimated_lambda <= removal_rate){
           constraints_satisfied <- FALSE
           constraint_violations <- c(constraint_violations, sprintf("R0 <= 1 (%.4f)", estimated_r0))
         }
-        
+
         # Check R0 bounds
         if(estimated_r0 < r0_min){
           constraints_satisfied <- FALSE
           constraint_violations <- c(constraint_violations, sprintf("R0 < r0_min (%.4f < %.4f)", estimated_r0, r0_min))
         }
-        
+
         if(estimated_r0 > r0_max){
           constraints_satisfied <- FALSE
           constraint_violations <- c(constraint_violations, sprintf("R0 > r0_max (%.4f > %.4f)", estimated_r0, r0_max))
         }
-        
+
         # Check psi bounds
         if(estimated_psi > psi_max){
           constraints_satisfied <- FALSE
           constraint_violations <- c(constraint_violations, sprintf("psi > psi_max (%.4f > %.4f)", estimated_psi, psi_max))
         }
-        
+
         # Check infectious period bounds
         inf_period <- 1 / removal_rate
         if(!is.null(infectious_period_min) && inf_period < infectious_period_min){
           constraints_satisfied <- FALSE
           constraint_violations <- c(constraint_violations, sprintf("inf.period < min (%.4f < %.4f)", inf_period, infectious_period_min))
         }
-        
+
         if(!is.null(infectious_period_max) && inf_period > infectious_period_max){
           constraints_satisfied <- FALSE
           constraint_violations <- c(constraint_violations, sprintf("inf.period > max (%.4f > %.4f)", inf_period, infectious_period_max))
@@ -217,12 +217,12 @@ estimate_bds_parameters <- function(
         two_step_successful <- TRUE
       }
     }
-    
+
   }, error = function(e){
     warning(sprintf("Estimation failed: %s", e$message))
     stop("Cannot proceed. Try relaxing constraints or checking tree structure.")
   })
-  
+
   # Determine final estimates
   if(two_step_successful && !force_two_step){
     final_lambda <- estimated_lambda
@@ -239,10 +239,10 @@ estimate_bds_parameters <- function(
     final_psi <- fixed_mu_fit$psi
     estimation_method <- "mle_constrained"
   }
-  
+
   final_mu <- mu
   final_inf_period <- 1 / (final_mu + final_psi)
-  
+
   # Return results
   result <- list(
     lambda = unname(final_lambda),
@@ -304,11 +304,11 @@ logsumexp <- function(a, b, c){
 log_q <- function(t, lambda, mu, psi){
   c1v <- c1(lambda, mu, psi)
   c2v <- c2(lambda, mu, psi)
-  
+
   term <- 2 * (1 - c2v^2)
   if(term <= 0){
     return(rep(-Inf, length(t)))
-  } 
+  }
   A <- log(term)
   B <- (-c1v * t) + 2 * log(abs(1 - c2v))
   C <- ( c1v * t) + 2 * log(abs(1 + c2v))
@@ -352,11 +352,11 @@ log_ge <- function(phy, lambda, mu, psi){
 #' @keywords internal
 #' @noRd
 estimate_a <- function(phy, trim = c(0.10, 0.50)){
-  
+
   if(length(trim) != 2 || !is.numeric(trim) || any(trim < 0) || any(trim > 1) || trim[1] >= trim[2]){
     stop("'trim' must be a numeric vector of length 2, and 0 <= trim[1] < trim[2] <= 1.")
   }
-  
+
   phy <- ape::reorder.phylo(phy, "cladewise")
   h <- ape::node.depth.edgelength(phy)
   ntip <- ape::Ntip(phy)
@@ -364,7 +364,7 @@ estimate_a <- function(phy, trim = c(0.10, 0.50)){
   bt <- sort(h[internal])
   bt <- bt[bt > 0]
   L <- 1 + seq_along(bt)
-  
+
   tmin <- stats::quantile(bt, trim[1])
   tmax <- stats::quantile(bt, trim[2])
   keep <- bt >= tmin & bt <= tmax
@@ -376,7 +376,7 @@ estimate_a <- function(phy, trim = c(0.10, 0.50)){
 #'
 #' Creates valid starting points for lambda and psi that satisfy all constraints
 #' including R0 bounds, removal rate bounds, and growth requirements.
-#' 
+#'
 #' Attempts to generate n_starts values for lambda and psi.
 #' However if more than 100*n_starts attempts are made, then fewer than n_starts values are returned
 #' and a warning message is displayed to the user.
@@ -404,34 +404,34 @@ generate_starting_points <- function(
 ){
   starts <- list()
   set.seed(123)
-  
+
   # Identify lambda_min
   lambda_min_from_r0 <- r0_min * removal_rate_min
   lambda_min_from_growth <- removal_rate_min + 0.001
   lambda_min <- max(lambda_min_from_r0, lambda_min_from_growth)
-  
+
   # Identify lambda_max
   if(is.finite(removal_rate_max)){
     lambda_max <- r0_max * removal_rate_max
   }else{
     lambda_max <- r0_max * 100
   }
-  
+
   if(lambda_min >= lambda_max){
     warning("Cannot generate valid lambda values. Lambda bounds depend on removal_rate_min and removal_rate_max.")
     return(list())
   }
-  
+
   max_attempts <- n_starts * 100
   attempt <- 0
   while(length(starts) < n_starts && attempt < max_attempts){
     attempt <- attempt + 1
     lambda_ini <- stats::runif(1, lambda_min, lambda_max)
     psi_ini <- stats::runif(1, psi_min, psi_max)
-    
+
     removal_rate <- mu + psi_ini
     r0_ini <- lambda_ini / removal_rate
-    
+
     valid <- TRUE
     # Removal rate bounds
     if(removal_rate < removal_rate_min || removal_rate > removal_rate_max){
@@ -453,7 +453,7 @@ generate_starting_points <- function(
       starts[[length(starts) + 1]] <- c(lambda = lambda_ini, psi = psi_ini)
     }
   }
-  
+
   if(length(starts) < n_starts){
     warning("Fewer than n_starts starting points could be generated. Consider relaxing parameter constraints.")
   }
@@ -468,8 +468,8 @@ generate_starting_points <- function(
 #' @param phy A phylo object with branch lengths
 #' @param mu Fixed extinction rate
 #' @param n_starts Number of starting points
-#' @param psi_max Maximum sampling rate 
-#' @param r0_min Minimum R0 
+#' @param psi_max Maximum sampling rate
+#' @param r0_min Minimum R0
 #' @param r0_max Maximum R0
 #' @param infectious_period_min Minimum infectious period (1/(mu+psi))
 #' @param infectious_period_max Maximum infectious period (1/(mu+psi))
@@ -496,7 +496,7 @@ fit_bd_fixed_mu <- function(
   }else{
     removal_rate_max <- Inf
   }
-  
+
   psi_min <- max(0, removal_rate_min - mu)
   if(is.finite(removal_rate_max)){
     psi_max_from_period <- removal_rate_max - mu
@@ -504,34 +504,34 @@ fit_bd_fixed_mu <- function(
     psi_max_from_period <- Inf
   }
   psi_max_eff <- min(psi_max, psi_max_from_period)
-  
+
   if(psi_max_eff < psi_min){
     stop(sprintf(
-      "Infeasible constraints: psi must be in [%.4f, %.4f] which is empty. mu=%.4f is incompatible with infectious_period_max=%.4f. Either decrease mu or increase infectious_period_max.", 
+      "Infeasible constraints: psi must be in [%.4f, %.4f] which is empty. mu=%.4f is incompatible with infectious_period_max=%.4f. Either decrease mu or increase infectious_period_max.",
       psi_min, psi_max_eff, mu, infectious_period_max
     ))
   }
-  
+
   lambda_min_from_r0 <- r0_min * removal_rate_min
   lambda_min_from_growth <- removal_rate_min + 1e-6
   lambda_min <- max(lambda_min_from_r0, lambda_min_from_growth)
-  
+
   if(is.finite(removal_rate_max)){
     lambda_max <- r0_max * removal_rate_max
   }else{
     lambda_max <- r0_max * 1000
   }
-  
+
   if(lambda_min >= lambda_max){
     stop(sprintf(
       "Infeasible constraints: lambda must be in [%.4f, %.4f] which is empty. Check that r0_min (%.2f), r0_max (%.2f), and infectious_period constraints are compatible.",
       lambda_min, lambda_max, r0_min, r0_max
     ))
   }
-  
+
   lower <- c(lambda_min, psi_min)
   upper <- c(lambda_max, psi_max_eff)
-  
+
   starts <- generate_starting_points(
     n_starts = n_starts,
     mu = mu,
@@ -542,31 +542,31 @@ fit_bd_fixed_mu <- function(
     removal_rate_min = removal_rate_min,
     removal_rate_max = removal_rate_max
   )
-  
+
   if(length(starts) == 0){
     stop("Failed to generate any valid starting points. Relax the parameter constraints.")
   }
-  
+
   # Likelihood function with quadratic penalty
   loglik <- function(par){
     lambda <- par[1]
     psi    <- par[2]
-    
+
     if(lambda <= 0 || psi < 0) return(-1e10)
-    
+
     r0 <- lambda / (mu + psi)
-    
+
     # Compute base likelihood
     base_lik <- tryCatch({
       log_ge(phy, lambda, mu, psi)
     }, error = function(e){
       return(-1e10)
     })
-    
+
     if(!is.finite(base_lik)){
       return(base_lik)
     }
-    
+
     # Apply penalty for R0 constraint violations
     penalty <- 0
     if(r0 < r0_min){
@@ -577,13 +577,13 @@ fit_bd_fixed_mu <- function(
       violation <- r0 - r0_max
       penalty <- 1000 * violation^2
     }
-    
+
     return(base_lik - penalty)
   }
-  
+
   results <- list()
   log_liks <- numeric(length(starts))
-  
+
   for(i in seq_along(starts)){
     start_i <- starts[[i]]
     fit <- tryCatch({
@@ -598,20 +598,20 @@ fit_bd_fixed_mu <- function(
     }, error = function(e){
       list(value = -1e10, convergence = 999, par = start_i, message = as.character(e))
     })
-    
+
     results[[i]] <- fit
     log_liks[i] <- fit$value
   }
-  
+
   # Find best result
   best_idx <- which.max(log_liks)
   best_fit <- results[[best_idx]]
-  
+
   # Check if we got reasonable results
   if(!is.finite(best_fit$value) || best_fit$value < -1e9){
     stop("All optimization attempts failed. Try relaxing constraints.")
   }
-  
+
   list(
     lambda             = best_fit$par[1],
     psi                = best_fit$par[2],

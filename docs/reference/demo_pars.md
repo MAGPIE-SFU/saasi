@@ -18,7 +18,7 @@ A data frame with 3 rows (one per state) and 5 columns:
 
   The character label for each state
 
-- `root_prior`:
+- `rootprior`:
 
   Prior probability distribution over states for the root node
 

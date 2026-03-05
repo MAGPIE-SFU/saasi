@@ -26,8 +26,8 @@ ability to handle sampling bias:
 
 # Define birth-death-sampling parameters
 demo_pars <- data.frame(
-  state = c("1", "2", "3"), 
-  root_prior = c(1/3, 1/3, 1/3), 
+  state = c("1", "2", "3"),
+  root_prior = c(1/3, 1/3, 1/3),
   lambda = c(3, 1.5, 1.5),        # Birth rate, also varies across states
   mu = c(0.1, 0.1, 0.1),          # Death rate
   psi = c(0.1, 1.0, 1.0)          # Sampling rate (heterogeneous!)
@@ -54,8 +54,8 @@ set.seed(123)
 
 # Generate tree with built-in post-processing
 phy <- sim_bds_tree(
-  params_df = demo_pars, 
-  q_matrix = demo_Q, 
+  params_df = demo_pars,
+  q_matrix = demo_Q,
   x0 = 1,                    # Start at state 1
   max_taxa = 500,            # Initial tree size
   max_t = 50,                # Maximum time depth
@@ -79,7 +79,7 @@ Run SAASI to infer ancestral states:
 
 saasi_result <- saasi(phy = phy,        # phylogenetic tree
                       Q = demo_Q,       # transition rate matrix
-                      pars = demo_pars)  
+                      pars = demo_pars)
 ```
 
 Calculate accuracy:
@@ -110,16 +110,16 @@ Let’s plot the truth, the ace predictions and the saasi predictions:
 ``` r
 
 true_result = 0*saasi_result
-for (k in 1:nrow(true_result)) { true_result[k, true_states[k]] = 1 } 
+for (k in 1:nrow(true_result)) { true_result[k, true_states[k]] = 1 }
 ```
 
 ``` r
 
 op <- par(mfrow = c(1, 3), mar = c(1, 1, 3, 1), oma = c(0, 0, 0, 0))
 on.exit(par(op), add = TRUE)
-plot_saasi(phy, true_result, tip_cex = 1, node_cex = 0.6); title("Truth") 
+plot_saasi(phy, true_result, tip_cex = 1, node_cex = 0.6); title("Truth")
 plot_saasi(phy, saasi_result, tip_cex = 1, node_cex = 0.6); title("SAASI")
-plot_saasi(phy, ace_result$lik.anc, tip_cex = 1, node_cex = 0.6); title("ACE") 
+plot_saasi(phy, ace_result$lik.anc, tip_cex = 1, node_cex = 0.6); title("ACE")
 ```
 
 ![](saasi_simulation_study_files/figure-html/plots-1.png)![](saasi_simulation_study_files/figure-html/plots-2.png)![](saasi_simulation_study_files/figure-html/plots-3.png)

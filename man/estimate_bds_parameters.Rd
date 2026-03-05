@@ -69,7 +69,7 @@ in which case the original estimates of \eqn{\lambda} and \eqn{\psi} are returne
 whether or not the constraints are satisfied.
 If LTT regression fails then the MLEs of \eqn{\lambda} and \eqn{\psi} will be returned.
 
-The MLEs are obtained numerically using the \code{L-BFGS-S} algorithm (see \link[stats::optim()]{optim} for implementation details) \code{n_starts} times from randomly chosen starting points
+The MLEs are obtained numerically using the \code{L-BFGS-S} algorithm (see \link[stats]{optim} for implementation details) \code{n_starts} times from randomly chosen starting points
 and selecting the best maximizer of all attempts. Due to the user-imposed constraints, not all randomly generated starting
 points are valid, so \code{100*n_starts} attempts are made to generate valid starting points. This may result in fewer than \code{n_starts} optimizations
 actually being performed.

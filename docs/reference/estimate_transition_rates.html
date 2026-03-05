@@ -105,9 +105,10 @@ If <code>fitMk</code> is selected, the <code><a href="https://rdrr.io/pkg/phytoo
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Use ace to estimate the rate transition matrix</span></span></span>
-<span class="r-in"><span><span class="co"># - Impose a structure such that transitions to or from the first state happen at a different rate than second and third states</span></span></span>
-<span class="r-in"><span><span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, </span></span>
-<span class="r-in"><span>                   <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">2</span>, </span></span>
+<span class="r-in"><span><span class="co"># - Impose a structure such that transitions to or from the first state</span></span></span>
+<span class="r-in"><span><span class="co">#   happen at a different rate than second and third states</span></span></span>
+<span class="r-in"><span><span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>                   <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>                   <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span>, ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">estimate_transition_rates</span><span class="op">(</span><span class="va">demo_tree_prepared</span>, matrix_structure <span class="op">=</span> <span class="va">struct</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
@@ -118,7 +119,7 @@ If <code>fitMk</code> is selected, the <code><a href="https://rdrr.io/pkg/phytoo
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Ivan Gill, Yexuan Song.</p>
+  <p>Developed by Ivan Gill, Yexuan Song, Renny Doig.</p>
 </div>
 
 <div class="pkgdown-footer-right">

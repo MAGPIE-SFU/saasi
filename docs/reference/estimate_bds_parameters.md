@@ -116,12 +116,12 @@ constraints are satisfied. If LTT regression fails then the MLEs of
 \\\lambda\\ and \\\psi\\ will be returned.
 
 The MLEs are obtained numerically using the `L-BFGS-S` algorithm (see
-optim for implementation details) `n_starts` times from randomly chosen
-starting points and selecting the best maximizer of all attempts. Due to
-the user-imposed constraints, not all randomly generated starting points
-are valid, so `100*n_starts` attempts are made to generate valid
-starting points. This may result in fewer than `n_starts` optimizations
-actually being performed.
+[optim](https://rdrr.io/r/stats/optim.html) for implementation details)
+`n_starts` times from randomly chosen starting points and selecting the
+best maximizer of all attempts. Due to the user-imposed constraints, not
+all randomly generated starting points are valid, so `100*n_starts`
+attempts are made to generate valid starting points. This may result in
+fewer than `n_starts` optimizations actually being performed.
 
 If the two-step method produces estimates that violate constraints or is
 numerically unstable, the function falls back to the MLE estimates from

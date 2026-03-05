@@ -8,7 +8,7 @@
 A data frame with 3 rows (one per state) and 5 columns:
 \describe{
 \item{\code{state}}{The character label for each state}
-\item{\code{root_prior}}{Prior probability distribution over states for the root node}
+\item{\code{rootprior}}{Prior probability distribution over states for the root node}
 \item{\code{lambda}}{Numeric speciation rate for each state}
 \item{\code{mu}}{Numeric extinction rate for each state}
 \item{\code{psi}}{Numeric Sampling rate for each state}

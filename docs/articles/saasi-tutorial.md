@@ -4,10 +4,8 @@
 
 library(saasi)
 library(diversitree)
-library(tidytree)
 library(ape)
 library(phytools)
-library(readr)
 ```
 
 ## Introduction
@@ -23,13 +21,12 @@ Unlike traditional methods that assume uniform sampling, SAASI
 explicitly models heterogeneous sampling, leading to ancestral state
 estimates that take sampling into account.
 
-SAASI is described in Song et
-al. <https://www.biorxiv.org/content/10.1101/2025.05.20.655151v2>.
+SAASI is described in Song et al. (2025).
 
 ## Installation
 
 You can install the development version of saasi from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/MAGPIE-SFU/saasi) with:
 
 ``` r
 
@@ -130,7 +127,7 @@ nextstrain. There are 193 tips from three countries.
 
 ``` r
 
-plot_saasi(ebola_tree, saasi_result = NULL,tip_cex = 1) 
+plot_saasi(ebola_tree, saasi_result = NULL,tip_cex = 1)
 ```
 
 ![](saasi-tutorial_files/figure-html/plottree-1.png)
@@ -171,8 +168,8 @@ between 1.5 and 3.
 
 rates <- estimate_bds_parameters(
     ebola_tree,
-    mu = 5, 
-    r0_max = 3, 
+    mu = 5,
+    r0_max = 3,
     r0_min = 1.5,
     psi_max = 15,
     infectious_period_min = 20/365, # convert days to years
@@ -250,7 +247,12 @@ opinion of the authors about the relative sampling during this outbreak.
 
 Hadfield, James, Colin Megill, Sidney M Bell, et al. 2018. “Nextstrain:
 Real-Time Tracking of Pathogen Evolution.” *Bioinformatics* 34 (23):
-4121–23.
+4121–23. <https://doi.org/10.1093/bioinformatics/bty407>.
 
 Sagulenko, Pavel, Vadim Puller, and Richard A Neher. 2018. “TreeTime:
 Maximum-Likelihood Phylodynamic Analysis.” *Virus Evol.* 4 (1).
+<https://doi.org/10.1093/ve/vex042>.
+
+Song, Yexuan, Ivan Gill, Ailene MacPherson, and Caroline Colijn. 2025.
+“Sampling Aware Ancestral State Inference.” *bioRxiv*, 2025–05.
+<https://doi.org/10.1101/2025.05.20.655151>.

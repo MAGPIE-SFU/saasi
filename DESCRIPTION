@@ -5,12 +5,12 @@ URL: https://github.com/MAGPIE-SFU/saasi/tree/saasi-maintaining,
      https://magpie-sfu.github.io/saasi
 Authors@R: c(
     person("Ivan", "Gill", email = "ivan_gill@sfu.ca", role = "aut"),
-    person("Yexuan", "Song", email = "yexuan_song@sfu.ca", role = "cre"),
-    person("Renny", "Doig", email = "", role = "ctb"),
-    person("Caroline", "Colijn", email = "", role = "ctb"),
-    person("Jennifer", "McNichol", email = "", role = "ctb"),
-    person("Alex", "Beams", email = "", role = "ctb"),
-    person("Brad", "Jones", email = "", role = "ctb"),
+    person("Yexuan", "Song", email = "yexuan_song@sfu.ca", role = "cre", comment = c(ORCID = "0009-0004-8316-4293")),
+    person("Renny", "Doig", email = "", role = "aut", comment = c(ORCID = "0000-0002-5691-0519")),
+    person("Caroline", "Colijn", email = "", role = "ctb", comment = c(ORCID = "0000-0001-6097-6708")),
+    person("Jennifer", "McNichol", email = "", role = "ctb", comment = c(ORCID = "0000-0002-7100-0855")),
+    person("Alex", "Beams", email = "", role = "ctb", comment = c(ORCID = "0000-0002-6656-0217")),
+    person("Brad", "Jones", email = "", role = "ctb", comment = c(ORCID = "0000-0003-4498-1069")),
     person("Lars", "Berling", email = "", role = "ctb", comment = c(ORCID = "0000-0002-1303-0669")))
 Description: Ancestral state reconstruction method that accounts for variation
   in sampling rate among locations.
@@ -18,7 +18,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Imports: 
+Imports:
     ape,
     deSolve,
     diversitree,
@@ -26,10 +26,11 @@ Imports:
     grDevices,
     graphics,
     phytools,
-    tidytree,
-    readr,
-Suggests: knitr, rmarkdown
+Suggests:
+    knitr,
+    rmarkdown,
+    readr
 VignetteBuilder: knitr
-Depends: 
+Depends:
     R (>= 3.5)
 LazyData: true

@@ -41,9 +41,10 @@ estimate_transition_rates(demo_tree_prepared, matrix_structure = "ER")
 
 \dontrun{
 # Use ace to estimate the rate transition matrix
-# - Impose a structure such that transitions to or from the first state happen at a different rate than second and third states
-struct <- matrix(c(0, 1, 2, 
-                   1, 0, 2, 
+# - Impose a structure such that transitions to or from the first state
+#   happen at a different rate than second and third states
+struct <- matrix(c(0, 1, 2,
+                   1, 0, 2,
                    2, 2, 0), nrow=3, ncol=3)
 estimate_transition_rates(demo_tree_prepared, matrix_structure = struct)
 }

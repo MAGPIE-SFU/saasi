@@ -1,8 +1,8 @@
 #' SAASI demonstration: timed phylogenetic tree
-#' 
+#'
 #' A simulated birth-death-sampling tree with 13 tips.
 #' The tip states are located separately in the [demo_metadata] file.
-#' 
+#'
 #' @format An object of class `phylo`
 #' @examples
 #' demo_tree
@@ -41,7 +41,7 @@
 #' @format A data frame with 3 rows (one per state) and 5 columns:
 #' \describe{
 #'   \item{`state`}{The character label for each state}
-#'   \item{`root_prior`}{Prior probability distribution over states for the root node}
+#'   \item{`rootprior`}{Prior probability distribution over states for the root node}
 #'   \item{`lambda`}{Numeric speciation rate for each state}
 #'   \item{`mu`}{Numeric extinction rate for each state}
 #'   \item{`psi`}{Numeric Sampling rate for each state}
@@ -54,9 +54,9 @@
 
 
 #' SAASI demonstration: tree metadata
-#' 
+#'
 #' A `data.frame` linking the tip nodes to their state
-#' 
+#'
 #' @format A `data.frame` with 13 rows (one per tip) and 2 columns
 #' \describe{
 #'    \item{`node`}{Node labels for each tip}
@@ -65,6 +65,6 @@
 #' @examples
 #' data(demo_metadata)
 #' demo_metadata
-#' 
+#'
 "demo_metadata"
 
