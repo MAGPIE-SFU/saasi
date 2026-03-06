@@ -1,16 +1,16 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://magpie-sfu.github.io/saasi/404.html</loc></url>
-<url><loc>https://magpie-sfu.github.io/saasi/LICENSE-text.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/articles/index.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/articles/saasi-tutorial.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/articles/saasi_simulation_study.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/authors.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/index.html</loc></url>
+<url><loc>https://magpie-sfu.github.io/saasi/LICENSE-text.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/reference/add_tip_states.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/reference/check_tree_compatibility.html</loc></url>
-<url><loc>https://magpie-sfu.github.io/saasi/reference/demo_Q.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/reference/demo_metadata.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/reference/demo_pars.html</loc></url>
+<url><loc>https://magpie-sfu.github.io/saasi/reference/demo_Q.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/reference/demo_tree.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/reference/demo_tree_prepared.html</loc></url>
 <url><loc>https://magpie-sfu.github.io/saasi/reference/drop_tips_by_state.html</loc></url>

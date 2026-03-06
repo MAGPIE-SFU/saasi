@@ -26,6 +26,7 @@ Imports:
     grDevices,
     graphics,
     phytools,
+    viridis,
 Suggests:
     knitr,
     rmarkdown,

@@ -13,7 +13,6 @@ internal states.
 Load required packages:
 
 ``` r
-
 library(saasi)
 ```
 
@@ -23,7 +22,6 @@ We use a 3-state model with heterogeneous sampling rates to test SAASI’s
 ability to handle sampling bias:
 
 ``` r
-
 # Define birth-death-sampling parameters
 demo_pars <- data.frame(
   state = c("1", "2", "3"),
@@ -49,7 +47,6 @@ designed to handle.
 First, let’s demonstrate a single simulation to understand the workflow:
 
 ``` r
-
 set.seed(123)
 
 # Generate tree with built-in post-processing
@@ -66,7 +63,6 @@ phy <- sim_bds_tree(
 Extract true ancestral states (ground truth):
 
 ``` r
-
 # The true internal node states are stored in node.state
 true_states <- phy$node.state
 ```
@@ -74,7 +70,6 @@ true_states <- phy$node.state
 Run SAASI to infer ancestral states:
 
 ``` r
-
 # Run SAASI
 
 saasi_result <- saasi(phy = phy,        # phylogenetic tree
@@ -85,7 +80,6 @@ saasi_result <- saasi(phy = phy,        # phylogenetic tree
 Calculate accuracy:
 
 ``` r
-
 predicted_states <- apply(saasi_result, 1, which.max)
 
 # Calculate accuracy
@@ -100,7 +94,6 @@ In contrast, standard tools are not designed to account for differences
 in sampling. Inferring ancestral states with `ace`:
 
 ``` r
-
 ace_result = ace(phy$tip.state, phy, type="d")
 ace_predictions = apply(ace_result$lik.anc, 1, which.max)
 ```
@@ -108,18 +101,16 @@ ace_predictions = apply(ace_result$lik.anc, 1, which.max)
 Let’s plot the truth, the ace predictions and the saasi predictions:
 
 ``` r
-
 true_result = 0*saasi_result
 for (k in 1:nrow(true_result)) { true_result[k, true_states[k]] = 1 }
 ```
 
 ``` r
-
 op <- par(mfrow = c(1, 3), mar = c(1, 1, 3, 1), oma = c(0, 0, 0, 0))
 on.exit(par(op), add = TRUE)
-plot_saasi(phy, true_result, tip_cex = 1, node_cex = 0.6); title("Truth")
-plot_saasi(phy, saasi_result, tip_cex = 1, node_cex = 0.6); title("SAASI")
-plot_saasi(phy, ace_result$lik.anc, tip_cex = 1, node_cex = 0.6); title("ACE")
+plot_saasi(phy, true_result, tip_cex = 1, node_cex = 1, res = 900); title("Truth")
+plot_saasi(phy, saasi_result, tip_cex = 1, node_cex = 1, res = 900); title("SAASI")
+plot_saasi(phy, ace_result$lik.anc, tip_cex = 1, node_cex = 1, res = 900); title("ACE")
 ```
 
 ![](saasi_simulation_study_files/figure-html/plots-1.png)![](saasi_simulation_study_files/figure-html/plots-2.png)![](saasi_simulation_study_files/figure-html/plots-3.png)

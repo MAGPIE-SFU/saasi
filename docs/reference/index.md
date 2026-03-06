@@ -10,14 +10,14 @@
 
   Check if phylogenetic tree is compatible with `saasi`
 
-- [`demo_Q`](https://magpie-sfu.github.io/saasi/reference/demo_Q.md) :
-  SAASI demonstration: transition rate matrix
-
 - [`demo_metadata`](https://magpie-sfu.github.io/saasi/reference/demo_metadata.md)
   : SAASI demonstration: tree metadata
 
 - [`demo_pars`](https://magpie-sfu.github.io/saasi/reference/demo_pars.md)
   : SAASI demonstration: birth-death-sampling process parameters
+
+- [`demo_Q`](https://magpie-sfu.github.io/saasi/reference/demo_Q.md) :
+  SAASI demonstration: transition rate matrix
 
 - [`demo_tree`](https://magpie-sfu.github.io/saasi/reference/demo_tree.md)
   : SAASI demonstration: timed phylogenetic tree

@@ -1,7 +1,6 @@
 # Sampling-Aware Ancestral State Inference
 
 ``` r
-
 library(saasi)
 library(diversitree)
 library(ape)
@@ -29,7 +28,6 @@ You can install the development version of saasi from
 [GitHub](https://github.com/MAGPIE-SFU/saasi) with:
 
 ``` r
-
 # install.packages("remotes")
 remotes::install_github("MAGPIE-SFU/saasi")
 ```
@@ -77,11 +75,10 @@ each internal node of the phylogenetic tree.
 ### Read tree and load metadata
 
 For this example, we use data from Nextstrain (Hadfield et al. 2018;
-Sagulenko et al. 2018):
+Sagulenko, Puller, and Neher 2018):
 <https://nextstrain.org/ebola/ebov-2013?c=country>.
 
 ``` r
-
 tree <- ape::read.tree(system.file("extdata", "nexstrain_ebola_ebov-2013_smaller.nwk", package = "saasi"))
 metadata <- readr::read_tsv(system.file("extdata", "nextstrain_ebola_ebov-2013_metadata.tsv", package = "saasi"))
 #> Rows: 1493 Columns: 8
@@ -100,7 +97,6 @@ column should contain the state of interest. Users can skip this step if
 `tree$tip.state` already exists.
 
 ``` r
-
 tip_data <- data.frame(
   tip_label = metadata$strain,
   state = metadata$country
@@ -118,7 +114,6 @@ Here, the function will include the tip states (i.e. their location) in
 the tree as
 
 ``` r
-
 ebola_tree <- prepare_tree_for_saasi(tree, tip_data)
 ```
 
@@ -126,8 +121,7 @@ This tree is a downsampled version of the 2013 Ebola virus tree from
 nextstrain. There are 193 tips from three countries.
 
 ``` r
-
-plot_saasi(ebola_tree, saasi_result = NULL,tip_cex = 1)
+plot_saasi(ebola_tree, saasi_result = NULL, tip_cex = 1, res = 900)
 ```
 
 ![](saasi-tutorial_files/figure-html/plottree-1.png)
@@ -141,7 +135,6 @@ rate `ER`, 2. Symmetric rate `SYM`, 3. All rates different `ARD`, and or
 a custom structure for the matrix.
 
 ``` r
-
 Q <- estimate_transition_rates(ebola_tree, method = 'fitMk', matrix_structure = 'SYM')
 ```
 
@@ -165,7 +158,6 @@ $`\psi`$ between 4.125 and 13.25. In this example, we assume R0 is
 between 1.5 and 3.
 
 ``` r
-
 rates <- estimate_bds_parameters(
     ebola_tree,
     mu = 5,
@@ -188,7 +180,6 @@ fraction of the cases than the other states, by a factor of 2.
 ### Setting up input parameters
 
 ``` r
-
 pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi, row.names = NULL)
 pars[(pars$state=="Liberia"),"psi"] = pars[(pars$state=="Liberia"), "psi"]/2 # set sampling rate to be 1/2 the baseline
 ```
@@ -196,7 +187,6 @@ pars[(pars$state=="Liberia"),"psi"] = pars[(pars$state=="Liberia"), "psi"]/2 # s
 ### Run saasi analysis
 
 ``` r
-
 saasi_ebola <- saasi(ebola_tree, Q, pars)
 #> Tree is compatible with SAASI
 ```
@@ -208,8 +198,7 @@ Users can use the built-in function
 to visualize results.
 
 ``` r
-
-p1 <- plot_saasi(ebola_tree, saasi_ebola, tip_cex = 1, node_cex=0.3)
+p1 <- plot_saasi(ebola_tree, saasi_ebola, tip_cex = 1, node_cex = 0.5, res = 900)
 ```
 
 ![](saasi-tutorial_files/figure-html/Plot%20the%20result-1.png)
@@ -220,12 +209,11 @@ If all states had comparable sampling we would obtain a different
 ancestral state reconstruction:
 
 ``` r
-
 pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi, row.names = NULL)
 saasi_ebola2 <- saasi(ebola_tree, Q, pars)
 #> Tree is compatible with SAASI
 
-p2 <- plot_saasi(ebola_tree, saasi_ebola2, tip_cex = 1, node_cex=0.3)
+p2 <- plot_saasi(ebola_tree, saasi_ebola2, tip_cex = 1, node_cex = 0.5, res = 900)
 ```
 
 ![](saasi-tutorial_files/figure-html/Run%20saasi%20with%20a%20different%20set%20of%20parameters-1.png)
@@ -245,9 +233,11 @@ Note that Liberia and the factor of 2 are chosen entirely at random for
 the purposes of this vignette and do not represent any knowledge or
 opinion of the authors about the relative sampling during this outbreak.
 
-Hadfield, James, Colin Megill, Sidney M Bell, et al. 2018. “Nextstrain:
-Real-Time Tracking of Pathogen Evolution.” *Bioinformatics* 34 (23):
-4121–23. <https://doi.org/10.1093/bioinformatics/bty407>.
+Hadfield, James, Colin Megill, Sidney M Bell, John Huddleston, Barney
+Potter, Charlton Callender, Pavel Sagulenko, Trevor Bedford, and Richard
+A Neher. 2018. “Nextstrain: Real-Time Tracking of Pathogen Evolution.”
+*Bioinformatics* 34 (23): 4121–23.
+<https://doi.org/10.1093/bioinformatics/bty407>.
 
 Sagulenko, Pavel, Vadim Puller, and Richard A Neher. 2018. “TreeTime:
 Maximum-Likelihood Phylodynamic Analysis.” *Virus Evol.* 4 (1).

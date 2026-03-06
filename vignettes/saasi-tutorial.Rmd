@@ -114,7 +114,7 @@ ebola_tree <- prepare_tree_for_saasi(tree, tip_data)
 This tree is a downsampled version of the 2013 Ebola virus tree from nextstrain. There are 193 tips from three countries.
 
 ```{r plottree}
-plot_saasi(ebola_tree, saasi_result = NULL,tip_cex = 1)
+plot_saasi(ebola_tree, saasi_result = NULL, tip_cex = 1, res = 900)
 ```
 
 
@@ -168,7 +168,7 @@ saasi_ebola <- saasi(ebola_tree, Q, pars)
 Users can use the built-in function `plot_saasi()` to visualize results.
 
 ```{r Plot the result}
-p1 <- plot_saasi(ebola_tree, saasi_ebola, tip_cex = 1, node_cex=0.3)
+p1 <- plot_saasi(ebola_tree, saasi_ebola, tip_cex = 1, node_cex = 0.5, res = 900)
 ```
 
 ### Compare to equal sampling
@@ -179,7 +179,7 @@ If all states had comparable sampling we would obtain a different ancestral stat
 pars = data.frame(state = colnames(Q), lambda=rates$lambda, mu = rates$mu, psi= rates$psi, row.names = NULL)
 saasi_ebola2 <- saasi(ebola_tree, Q, pars)
 
-p2 <- plot_saasi(ebola_tree, saasi_ebola2, tip_cex = 1, node_cex=0.3)
+p2 <- plot_saasi(ebola_tree, saasi_ebola2, tip_cex = 1, node_cex = 0.5, res = 900)
 ```
 
 ### Interpreting results

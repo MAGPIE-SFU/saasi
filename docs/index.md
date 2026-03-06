@@ -12,7 +12,6 @@ You can install the current version of SAASI from
 [GitHub](https://github.com/MAGPIE-SFU/saasi) with:
 
 ``` r
-
 # install.packages("remotes")
 
 remotes::install_github("MAGPIE-SFU/saasi")

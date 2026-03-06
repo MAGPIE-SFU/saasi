@@ -29,7 +29,7 @@
 #' \dontrun{
 #' # Use custom colours and save the result to tree.png
 #' plot_saasi(tree, saasi_result,
-#'            colours = c("orange", "darkblue", "pink"),
+#'            colours = viridis::viridis(3, begin=0.1, end=0.9),
 #'            node_cex = 0.3,
 #'            save_file = "tree.png")
 #' }
@@ -46,7 +46,7 @@ plot_saasi <- function(tree,
   n_states <- length(unique(tree$tip.state))
   
   if(is.null(colours)){
-    colours <- grDevices::rainbow(n_states)
+    colours <- viridis::cividis(n_states, begin=0.1, end=0.9)
   }
   
   if(length(colours) < n_states){

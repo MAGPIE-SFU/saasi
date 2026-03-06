@@ -12,7 +12,6 @@ You can install the current version of SAASI from
 [GitHub](https://github.com/MAGPIE-SFU/saasi) with:
 
 ``` r
-
 # install.packages("remotes")
 
 remotes::install_github("MAGPIE-SFU/saasi")
@@ -30,14 +29,14 @@ remotes::install_github("MAGPIE-SFU/saasi")
 
   Check if phylogenetic tree is compatible with `saasi`
 
-- [`demo_Q`](https://magpie-sfu.github.io/saasi/reference/demo_Q.md) :
-  SAASI demonstration: transition rate matrix
-
 - [`demo_metadata`](https://magpie-sfu.github.io/saasi/reference/demo_metadata.md)
   : SAASI demonstration: tree metadata
 
 - [`demo_pars`](https://magpie-sfu.github.io/saasi/reference/demo_pars.md)
   : SAASI demonstration: birth-death-sampling process parameters
+
+- [`demo_Q`](https://magpie-sfu.github.io/saasi/reference/demo_Q.md) :
+  SAASI demonstration: transition rate matrix
 
 - [`demo_tree`](https://magpie-sfu.github.io/saasi/reference/demo_tree.md)
   : SAASI demonstration: timed phylogenetic tree
@@ -72,7 +71,7 @@ remotes::install_github("MAGPIE-SFU/saasi")
 
 ### All vignettes
 
-- [SAASI Simulation
-  Study](https://magpie-sfu.github.io/saasi/articles/saasi_simulation_study.md):
 - [Sampling-Aware Ancestral State
   Inference](https://magpie-sfu.github.io/saasi/articles/saasi-tutorial.md):
+- [SAASI Simulation
+  Study](https://magpie-sfu.github.io/saasi/articles/saasi_simulation_study.md):

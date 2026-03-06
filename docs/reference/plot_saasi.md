@@ -91,7 +91,7 @@ plot_saasi(demo_tree_prepared, saasi_res)
 if (FALSE) { # \dontrun{
 # Use custom colours and save the result to tree.png
 plot_saasi(tree, saasi_result,
-           colours = c("orange", "darkblue", "pink"),
+           colours = viridis::viridis(3, begin=0.1, end=0.9),
            node_cex = 0.3,
            save_file = "tree.png")
 } # }
